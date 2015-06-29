@@ -1,7 +1,9 @@
-package com.ascenttechnovation.laundrize;
+package com.ascenttechnovation.laundrize.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.ascenttechnovation.laundrize.R;
 
 /**
  * Created by ADMIN on 29-06-2015.
