@@ -1,7 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DADADA">
+
+    <TextView
+        android:id="@+id/tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:text=" Enter Your Verification Code "
+        android:textColor="#196799"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#00000"
+        android:layout_above="@id/tv2"/>
+
+    <Button
+        android:id="@+id/verify_button_verification_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Verify Now "
+        style="@style/ButtonText"
+        android:layout_above="@id/view"
+        android:background="@drawable/roundedbluebutton"
+        android:textStyle="normal"
+        android:textSize="18dp"/>
+
+    <EditText
+        android:id="@+id/mobileno_edit_verification_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="7dp"
+        android:background="@drawable/roundededittext"
+        android:hint=" +91 - "
+        android:layout_above="@id/verify_button_verification_activity"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -9,66 +49,38 @@
         android:gravity="center"
         android:layout_centerInParent="true"
         android:text=" Enter Your Mobile Number "
-        android:textColor="#00796B"
+        android:textColor="#196799"
+        android:layout_above="@id/mobileno_edit_verification_activity"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/mobileno_edit_verification_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint=" +91 - "
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:radius="5dp"/>
-
-    <Button
-        android:id="@+id/verify_button_verification_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" Verify Now "
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        style="@style/ButtonText"
-        android:background="#00796B"/>
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:background="#000000" />
-
     <TextView
+        android:id="@+id/tv3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_centerInParent="true"
-        android:text=" Enter Your Verification Code "
-        android:textColor="#00796B"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:text="This is just a 4 digit number you must have\nreceived on your mobile number"
+        android:layout_below="@id/tv2"
+        android:text="This is just a 4 digit number you must\nhave received on your mobile number"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/username_edit_verification_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:radius="5dp"/>
+        android:padding="10dp"
+        android:layout_margin="7dp"
+        android:layout_below="@id/tv3"
+        android:background="@drawable/roundededittext"/>
 
     <Button
         android:id="@+id/confirm_button_verification_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=" Confirm my verification "
-        android:gravity="center"
-        android:layout_centerInParent="true"
         style="@style/ButtonText"
-        android:background="#00796B"/>
+        android:layout_below="@id/username_edit_verification_activity"
+        android:background="@drawable/roundedbluebutton"
+        android:textStyle="normal"
+        android:textSize="18dp"/>
 
-</LinearLayout>
+</RelativeLayout>

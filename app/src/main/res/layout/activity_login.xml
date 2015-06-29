@@ -1,29 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back">
+
+    <View
+        android:id="@+id/horizontalrow"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#000000"
+        android:layout_centerInParent="true"
+        />
+    <Button
+        android:id="@+id/register_button_login_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Register Now "
+        style="@style/ButtonText"
+        android:background="@drawable/roundedbluebutton"
+        android:layout_above="@id/horizontalrow"/>
 
     <Button
+        android:id="@+id/signin_button_login_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=" Sign in Now "
-        android:id="@+id/signin"/>
+        style="@style/ButtonText"
+        android:background="@drawable/roundedblackbutton"
+        android:layout_above="@id/register_button_login_activity"/>
 
     <Button
+        android:id="@+id/facebook_button_login_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" Sign in Now "
-        android:id="@+id/register"/>
+        android:text=" Sign in with Facebook "
+        style="@style/ButtonText"
+        android:background="@drawable/roundedpurplebutton"
+        android:layout_below="@id/horizontalrow"/>
 
     <Button
+        android:id="@+id/google_button_login_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" Sign in Now "
-        android:id="@+id/facebook"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=" Sign in Now "
-        android:id="@+id/google"/>
-</LinearLayout>
+        android:text=" Sign in with Google + "
+        style="@style/ButtonText"
+        android:background="@drawable/roundedredbutton"
+        android:layout_below="@id/facebook_button_login_activity"/>
+</RelativeLayout>
