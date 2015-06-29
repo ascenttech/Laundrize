@@ -9,7 +9,7 @@ import com.ascenttechnovation.laundrize.R;
 /**
  * Created by ADMIN on 29-06-2015.
  */
-public class LandingActivitiy extends ActionBarActivity {
+public class LandingActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
