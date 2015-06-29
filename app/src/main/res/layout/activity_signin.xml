@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:text=" Sign in to Laundrize "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/username_edit_signin_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" USERNAME "
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:radius="5dp"/>
+
+    <EditText
+        android:id="@+id/password_edit_signin_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" PASSWORD "
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:radius="5dp"/>
+
+    <Button
+        android:id="@+id/facebook_button_signin_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Login Now "
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        style="@style/ButtonText"
+        android:background="#212121"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:background="#000000" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:text=" Forgot Your Password? "
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:text=" Click Here "
+        android:onClick="forgotpassword"
+        android:clickable="true"
+        android:textColor="#000000"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+</LinearLayout>

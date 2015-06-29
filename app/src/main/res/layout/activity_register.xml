@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:text=" Register to Laundrize "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/name_edit_register_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" NAME "
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:radius="5dp"/>
+
+    <EditText
+        android:id="@+id/email_edit_register_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" EMAIL "
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:radius="5dp"/>
+
+    <EditText
+        android:id="@+id/mobileno_edit_register_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" MOBILE NUMBER AS USER ID "
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:radius="5dp"/>
+
+    <EditText
+        android:id="@+id/password_edit_register_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" PASSWORD "
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:radius="5dp"/>
+
+    <Button
+        android:id="@+id/signup_button_register_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" SIGN UP "
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        style="@style/ButtonText"
+        android:background="#212121"/>
+</LinearLayout>
