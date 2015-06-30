@@ -19,6 +19,7 @@
         <activity android:name=".activities.LoginActivity"/>
         <activity android:name=".activities.LandingActivity"/>
         <activity android:name=".activities.AddressActivity"/>
+        <activity android:name=".activities.ProfileActivity"/>
     </application>
 
 </manifest>

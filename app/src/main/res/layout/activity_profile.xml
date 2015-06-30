@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp"
+        android:padding="15dp"
+        android:background="@drawable/whitecard">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text=" Edit Your Profile "
+            android:onClick="edit"
+            android:clickable="true"
+            android:textColor="#196799"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="250px"
+            android:layout_height="250px"
+            android:src="@drawable/profile"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=" Welcome "
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=" JEET VASA "
+            android:textColor="#196799"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+    <Button
+        android:id="@+id/save_button_profile_activity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=" Save "
+        android:textColor="#FFFFFF"
+        android:layout_weight="1"
+        android:background="#196799"/>
+
+    <View
+        android:layout_width="1dip"
+        android:layout_height="45dip"
+        android:background="#FFFFFF"/>
+
+    <Button
+        android:id="@+id/continue_button_profile_activity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text=" Continue "
+        android:textColor="#FFFFFF"
+        android:layout_weight="1"
+        android:background="#212121"/>
+    </LinearLayout>
+</RelativeLayout>
