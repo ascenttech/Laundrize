@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/city_edit_new_address_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" CITY "
+        android:padding="8dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/roundededittext"/>
+
+    <EditText
+        android:id="@+id/pincode_edit_new_address_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" PIN CODE "
+        android:padding="8dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/roundededittext"/>
+
+    <EditText
+        android:id="@+id/area_edit_new_address_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" AREA "
+        android:padding="8dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/roundededittext"/>
+
+    <EditText
+        android:id="@+id/steetname_edit_new_address_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" BUILDING/ STREET NAME "
+        android:padding="8dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/roundededittext"/>
+
+    <EditText
+        android:id="@+id/faltno_edit_new_address_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint=" FLAT/ HOUSE NUMBER "
+        android:padding="8dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/roundededittext"/>
+
+    <Button
+        android:id="@+id/save_button_new_address_activity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" Save New Address "
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"
+        android:background="@drawable/roundedbluebutton"/>
+
+</LinearLayout>

@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     android:background="@drawable/back">
 
+    <CheckBox
+        android:id="@+id/keepin_checkbox_signin_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Keep me logged in"
+        android:layout_centerVertical="true"/>
+
     <EditText
         android:id="@+id/password_edit_signin_activity"
         android:layout_width="match_parent"
@@ -12,8 +19,8 @@
         android:hint=" PASSWORD "
         android:padding="10dp"
         android:layout_margin="7dp"
-        android:background="@drawable/roundededittext"
-        android:layout_centerInParent="true"/>
+        android:layout_above="@id/keepin_checkbox_signin_activity"
+        android:background="@drawable/roundededittext"/>
 
     <EditText
         android:id="@+id/username_edit_signin_activity"
@@ -40,14 +47,14 @@
         android:layout_height="wrap_content"
         android:text=" Login Now "
         style="@style/ButtonText"
-        android:layout_below="@id/password_edit_signin_activity"
+        android:layout_below="@id/keepin_checkbox_signin_activity"
         android:background="@drawable/roundedblackbutton"/>
 
     <View
         android:id="@+id/hr"
         android:layout_width="fill_parent"
         android:layout_height="1dip"
-        android:background="#000000"
+        android:background="#FFFFFF"
         android:layout_below="@id/facebook_button_signin_activity"/>
 
     <TextView

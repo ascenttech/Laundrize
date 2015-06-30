@@ -60,7 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=" SIGN UP "
-        style="@style/ButtonText"
-        android:layout_below="@id/password_edit_register_activity"
-        android:background="@drawable/roundedblackbutton"/>
+        android:textColor="#FFFFFF"
+        android:layout_alignParentBottom="true"
+        android:textSize="18dp"
+        android:background="#212121"/>
 </RelativeLayout>
