@@ -1,10 +1,14 @@
 package com.ascenttechnovation.laundrize.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 
 import java.util.ArrayList;
@@ -16,6 +20,9 @@ public class NavigationDrawerAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<NavigationDrawerData> navigationDrawerData;
+    View v;
+    TextView menuItemName;
+    ImageView menuItemLogo;
 
     public NavigationDrawerAdapter(Context context, ArrayList<NavigationDrawerData> navigationDrawerData) {
         this.context = context;
@@ -38,7 +45,28 @@ public class NavigationDrawerAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        return null;
+    public View getView(int position, View view, ViewGroup viewGroup) {
+
+
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        v = inflater.inflate(R.layout.row_navigation_drawer,null);
+
+        findViews();
+        setViews(position);
+
+        return v;
+    }
+
+    private void findViews(){
+
+        menuItemLogo = (ImageView) v.findViewById(R.id.menu_logo_image_navigation_drawer);
+        menuItemName = (TextView) v.findViewById(R.id.menu_item_text_navigation_drawer);
+    }
+
+    private void setViews(int position){
+
+        menuItemLogo.setImageResource(navigationDrawerData.get(position).getMenuItemLogo());
+        menuItemName.setText(navigationDrawerData.get(position).getMenuItemName());
+
     }
 }

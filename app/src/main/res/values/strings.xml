@@ -3,4 +3,15 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string-array name="navigation_drawer_items">
+
+        <item>Profile</item>
+        <item>Terms &amp; Conditions</item>
+        <item>Privacy Policy</item>
+        <item>FAQs</item>
+        <item>Contact Us</item>
+
+    </string-array>
+
 </resources>

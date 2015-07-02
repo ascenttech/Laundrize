@@ -4,118 +4,107 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/top"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:id="@+id/top"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="15dp"
+                android:padding="10dp"
+                android:background="@drawable/white_card">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text=" Edit Your Profile "
+                    android:onClick="edit"
+                    android:clickable="true"
+                    android:textColor="#196799"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="250px"
+                    android:layout_height="250px"
+                    android:src="@drawable/profile"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/forgot_password_static_text_log_in_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=" Welcome "
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=" RAMKRISHNA JOSHI "
+                    android:textColor="#196799"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="10dp"
+                android:layout_below="@id/top"
+                android:background="@drawable/blue_card">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Address "
+                    android:textColor="#212121"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Graden View, Flat 102, Sector 16,\n Navi Mumbai 400708."
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:paddingBottom="30px"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" Mobile "
+                    android:textColor="#212121"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" +91 9167100000 "
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+    <include
+        layout="@layout/include_two_buttons_in_the_footer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="15dp"
-        android:padding="10dp"
-        android:background="@drawable/whitecard">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text=" Edit Your Profile "
-            android:onClick="edit"
-            android:clickable="true"
-            android:textColor="#196799"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="250px"
-            android:layout_height="250px"
-            android:src="@drawable/profile"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"/>
-
-        <TextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text=" Welcome "
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text=" RAMKRISHNA JOSHI "
-            android:textColor="#196799"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true">
-
-        <Button
-            android:id="@+id/save_button_profile_activity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text=" Save "
-            android:textColor="#FFFFFF"
-            android:layout_weight="1"
-            android:background="#196799"/>
-
-        <View
-            android:layout_width="1dip"
-            android:layout_height="45dip"
-            android:background="#FFFFFF"/>
-
-        <Button
-            android:id="@+id/continue_button_profile_activity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text=" Continue "
-            android:textColor="#FFFFFF"
-            android:layout_weight="1"
-            android:background="#212121"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:padding="10dp"
-        android:layout_below="@id/top"
-        android:background="@drawable/bluecard">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Address "
-            android:textColor="#212121"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Graden View, Flat 102, Sector 16,\n Navi Mumbai 400708."
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:paddingBottom="30px"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Mobile "
-            android:textColor="#212121"
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" +91 9167100000 "
-            android:textAppearance="?android:attr/textAppearanceMedium"/>
-    </LinearLayout>
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>

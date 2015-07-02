@@ -27,9 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=" Verify Now "
-        style="@style/ButtonText"
         android:layout_above="@id/view"
-        android:background="@drawable/roundedbluebutton"
+        android:background="@drawable/rounded_blue_button"
         android:textStyle="normal"
         android:textSize="18dp"/>
 
@@ -39,7 +38,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_margin="7dp"
-        android:background="@drawable/roundededittext"
+        android:background="@drawable/rounded_edit_text"
         android:hint=" +91 - "
         android:layout_above="@id/verify_button_verification_activity"/>
 
@@ -70,16 +69,15 @@
         android:padding="10dp"
         android:layout_margin="7dp"
         android:layout_below="@id/tv3"
-        android:background="@drawable/roundededittext"/>
+        android:background="@drawable/rounded_edit_text"/>
 
     <Button
         android:id="@+id/confirm_button_verification_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text=" Confirm my verification "
-        style="@style/ButtonText"
         android:layout_below="@id/username_edit_verification_activity"
-        android:background="@drawable/roundedbluebutton"
+        android:background="@drawable/rounded_blue_button"
         android:textStyle="normal"
         android:textSize="18dp"/>
 
