@@ -10,7 +10,9 @@
         android:layout_height="wrap_content"
         android:text=" Weekly Order "
         android:layout_centerInParent="true"
-        android:background="@drawable/rounded_black_button"/>
+        android:background="@drawable/rounded_black_button"
+        android:textColor="@color/text_color"
+        />
 
     <Button
         android:id="@+id/quickorder_button_ordermenu_activity"
@@ -18,7 +20,9 @@
         android:layout_height="wrap_content"
         android:text=" Quick Order "
         android:layout_above="@id/weeklyorder_button_ordermenu_activity"
-        android:background="@drawable/rounded_black_button"/>
+        android:background="@drawable/rounded_black_button"
+        android:textColor="@color/text_color"
+        />
 
 
     <Button
@@ -27,7 +31,8 @@
         android:layout_height="wrap_content"
         android:text=" Place Order "
         android:layout_above="@id/quickorder_button_ordermenu_activity"
-        android:background="@drawable/rounded_black_button"/>
+        android:background="@drawable/rounded_black_button"
+        android:textColor="@color/text_color"/>
 
     <Button
         android:id="@+id/trackorder_button_ordermenu_activity"
@@ -35,7 +40,9 @@
         android:layout_height="wrap_content"
         android:text=" Track Order "
         android:layout_below="@id/weeklyorder_button_ordermenu_activity"
-        android:background="@drawable/rounded_blue_button"/>
+        android:background="@drawable/rounded_blue_button"
+        android:textColor="@color/text_color"
+        />
 
     <Button
         android:id="@+id/completedorder_button_ordermenu_activity"
@@ -43,5 +50,7 @@
         android:layout_height="wrap_content"
         android:text=" Completed Order "
         android:layout_below="@id/trackorder_button_ordermenu_activity"
-        android:background="@drawable/rounded_blue_button"/>
+        android:background="@drawable/rounded_blue_button"
+        android:textColor="@color/text_color"
+        />
 </RelativeLayout>

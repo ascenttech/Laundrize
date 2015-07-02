@@ -47,7 +47,9 @@
         android:layout_height="wrap_content"
         android:text=" Login Now "
         android:layout_below="@id/keepin_checkbox_log_in_now_activity"
-        android:background="@drawable/rounded_black_button"/>
+        android:background="@drawable/rounded_black_button"
+        android:textColor="@color/text_color"
+        />
 
     <View
         android:id="@+id/hr"

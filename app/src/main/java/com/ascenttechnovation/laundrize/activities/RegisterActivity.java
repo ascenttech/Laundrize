@@ -36,7 +36,7 @@ public class RegisterActivity extends Activity {
 
     public void signUp(){
 
-        Intent i = new Intent(RegisterActivity.this,LandingActivity.class);
+        Intent i = new Intent(RegisterActivity.this,MobileVerificationActivity.class);
         startActivity(i);
 
     }

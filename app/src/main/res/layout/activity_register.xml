@@ -63,5 +63,5 @@
         android:textColor="#FFFFFF"
         android:layout_alignParentBottom="true"
         android:textSize="18dp"
-        android:background="#212121"/>
+        android:background="@color/navy_blue_button"/>
 </RelativeLayout>
