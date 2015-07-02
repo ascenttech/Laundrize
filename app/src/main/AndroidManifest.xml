@@ -9,20 +9,36 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.SplashScreenActivity"
-                android:label="@string/app_name" >
+                android:label="@string/app_name"
+                android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ForgotPasswordActivity"/>
-        <activity android:name=".activities.LogInOrRegisterActivity"/>
-        <activity android:name=".activities.LandingActivity"/>
-        <activity android:name=".activities.AddressActivity"/>
-        <activity android:name=".activities.ProfileActivity"/>
-        <activity android:name=".activities.LogInActivity"/>
-        <activity android:name=".activities.RegisterActivity"/>
+        <activity android:name=".activities.ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.LogInOrRegisterActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.LandingActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.AddressActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.ProfileActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.LogInActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".activities.RegisterActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
 
 </manifest>
