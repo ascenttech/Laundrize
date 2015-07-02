@@ -1,6 +1,7 @@
 package com.ascenttechnovation.laundrize.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
+import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,9 @@ public class NavigationDrawerAdapter extends BaseAdapter {
     public NavigationDrawerAdapter(Context context, ArrayList<NavigationDrawerData> navigationDrawerData) {
         this.context = context;
         this.navigationDrawerData = navigationDrawerData;
+
+        Log.d(Constants.LOG_TAG,Constants.NavigationDrawerAdapter);
+
     }
 
     @Override

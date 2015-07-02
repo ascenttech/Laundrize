@@ -3,16 +3,18 @@ package com.ascenttechnovation.laundrize.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
  * Created by ADMIN on 01-07-2015.
  */
-public class LogInActivity extends Activity {
+public class LoginActivity extends Activity {
 
     TextView clickHere,logInNow;
 
@@ -20,6 +22,8 @@ public class LogInActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Log.d(Constants.LOG_TAG,Constants.LoginActivity);
 
         findViews();
         setViews();
@@ -41,13 +45,13 @@ public class LogInActivity extends Activity {
 
     public void clickHere(){
 
-        Intent i = new Intent(LogInActivity.this,ForgotPasswordActivity.class);
+        Intent i = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
         startActivity(i);
     }
 
     public void logInNow(){
 
-        Intent i = new Intent(LogInActivity.this,LandingActivity.class);
+        Intent i = new Intent(LoginActivity.this,LandingActivity.class);
         startActivity(i);
 
     }

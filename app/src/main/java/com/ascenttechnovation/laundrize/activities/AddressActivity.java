@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ExpandableListView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.ExpandableListAdapter;
+import com.ascenttechnovation.laundrize.utils.Constants;
 
 public class AddressActivity extends Activity {
 
@@ -21,6 +23,8 @@ public class AddressActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
+
+        Log.d(Constants.LOG_TAG,Constants.AddressActivity);
 
         expListView = (ExpandableListView) findViewById(R.id.address_expandable_address_activity);
 

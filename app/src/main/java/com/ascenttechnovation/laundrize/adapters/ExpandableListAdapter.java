@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.utils.Constants;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -24,6 +26,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         this._context = context;
         this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
+
+        Log.d(Constants.LOG_TAG,Constants.ExpandableListAdapter);
     }
 
     @Override

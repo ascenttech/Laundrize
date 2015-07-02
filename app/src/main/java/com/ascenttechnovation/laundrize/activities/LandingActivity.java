@@ -20,8 +20,11 @@ import android.widget.RelativeLayout;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.NavigationDrawerAdapter;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
+import com.ascenttechnovation.laundrize.fragments.FAQFragment;
+import com.ascenttechnovation.laundrize.fragments.LandingFragment;
 import com.ascenttechnovation.laundrize.fragments.MapFragment;
 import com.ascenttechnovation.laundrize.fragments.ProfileFragment;
+import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -55,6 +58,8 @@ public class LandingActivity extends ActionBarActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
+
+        Log.d(Constants.LOG_TAG,Constants.LandingActivity);
 
         mTitle = mDrawerTitle = getTitle();
 
@@ -145,7 +150,7 @@ public class LandingActivity extends ActionBarActivity {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new MapFragment();
+                fragment = new LandingFragment();
                 break;
             case 1:
                 fragment = new MapFragment();
@@ -157,7 +162,7 @@ public class LandingActivity extends ActionBarActivity {
                 fragment = new MapFragment();
                 break;
             case 4:
-                fragment = new MapFragment();
+                fragment = new FAQFragment();
                 break;
 
             default:

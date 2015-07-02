@@ -3,10 +3,12 @@ package com.ascenttechnovation.laundrize.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
  * Created by ADMIN on 02-07-2015.
@@ -19,6 +21,8 @@ public class MobileVerificationActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_verification);
+
+        Log.d(Constants.LOG_TAG,Constants.MobileVerificationActivity);
 
         findViews();
         setViews();
