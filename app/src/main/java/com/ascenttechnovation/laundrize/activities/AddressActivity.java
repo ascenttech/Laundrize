@@ -22,17 +22,17 @@ public class AddressActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_address);
+        setContentView(R.layout.fragment_address);
 
         Log.d(Constants.LOG_TAG,Constants.AddressActivity);
 
-        expListView = (ExpandableListView) findViewById(R.id.address_expandable_address_activity);
+//        expListView = (ExpandableListView) findViewById(R.id.address_expandable_address_activity);
 
         prepareListData();
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
-        expListView.setAdapter(listAdapter);
+//        expListView.setAdapter(listAdapter);
 
     }
     private void prepareListData() {

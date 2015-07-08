@@ -6,7 +6,7 @@
     android:background="@drawable/back">
 
     <CheckBox
-        android:id="@+id/keepin_checkbox_log_in_now_activity"
+        android:id="@+id/keep_logged_in_checkbox_log_in_now_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Keep me logged in"
@@ -16,17 +16,17 @@
         android:id="@+id/password_edit_log_in_now_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint=" PASSWORD "
+        android:hint="@string/login_activity_hint_password"
         android:padding="10dp"
         android:layout_margin="7dp"
-        android:layout_above="@id/keepin_checkbox_log_in_now_activity"
+        android:layout_above="@id/keep_logged_in_checkbox_log_in_now_activity"
         android:background="@drawable/rounded_edit_text"/>
 
     <EditText
         android:id="@+id/username_edit_log_in_now_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint=" USERNAME "
+        android:hint= "@string/login_activity_hint_number"
         android:padding="10dp"
         android:layout_margin="7dp"
         android:background="@drawable/rounded_edit_text"
@@ -45,8 +45,8 @@
         android:id="@+id/log_in_now_button_log_in_now_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" Login Now "
-        android:layout_below="@id/keepin_checkbox_log_in_now_activity"
+        android:text="@string/login_actvity_button_text"
+        android:layout_below="@id/keep_logged_in_checkbox_log_in_now_activity"
         android:background="@drawable/rounded_black_button"
         android:textColor="@color/text_color"
         />

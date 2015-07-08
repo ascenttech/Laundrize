@@ -4,6 +4,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 
+    <!-- used in layout : activity_login -->
+    <string name="login_activity_hint_number">Mobile Number</string>
+    <string name="login_activity_hint_password">Password</string>
+    <string name="login_actvity_button_text">Login Now</string>
+
+    <!-- used in layout : activity_login -->
+    <string name="register_actvity_button_text">Sign Up</string>
+
+
     <string-array name="navigation_drawer_items">
 
         <item>Profile</item>

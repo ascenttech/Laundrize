@@ -21,8 +21,8 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.NavigationDrawerAdapter;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.fragments.FAQFragment;
-import com.ascenttechnovation.laundrize.fragments.LandingFragment;
 import com.ascenttechnovation.laundrize.fragments.MapFragment;
+import com.ascenttechnovation.laundrize.fragments.OrderNowFragment;
 import com.ascenttechnovation.laundrize.fragments.ProfileFragment;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -120,7 +120,7 @@ public class LandingActivity extends ActionBarActivity {
         public void onClick(View view) {
 
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.content_frame, new ProfileFragment())
+                    .replace(R.id.container, new ProfileFragment())
                     .commit();
             setTitle("Profile");
             mDrawerLayout.closeDrawer(sliderLayout);
@@ -150,7 +150,7 @@ public class LandingActivity extends ActionBarActivity {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new LandingFragment();
+                fragment = new OrderNowFragment();
                 break;
             case 1:
                 fragment = new MapFragment();
@@ -172,7 +172,7 @@ public class LandingActivity extends ActionBarActivity {
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame, fragment).commit();
+                    .replace(R.id.container, fragment).commit();
 
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);

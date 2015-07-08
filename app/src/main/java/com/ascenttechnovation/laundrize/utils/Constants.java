@@ -11,6 +11,9 @@ import java.util.ArrayList;
 public class Constants {
 
     public static final String LOG_TAG =" Laundrize ";
+    public static final String APP_NAME ="Laundrize";
+
+    public static String userId,token,verificationCode;
 
     public static ArrayList<LandingFragmentData> landingFragmentData;
 
@@ -32,4 +35,28 @@ public class Constants {
     public static final String ExpandableListAdapter = " EXPANDABLE LIST ADAPTER ";
     public static final String LandingFragmentRecyclerAdapter = " LANDING FRAGMENT RECYCLER ADAPTER ";
     public static final String NavigationDrawerAdapter = " NAVIGATION ADAPTER ";
+
+    // Log Tags for async Task
+    public static final String ConfirmVerificationAsyncTask=" CONFIRM VERIFICATION ASYNC TASK ";
+    public static final String FetchVerificationCodeAsyncTask=" FETCH VERIFICATION CODE ASYNC TASK ";
+    public static final String RegisterUserAsyncTask=" REGISTER USER ASYNC TASK ";
+    public static final String SignInUserAsyncTask=" SIGN IN USER ASYNC TASK ";
+
+    // LINKS with a harcoded link for testing
+    // verify Now full Url
+
+    //  public static final String verifyNowUrl = "http://dev.api.laundrize.com/api/api/v1/sendverificationcode?mobile_number=9876543210";
+    public static final String verifyNowUrl = "http://dev.api.laundrize.com/api/api/v1/sendverificationcode?mobile_number=";
+
+
+    // confirm verification url
+    //  public static final String confirmVerificationUrl = "http://dev.api.laundrize.com/api/api/v1/registeruser?mobile_number=9820817089&verification_code=Fzj8GE&password=122345&first_name=sagar&email=abc@gmail.com";
+    public static final String confirmVerificationUrl = "http://dev.api.laundrize.com/api/api/v1/registeruser?mobile_number=";
+
+    // sign in url full
+    // public static final String signInUrl = "http://dev.api.laundrize.com/api/api/v1/postlogin?mobile_number=9752493189&password=laundrize";
+    public static final String signInUrl = "http://dev.api.laundrize.com/api/api/v1/postlogin?mobile_number=";
+
+
+
 }

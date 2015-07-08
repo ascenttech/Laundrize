@@ -59,8 +59,8 @@
         android:id="@+id/signup_button_register_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" SIGN UP "
-        android:textColor="#FFFFFF"
+        android:text="@string/register_actvity_button_text"
+        android:textColor="@color/text_color"
         android:layout_alignParentBottom="true"
         android:textSize="18dp"
         android:background="@color/navy_blue_button"/>
