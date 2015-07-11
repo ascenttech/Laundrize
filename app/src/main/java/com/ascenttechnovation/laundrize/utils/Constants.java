@@ -32,9 +32,9 @@ public class Constants {
     public static final String LandingFragment = " LANDING FRAGMENT ";
 
     // Log Tags for all the adapters
-    public static final String ExpandableListAdapter = " EXPANDABLE LIST ADAPTER ";
     public static final String LandingFragmentRecyclerAdapter = " LANDING FRAGMENT RECYCLER ADAPTER ";
     public static final String NavigationDrawerAdapter = " NAVIGATION ADAPTER ";
+    public static final String YourbasketRecyclerAdapter = " YOUR BASKET RECYCLER ADAPTER ";
 
     // Log Tags for async Task
     public static final String ConfirmVerificationAsyncTask=" CONFIRM VERIFICATION ASYNC TASK ";

@@ -49,49 +49,38 @@ public class OrderNowFragment extends Fragment {
 
     public void placeOrder(){
 
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container,new AddressFragment())
-                .commit();
-
-
+        replaceFragment(new AddressFragment());
     }
 
     public void quickOrder(){
 
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container,new AddressFragment())
-                .commit();
-
+        replaceFragment(new AddressFragment());
 
     }
 
     public void weeklyOrder(){
 
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container,new AddressFragment())
-                .commit();
+        replaceFragment(new AddressFragment());
 
     }
 
     public void trackOrder(){
 
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container,new AddressFragment())
-                .commit();
+        replaceFragment(new AddressFragment());
 
     }
     public void completedOrder(){
 
+        replaceFragment(new AddressFragment());
+
+    }
+
+    public void replaceFragment(Fragment fragment){
 
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container,new AddressFragment())
+                .replace(R.id.container,fragment)
                 .commit();
-
     }
 
     View.OnClickListener listener = new View.OnClickListener() {

@@ -12,9 +12,9 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 
 /**
- * Created by ADMIN on 02-07-2015.
+ * Created by ADMIN on 09-07-2015.
  */
-public class FAQFragment extends Fragment {
+public class YourBasketFragment extends Fragment {
 
     ActionBar actionBar;
 
@@ -22,7 +22,7 @@ public class FAQFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_faq, null);
+        View v = inflater.inflate(R.layout.fragment_your_basket,null);
 
         actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
         actionBar.removeAllTabs();

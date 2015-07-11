@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    >
+
+    <EditText
+        android:id="@+id/name_edit_custom_dialog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:background="@drawable/rounded_edit_text"
+        android:textSize="30dp"
+        android:layout_margin="5dp"
+        />
+    <EditText
+        android:id="@+id/name_edit_custom_dialog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email Address"
+        android:background="@drawable/rounded_edit_text"
+        android:textSize="30dp"
+        android:layout_margin="5dp"
+        />
+    <EditText
+        android:id="@+id/name_edit_custom_dialog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Date Of Birth"
+        android:background="@drawable/rounded_edit_text"
+        android:textSize="30dp"
+        android:layout_margin="5dp"
+        />
+    <EditText
+        android:id="@+id/name_edit_custom_dialog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mobile Number"
+        android:background="@drawable/rounded_edit_text"
+        android:textSize="30dp"
+        android:layout_margin="5dp"
+        />
+    <Button
+        android:id="@+id/update_button_custom_dialog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:background="@drawable/rounded_blue_button"
+        android:textColor="#FFF"
+        />
+
+</LinearLayout>

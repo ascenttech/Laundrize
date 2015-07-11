@@ -71,12 +71,12 @@ public class SplashScreenActivity extends Activity {
 
     private void findViews(){
 
-        webView = (WebView) findViewById(R.id.logo_web_view_splash_screen_activity);
+//        webView = (WebView) findViewById(R.id.logo_web_view_splash_screen_activity);
     }
 
     private void setViews(){
 
-        webView.loadUrl("file:///drawable/logo.gif");
+//        webView.loadUrl("file:///drawable/logo.gif");
     }
 
 }

@@ -1,6 +1,15 @@
 package com.ascenttechnovation.laundrize.activities;
 
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +22,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -20,9 +30,9 @@ import android.widget.RelativeLayout;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.NavigationDrawerAdapter;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
+import com.ascenttechnovation.laundrize.fragments.AddressFragment;
 import com.ascenttechnovation.laundrize.fragments.FAQFragment;
 import com.ascenttechnovation.laundrize.fragments.MapFragment;
-import com.ascenttechnovation.laundrize.fragments.OrderNowFragment;
 import com.ascenttechnovation.laundrize.fragments.ProfileFragment;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -52,6 +62,7 @@ public class LandingActivity extends ActionBarActivity {
 
     LinearLayout sliderLayout;
     RelativeLayout profileLayout;
+    ImageView profileImage;
 
 
     @Override
@@ -66,12 +77,18 @@ public class LandingActivity extends ActionBarActivity {
         // load slide menu items
         navMenuTitles = getResources().getStringArray(R.array.navigation_drawer_items);
 
+        // create bitmap from resource
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                R.drawable.profile);
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         sliderLayout = (LinearLayout) findViewById(R.id.sliderLayout);
         profileLayout = (RelativeLayout) findViewById(R.id.profile_layout_navigation_drawer);
+        profileImage = (ImageView) findViewById(R.id.profile_image_navigation_drawer);
+
+        profileImage.setImageBitmap(getCircleBitmap(bitmap));
 
         navigationDrawerData = new ArrayList<NavigationDrawerData>();
 
@@ -115,6 +132,32 @@ public class LandingActivity extends ActionBarActivity {
         }
     }
 
+    public Bitmap getCircleBitmap(Bitmap bitmap){
+
+
+        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
+                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(output);
+
+        final int color = Color.RED;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawOval(rectF, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        bitmap.recycle();
+
+        return output;
+
+    }
+
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -150,10 +193,10 @@ public class LandingActivity extends ActionBarActivity {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new OrderNowFragment();
+                fragment = new AddressFragment();
                 break;
             case 1:
-                fragment = new MapFragment();
+                fragment = new ProfileFragment();
                 break;
             case 2:
                 fragment = new MapFragment();
