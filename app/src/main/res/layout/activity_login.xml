@@ -48,7 +48,7 @@
         android:text="@string/login_actvity_button_text"
         android:layout_below="@id/keep_logged_in_checkbox_log_in_now_activity"
         android:background="@drawable/rounded_black_button"
-        android:textColor="@color/text_color"
+        android:textColor="@color/text_color_white"
         />
 
     <View

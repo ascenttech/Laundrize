@@ -3,24 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/pop_up_margin_dp"
+    >
 
 
     <ImageView
         android:id="@+id/menu_logo_image_navigation_drawer"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:src="@android:drawable/ic_delete"
         android:layout_weight="1"
-        android:scaleType="centerCrop"
+        android:padding="@dimen/pop_up_margin_dp"
         />
     <TextView
         android:id="@+id/menu_item_text_navigation_drawer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello"
         android:layout_weight="3"
-        android:textColor="@color/text_color"
+        android:textColor="@color/text_color_white"
+        android:padding="@dimen/pop_up_margin_dp"
+        android:textSize="@dimen/drawer_text_size"
         />
 
 </LinearLayout>

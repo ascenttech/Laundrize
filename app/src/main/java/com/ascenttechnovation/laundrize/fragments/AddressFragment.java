@@ -1,7 +1,6 @@
 package com.ascenttechnovation.laundrize.fragments;
 
 import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,9 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
@@ -21,9 +24,13 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class AddressFragment extends Fragment {
 
-    LinearLayout child,parent;
-    int height;
-    ActionBar actionBar;
+    private TextView selectAddressChild;
+    private Button selectAddress,addNewAddress;
+    private LinearLayout addNewAddressChild;
+    private int height;
+    private ActionBar actionBar;
+    private Animation animShow;
+
 
     @Nullable
     @Override
@@ -31,53 +38,84 @@ public class AddressFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_address,null);
 
+        customActionBar();
         findViews(v);
         setViews();
 
-        height = child.getHeight();
+        height = selectAddressChild.getHeight();
 
         return v;
     }
 
+    private void customActionBar(){
+
+        actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
+        actionBar.removeAllTabs();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+    }
+
     private void findViews(View v){
 
-        parent = (LinearLayout) v.findViewById(R.id.parent);
-        child = (LinearLayout) v.findViewById(R.id.child);
+        selectAddress = (Button) v.findViewById(R.id.select_address_button_address_fragment);
+        selectAddressChild = (TextView) v.findViewById(R.id.available_address_text_address_fragment);
+        addNewAddress = (Button) v.findViewById(R.id.add_new_address_button_address_fragment);
+        addNewAddressChild = (LinearLayout) v.findViewById(R.id.add_new_address_linear_layout_address_fragment);
 
     }
 
     private void setViews(){
 
-        parent.setOnClickListener(listener);
+        selectAddress.setOnClickListener(listener);
+        addNewAddress.setOnClickListener(listener);
     }
 
-    public void expand(){
+    public void expand(View v){
+
+        Log.d(Constants.LOG_TAG," EXPANDED ");
         //set Visible
-        child.setVisibility(View.VISIBLE);
+        v.setVisibility(View.VISIBLE);
 
         final int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         final int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-        child.measure(widthSpec, heightSpec);
+        v.measure(widthSpec, heightSpec);
 
-        ValueAnimator mAnimator = slideAnimator(0, child.getMeasuredHeight());
+        ValueAnimator mAnimator = slideAnimator(0, v.getMeasuredHeight(),v);
         mAnimator.start();
     }
-    public void collapse(){
+    public void collapse(final View v){
 
-        int finalHeight = child.getHeight();
-        ValueAnimator mAnimator = slideAnimator(finalHeight, 0);
-//        mAnimator.addListener(new Animator.AnimatorListener() {
-//            @Override
-//            public void onAnimationEnd(Animator animator) {
-//                //Height=0, but it set visibility to GONE
-//                child.setVisibility(View.GONE);
-//            }
-//        });
+        Log.d(Constants.LOG_TAG," COLLAPSE ");
+        int finalHeight = v.getHeight();
+
+        ValueAnimator mAnimator = slideAnimator(finalHeight, 0,v);
+
+        mAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                //Height=0, but it set visibility to GONE
+                v.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
         mAnimator.start();
 
     }
 
-    private ValueAnimator slideAnimator(int start, int end) {
+    private ValueAnimator slideAnimator(int start, int end, final View v) {
 
         ValueAnimator animator = ValueAnimator.ofInt(start, end);
 
@@ -86,9 +124,9 @@ public class AddressFragment extends Fragment {
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 //Update Height
                 int value = (Integer) valueAnimator.getAnimatedValue();
-                ViewGroup.LayoutParams layoutParams = child.getLayoutParams();
+                ViewGroup.LayoutParams layoutParams = v.getLayoutParams();
                 layoutParams.height = value;
-                child.setLayoutParams(layoutParams);
+                v.setLayoutParams(layoutParams);
             }
         });
         return animator;
@@ -98,14 +136,50 @@ public class AddressFragment extends Fragment {
         @Override
         public void onClick(View view) {
 
-            if(child.getVisibility()==View.INVISIBLE){
+            switch (view.getId()){
 
-                expand();
-            }
-            else{
+                case R.id.select_address_button_address_fragment:
+                    if(selectAddressChild.getVisibility()==View.GONE){
+                        if(addNewAddressChild.getVisibility() == View.GONE){
 
-                collapse();
+                            expand(selectAddressChild);
+
+                        }
+                        else{
+
+                            expand(selectAddressChild);
+                            collapse(addNewAddressChild);
+                        }
+
+                    }
+                    else{
+
+                        collapse(selectAddressChild);
+                    }
+
+                    break;
+                case R.id.add_new_address_button_address_fragment:
+                    if(addNewAddressChild.getVisibility()==View.GONE){
+                        if(selectAddressChild.getVisibility() == View.GONE){
+
+                            expand(addNewAddressChild);
+                        }
+                        else{
+
+                            expand(addNewAddressChild);
+                            collapse(selectAddressChild);
+                        }
+
+
+                    }
+                    else{
+
+                        collapse(addNewAddressChild);
+                    }
+                    break;
+
             }
+
 
         }
     };

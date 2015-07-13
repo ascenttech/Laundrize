@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/register_actvity_button_text"
-        android:textColor="@color/text_color"
+        android:textColor="@color/text_color_white"
         android:layout_alignParentBottom="true"
         android:textSize="18dp"
         android:background="@color/navy_blue_button"/>

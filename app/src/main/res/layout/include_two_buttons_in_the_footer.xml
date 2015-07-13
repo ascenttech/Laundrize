@@ -9,7 +9,7 @@
         android:id="@+id/left_button_included"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_color_white"
         android:layout_weight="1"
         android:background="@color/blue_button"
         />
@@ -17,7 +17,7 @@
         android:id="@+id/right_button_included"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_color_white"
         android:layout_weight="1"
         android:background="@color/footer_button"
         />

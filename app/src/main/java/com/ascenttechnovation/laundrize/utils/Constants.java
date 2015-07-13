@@ -13,6 +13,7 @@ public class Constants {
     public static final String LOG_TAG =" Laundrize ";
     public static final String APP_NAME ="Laundrize";
 
+
     public static String userId,token,verificationCode;
 
     public static ArrayList<LandingFragmentData> landingFragmentData;
@@ -30,6 +31,7 @@ public class Constants {
 
     // Log Tags for all the fragments
     public static final String LandingFragment = " LANDING FRAGMENT ";
+    public static final String DataHolderFragment =" DATA HOLDER FRAGMENT ";
 
     // Log Tags for all the adapters
     public static final String LandingFragmentRecyclerAdapter = " LANDING FRAGMENT RECYCLER ADAPTER ";

@@ -3,12 +3,14 @@ package com.ascenttechnovation.laundrize.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.activities.LandingActivity;
 
 /**
  * Created by ADMIN on 08-07-2015.
@@ -16,6 +18,7 @@ import com.ascenttechnovation.laundrize.R;
 public class OrderNowFragment extends Fragment {
 
     private Button placeOrder,quickOrder,weeklyOrder,trackOrder,completedOrder;
+    private ActionBar actionBar;
 
     @Nullable
     @Override
@@ -23,9 +26,18 @@ public class OrderNowFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_order_now,null);
 
+        customActionBar();
+
         findViews(v);
         setViews();
         return v;
+    }
+
+    private void customActionBar(){
+
+        actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
+        actionBar.removeAllTabs();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
     }
 
     private void findViews(View v){

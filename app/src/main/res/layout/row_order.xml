@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/background_image_row_order"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        android:background="#235464"
+        />
+    <include
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/include_spinner_and_add_button"
+        android:layout_below="@id/background_image_row_order"
+        />
+    
+</RelativeLayout>

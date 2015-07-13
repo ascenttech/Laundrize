@@ -1,38 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="fill_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent">
-
     <LinearLayout
-        android:id="@+id/parent"
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:background="#892382"
-        />
-    <LinearLayout
-        android:id="@+id/child"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        >
+        android:layout_height="fill_parent">
 
         <Button
+            android:id="@+id/select_address_button_address_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginRight="@dimen/margin_dp"
+            android:layout_marginLeft="@dimen/margin_dp"
+            android:layout_marginTop="@dimen/margin_dp"
+            android:text="Select Your Address"
+            android:drawableLeft="@android:drawable/ic_delete"
+            />
+
+        <TextView
+            android:id="@+id/available_address_text_address_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Select Your Address"
             android:drawableLeft="@drawable/abc_ic_menu_share_mtrl_alpha"
-            android:layout_margin="10dp"
+            android:background="@drawable/rectangle_box"
+            android:padding="@dimen/margin_dp"
+            android:layout_marginRight="@dimen/margin_dp"
+            android:layout_marginLeft="@dimen/margin_dp"
+            android:visibility="gone"
+            android:textSize="@dimen/text_size"
             />
+
+        <Button
+            android:id="@+id/add_new_address_button_address_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/margin_dp"
+            android:drawableLeft="@android:drawable/ic_menu_compass"
+            android:text="Add New Address"
+            />
+        <LinearLayout
+            android:id="@+id/add_new_address_linear_layout_address_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginRight="@dimen/margin_dp"
+            android:layout_marginLeft="@dimen/margin_dp"
+            android:orientation="vertical"
+            android:background="@drawable/rectangle_box"
+            android:padding="@dimen/margin_dp"
+            >
+
+            <EditText
+                android:id="@+id/city_add_new_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="city"
+                android:background="@drawable/rounded_edit_text"
+                android:textSize="@dimen/text_size"
+                />
+            <EditText
+                android:id="@+id/pincode_add_new_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="pincode"
+                android:background="@drawable/rounded_edit_text"
+                android:layout_marginTop="@dimen/margin_dp"
+                android:textSize="@dimen/text_size"
+                />
+            <EditText
+                android:id="@+id/area_add_new_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="area"
+                android:background="@drawable/rounded_edit_text"
+                android:layout_marginTop="@dimen/margin_dp"
+                android:textSize="@dimen/text_size"
+                />
+            <EditText
+                android:id="@+id/building_or_street_add_new_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="building or street name"
+                android:background="@drawable/rounded_edit_text"
+                android:layout_marginTop="@dimen/margin_dp"
+                android:textSize="@dimen/text_size"
+                />
+            <EditText
+                android:id="@+id/flat_or_house_number_add_new_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Flat or house Number"
+                android:background="@drawable/rounded_edit_text"
+                android:layout_marginTop="@dimen/margin_dp"
+                android:textSize="@dimen/text_size"
+                />
+            <Button
+                android:id="@+id/add_this_address_add_new_address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Add This Address"
+                android:background="@drawable/rounded_blue_button"
+                android:layout_marginTop="@dimen/margin_dp"
+                />
+
+
+        </LinearLayout>
+
     </LinearLayout>
-
-
-    <!--<Button-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Add New Address"-->
-        <!--android:drawableLeft="@drawable/abc_ic_menu_share_mtrl_alpha"-->
-        <!--android:layout_margin="10dp"-->
-        <!--/>-->
-
-
-</LinearLayout>
+</ScrollView>

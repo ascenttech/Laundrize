@@ -3,6 +3,7 @@ package com.ascenttechnovation.laundrize.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.adapters.LandingFragmentRecyclerAdapter;
 import com.ascenttechnovation.laundrize.data.LandingFragmentData;
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -26,6 +28,7 @@ public class LandingFragment extends Fragment {
     private RecyclerView.Adapter landingFragmentAdapter;
     private RecyclerView.LayoutManager landingFragmentLayoutManager;
     ArrayList<LandingFragmentData> landingFragmentData;
+    private ActionBar actionBar;
 
     @Nullable
     @Override
@@ -35,6 +38,7 @@ public class LandingFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_landing,null);
 
+        customActionBar();
         findViews(v);
         setViews();
 
@@ -47,6 +51,14 @@ public class LandingFragment extends Fragment {
         settingAdapter();
 
         return v;
+    }
+
+    private void customActionBar(){
+
+        actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
+        actionBar.removeAllTabs();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+
     }
 
     private void findViews(View v){

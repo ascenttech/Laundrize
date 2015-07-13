@@ -11,9 +11,9 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/drawer_text_size"
+        android:textColor="@color/text_color_white"
         android:text="Hello"
-        android:textSize="20dp"
-        android:textColor="#FFF"
         android:gravity="center"
         />
 

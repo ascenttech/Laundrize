@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+    android:layout_margin="@dimen/margin_dp"
     >
 
     <EditText
@@ -13,35 +13,35 @@
         android:layout_height="wrap_content"
         android:hint="Name"
         android:background="@drawable/rounded_edit_text"
-        android:textSize="30dp"
-        android:layout_margin="5dp"
+        android:textSize="@dimen/text_size"
+        android:layout_margin="@dimen/pop_up_margin_dp"
         />
     <EditText
-        android:id="@+id/name_edit_custom_dialog"
+        android:id="@+id/email_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Email Address"
         android:background="@drawable/rounded_edit_text"
-        android:textSize="30dp"
-        android:layout_margin="5dp"
+        android:textSize="@dimen/text_size"
+        android:layout_margin="@dimen/pop_up_margin_dp"
         />
     <EditText
-        android:id="@+id/name_edit_custom_dialog"
+        android:id="@+id/date_of_birth_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Date Of Birth"
         android:background="@drawable/rounded_edit_text"
-        android:textSize="30dp"
-        android:layout_margin="5dp"
+        android:textSize="@dimen/text_size"
+        android:layout_margin="@dimen/pop_up_margin_dp"
         />
     <EditText
-        android:id="@+id/name_edit_custom_dialog"
+        android:id="@+id/mobile_number_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:hint="Mobile Number"
         android:background="@drawable/rounded_edit_text"
-        android:textSize="30dp"
-        android:layout_margin="5dp"
+        android:textSize="@dimen/text_size"
+        android:layout_margin="@dimen/pop_up_margin_dp"
         />
     <Button
         android:id="@+id/update_button_custom_dialog"
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:text="Update"
         android:background="@drawable/rounded_blue_button"
-        android:textColor="#FFF"
+        android:textColor="@color/text_color_white"
         />
 
 </LinearLayout>

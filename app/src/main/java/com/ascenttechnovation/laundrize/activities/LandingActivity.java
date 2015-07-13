@@ -30,9 +30,9 @@ import android.widget.RelativeLayout;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.NavigationDrawerAdapter;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
-import com.ascenttechnovation.laundrize.fragments.AddressFragment;
 import com.ascenttechnovation.laundrize.fragments.FAQFragment;
 import com.ascenttechnovation.laundrize.fragments.MapFragment;
+import com.ascenttechnovation.laundrize.fragments.OrderNowFragment;
 import com.ascenttechnovation.laundrize.fragments.ProfileFragment;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -63,6 +63,7 @@ public class LandingActivity extends ActionBarActivity {
     LinearLayout sliderLayout;
     RelativeLayout profileLayout;
     ImageView profileImage;
+    int icons[]={R.drawable.drawer_logo_profile,R.drawable.drawer_logo_tnc,R.drawable.drawer_logo_privacy_policy,R.drawable.drawer_logo_faq,R.drawable.drawer_logo_contact_us};
 
 
     @Override
@@ -94,7 +95,7 @@ public class LandingActivity extends ActionBarActivity {
 
         for(int i=0;i<navMenuTitles.length;i++){
 
-            navigationDrawerData.add(new NavigationDrawerData(android.R.drawable.ic_menu_camera,navMenuTitles[i]));
+            navigationDrawerData.add(new NavigationDrawerData(icons[i],navMenuTitles[i]));
         }
 
         // setting the nav drawer list adapter
@@ -193,7 +194,7 @@ public class LandingActivity extends ActionBarActivity {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new AddressFragment();
+                fragment = new OrderNowFragment();
                 break;
             case 1:
                 fragment = new ProfileFragment();

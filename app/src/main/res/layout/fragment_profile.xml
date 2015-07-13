@@ -33,10 +33,9 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <ImageView
-                    android:id="@+id/img"
+                    android:id="@+id/profile_image_profile_fragment"
                     android:layout_width="250px"
                     android:layout_height="250px"
-                    android:src="@drawable/profile"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"/>
 
@@ -102,6 +101,7 @@
         </RelativeLayout>
     </ScrollView>
     <include
+        android:id="@+id/included_buttons_profile_fragment"
         layout="@layout/include_two_buttons_in_the_footer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -18,7 +18,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
@@ -29,11 +31,13 @@ import com.ascenttechnovation.laundrize.activities.LandingActivity;
  */
 public class ProfileFragment extends Fragment {
 
-    ActionBar actionBar;
-    ImageView profileImage;
-    Bitmap bitmap;
-    TextView editYourProfile;
-    Dialog dialog;
+    private ActionBar actionBar;
+    private ImageView profileImage;
+    private Bitmap bitmap;
+    private TextView editYourProfile;
+    private Dialog dialog;
+    private Button update,cancel;
+    private LinearLayout footer;
 
     @Nullable
     @Override
@@ -41,13 +45,13 @@ public class ProfileFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_profile,null);
 
-        findViews(v);
-
         // create bitmap from resource
         bitmap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.profile);
 
 
+        customActionBar();
+        findViews(v);
         setViews();
 
 
@@ -64,38 +68,46 @@ public class ProfileFragment extends Fragment {
 
     private void findViews(View v){
 
-        profileImage = (ImageView) v.findViewById(R.id.img);
+        profileImage = (ImageView) v.findViewById(R.id.profile_image_profile_fragment);
         editYourProfile = (TextView) v.findViewById(R.id.edit_profile_text_profile_fragment);
+        footer = (LinearLayout) v.findViewById(R.id.included_buttons_profile_fragment);
+        update = (Button) footer.findViewById(R.id.left_button_included);
+        cancel = (Button) footer.findViewById(R.id.right_button_included);
     }
 
     private void setViews(){
 
         profileImage.setImageBitmap(getCircleBitmap(bitmap));
         editYourProfile.setOnClickListener(listener);
+
+        update.setText("Update");
+        update.setOnClickListener(listener);
+
+        cancel.setText("Cancel");
+        cancel.setOnClickListener(listener);
     }
 
+    // This will generate a pop up
+    // Since the pop up is totally new screen
+    // we wont find its id in the findViews
     public void editYourProfile(){
 
         // custom dialog
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.custom_dialog);
         dialog.setTitle("Update Profile");
-//
-//        // set the custom dialog components - text, image and button
-//        TextView text = (TextView) dialog.findViewById(R.id.text);
-//        text.setText("Android custom dialog example!");
-//        ImageView image = (ImageView) dialog.findViewById(R.id.image);
-//        image.setImageResource(R.drawable.ic_launcher);
 
         Button dialogButton = (Button) dialog.findViewById(R.id.update_button_custom_dialog);
-        // if button is clicked, close the custom dialog
+        EditText dateOfBirth = (EditText) dialog.findViewById(R.id.date_of_birth_edit_custom_dialog);
+//        dateOfBirth.setOnClickListener();
+
+
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-
         dialog.show();
 
     }
@@ -126,6 +138,16 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    public void cancel(){
+
+        ((LandingActivity)getActivity())
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,new OrderNowFragment())
+                .commit();
+
+    }
+
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -134,7 +156,10 @@ public class ProfileFragment extends Fragment {
 
                 case R.id.edit_profile_text_profile_fragment: editYourProfile();
                     break;
-
+                case R.id.left_button_included: cancel();
+                    break;
+                case R.id.right_button_included: cancel();
+                    break;
 
             }
 
