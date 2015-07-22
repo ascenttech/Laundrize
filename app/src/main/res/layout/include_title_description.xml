@@ -8,20 +8,22 @@
     >
 
     <TextView
-        android:id="@+id/title_included"
+        android:id="@+id/title_text_included"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="20dp"
+        android:padding="@dimen/five_dp"
+        android:textSize="@dimen/title_text_size"
         android:textColor="@color/text_color_white"
+        android:text="Tittle"
         />
     <TextView
-        android:id="@+id/description_included"
+        android:id="@+id/description_text_included"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textSize="18dp"
+        android:padding="@dimen/five_dp"
+        android:textSize="@dimen/description_text_size"
         android:textColor="@color/text_color_white"
+        android:text="Description"
         />
 
 </LinearLayout>

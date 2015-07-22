@@ -69,8 +69,8 @@ public class LandingFragmentRecyclerAdapter extends RecyclerView.Adapter<Landing
 
         backgroundImage = (ImageView) viewHolder.view.findViewById(R.id.backgroundImage);
         titleDescriptionLayout = (LinearLayout) viewHolder.view.findViewById(R.id.title_description_include_landing_fragment);
-        title = (TextView) titleDescriptionLayout.findViewById(R.id.title_included);
-        description = (TextView) titleDescriptionLayout.findViewById(R.id.description_included);
+        title = (TextView) titleDescriptionLayout.findViewById(R.id.title_text_included);
+        description = (TextView) titleDescriptionLayout.findViewById(R.id.description_text_included);
 
     }
 

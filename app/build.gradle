@@ -4,6 +4,10 @@ android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
+    repositories {
+        mavenCentral()
+    }
+
     defaultConfig {
         applicationId "com.ascenttechnovation.laundrize"
         minSdkVersion 10
@@ -24,4 +28,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:cardview-v7:21.0.+'
     compile 'com.android.support:recyclerview-v7:21.0.+'
+    compile 'com.facebook.android:facebook-android-sdk:4.1.0'
 }

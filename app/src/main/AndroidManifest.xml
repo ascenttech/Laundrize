@@ -9,6 +9,8 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
         <activity
             android:name=".activities.SplashScreenActivity"
                 android:label="@string/app_name"
@@ -26,7 +28,7 @@
         <activity android:name=".activities.ForgotPasswordActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".activities.LoginOrRegisterActivity"
+        <activity android:name=".activities.LogInOrRegisterActivity"
             android:screenOrientation="portrait"
             />
         <activity android:name=".activities.LoginActivity"
@@ -39,6 +41,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/MobileVerificationTheme"
             />
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

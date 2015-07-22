@@ -9,11 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.DataHolderFragmentRecyclerAdapter;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
+
+import java.util.ArrayList;
 
 /**
  * Created by ADMIN on 13-07-2015.
@@ -23,14 +25,18 @@ public class DataHolderFragment extends Fragment {
     private RecyclerView dataholderRecyclerView;
     private RecyclerView.Adapter dataHolderAdapter;
     private RecyclerView.LayoutManager dataLayoutManager;
+    private ArrayList<GeneralData> generalData;
 
+//    public DataHolderFragment(ArrayList<GeneralData> generalData) {
+//        this.generalData = generalData;
+//    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         Log.d(Constants.LOG_TAG,Constants.DataHolderFragment);
-        View v = inflater.inflate(R.layout.demo,null);
+        View v = inflater.inflate(R.layout.fragment_data_holder,null);
 
         settingTheAdapter(v);
 

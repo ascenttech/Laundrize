@@ -25,7 +25,7 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 public class AddressFragment extends Fragment {
 
     private TextView selectAddressChild;
-    private Button selectAddress,addNewAddress;
+    private Button selectAddress,addNewAddress,updateNewAddress;
     private LinearLayout addNewAddressChild;
     private int height;
     private ActionBar actionBar;
@@ -60,6 +60,7 @@ public class AddressFragment extends Fragment {
         selectAddressChild = (TextView) v.findViewById(R.id.available_address_text_address_fragment);
         addNewAddress = (Button) v.findViewById(R.id.add_new_address_button_address_fragment);
         addNewAddressChild = (LinearLayout) v.findViewById(R.id.add_new_address_linear_layout_address_fragment);
+        updateNewAddress = (Button) v.findViewById(R.id.update_this_address_add_new_address);
 
     }
 
@@ -67,6 +68,7 @@ public class AddressFragment extends Fragment {
 
         selectAddress.setOnClickListener(listener);
         addNewAddress.setOnClickListener(listener);
+        updateNewAddress.setOnClickListener(listener);
     }
 
     public void expand(View v){
@@ -132,6 +134,16 @@ public class AddressFragment extends Fragment {
         return animator;
     }
 
+    public void updateNewAddress(){
+
+        ((LandingActivity)getActivity()).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,new ServicesFragment())
+                .commit();
+
+    }
+
+
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -177,10 +189,13 @@ public class AddressFragment extends Fragment {
                         collapse(addNewAddressChild);
                     }
                     break;
+                case R.id.update_this_address_add_new_address: updateNewAddress();
+                    break;
 
             }
 
 
         }
     };
+
 }

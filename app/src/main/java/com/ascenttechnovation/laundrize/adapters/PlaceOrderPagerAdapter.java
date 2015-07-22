@@ -8,13 +8,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
-import android.view.View;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.fragments.AddressFragment;
 import com.ascenttechnovation.laundrize.fragments.FAQFragment;
 import com.ascenttechnovation.laundrize.fragments.LandingFragment;
-import com.ascenttechnovation.laundrize.fragments.OrderNowFragment;
 import com.ascenttechnovation.laundrize.fragments.ProfileFragment;
 
 /**
@@ -49,7 +47,7 @@ public class PlaceOrderPagerAdapter extends FragmentPagerAdapter {
 
             // Open FragmentTab3.java
             case 2:
-                return new OrderNowFragment();
+                return new LandingFragment();
             case 3:
                 return new ProfileFragment();
             case 4:

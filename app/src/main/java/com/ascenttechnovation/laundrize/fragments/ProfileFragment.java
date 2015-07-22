@@ -143,7 +143,7 @@ public class ProfileFragment extends Fragment {
         ((LandingActivity)getActivity())
                 .getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container,new OrderNowFragment())
+                .replace(R.id.container,new LandingFragment())
                 .commit();
 
     }

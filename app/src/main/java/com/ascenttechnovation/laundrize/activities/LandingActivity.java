@@ -31,8 +31,8 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.NavigationDrawerAdapter;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.fragments.FAQFragment;
-import com.ascenttechnovation.laundrize.fragments.MapFragment;
-import com.ascenttechnovation.laundrize.fragments.OrderNowFragment;
+import com.ascenttechnovation.laundrize.fragments.ServicesFragment;
+import com.ascenttechnovation.laundrize.fragments.LandingFragment;
 import com.ascenttechnovation.laundrize.fragments.ProfileFragment;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -194,16 +194,16 @@ public class LandingActivity extends ActionBarActivity {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new OrderNowFragment();
+                fragment = new LandingFragment();
                 break;
             case 1:
                 fragment = new ProfileFragment();
                 break;
             case 2:
-                fragment = new MapFragment();
+                fragment = new ServicesFragment();
                 break;
             case 3:
-                fragment = new MapFragment();
+                fragment = new ServicesFragment();
                 break;
             case 4:
                 fragment = new FAQFragment();

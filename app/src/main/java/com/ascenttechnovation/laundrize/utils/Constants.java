@@ -1,7 +1,6 @@
 package com.ascenttechnovation.laundrize.utils;
 
 import com.ascenttechnovation.laundrize.data.LandingFragmentData;
-import com.ascenttechnovation.laundrize.fragments.LandingFragment;
 
 import java.util.ArrayList;
 
