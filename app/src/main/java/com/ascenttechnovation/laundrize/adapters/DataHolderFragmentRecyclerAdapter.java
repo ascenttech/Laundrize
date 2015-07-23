@@ -135,17 +135,20 @@ public class DataHolderFragmentRecyclerAdapter extends RecyclerView.Adapter<Data
 
     private void addQuantity(String position) {
 
-        Toast.makeText(context," Position is "+position,5000).show();
         int pos = Integer.parseInt(position);
-        quantity.setText(Integer.parseInt(quantity.getText().toString())+1);
+        int value = Integer.parseInt(quantity.getText().toString())+1;
+        String number = String.valueOf(value);
+        quantity.setText(number);
+
     }
 
     private void subtractQuantity(String position) {
 
-        Toast.makeText(context," Position is "+position,5000).show();
         int pos = Integer.parseInt(position);
         if(Integer.parseInt(quantity.getText().toString())!=0){
-            quantity.setText(Integer.parseInt(quantity.getText().toString())-1);
+            int value = Integer.parseInt(quantity.getText().toString())-1;
+            String number = String.valueOf(value);
+            quantity.setText(number);
         }
 
     }
