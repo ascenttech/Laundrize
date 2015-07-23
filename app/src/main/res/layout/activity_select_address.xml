@@ -5,28 +5,28 @@
     android:padding="20px"
     android:background="@drawable/blue_border_box">
 
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Address "
         android:textColor="#212121"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Graden View, Flat 102, Sector 16,\n Navi Mumbai 400708."
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:paddingBottom="30px"/>
 
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Mobile "
         android:textColor="#212121"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" +91 9167100000 "

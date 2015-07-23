@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/how_can_i_start_question_text_faq_fragment"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         android:padding="@dimen/margin_dp"
         android:background="@drawable/rectangle_box"
         />
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/how_can_i_start_answer_text_faq_fragment"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         android:background="@drawable/rectangle_box"
         android:text="LOREM IPSUM HELWLRJWELJ jalfdjks \nsafjdlkasjd"
         />
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/how_do_i_get_delivered_question_text_faq_fragment"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         android:padding="@dimen/margin_dp"
         android:background="@drawable/rectangle_box"
         />
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/how_do_i_get_delivered_answer_text_faq_fragment"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -7,7 +7,7 @@
     android:layout_margin="@dimen/margin_dp"
     >
 
-    <EditText
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/name_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         android:textSize="@dimen/text_size"
         android:layout_margin="@dimen/pop_up_margin_dp"
         />
-    <EditText
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/email_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:textSize="@dimen/text_size"
         android:layout_margin="@dimen/pop_up_margin_dp"
         />
-    <EditText
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/date_of_birth_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         android:textSize="@dimen/text_size"
         android:layout_margin="@dimen/pop_up_margin_dp"
         />
-    <EditText
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/mobile_number_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         android:textSize="@dimen/text_size"
         android:layout_margin="@dimen/pop_up_margin_dp"
         />
-    <Button
+    <com.ascenttechnovation.laundrize.custom.CustomButton
         android:id="@+id/update_button_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

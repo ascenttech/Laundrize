@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin_large"
+        android:divider="@drawable/divider"
+        >
+
+        <com.ascenttechnovation.laundrize.custom.CustomTextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Collection"
+            android:drawableLeft="@drawable/collection_icon"
+            android:padding="@dimen/padding_large"
+            android:drawablePadding="@dimen/padding"
+            />
+        <com.ascenttechnovation.laundrize.custom.CustomTextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Today"
+            android:drawableLeft="@drawable/calender"
+            android:padding="@dimen/padding_large"
+            android:drawablePadding="@dimen/padding"
+            android:drawableRight="@android:drawable/ic_menu_compass"
+            />
+        <com.ascenttechnovation.laundrize.custom.CustomTextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Time Slot"
+            android:drawableLeft="@drawable/collection_icon"
+            android:padding="@dimen/padding_large"
+            android:drawablePadding="@dimen/padding"
+            android:drawableRight="@android:drawable/ic_menu_compass"
+            />
+
+    </LinearLayout>
+
+    <include
+        layout="@layout/include_two_buttons_in_the_footer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

@@ -7,7 +7,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <Button
+        <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/select_address_button_address_fragment"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -18,7 +18,7 @@
             android:drawableLeft="@android:drawable/ic_delete"
             />
 
-        <TextView
+        <com.ascenttechnovation.laundrize.custom.CustomTextView
             android:id="@+id/available_address_text_address_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             android:textSize="@dimen/text_size"
             />
 
-        <Button
+        <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/add_new_address_button_address_fragment"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -52,7 +52,7 @@
             android:padding="@dimen/margin_dp"
             >
 
-            <EditText
+            <com.ascenttechnovation.laundrize.custom.CustomEditText
                 android:id="@+id/city_add_new_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 android:background="@drawable/rounded_edit_text"
                 android:textSize="@dimen/text_size"
                 />
-            <EditText
+            <com.ascenttechnovation.laundrize.custom.CustomEditText
                 android:id="@+id/pincode_add_new_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                 android:layout_marginTop="@dimen/margin_dp"
                 android:textSize="@dimen/text_size"
                 />
-            <EditText
+            <com.ascenttechnovation.laundrize.custom.CustomEditText
                 android:id="@+id/area_add_new_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
                 android:layout_marginTop="@dimen/margin_dp"
                 android:textSize="@dimen/text_size"
                 />
-            <EditText
+            <com.ascenttechnovation.laundrize.custom.CustomEditText
                 android:id="@+id/building_or_street_add_new_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
                 android:layout_marginTop="@dimen/margin_dp"
                 android:textSize="@dimen/text_size"
                 />
-            <EditText
+            <com.ascenttechnovation.laundrize.custom.CustomEditText
                 android:id="@+id/flat_or_house_number_add_new_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -96,13 +96,14 @@
                 android:layout_marginTop="@dimen/margin_dp"
                 android:textSize="@dimen/text_size"
                 />
-            <Button
+            <com.ascenttechnovation.laundrize.custom.CustomButton
                 android:id="@+id/update_this_address_add_new_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Add This Address"
                 android:background="@drawable/rounded_blue_button"
                 android:layout_marginTop="@dimen/margin_dp"
+                android:textColor="@color/text_color_white"
                 />
 
 

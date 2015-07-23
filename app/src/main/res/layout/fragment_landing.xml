@@ -12,7 +12,7 @@
         android:layout_margin="20dp"
         >
 
-        <Button
+        <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/place_order_button_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             android:background="@drawable/rounded_black_button"
             android:layout_margin="10dp"
             />
-        <Button
+        <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/quick_order_button_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             android:background="@drawable/rounded_black_button"
             android:layout_margin="10dp"
             />
-        <Button
+        <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/weekly_order_button_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:background="@drawable/rounded_black_button"
             android:layout_margin="10dp"
             />
-        <Button
+        <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/track_order_button_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             android:background="@drawable/rounded_blue_button"
             android:layout_margin="10dp"
             />
-        <Button
+        <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/completed_order_button_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

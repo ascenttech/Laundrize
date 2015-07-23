@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <EditText
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/email_edit_register_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +15,7 @@
         android:layout_margin="7dp"
         android:hint=" EMAIL "/>
 
-    <EditText
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/name_edit_register_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
         android:layout_above="@id/email_edit_register_activity"
         android:background="@drawable/rounded_edit_text"/>
 
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -35,7 +35,7 @@
         android:layout_above="@id/name_edit_register_activity"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/mobileno_edit_register_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         android:layout_below="@id/email_edit_register_activity"
         android:background="@drawable/rounded_edit_text"/>
 
-    <EditText
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/password_edit_register_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
         android:layout_below="@id/mobileno_edit_register_activity"
         android:background="@drawable/rounded_edit_text"/>
 
-    <Button
+    <com.ascenttechnovation.laundrize.custom.CustomButton
         android:id="@+id/signup_button_register_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

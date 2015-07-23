@@ -6,10 +6,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.webkit.WebView;
+import android.view.SurfaceView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.data.LandingFragmentData;
+import com.ascenttechnovation.laundrize.gif.decoder.GifRun;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  */
 public class SplashScreenActivity extends Activity {
 
-    WebView webView;
+    SurfaceView surface;
     String userId,token;
 
     @Override
@@ -29,8 +30,12 @@ public class SplashScreenActivity extends Activity {
 
         Log.d(Constants.LOG_TAG,Constants.SplashScreenActivity);
 
+
         initializeArrayList();
         findViews();
+
+        GifRun gifRun = new GifRun();
+        gifRun.LoadGiff(surface,getApplicationContext(),R.drawable.animated_logo);
 
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
         userId = sharedPreferences.getString("userId","null");
@@ -71,12 +76,15 @@ public class SplashScreenActivity extends Activity {
 
     private void findViews(){
 
-//        webView = (WebView) findViewById(R.id.logo_web_view_splash_screen_activity);
+
+        surface = (SurfaceView) findViewById(R.id.gif_surface_splash_screen_activity);
+
     }
 
     private void setViews(){
 
-//        webView.loadUrl("file:///drawable/logo.gif");
+
+
     }
 
 }

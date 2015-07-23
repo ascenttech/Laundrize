@@ -23,7 +23,8 @@ public class ServicesFragment extends Fragment {
 
     ActionBar actionBar;
     ActionBar.Tab tab;
-    String names[]= {"Wash & Iron","Ironing","Dry Cleaning","Wash & Dry","Wash & Iron","Ironing","Dry Cleaning","Wash & Dry"};
+
+    String names[]= {"Ironing: Wearables","Ironing: Households","Dry Cleaning","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables","Dry Clean: Households","Shoe Laundry","Bag Laundry","Others"};
     private LinearLayout footer;
     Button mainMenu,placeOrder;
 
@@ -37,7 +38,7 @@ public class ServicesFragment extends Fragment {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayShowTitleEnabled(true);
 
-        for(int i =0 ;i<6;i++){
+        for(int i =0 ;i<names.length;i++){
 
             tab = actionBar.newTab()
                     .setCustomView(makeDummyTab(names[i], R.drawable.baniyan,i))

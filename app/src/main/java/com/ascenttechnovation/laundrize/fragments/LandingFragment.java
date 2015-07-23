@@ -72,7 +72,7 @@ public class LandingFragment extends Fragment {
 
     public void weeklyOrder(){
 
-        replaceFragment(new AddressFragment());
+        replaceFragment(new WeeklyFragment());
 
     }
 

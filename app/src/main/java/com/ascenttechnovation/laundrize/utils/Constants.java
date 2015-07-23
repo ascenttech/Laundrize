@@ -41,6 +41,7 @@ public class Constants {
     public static final String ConfirmVerificationAsyncTask=" CONFIRM VERIFICATION ASYNC TASK ";
     public static final String FetchAddressAsyncTask=" FETCH ADDRESS ASYNC TASK ";
     public static final String FetchVerificationCodeAsyncTask=" FETCH VERIFICATION CODE ASYNC TASK ";
+    public static final String PlaceWeeklyOrderAsyncTask=" PLACE WEEKLY ORDER ASYNC TASK ";
     public static final String RegisterUserAsyncTask=" REGISTER USER ASYNC TASK ";
     public static final String SignInUserAsyncTask=" SIGN IN USER ASYNC TASK ";
     public static final String UpdateUserProfileAsyncTask=" UPDATE USER PROFILE ASYNC TASK ";

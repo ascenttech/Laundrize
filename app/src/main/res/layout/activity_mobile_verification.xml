@@ -8,7 +8,7 @@
     android:layout_margin="10dp"
     >
 
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/tv2"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -20,7 +20,7 @@
         android:padding="5dp"
         />
 
-    <EditText
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/mobileno_edit_verification_activity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -31,7 +31,7 @@
         android:padding="5dp"
         />
 
-    <Button
+    <com.ascenttechnovation.laundrize.custom.CustomButton
         android:id="@+id/verify_now_button_mobile_verification_activity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -44,7 +44,7 @@
         android:padding="5dp"
         />
 
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:gravity="center"
@@ -57,7 +57,7 @@
         android:padding="5dp"
         />
 
-    <TextView
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/tv3"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -70,7 +70,7 @@
         android:padding="5dp"
         />
 
-    <EditText
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/username_edit_verification_activity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -80,7 +80,7 @@
         android:padding="5dp"
         />
 
-    <Button
+    <com.ascenttechnovation.laundrize.custom.CustomButton
         android:id="@+id/confirm_verification_button_mobile_verification_activity"
         android:layout_width="match_parent"
         android:layout_height="0dp"
