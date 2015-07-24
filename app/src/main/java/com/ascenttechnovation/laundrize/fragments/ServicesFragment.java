@@ -15,6 +15,19 @@ import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.data.BagLaundryData;
+import com.ascenttechnovation.laundrize.data.DryCleanHouseholdsData;
+import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
+import com.ascenttechnovation.laundrize.data.IroningHouseholdsData;
+import com.ascenttechnovation.laundrize.data.IroningWearablesData;
+import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
+import com.ascenttechnovation.laundrize.data.OthersData;
+import com.ascenttechnovation.laundrize.data.ShoeLaundryData;
+import com.ascenttechnovation.laundrize.data.WashAndIronHouseholdsData;
+import com.ascenttechnovation.laundrize.data.WashAndIronWearablesData;
+import com.ascenttechnovation.laundrize.utils.Constants;
+
+import java.util.List;
 
 /**
  * Created by ADMIN on 01-07-2015.
@@ -24,7 +37,8 @@ public class ServicesFragment extends Fragment {
     ActionBar actionBar;
     ActionBar.Tab tab;
 
-    String names[]= {"Ironing: Wearables","Ironing: Households","Dry Cleaning","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables","Dry Clean: Households","Shoe Laundry","Bag Laundry","Others"};
+//    String names[]= {"Ironing: Wearables","Ironing: Households","Dry Cleaning","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables","Dry Clean: Households","Shoe Laundry","Bag Laundry","Others"};
+    String names[]= {"Ironing: Wearables","Ironing: Households","Dry Cleaning","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables"};
     private LinearLayout footer;
     Button mainMenu,placeOrder;
 
@@ -82,6 +96,8 @@ public class ServicesFragment extends Fragment {
 
     }
 
+
+
     ActionBar.TabListener actionBarListener = new ActionBar.TabListener() {
         @Override
         public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -94,34 +110,49 @@ public class ServicesFragment extends Fragment {
 
                 case 0: getChildFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.frame,new DataHolderFragment())
+                        .replace(R.id.frame, new BagLaundryFragment())
                         .commit();
                     break;
                 case 1: getChildFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.frame, new DataHolderFragment())
+                        .replace(R.id.frame, new DryCleanHouseholdsFragment())
                         .commit();
                      break;
                 case 2: getChildFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.frame, new DataHolderFragment())
+                        .replace(R.id.frame, new DryCleanWearablesFragment())
                         .commit();
                     break;
                 case 3: getChildFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.frame, new DataHolderFragment())
+                        .replace(R.id.frame, new IroningHouseholdsFragment())
                         .commit();
                     break;
                 case 4: getChildFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.frame, new DataHolderFragment())
+                        .replace(R.id.frame, new IroningWearablesFragment())
                         .commit();
                     break;
                 case 5: getChildFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.frame, new DataHolderFragment())
+                        .replace(R.id.frame, new OthersFragment())
                         .commit();
                     break;
+//                case 6: getChildFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.frame, new ShoeLaundryFragment())
+//                        .commit();
+//                    break;
+//                case 7: getChildFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.frame, new WashAndIronHouseholdsFragment())
+//                        .commit();
+//                    break;
+//                case 8: getChildFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.frame, new WashAndIronWearablesFragment())
+//                        .commit();
+//                    break;
 
 
             }

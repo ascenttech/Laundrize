@@ -21,7 +21,6 @@
         />
 
     <include
-        android:id="@+id/card_footer_included_data_holder_fragment"
         layout="@layout/include_add_button_pricing_circle_subtract_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -29,3 +28,5 @@
         />
     
 </RelativeLayout>
+
+    <!--android:id="@+id/card_footer_included_data_holder_fragment"-->

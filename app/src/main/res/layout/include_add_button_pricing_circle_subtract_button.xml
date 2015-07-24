@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:src="@android:drawable/ic_delete"
+            android:src="@drawable/icon_add"
             android:layout_alignParentBottom="true"
             />
 
@@ -33,7 +33,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:background="@drawable/circle_background_for_price"
-                android:text="100"
                 android:gravity="center"
                 android:textColor="#FFF"
                 android:textSize="30dp"
@@ -45,7 +44,6 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:textColor="#FFF"
-                android:text="5"
                 android:textSize="20dp"
                 android:layout_gravity="right"
                 android:gravity="center"

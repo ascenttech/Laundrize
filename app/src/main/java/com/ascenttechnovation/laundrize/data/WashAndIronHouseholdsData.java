@@ -3,11 +3,11 @@ package com.ascenttechnovation.laundrize.data;
 /**
  * Created by ADMIN on 24-07-2015.
  */
-public class GeneralData {
+public class WashAndIronHouseholdsData {
 
     private String backgroundImageUrl,title,description,price,quantity;
 
-    public GeneralData(String backgroundImageUrl, String title, String description, String price, String quantity) {
+    public WashAndIronHouseholdsData(String backgroundImageUrl, String title, String description, String price, String quantity) {
         this.backgroundImageUrl = backgroundImageUrl;
         this.title = title;
         this.description = description;

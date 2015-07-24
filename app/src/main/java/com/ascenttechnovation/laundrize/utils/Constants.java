@@ -1,8 +1,19 @@
 package com.ascenttechnovation.laundrize.utils;
 
-import com.ascenttechnovation.laundrize.data.LandingFragmentData;
+import com.ascenttechnovation.laundrize.data.BagLaundryData;
+import com.ascenttechnovation.laundrize.data.DryCleanHouseholdsData;
+import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
+import com.ascenttechnovation.laundrize.data.IroningHouseholdsData;
+import com.ascenttechnovation.laundrize.data.IroningWearablesData;
+import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
+import com.ascenttechnovation.laundrize.data.OthersData;
+import com.ascenttechnovation.laundrize.data.ShoeLaundryData;
+import com.ascenttechnovation.laundrize.data.WashAndIronHouseholdsData;
+import com.ascenttechnovation.laundrize.data.WashAndIronWearablesData;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by ADMIN on 02-07-2015.
@@ -15,7 +26,42 @@ public class Constants {
 
     public static String userId,token,verificationCode;
 
-    public static ArrayList<LandingFragmentData> landingFragmentData;
+
+    public static ArrayList<String> order;
+
+    public static String ironingWearablesTitles[]={"Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket"};
+    public static String ironingHouseholdsTitles[]={"Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover"};
+    public static String washAndIronWearablesTitles[] ={"Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket"};
+    public static String washAndIronHouseholdsTitles[] = {"Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover"};
+    public static String dryCleanWearablesTitles[] = {"Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket"};
+    public static String dryCleanHouseholdsTitles[] = {"Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover"};
+    public static String shoeLaundryTitles[]={"Loafers","Boat Shoes","Sneakers","Sketchers","Loafers","Boat Shoes","Sneakers","Sketchers","Loafers","Boat Shoes","Sneakers","Sketchers"};
+    public static String bagLaundryTitles[]={"One Strap","Two Strap","Suitcase","HandBag","One Strap","Two Strap","Suitcase","HandBag","One Strap","Two Strap","Suitcase","HandBag"};
+    public static String othersTitles[]={"Underwear","Baniyan","Socks","Handkerchiefs","Underwear","Baniyan","Socks","Handkerchiefs","Underwear","Baniyan","Socks","Handkerchiefs"};
+
+    // All the arraylists
+    public static ArrayList<BagLaundryData> bagLaundryData;
+    public static ArrayList<DryCleanHouseholdsData> dryCleanHouseholdsData;
+    public static ArrayList<DryCleanWearablesData> dryCleanWearablesData;
+    public static ArrayList<IroningHouseholdsData> ironingHouseholdsData;
+    public static ArrayList<IroningWearablesData> ironingWearablesData;
+    public static ArrayList<NavigationDrawerData> navigationDrawerData;
+    public static ArrayList<OthersData> othersData;
+    public static ArrayList<ShoeLaundryData> shoeLaundryData;
+    public static ArrayList<WashAndIronHouseholdsData> washAndIronHouseholdsData;
+    public static ArrayList<WashAndIronWearablesData> washAndIronWearablesData;
+
+    // HashMap for all the data
+    public static HashMap<String,String> ironingWearables;
+    public static HashMap<String,String> ironingHouseholds;
+    public static HashMap<String,String> washAndIronWearables;
+    public static HashMap<String,String> washAndIronHouseholds;
+    public static HashMap<String,String> dryCleanWearables;
+    public static HashMap<String,String> dryCleanHouseholds;
+    public static HashMap<String,String> shoeLaundry;
+    public static HashMap<String,String> bagLaundry;
+    public static HashMap<String,String> others;
+
 
     // Log Tags for all the activities
     public static final String AddressActivity = " ADDRESS ACTIVITY ";
