@@ -12,14 +12,79 @@
     <string name="login_actvity_button_text">Login Now</string>
 
 
+    <string-array name="faq_questions">
+        <item>What is Laundrize ?</item>
+        <item>How do I start ?</item>
+        <item>How do I schedule a pick up or drop off ?</item>
+        <item>What if I am unavailable for pickup/delivery ?</item>
+        <item>How much does Laundrize cost ?</item>
+        <item>Is there a minimum order ?</item>
+        <item>What are ways to schedule a laundry ?</item>
+
+    </string-array>
+
+    <string-array name="faq_answers">
+
+        <item>With all your laundry needs taken care of with a click, minimum processing hours, you don’t wash, iron or dry-clean your clothes anymore. You just Laundrize!</item>
+        <item>1) Just log on to www.laundrize.com and sign up for free. You can also sign up using your Facebook or Gmail account.
+    \n2) Once registered provide us with your pin-code to check if we are operational in your area.
+    \n3) Once confirmed, provide us with your address and you are ready to Laundrize.</item>
+        <item>Once your order is built just select any one of our pick up and delivery slots as per your convenience and our collector/delivery guy will do the rest</item>
+        <item>We understand that due to unforeseeable circumstances you may not be able to be present during pickup/delivery. This being the case, just give us call with your order number as reference and we will reschedule your pickup</item>
+        <item>Please take a moment to go through our pricelist. In case of any questions regarding the same please contact our customer support executive or email us at support@laundrize.com</item>
+        <item>There is no restriction on minimum number of orders. Customer have to pay Rs. 10 delvery charges for less than Rs. 60 bill amount</item>
+        <item>You can order through our website, mobile website or on call at 8-007-012346</item>
+    </string-array>
+
+    <string-array name="privacy_policy_questions">
+
+        <item>What information we collect ?</item>
+        <item>What do we use your information for ?</item>
+        <item>How do we protect your information ?</item>
+        <item>Do we use cookies ?</item>
+        <item>Do we disclose information to outside parties ?</item>
+        <item>Your consent ?</item>
+        <item>Changes to our privacy policy ?</item>
+
+    </string-array>
+
+
+    <string-array name="privacy_policy_answers">
+
+        <item>We collect your name, mobile number, email id, address and date of birth from you during registration. We use it for collection and delivery of your laundry clothes.</item>
+        <item>1) Identification of your laundry order with your clothes
+        \n2) Collect and deliver clothes from and to your address
+        \n3) Give you better offers and deals
+        \n4) Improve our customer service
+        \n5) To improve our website
+        \n6) To send email and SMS on collection and delivery of clothes, shoes and bags from you
+        \n7) To administer any offer, contest, promotion or discount</item>
+        <item>We collect only necessary information from you and implement a variety of security measures to keep your information safe with us.</item>
+        <item>We use cookies to keep you in logged in state and store basic orders that you have placed in past for faster performance of site/app.</item>
+        <item>We do not disclose your information to any outside parties except our select partners to get your laundry requirements completed.</item>
+        <item>By using our website you agree to accept our privacy policies</item>
+        <item>If we change our privacy policy, we will update it here. The above policies were last updated on 18 July 2015</item>
+
+    </string-array>
+
+
+
+
+
+
+
     <!-- used in layout : activity_login -->
     <string name="register_actvity_button_text">Sign Up</string>
 
-
     <string-array name="navigation_drawer_items">
 
+        <item>Home</item>
+        <item>Quick Order</item>
+        <item>Weekly Order</item>
+        <item>Track Orders</item>
+        <item>Completed Orders</item>
         <item>Profile</item>
-        <item>Terms &amp; Conditions</item>
+        <item>Terms and Conditions</item>
         <item>Privacy Policy</item>
         <item>FAQs</item>
         <item>Contact Us</item>

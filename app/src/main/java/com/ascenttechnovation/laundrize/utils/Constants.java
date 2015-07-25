@@ -84,6 +84,7 @@ public class Constants {
     public static final String YourbasketRecyclerAdapter = " YOUR BASKET RECYCLER ADAPTER ";
 
     // Log Tags for async Task
+    public static final String AddNewAddressAsyncTask=" ADD NEW ADDRESS ASYNC TASK ";
     public static final String ConfirmVerificationAsyncTask=" CONFIRM VERIFICATION ASYNC TASK ";
     public static final String FetchAddressAsyncTask=" FETCH ADDRESS ASYNC TASK ";
     public static final String FetchVerificationCodeAsyncTask=" FETCH VERIFICATION CODE ASYNC TASK ";

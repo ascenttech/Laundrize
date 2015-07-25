@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.async.AddNewAddressAsyncTask;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
@@ -24,7 +25,7 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class AddressFragment extends Fragment {
 
-    private TextView selectAddressChild;
+    private LinearLayout selectAddressChild;
     private Button selectAddress,addNewAddress,updateNewAddress;
     private LinearLayout addNewAddressChild;
     private int height;
@@ -57,7 +58,7 @@ public class AddressFragment extends Fragment {
     private void findViews(View v){
 
         selectAddress = (Button) v.findViewById(R.id.select_address_button_address_fragment);
-        selectAddressChild = (TextView) v.findViewById(R.id.available_address_text_address_fragment);
+        selectAddressChild = (LinearLayout) v.findViewById(R.id.available_address_text_address_fragment);
         addNewAddress = (Button) v.findViewById(R.id.add_new_address_button_address_fragment);
         addNewAddressChild = (LinearLayout) v.findViewById(R.id.add_new_address_linear_layout_address_fragment);
         updateNewAddress = (Button) v.findViewById(R.id.update_this_address_add_new_address);
@@ -66,7 +67,10 @@ public class AddressFragment extends Fragment {
 
     private void setViews(){
 
+        selectAddressChild.setVisibility(View.GONE);
+        selectAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus, 0, 0, 0);
         selectAddress.setOnClickListener(listener);
+        addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
         addNewAddress.setOnClickListener(listener);
         updateNewAddress.setOnClickListener(listener);
     }
@@ -136,6 +140,18 @@ public class AddressFragment extends Fragment {
 
     public void updateNewAddress(){
 
+//        new AddNewAddressAsyncTask(getActivity().getApplicationContext(),new AddNewAddressAsyncTask.AddNewAddressCallback() {
+//            @Override
+//            public void onStart(boolean status) {
+//
+//
+//            }
+//            @Override
+//            public void onResult(boolean result) {
+//
+//            }
+//        }).execute(url);
+
         ((LandingActivity)getActivity()).getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container,new ServicesFragment())
@@ -152,6 +168,7 @@ public class AddressFragment extends Fragment {
 
                 case R.id.select_address_button_address_fragment:
                     if(selectAddressChild.getVisibility()==View.GONE){
+                        selectAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_minus,0,0,0);
                         if(addNewAddressChild.getVisibility() == View.GONE){
 
                             expand(selectAddressChild);
@@ -160,18 +177,20 @@ public class AddressFragment extends Fragment {
                         else{
 
                             expand(selectAddressChild);
+                            addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
                             collapse(addNewAddressChild);
                         }
 
                     }
                     else{
-
+                        selectAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
                         collapse(selectAddressChild);
                     }
 
                     break;
                 case R.id.add_new_address_button_address_fragment:
                     if(addNewAddressChild.getVisibility()==View.GONE){
+                        addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_minus,0,0,0);
                         if(selectAddressChild.getVisibility() == View.GONE){
 
                             expand(addNewAddressChild);
@@ -179,13 +198,14 @@ public class AddressFragment extends Fragment {
                         else{
 
                             expand(addNewAddressChild);
+                            selectAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
                             collapse(selectAddressChild);
                         }
 
 
                     }
                     else{
-
+                        addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
                         collapse(addNewAddressChild);
                     }
                     break;

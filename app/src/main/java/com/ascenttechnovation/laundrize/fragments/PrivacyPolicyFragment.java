@@ -20,7 +20,7 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 /**
  * Created by ADMIN on 02-07-2015.
  */
-public class FAQFragment extends Fragment {
+public class PrivacyPolicyFragment extends Fragment {
 
     private ActionBar actionBar;
     private TextView firstQuestion,firstAnswer,secondQuestion,secondAnswer,thirdQuestion,thirdAnswer,fourthQuestion,fourthAnswer,fifthQuestion,fifthAnswer,sixthQuestion,sixthAnswer,seventhQuestion,seventhAnswer;
@@ -31,12 +31,12 @@ public class FAQFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_faq, null);
+        View v = inflater.inflate(R.layout.fragment_privacy_policy, null);
 
 
         customActionBar();
-        questions = getActivity().getApplicationContext().getResources().getStringArray(R.array.faq_questions);
-        answers = getActivity().getApplicationContext().getResources().getStringArray(R.array.faq_answers);
+        questions = getActivity().getApplicationContext().getResources().getStringArray(R.array.privacy_policy_questions);
+        answers = getActivity().getApplicationContext().getResources().getStringArray(R.array.privacy_policy_answers);
 
         findViews(v);
         setViews();

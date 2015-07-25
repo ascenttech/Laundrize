@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
+        android:id="@+id/question_text_faq_fragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_dp"
+        android:layout_marginLeft="@dimen/margin_dp"
+        android:layout_marginTop="@dimen/margin_dp"
+        android:textColor="@color/text_color_black"
+        android:gravity="center_vertical"
+        android:padding="@dimen/margin_dp"
+        android:background="@drawable/rectangle_box"
+        />
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
+        android:id="@+id/answer_text_faq_fragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_dp"
+        android:layout_marginLeft="@dimen/margin_dp"
+        android:layout_marginTop="@dimen/margin_dp"
+        android:textColor="@color/text_color_black"
+        android:gravity="center_vertical"
+        android:padding="@dimen/margin_dp"
+        android:visibility="gone"
+        android:background="@drawable/rectangle_box"
+        />
+
+
+</LinearLayout>
+
+   <!---->
+    <!--above the given content-->
+
+<!--<com.ascenttechnovation.laundrize.custom.CustomTextView-->
+<!--android:id="@+id/how_can_i_start_question_text_faq_fragment"-->
+<!--android:layout_width="fill_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginRight="@dimen/margin_dp"-->
+<!--android:layout_marginLeft="@dimen/margin_dp"-->
+<!--android:layout_marginTop="@dimen/margin_dp"-->
+<!--android:drawableRight="@drawable/icon_plus"-->
+<!--android:text="How Can I Start"-->
+<!--android:textColor="@color/text_color_black"-->
+<!--android:gravity="center_vertical"-->
+<!--android:padding="@dimen/margin_dp"-->
+<!--android:background="@drawable/rectangle_box"-->
+    <!--/>-->
+<!--<com.ascenttechnovation.laundrize.custom.CustomTextView-->
+<!--android:id="@+id/how_can_i_start_answer_text_faq_fragment"-->
+<!--android:layout_width="fill_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginRight="@dimen/margin_dp"-->
+<!--android:layout_marginLeft="@dimen/margin_dp"-->
+<!--android:layout_marginTop="@dimen/margin_dp"-->
+<!--android:drawableRight="@android:drawable/btn_plus"-->
+<!--android:textColor="@color/text_color_black"-->
+<!--android:gravity="center_vertical"-->
+<!--android:padding="@dimen/margin_dp"-->
+<!--android:visibility="gone"-->
+<!--android:background="@drawable/rectangle_box"-->
+<!--android:text="LOREM IPSUM HELWLRJWELJ jalfdjks \nsafjdlkasjd"-->
+    <!--/>-->

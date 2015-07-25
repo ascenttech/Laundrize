@@ -1,5 +1,6 @@
 package com.ascenttechnovation.laundrize.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,7 +31,10 @@ import android.widget.RelativeLayout;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.NavigationDrawerAdapter;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
+import com.ascenttechnovation.laundrize.fragments.AddressFragment;
+import com.ascenttechnovation.laundrize.fragments.ContactUsFragment;
 import com.ascenttechnovation.laundrize.fragments.FAQFragment;
+import com.ascenttechnovation.laundrize.fragments.PrivacyPolicyFragment;
 import com.ascenttechnovation.laundrize.fragments.QuickFragment;
 import com.ascenttechnovation.laundrize.fragments.ServicesFragment;
 import com.ascenttechnovation.laundrize.fragments.LandingFragment;
@@ -64,7 +68,7 @@ public class LandingActivity extends ActionBarActivity {
     LinearLayout sliderLayout;
     RelativeLayout profileLayout;
     ImageView profileImage;
-    int icons[]={R.drawable.drawer_logo_profile,R.drawable.drawer_logo_tnc,R.drawable.drawer_logo_privacy_policy,R.drawable.drawer_logo_faq,R.drawable.drawer_logo_contact_us};
+    int icons[]={R.drawable.drawer_logo_profile,R.drawable.drawer_logo_tnc,R.drawable.drawer_logo_privacy_policy,R.drawable.drawer_logo_faq,R.drawable.drawer_logo_contact_us,R.drawable.drawer_logo_profile,R.drawable.drawer_logo_tnc,R.drawable.drawer_logo_privacy_policy,R.drawable.drawer_logo_faq,R.drawable.drawer_logo_contact_us};
 
 
     @Override
@@ -198,19 +202,32 @@ public class LandingActivity extends ActionBarActivity {
                 fragment = new LandingFragment();
                 break;
             case 1:
-                fragment = new QuickFragment();
+                fragment = new AddressFragment();
                 break;
             case 2:
-                fragment = new ServicesFragment();
+                fragment = new AddressFragment();
                 break;
             case 3:
                 fragment = new QuickFragment();
                 break;
             case 4:
+                fragment = new QuickFragment();
+                break;
+            case 5:
+                fragment = new ProfileFragment();
+                break;
+            case 6:
+                fragment = new QuickFragment();
+                break;
+            case 7:
+                fragment = new PrivacyPolicyFragment();
+                break;
+            case 8:
                 fragment = new FAQFragment();
                 break;
-
-            default:
+            case 9:
+                mDrawerLayout.closeDrawer(sliderLayout);
+                mailToSupport();
                 break;
         }
 
@@ -228,6 +245,16 @@ public class LandingActivity extends ActionBarActivity {
             // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
         }
+    }
+
+    public void mailToSupport(){
+
+        Intent i = new Intent(android.content.Intent.ACTION_SEND);
+        i.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "support@laundrize.com" });
+        i.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject");
+        i.putExtra(Intent.EXTRA_TEXT, "Email message");
+        i.setType("plain/text");
+        startActivity(i);
     }
 
     @Override

@@ -6,7 +6,7 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         app:showAsAction="always"
-        android:icon="@android:drawable/ic_menu_mylocation"
+        android:icon="@drawable/icon_cart"
         />
 
 
