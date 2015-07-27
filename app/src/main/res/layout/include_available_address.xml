@@ -15,11 +15,12 @@
         />
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
+        android:id="@+id/address_text_included"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Graden View, Flat 102, Sector 16,\n Navi Mumbai 400708."
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:paddingBottom="30px"/>
+        android:paddingBottom="30px"
+        android:textSize="@dimen/text_size_extra_large"
+        />
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:layout_width="wrap_content"
@@ -29,8 +30,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
+        android:id="@+id/mobile_number_included"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" +91 9167100000 "
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:textSize="@dimen/text_size_large"
+        />
 </LinearLayout>

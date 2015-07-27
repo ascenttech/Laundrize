@@ -5,6 +5,30 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="CustomActionBarTheme"
+        parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
+
+
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="MyActionBar"
+        parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--<item name="android:background">@drawable/background_action_bar</item>-->
+        <item name="android:background">@color/actionbar</item>
+        <!--<item name="android:textColorPrimary">@color/white</item>-->
+
+        <!-- Support library compatibility -->
+        <item name="background">@color/actionbar</item>
+        <!--<item name="textColorPrimary">@color/white</item>-->
+    </style>
+
+
+
     <style name="MobileVerificationTheme" parent="@android:style/Theme.NoTitleBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
@@ -12,5 +36,7 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
+
 
 </resources>

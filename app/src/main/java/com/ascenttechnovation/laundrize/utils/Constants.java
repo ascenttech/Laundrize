@@ -1,10 +1,13 @@
 package com.ascenttechnovation.laundrize.utils;
 
+import com.ascenttechnovation.laundrize.data.AddressData;
 import com.ascenttechnovation.laundrize.data.BagLaundryData;
 import com.ascenttechnovation.laundrize.data.DryCleanHouseholdsData;
 import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
 import com.ascenttechnovation.laundrize.data.IroningHouseholdsData;
 import com.ascenttechnovation.laundrize.data.IroningWearablesData;
+import com.ascenttechnovation.laundrize.data.LaundryServicesMainCategoryData;
+import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.data.OthersData;
 import com.ascenttechnovation.laundrize.data.ShoeLaundryData;
@@ -25,7 +28,10 @@ public class Constants {
 
 
     public static String userId,token,verificationCode;
+    public static boolean addressFetched;
 
+    public static String address;
+    public static String mobileNumber;
 
     public static ArrayList<String> order;
 
@@ -40,11 +46,14 @@ public class Constants {
     public static String othersTitles[]={"Underwear","Baniyan","Socks","Handkerchiefs","Underwear","Baniyan","Socks","Handkerchiefs","Underwear","Baniyan","Socks","Handkerchiefs"};
 
     // All the arraylists
+    public static ArrayList<AddressData> addressData;
     public static ArrayList<BagLaundryData> bagLaundryData;
     public static ArrayList<DryCleanHouseholdsData> dryCleanHouseholdsData;
     public static ArrayList<DryCleanWearablesData> dryCleanWearablesData;
     public static ArrayList<IroningHouseholdsData> ironingHouseholdsData;
     public static ArrayList<IroningWearablesData> ironingWearablesData;
+    public static ArrayList<LaundryServicesMainCategoryData> laundryServicesMainCategory;
+    public static ArrayList<LaundryServicesSubCategoryData> laundryServicesSubCategory;
     public static ArrayList<NavigationDrawerData> navigationDrawerData;
     public static ArrayList<OthersData> othersData;
     public static ArrayList<ShoeLaundryData> shoeLaundryData;
@@ -87,27 +96,34 @@ public class Constants {
     public static final String AddNewAddressAsyncTask=" ADD NEW ADDRESS ASYNC TASK ";
     public static final String ConfirmVerificationAsyncTask=" CONFIRM VERIFICATION ASYNC TASK ";
     public static final String FetchAddressAsyncTask=" FETCH ADDRESS ASYNC TASK ";
+    public static final String FetchLaundryServicesAsyncTask=" FETCH LAUNDRY SERVICES ASYNC TASK ";
     public static final String FetchVerificationCodeAsyncTask=" FETCH VERIFICATION CODE ASYNC TASK ";
     public static final String PlaceWeeklyOrderAsyncTask=" PLACE WEEKLY ORDER ASYNC TASK ";
     public static final String RegisterUserAsyncTask=" REGISTER USER ASYNC TASK ";
     public static final String SignInUserAsyncTask=" SIGN IN USER ASYNC TASK ";
+    public static final String TrackOrdersAsyncTask=" TRACK ORDERS ASYNC TASK ";
     public static final String UpdateUserProfileAsyncTask=" UPDATE USER PROFILE ASYNC TASK ";
 
     // LINKS with a harcoded link for testing
     // verify Now full Url
 
-    //  public static final String verifyNowUrl = "http://dev.api.laundrize.com/api/api/v1/sendverificationcode?mobile_number=9876543210";
-    public static final String verifyNowUrl = "http://dev.api.laundrize.com/api/api/v1/sendverificationcode?mobile_number=";
+//    public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=";
+    public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=";
 
+//    public static final String fetchLaundrySevicesUrl ="http://dev.laundrize.com/api/api/v1/getlaundryservice?user_id=50"
+    public static final String fetchLaundrySevicesUrl ="http://dev.laundrize.com/api/api/v1/getlaundryservice?user_id=";
 
-    // confirm verification url
-    //  public static final String confirmVerificationUrl = "http://dev.api.laundrize.com/api/api/v1/registeruser?mobile_number=9820817089&verification_code=Fzj8GE&password=122345&first_name=sagar&email=abc@gmail.com";
-    public static final String confirmVerificationUrl = "http://dev.api.laundrize.com/api/api/v1/registeruser?mobile_number=";
+    //  public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=9876543210";
+    public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=";
 
-    // sign in url full
-    // public static final String signInUrl = "http://dev.api.laundrize.com/api/api/v1/postlogin?mobile_number=9752493189&password=laundrize";
-    public static final String signInUrl = "http://dev.api.laundrize.com/api/api/v1/postlogin?mobile_number=";
+    //  public static final String confirmVerificationUrl = "http://dev.laundrize.com/api/api/v1/registeruser?mobile_number=9820817089&verification_code=Fzj8GE&password=122345&first_name=sagar&email=abc@gmail.com";
+    public static final String confirmVerificationUrl = "http://dev.laundrize.com/api/api/v1/registeruser?mobile_number=";
 
+    // public static final String signInUrl = "http://dev.laundrize.com/api/api/v1/postlogin?mobile_number=9752493189&password=laundry";
+    public static final String signInUrl = "http://dev.laundrize.com/api/api/v1/postlogin?mobile_number=";
+
+//    public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=12";
+    public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=";
 
 
 }

@@ -47,8 +47,11 @@ public class FAQFragment extends Fragment {
     public void customActionBar(){
 
         actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
+        actionBar.setTitle("FAQs");
         actionBar.removeAllTabs();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+
+
 
     }
 

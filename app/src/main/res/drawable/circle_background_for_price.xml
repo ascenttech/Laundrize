@@ -3,7 +3,7 @@
     android:shape="oval"
     >
 
-    <solid android:color="@color/blue_button"/>
+    <solid android:color="@color/actionbar"/>
     <stroke android:color="@color/white"
         android:width="3dp"/>
 </shape>

@@ -55,13 +55,10 @@
         android:layout_below="@id/mobileno_edit_register_activity"
         android:background="@drawable/rounded_edit_text"/>
 
-    <com.ascenttechnovation.laundrize.custom.CustomButton
-        android:id="@+id/signup_button_register_activity"
-        android:layout_width="match_parent"
+    <include
+        layout="@layout/include_single_button_in_the_footer"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register_actvity_button_text"
-        android:textColor="@color/text_color_white"
-        android:layout_alignParentBottom="true"
-        android:textSize="18dp"
-        android:background="@color/navy_blue_button"/>
+        />
+
 </RelativeLayout>

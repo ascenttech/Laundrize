@@ -9,11 +9,14 @@ import android.util.Log;
 import android.view.SurfaceView;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.data.AddressData;
 import com.ascenttechnovation.laundrize.data.BagLaundryData;
 import com.ascenttechnovation.laundrize.data.DryCleanHouseholdsData;
 import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
 import com.ascenttechnovation.laundrize.data.IroningHouseholdsData;
 import com.ascenttechnovation.laundrize.data.IroningWearablesData;
+import com.ascenttechnovation.laundrize.data.LaundryServicesMainCategoryData;
+import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.data.OthersData;
 import com.ascenttechnovation.laundrize.data.ShoeLaundryData;
@@ -45,6 +48,7 @@ public class SplashScreenActivity extends Activity {
         initializeHashMaps();
         setData();
         findViews();
+        getCredentials();
 
         GifRun gifRun = new GifRun();
         gifRun.LoadGiff(surface,getApplicationContext(),R.drawable.animated_logo);
@@ -70,8 +74,8 @@ public class SplashScreenActivity extends Activity {
                 @Override
                 public void run() {
 
-//                    Intent intent = new Intent(SplashScreenActivity.this,LogInOrRegisterActivity.class);
-                    Intent intent = new Intent(SplashScreenActivity.this,LandingActivity.class);
+                    Intent intent = new Intent(SplashScreenActivity.this,LogInOrRegisterActivity.class);
+//                    Intent intent = new Intent(SplashScreenActivity.this,LandingActivity.class);
                     startActivity(intent);
                 }
             },3000);
@@ -83,11 +87,14 @@ public class SplashScreenActivity extends Activity {
 
     public void initializeArrayList(){
 
+        Constants.addressData = new ArrayList<AddressData>();
         Constants.bagLaundryData = new ArrayList<BagLaundryData>();
         Constants.dryCleanHouseholdsData = new ArrayList<DryCleanHouseholdsData>();
         Constants.dryCleanWearablesData = new ArrayList<DryCleanWearablesData>();
         Constants.ironingHouseholdsData = new ArrayList<IroningHouseholdsData>();
         Constants.ironingWearablesData = new ArrayList<IroningWearablesData>();
+        Constants.laundryServicesMainCategory = new ArrayList<LaundryServicesMainCategoryData>();
+        Constants.laundryServicesSubCategory = new ArrayList<LaundryServicesSubCategoryData>();
         Constants.navigationDrawerData = new ArrayList<NavigationDrawerData>();
         Constants.othersData = new ArrayList<OthersData>();
         Constants.shoeLaundryData = new ArrayList<ShoeLaundryData>();
@@ -149,6 +156,15 @@ public class SplashScreenActivity extends Activity {
         surface = (SurfaceView) findViewById(R.id.gif_surface_splash_screen_activity);
 
     }
+
+    public void getCredentials(){
+
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+        Constants.userId = sharedPreferences.getString("userId","null");
+        Constants.token = sharedPreferences.getString("token","null");
+    };
+
 
     private void setViews(){
 

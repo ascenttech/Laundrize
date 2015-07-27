@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
+        android:id="@+id/field_static_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="HELLO THERE"
+        android:textSize="@dimen/text_size_extra_large"
+        android:textColor="@color/sky_blue"
+        />
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
+        android:id="@+id/field_value_text_included"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="HELLO THERE"
+        android:textSize="30sp"
+        android:textColor="@color/navy_blue_button"
+        />
+
+</LinearLayout>

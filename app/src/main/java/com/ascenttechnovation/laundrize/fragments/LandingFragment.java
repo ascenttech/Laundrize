@@ -38,6 +38,7 @@ public class LandingFragment extends Fragment {
         actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
         actionBar.removeAllTabs();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setTitle("Home");
     }
 
     private void findViews(View v){
@@ -78,7 +79,7 @@ public class LandingFragment extends Fragment {
 
     public void trackOrder(){
 
-        replaceFragment(new AddressFragment());
+        replaceFragment(new TrackOrdersFragment());
 
     }
     public void completedOrder(){
@@ -92,6 +93,7 @@ public class LandingFragment extends Fragment {
         getActivity().getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.container,fragment)
+                .addToBackStack(fragment.getClass().getName())
                 .commit();
     }
 

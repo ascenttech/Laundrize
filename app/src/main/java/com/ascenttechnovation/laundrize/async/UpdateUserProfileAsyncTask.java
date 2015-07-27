@@ -45,6 +45,7 @@ public class UpdateUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
     @Override
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
+        Log.d(Constants.LOG_TAG," Value Returned "+result);
         callback.onResult(result);
     }
 }

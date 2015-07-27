@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.adapters.TabsViewPagerAdapter;
 import com.ascenttechnovation.laundrize.data.BagLaundryData;
 import com.ascenttechnovation.laundrize.data.DryCleanHouseholdsData;
 import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
@@ -35,12 +38,14 @@ import java.util.List;
 public class ServicesFragment extends Fragment {
 
     ActionBar actionBar;
-    ActionBar.Tab tab;
+    ActionBar.Tab tabs;
 
 //    String names[]= {"Ironing: Wearables","Ironing: Households","Dry Cleaning","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables","Dry Clean: Households","Shoe Laundry","Bag Laundry","Others"};
     String names[]= {"Ironing: Wearables","Ironing: Households","Dry Cleaning","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables"};
     private LinearLayout footer;
     Button mainMenu,placeOrder;
+    ViewPager viewPager;
+    TabsViewPagerAdapter viewPagerAdapter;
 
     @Nullable
     @Override
@@ -52,13 +57,21 @@ public class ServicesFragment extends Fragment {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayShowTitleEnabled(true);
 
+        viewPager = (ViewPager) v.findViewById(R.id.myviewpager);
+
         for(int i =0 ;i<names.length;i++){
 
-            tab = actionBar.newTab()
-                    .setCustomView(makeDummyTab(names[i], R.drawable.baniyan,i))
-                    .setTabListener(actionBarListener);
-            actionBar.addTab(tab);
+            actionBar.addTab(
+                    actionBar.newTab()
+                            .setCustomView(makeDummyTab(names[i], R.drawable.baniyan,i))
+                            .setTabListener(actionBarListener));
         }
+
+//            tabs = actionBar.newTab()
+//                    .setCustomView(makeDummyTab(names[i], R.drawable.baniyan,i))
+//                    .setTabListener(actionBarListener);
+//            actionBar.addTab(tabs);
+//        }
 
         findViews(v);
         setViews();
@@ -84,15 +97,21 @@ public class ServicesFragment extends Fragment {
         mainMenu = (Button) v.findViewById(R.id.left_button_included);
         placeOrder = (Button) v.findViewById(R.id.right_button_included);
 
+
+        viewPagerAdapter = new TabsViewPagerAdapter(getChildFragmentManager());
+
     }
 
     private void setViews(){
 
         mainMenu.setText("Main Menu");
-        mainMenu.setOnClickListener(listener);
+//        mainMenu.setOnClickListener(listener);
 
         placeOrder.setText("Place Order");
-        placeOrder.setOnClickListener(listener);
+//        placeOrder.setOnClickListener(listener);
+
+        viewPager.setOnPageChangeListener(pageChangeListener);
+        viewPager.setAdapter(viewPagerAdapter);
 
     }
 
@@ -102,42 +121,47 @@ public class ServicesFragment extends Fragment {
         @Override
         public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 
-            String tag = tab.getCustomView().getTag().toString();
-            String view[] = tag.split("_");
-            int position = Integer.parseInt(view[1]);
+            Log.d(Constants.LOG_TAG,"Position "+tab.getPosition());
 
-            switch(position){
+            viewPager.setCurrentItem(tab.getPosition());
 
-                case 0: getChildFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame, new BagLaundryFragment())
-                        .commit();
-                    break;
-                case 1: getChildFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame, new DryCleanHouseholdsFragment())
-                        .commit();
-                     break;
-                case 2: getChildFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame, new DryCleanWearablesFragment())
-                        .commit();
-                    break;
-                case 3: getChildFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame, new IroningHouseholdsFragment())
-                        .commit();
-                    break;
-                case 4: getChildFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame, new IroningWearablesFragment())
-                        .commit();
-                    break;
-                case 5: getChildFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frame, new OthersFragment())
-                        .commit();
-                    break;
+
+//            String tag = tab.getCustomView().getTag().toString();
+//            String view[] = tag.split("_");
+//            int position = Integer.parseInt(view[1]);
+//
+//            switch(position){
+//
+//                case 0: getChildFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.frame, new BagLaundryFragment())
+//                        .commit();
+//                    break;
+//                case 1: getChildFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.frame, new DryCleanHouseholdsFragment())
+//                        .commit();
+//                     break;
+//                case 2: getChildFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.frame, new DryCleanWearablesFragment())
+//                        .commit();
+//                    break;
+//                case 3: getChildFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.frame, new IroningHouseholdsFragment())
+//                        .commit();
+//                    break;
+//                case 4: getChildFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.frame, new IroningWearablesFragment())
+//                        .commit();
+//                    break;
+//                case 5: getChildFragmentManager()
+//                        .beginTransaction()
+//                        .replace(R.id.frame, new OthersFragment())
+//                        .commit();
+//                    break;
 //                case 6: getChildFragmentManager()
 //                        .beginTransaction()
 //                        .replace(R.id.frame, new ShoeLaundryFragment())
@@ -155,7 +179,7 @@ public class ServicesFragment extends Fragment {
 //                    break;
 
 
-            }
+//            }
 
         }
 
@@ -169,6 +193,25 @@ public class ServicesFragment extends Fragment {
 
         }
     };
+
+    ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            actionBar.setSelectedNavigationItem(position);
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override

@@ -63,6 +63,7 @@ public class ProfileFragment extends Fragment {
         actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
         actionBar.removeAllTabs();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setTitle("Profile");
 
     }
 

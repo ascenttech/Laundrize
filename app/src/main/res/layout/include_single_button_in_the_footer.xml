@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.ascenttechnovation.laundrize.custom.CustomButton
+        android:id="@+id/footer_button_included"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color_white"
+        android:layout_alignParentBottom="true"
+        android:textSize="18dp"
+        android:background="@color/navy_blue_button"/>
+
+</RelativeLayout>

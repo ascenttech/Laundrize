@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_large"
+    >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:id="@+id/order_details_track_order_fragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <com.ascenttechnovation.laundrize.custom.CustomTextView
+            android:id="@+id/track_order_static_text_track_order_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Track Your Order #1"
+            android:textSize="24dp"
+            android:padding="@dimen/padding_small"
+            android:textColor="@color/navy_blue_button"
+            />
+        <com.ascenttechnovation.laundrize.custom.CustomTextView
+            android:id="@+id/status_static_text_track_order_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="(Dry Cleaning)"
+            android:textSize="@dimen/text_size_extra_large"
+            android:padding="@dimen/padding_small"
+            android:layout_below="@id/track_order_static_text_track_order_fragment"
+            android:textColor="@color/sky_blue"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:layout_below="@id/order_details_track_order_fragment"
+        >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@drawable/track"
+            />
+
+        <include
+            layout="@layout/include_order_progress_text"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+        />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+<!--<include-->
+<!--layout="@layout/include_order_progress_images"-->
+<!--android:layout_width="0dp"-->
+<!--android:layout_height="fill_parent"-->
+<!--android:layout_weight="1"-->
+    <!--/>-->

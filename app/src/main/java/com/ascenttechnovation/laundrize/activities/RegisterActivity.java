@@ -41,11 +41,12 @@ public class RegisterActivity extends Activity {
         email = (EditText) findViewById(R.id.email_edit_register_activity);
         mobileNumber = (EditText) findViewById(R.id.mobileno_edit_register_activity);
         password = (EditText) findViewById(R.id.password_edit_register_activity);
-        signUp = (Button) findViewById(R.id.signup_button_register_activity);
+        signUp = (Button) findViewById(R.id.footer_button_included);
     }
 
     private void setViews(){
 
+        signUp.setText("SIGN UP");
         signUp.setOnClickListener(listener);
     }
 
@@ -56,6 +57,7 @@ public class RegisterActivity extends Activity {
         i.putExtra("emailId",email.getText().toString());
         i.putExtra("mobileNumber",mobileNumber.getText().toString());
         i.putExtra("password",password.getText().toString());
+        i.putExtra("from","registerUser");
         startActivity(i);
 
     }
@@ -66,7 +68,7 @@ public class RegisterActivity extends Activity {
 
             switch (view.getId()){
 
-                case R.id.signup_button_register_activity : signUp();
+                case R.id.footer_button_included : signUp();
                     break;
                 default:
                     break;

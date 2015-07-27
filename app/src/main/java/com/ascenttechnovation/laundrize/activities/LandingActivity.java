@@ -39,6 +39,7 @@ import com.ascenttechnovation.laundrize.fragments.QuickFragment;
 import com.ascenttechnovation.laundrize.fragments.ServicesFragment;
 import com.ascenttechnovation.laundrize.fragments.LandingFragment;
 import com.ascenttechnovation.laundrize.fragments.ProfileFragment;
+import com.ascenttechnovation.laundrize.fragments.TrackOrdersFragment;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -205,10 +206,10 @@ public class LandingActivity extends ActionBarActivity {
                 fragment = new AddressFragment();
                 break;
             case 2:
-                fragment = new AddressFragment();
+                fragment = new ServicesFragment();
                 break;
             case 3:
-                fragment = new QuickFragment();
+                fragment = new TrackOrdersFragment();
                 break;
             case 4:
                 fragment = new QuickFragment();
@@ -234,7 +235,9 @@ public class LandingActivity extends ActionBarActivity {
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment).commit();
+                    .replace(R.id.container, fragment)
+                    .addToBackStack(fragment.getClass().getName())
+                    .commit();
 
             // update selected item and title, then close the drawer
             mDrawerList.setItemChecked(position, true);
@@ -314,4 +317,10 @@ public class LandingActivity extends ActionBarActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+//        setTitle(navMenuTitles[position]);
+        mDrawerLayout.closeDrawer(sliderLayout);
+    }
 }

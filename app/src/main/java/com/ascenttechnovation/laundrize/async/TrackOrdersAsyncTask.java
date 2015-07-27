@@ -7,19 +7,20 @@ import android.util.Log;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
- * Created by ADMIN on 23-07-2015.
+ * Created by ADMIN on 27-07-2015.
  */
-public class PlaceWeeklyOrderAsyncTask extends AsyncTask<String,Void,Boolean> {
+public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     Context context;
-    PlaceWeeklyOrderCallback callback;
-    public interface PlaceWeeklyOrderCallback{
+    TrackOrdersCallback callback;
+    public interface TrackOrdersCallback{
 
         public void onStart(boolean status);
         public void onResult(boolean result);
+
     }
 
-    public PlaceWeeklyOrderAsyncTask(Context context, PlaceWeeklyOrderCallback callback) {
+    public TrackOrdersAsyncTask(Context context, TrackOrdersCallback callback) {
         this.context = context;
         this.callback = callback;
     }
@@ -33,8 +34,16 @@ public class PlaceWeeklyOrderAsyncTask extends AsyncTask<String,Void,Boolean> {
     @Override
     protected Boolean doInBackground(String... url) {
 
-        Log.d(Constants.LOG_TAG,Constants.PlaceWeeklyOrderAsyncTask);
+        Log.d(Constants.LOG_TAG, Constants.TrackOrdersAsyncTask);
         Log.d(Constants.LOG_TAG," URL to be fetched "+ url[0]);
+
+
+
+
+
+
+
+
 
         return false;
     }
@@ -44,6 +53,5 @@ public class PlaceWeeklyOrderAsyncTask extends AsyncTask<String,Void,Boolean> {
         super.onPostExecute(result);
         Log.d(Constants.LOG_TAG," Value Returned "+result);
         callback.onResult(result);
-
     }
 }

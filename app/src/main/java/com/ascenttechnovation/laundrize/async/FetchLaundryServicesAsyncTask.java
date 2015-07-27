@@ -5,34 +5,35 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ascenttechnovation.laundrize.data.AddressData;
+import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+
 /**
- * Created by ADMIN on 22-07-2015.
+ * Created by ADMIN on 27-07-2015.
  */
-public class FetchAddressAsyncTask extends AsyncTask<String,Void,Boolean> {
+public class FetchLaundryServicesAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     Context context;
-    FetchAddressCallback callback;
-
-    public interface FetchAddressCallback{
+    FetchLaundryServicesCallback callback;
+    public interface FetchLaundryServicesCallback{
 
         public void onStart(boolean status);
         public void onResult(boolean result);
 
     }
 
-    public FetchAddressAsyncTask(Context context, FetchAddressCallback callback) {
+    public FetchLaundryServicesAsyncTask(Context context, FetchLaundryServicesCallback callback) {
         this.context = context;
         this.callback = callback;
     }
@@ -45,8 +46,9 @@ public class FetchAddressAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     @Override
     protected Boolean doInBackground(String... url) {
-        Log.d(Constants.LOG_TAG,Constants.FetchAddressAsyncTask);
-        Log.d(Constants.LOG_TAG," Url to be fetched "+url[0]);
+
+        Log.d(Constants.LOG_TAG,Constants.FetchLaundryServicesAsyncTask);
+        Log.d(Constants.LOG_TAG," URL to be fetched "+ url[0]);
 
         try{
 
@@ -67,15 +69,31 @@ public class FetchAddressAsyncTask extends AsyncTask<String,Void,Boolean> {
                 for(int i = 0;i<jsonArray.length();i++){
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String id = jsonObject.getString("id");
-                    String address = jsonObject.getString("address");
-                    String city = jsonObject.getString("city_name");
-                    String zipCode = jsonObject.getString("zip_code");
-                    String areaName = jsonObject.getString("area_name");
-                    String mobileNumber = jsonObject.getString("mobile");
-                    String fullAddress = address+","+areaName+","+city+","+zipCode;
+//                    String id = jsonObject.getString("id");
+//                    String id = jsonObject.getString("name");
+//                    String id = jsonObject.getString("des_short");
+//                    String id = jsonObject.getString("des_long");
+//                    String id = jsonObject.getString("imgsmall");
+//                    String id = jsonObject.getString("imglarge");
 
-                    Constants.addressData.add(new AddressData(id,address,city,zipCode,areaName,mobileNumber,fullAddress));
+                    JSONArray nestedJsonArray = jsonObject.getJSONArray("subitems");
+                    for(int j=0;j<nestedJsonArray.length();i++){
+
+                    JSONObject nestedJsonObject = nestedJsonArray.getJSONObject(i);
+                     String code = nestedJsonObject.getString("code");
+                     String description = nestedJsonObject.getString("desc");
+                     String title = nestedJsonObject.getString("name");
+                     String largeImage = nestedJsonObject.getString("imglarge");
+                     String smallImage = nestedJsonObject.getString("imgsmall");
+                     String regular = nestedJsonObject.getString("regular");
+                     String regularCost = nestedJsonObject.getString("regularcost");
+                     String extraCare = nestedJsonObject.getString("extracare");
+                     String extraCareCost = nestedJsonObject.getString("extracarecost");
+
+                     Constants.laundryServicesSubCategory.add(new LaundryServicesSubCategoryData(code,title,description,smallImage,largeImage,regular,regularCost,extraCare,extraCareCost));
+
+                    }
+
                 }
 
                 return true;
