@@ -24,7 +24,7 @@ public class LandingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_landing,null);
+        View v = inflater.inflate(R.layout.fragment_landing,container,false);
 
         customActionBar();
 

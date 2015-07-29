@@ -46,6 +46,7 @@ public class CheckOutFragment extends Fragment {
 
         actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
         actionBar.removeAllTabs();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setTitle("Check Out");
 
     }

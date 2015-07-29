@@ -4,33 +4,23 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.ascenttechnovation.laundrize.data.AddressData;
 import com.ascenttechnovation.laundrize.utils.Constants;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * Created by ADMIN on 27-07-2015.
  */
-public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
+public class FetchUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     Context context;
-    TrackOrdersCallback callback;
-    public interface TrackOrdersCallback{
+    FetchUserProfileCallback callback;
+    public interface FetchUserProfileCallback {
 
         public void onStart(boolean status);
         public void onResult(boolean result);
 
     }
 
-    public TrackOrdersAsyncTask(Context context, TrackOrdersCallback callback) {
+    public FetchUserProfileAsyncTask(Context context, FetchUserProfileCallback callback) {
         this.context = context;
         this.callback = callback;
     }
@@ -44,7 +34,7 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
     @Override
     protected Boolean doInBackground(String... url) {
 
-        Log.d(Constants.LOG_TAG, Constants.TrackOrdersAsyncTask);
+        Log.d(Constants.LOG_TAG, Constants.FetchUserProfileAsyncTask);
         Log.d(Constants.LOG_TAG," URL to be fetched "+ url[0]);
 
         return false;
@@ -68,15 +58,19 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
 //
 //                    JSONObject jsonObject = jsonArray.getJSONObject(i);
 //                    String id = jsonObject.getString("id");
-//                    String address = jsonObject.getString("service_name");
-//                    String city = jsonObject.getString("collection_slot");
-//                    String zipCode = jsonObject.getString("actual_collected");
-//                    String areaName = jsonObject.getString("actual_ops_submission_time");
-//                    String mobileNumber = jsonObject.getString("actual_ops_collection_time");
-//                    String mobileNumber = jsonObject.getString("price");
-//                    String mobileNumber = jsonObject.getString("actual_delivery");
-//                    String mobileNumber = jsonObject.getString("delivery_slot");
-//                    String mobileNumber = jsonObject.getString("user_delivery_date");
+//                    String address = jsonObject.getString("username");
+//                    String city = jsonObject.getString("password");
+//                    String zipCode = jsonObject.getString("first_name");
+//                    String areaName = jsonObject.getString("last_name");
+//                    String mobileNumber = jsonObject.getString("email");
+//                    String mobileNumber = jsonObject.getString("confirmed");
+//                    String mobileNumber = jsonObject.getString("confirmation_code");
+//                    String mobileNumber = jsonObject.getString("remember_token");
+//                    String mobileNumber = jsonObject.getString("facebook_id");
+//                    String mobileNumber = jsonObject.getString("google_id");
+//                    String mobileNumber = jsonObject.getString("status");
+//                    String mobileNumber = jsonObject.getString("created_at");
+//                    String mobileNumber = jsonObject.getString("updated_at");
 //                    String fullAddress = address+","+areaName+","+city+","+zipCode;
 //
 //                    Log.d(Constants.LOG_TAG,"FUll address "+ fullAddress);

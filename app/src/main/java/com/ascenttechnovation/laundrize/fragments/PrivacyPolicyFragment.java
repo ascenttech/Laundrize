@@ -31,7 +31,7 @@ public class PrivacyPolicyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_privacy_policy, null);
+        View v = inflater.inflate(R.layout.fragment_privacy_policy,container,false);
 
 
         customActionBar();
