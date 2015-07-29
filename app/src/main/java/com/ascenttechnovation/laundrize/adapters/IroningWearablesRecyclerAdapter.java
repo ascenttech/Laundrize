@@ -2,6 +2,7 @@ package com.ascenttechnovation.laundrize.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.data.GeneralData;
+import com.ascenttechnovation.laundrize.imageloader.ImageLoader;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -23,10 +25,13 @@ public class IroningWearablesRecyclerAdapter extends RecyclerView.Adapter<Ironin
     private ArrayList<GeneralData> ironingWearablesData;
     private TextView title,description,price,quantity;
     private ImageView add,subtract;
+    private ImageLoader imgLoader;
+    private ImageView backgroundImage;
 
     public IroningWearablesRecyclerAdapter(Context context, ArrayList<GeneralData> ironingWearablesData) {
         this.context = context;
         this.ironingWearablesData = ironingWearablesData;
+        imgLoader = new ImageLoader(context);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -59,6 +64,7 @@ public class IroningWearablesRecyclerAdapter extends RecyclerView.Adapter<Ironin
 
     private void findViews(ViewHolder holder){
 
+        backgroundImage = (ImageView) holder.v.findViewById(R.id.background_image_row_order);
         title = (TextView) holder.v.findViewById(R.id.title_text_included);
         description = (TextView) holder.v.findViewById(R.id.description_text_included);
         price = (TextView) holder.v.findViewById(R.id.price_text_included);
@@ -69,6 +75,8 @@ public class IroningWearablesRecyclerAdapter extends RecyclerView.Adapter<Ironin
     }
 
     private void setViews(int position){
+
+        imgLoader.DisplayImage(Constants.ironingWearablesData.get(position).getLargeImage(),backgroundImage);
 
         title.setText(Constants.ironingWearablesData.get(position).getTitle());
         description.setText(Constants.ironingWearablesData.get(position).getDescription());

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.data.GeneralData;
+import com.ascenttechnovation.laundrize.imageloader.ImageLoader;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -23,10 +24,13 @@ public class DryCleanWearablesRecyclerAdapter extends RecyclerView.Adapter<DryCl
     private ArrayList<GeneralData> dryCleanWearablesData;
     private TextView title,description,price,quantity;
     private ImageView add,subtract;
+    private ImageLoader imgLoader;
+    private ImageView backgroundImage;
 
     public DryCleanWearablesRecyclerAdapter(Context context, ArrayList<GeneralData> dryCleanWearablesData) {
         this.context = context;
         this.dryCleanWearablesData = dryCleanWearablesData;
+        imgLoader = new ImageLoader(context);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -59,6 +63,7 @@ public class DryCleanWearablesRecyclerAdapter extends RecyclerView.Adapter<DryCl
 
     private void findViews(ViewHolder holder){
 
+        backgroundImage = (ImageView) holder.v.findViewById(R.id.background_image_row_order);
         title = (TextView) holder.v.findViewById(R.id.title_text_included);
         description = (TextView) holder.v.findViewById(R.id.description_text_included);
         price = (TextView) holder.v.findViewById(R.id.price_text_included);
@@ -70,6 +75,7 @@ public class DryCleanWearablesRecyclerAdapter extends RecyclerView.Adapter<DryCl
 
     private void setViews(int position){
 
+        imgLoader.DisplayImage(Constants.ironingWearablesData.get(position).getLargeImage(),backgroundImage);
         title.setText(Constants.dryCleanWearablesData.get(position).getTitle());
         description.setText(Constants.dryCleanWearablesData.get(position).getDescription());
         price.setText(Constants.dryCleanWearablesData.get(position).getRegularCost());

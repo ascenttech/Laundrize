@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.data.GeneralData;
+import com.ascenttechnovation.laundrize.imageloader.ImageLoader;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -22,11 +23,13 @@ public class WashAndIronHouseholdsRecyclerAdapter extends RecyclerView.Adapter<W
     Context context;
     private ArrayList<GeneralData> washAndIronHouseholdsData;
     private TextView title,description,price,quantity;
-    private ImageView add,subtract;
+    private ImageView add,subtract,backgroundImage;
+    private ImageLoader imgLoader;
 
     public WashAndIronHouseholdsRecyclerAdapter(Context context, ArrayList<GeneralData> washAndIronHouseholdsData) {
         this.context = context;
         this.washAndIronHouseholdsData = washAndIronHouseholdsData;
+        imgLoader = new ImageLoader(context);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -59,6 +62,7 @@ public class WashAndIronHouseholdsRecyclerAdapter extends RecyclerView.Adapter<W
 
     private void findViews(ViewHolder holder){
 
+        backgroundImage = (ImageView) holder.v.findViewById(R.id.background_image_row_order);
         title = (TextView) holder.v.findViewById(R.id.title_text_included);
         description = (TextView) holder.v.findViewById(R.id.description_text_included);
         price = (TextView) holder.v.findViewById(R.id.price_text_included);
@@ -70,6 +74,7 @@ public class WashAndIronHouseholdsRecyclerAdapter extends RecyclerView.Adapter<W
 
     private void setViews(int position){
 
+        imgLoader.DisplayImage(Constants.ironingWearablesData.get(position).getLargeImage(),backgroundImage);
         title.setText(Constants.washAndIronHouseholdsData.get(position).getTitle());
         description.setText(Constants.washAndIronHouseholdsData.get(position).getDescription());
         price.setText(Constants.washAndIronHouseholdsData.get(position).getRegularCost());

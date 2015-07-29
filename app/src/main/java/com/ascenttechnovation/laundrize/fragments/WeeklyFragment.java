@@ -24,7 +24,7 @@ public class WeeklyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_checkout,container,false);
+        View v = inflater.inflate(R.layout.fragment_weekly,container,false);
         findViews(v);
         setViews();
 

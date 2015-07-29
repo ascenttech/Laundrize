@@ -45,13 +45,11 @@ public class Constants {
 
 
     // Log Tags for all the activities
-    public static final String AddressActivity = " ADDRESS ACTIVITY ";
     public static final String ForgotPasswordActivity = " FORGOT PASSWORD ACTIVITY ";
     public static final String LandingActivity = " LANDING ACTIVITY ";
     public static final String LoginActivity = " LOGIN ACTIVITY ";
     public static final String LoginOrRegisterActivity = " LOGIN OR REGISTER ACTIVITY ";
     public static final String MobileVerificationActivity = " MOBILE VERIFICATION ACTIVITY ";
-    public static final String ProfileActivity = " PROFILE ACTIVITY ";
     public static final String RegisterActivity = " REGISTER ACTIVITY ";
     public static final String SplashScreenActivity = " SPLASH SCREEN ACTIVITY ";
 
@@ -62,7 +60,6 @@ public class Constants {
     // Log Tags for all the adapters
     public static final String LandingFragmentRecyclerAdapter = " LANDING FRAGMENT RECYCLER ADAPTER ";
     public static final String NavigationDrawerAdapter = " NAVIGATION ADAPTER ";
-    public static final String YourbasketRecyclerAdapter = " YOUR BASKET RECYCLER ADAPTER ";
 
     // Log Tags for async Task
     public static final String AddNewAddressAsyncTask=" ADD NEW ADDRESS ASYNC TASK ";
