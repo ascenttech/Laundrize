@@ -1,18 +1,15 @@
 package com.ascenttechnovation.laundrize.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.data.AddressData;
-import com.ascenttechnovation.laundrize.data.BagLaundryData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -62,7 +59,7 @@ public class AddressRecyclerAdapter extends RecyclerView.Adapter<AddressRecycler
     private void findViews(ViewHolder holder){
 
             address = (TextView) holder.v.findViewById(R.id.address_text_included);
-            mobileNumber = (TextView) holder.v.findViewById(R.id.mobile_number_included);
+            mobileNumber = (TextView) holder.v.findViewById(R.id.mobile_number_text_included);
 
 
     }
@@ -104,7 +101,7 @@ public class AddressRecyclerAdapter extends RecyclerView.Adapter<AddressRecycler
                 case R.id.address_text_included: myAddress(position);
                     notifyDataSetChanged();
                     break;
-                case R.id.mobile_number_included: myAddress(position);
+                case R.id.mobile_number_text_included: myAddress(position);
                     notifyDataSetChanged();
                     break;
 

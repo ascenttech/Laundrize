@@ -16,27 +16,12 @@
             android:layout_marginTop="@dimen/margin_dp"
             android:text="Select Your Address"
             />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/addresses_recycler_view_included"
+        <LinearLayout
+            android:id="@+id/available_address_layout_container"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/margin_dp"
-            android:layout_marginLeft="@dimen/margin_dp"/>
-
-
-        <!--<com.ascenttechnovation.laundrize.custom.CustomTextView-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Select Your Address"-->
-            <!--android:drawableLeft="@drawable/icon_tick"-->
-            <!--android:background="@drawable/rectangle_box"-->
-            <!--android:padding="@dimen/margin_dp"-->
-            <!--android:layout_marginRight="@dimen/margin_dp"-->
-            <!--android:layout_marginLeft="@dimen/margin_dp"-->
-            <!--android:visibility="gone"-->
-            <!--android:textSize="@dimen/text_size"-->
-            <!--/>-->
+            android:orientation="vertical"
+            />
 
         <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/add_new_address_button_address_fragment"

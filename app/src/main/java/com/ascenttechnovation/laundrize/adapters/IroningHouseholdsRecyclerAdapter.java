@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.data.IroningHouseholdsData;
-import com.ascenttechnovation.laundrize.data.IroningWearablesData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -21,11 +20,11 @@ import java.util.ArrayList;
 public class IroningHouseholdsRecyclerAdapter extends RecyclerView.Adapter<IroningHouseholdsRecyclerAdapter.ViewHolder> {
 
     Context context;
-    private ArrayList<IroningHouseholdsData> ironingHouseholdsData;
+    private ArrayList<GeneralData> ironingHouseholdsData;
     private TextView title,description,price,quantity;
     private ImageView add,subtract;
 
-    public IroningHouseholdsRecyclerAdapter(Context context, ArrayList<IroningHouseholdsData> ironingHouseholdsData) {
+    public IroningHouseholdsRecyclerAdapter(Context context, ArrayList<GeneralData> ironingHouseholdsData) {
         this.context = context;
         this.ironingHouseholdsData = ironingHouseholdsData;
     }
@@ -73,7 +72,7 @@ public class IroningHouseholdsRecyclerAdapter extends RecyclerView.Adapter<Ironi
 
         title.setText(Constants.ironingHouseholdsData.get(position).getTitle());
         description.setText(Constants.ironingHouseholdsData.get(position).getDescription());
-        price.setText(Constants.ironingHouseholdsData.get(position).getPrice());
+        price.setText(Constants.ironingHouseholdsData.get(position).getRegularCost());
         quantity.setText(Constants.ironingHouseholdsData.get(position).getQuantity());
 
         add.setTag("add_"+position);
@@ -94,6 +93,8 @@ public class IroningHouseholdsRecyclerAdapter extends RecyclerView.Adapter<Ironi
         value++;
         String quantity = String.valueOf(value);
         Constants.ironingHouseholdsData.get(position).setQuantity(quantity);
+        String orderId = Constants.ironingHouseholdsData.get(position).getCode();
+        Constants.order.put(orderId,quantity);
 
     }
 
@@ -105,6 +106,8 @@ public class IroningHouseholdsRecyclerAdapter extends RecyclerView.Adapter<Ironi
             value--;
             String quantity = String.valueOf(value);
             Constants.ironingHouseholdsData.get(position).setQuantity(quantity);
+            String orderId = Constants.ironingHouseholdsData.get(position).getCode();
+            Constants.order.put(orderId,quantity);
 
         }
 

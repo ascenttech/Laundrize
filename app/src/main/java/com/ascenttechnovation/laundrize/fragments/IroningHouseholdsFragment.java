@@ -11,13 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.adapters.DryCleanHouseholdsRecyclerAdapter;
 import com.ascenttechnovation.laundrize.adapters.IroningHouseholdsRecyclerAdapter;
-import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
-import com.ascenttechnovation.laundrize.data.IroningHouseholdsData;
 import com.ascenttechnovation.laundrize.utils.Constants;
-
-import java.util.ArrayList;
 
 /**
  * Created by ADMIN on 24-07-2015.
@@ -27,7 +22,6 @@ public class IroningHouseholdsFragment extends Fragment {
     private RecyclerView ironingHouseholdsRecyclerView;
     private RecyclerView.Adapter ironingHouseholdsAdapter;
     private RecyclerView.LayoutManager ironingHouseholdsLayoutManager;
-    private ArrayList<IroningHouseholdsData> ironingHouseholdsData;
     Context context;
 
     @Nullable

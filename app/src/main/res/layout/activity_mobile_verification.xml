@@ -33,7 +33,7 @@
 
     <com.ascenttechnovation.laundrize.custom.CustomButton
         android:id="@+id/verify_now_button_mobile_verification_activity"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:text=" Verify Now "
         android:background="@drawable/rounded_blue_button"
@@ -42,6 +42,7 @@
         android:layout_weight="1"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:layout_gravity="center_horizontal"
         />
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
@@ -82,7 +83,7 @@
 
     <com.ascenttechnovation.laundrize.custom.CustomButton
         android:id="@+id/confirm_verification_button_mobile_verification_activity"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:text=" Confirm my verification "
         android:background="@drawable/rounded_blue_button"
@@ -90,6 +91,7 @@
         android:layout_weight="1"
         android:layout_margin="5dp"
         android:padding="5dp"
+        android:layout_gravity="center_horizontal"
         />
 
 </LinearLayout>

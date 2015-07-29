@@ -4,8 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.ascenttechnovation.laundrize.data.AddressData;
-import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import org.apache.http.HttpEntity;
@@ -17,7 +16,7 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * Created by ADMIN on 27-07-2015.
@@ -26,6 +25,7 @@ public class FetchLaundryServicesAsyncTask extends AsyncTask<String,Void,Boolean
 
     Context context;
     FetchLaundryServicesCallback callback;
+
     public interface FetchLaundryServicesCallback{
 
         public void onStart(boolean status);
@@ -69,7 +69,9 @@ public class FetchLaundryServicesAsyncTask extends AsyncTask<String,Void,Boolean
                 for(int i = 0;i<jsonArray.length();i++){
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                    String id = jsonObject.getString("id");
+                    String id = jsonObject.getString("id");
+
+
 //                    String id = jsonObject.getString("name");
 //                    String id = jsonObject.getString("des_short");
 //                    String id = jsonObject.getString("des_long");
@@ -77,9 +79,9 @@ public class FetchLaundryServicesAsyncTask extends AsyncTask<String,Void,Boolean
 //                    String id = jsonObject.getString("imglarge");
 
                     JSONArray nestedJsonArray = jsonObject.getJSONArray("subitems");
-                    for(int j=0;j<nestedJsonArray.length();i++){
+                    for(int j=0;j<nestedJsonArray.length();j++){
 
-                    JSONObject nestedJsonObject = nestedJsonArray.getJSONObject(i);
+                    JSONObject nestedJsonObject = nestedJsonArray.getJSONObject(j);
                      String code = nestedJsonObject.getString("code");
                      String description = nestedJsonObject.getString("desc");
                      String title = nestedJsonObject.getString("name");
@@ -90,11 +92,15 @@ public class FetchLaundryServicesAsyncTask extends AsyncTask<String,Void,Boolean
                      String extraCare = nestedJsonObject.getString("extracare");
                      String extraCareCost = nestedJsonObject.getString("extracarecost");
 
-                     Constants.laundryServicesSubCategory.add(new LaundryServicesSubCategoryData(code,title,description,smallImage,largeImage,regular,regularCost,extraCare,extraCareCost));
+                     Constants.subCategory.add(new GeneralData(code,title,description,smallImage,largeImage,regular,regularCost,extraCare,extraCareCost,"0"));
+//                     Constants.subCategory.add(new GeneralData(code,title,description,smallImage,largeImage,regular,regularCost,extraCare,extraCareCost));
 
-                    }
+                    } // end of nested for loop
 
-                }
+                    sortTheCategories(id);
+
+
+                }// end of the for loop
 
                 return true;
             }
@@ -106,6 +112,43 @@ public class FetchLaundryServicesAsyncTask extends AsyncTask<String,Void,Boolean
 
             e.printStackTrace();
             return false;
+        }
+
+    }
+
+    public void sortTheCategories(String id) {
+
+        switch(id){
+
+            case "001000000":
+                Constants.ironingWearablesData = Constants.subCategory;
+                Constants.subCategory = new ArrayList<GeneralData>();
+                break;
+            case "002000000":
+                Constants.ironingHouseholdsData = Constants.subCategory;
+                Constants.subCategory = new ArrayList<GeneralData>();
+                break;
+            case "003000000":
+                Constants.washAndIronWearablesData = Constants.subCategory;
+                Constants.subCategory = new ArrayList<GeneralData>();
+                break;
+            case "004000000":
+                Constants.washAndIronHouseholdsData = Constants.subCategory;
+                Constants.subCategory = new ArrayList<GeneralData>();
+                break;
+            case "005000000":
+                Constants.dryCleanWearablesData = Constants.subCategory;
+                Constants.subCategory = new ArrayList<GeneralData>();
+                break;
+            case "006000000":
+                Constants.dryCleanHouseholdsData = Constants.subCategory;
+                Constants.subCategory = new ArrayList<GeneralData>();
+                break;
+            case "007000000":
+                Constants.shoeLaundryData = Constants.subCategory;
+                Constants.subCategory = new ArrayList<GeneralData>();
+                break;
+
         }
 
     }

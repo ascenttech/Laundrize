@@ -12,11 +12,7 @@ import android.view.ViewGroup;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.BagLaundryRecyclerAdapter;
-import com.ascenttechnovation.laundrize.adapters.IroningWearablesRecyclerAdapter;
-import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
-
-import java.util.ArrayList;
 
 /**
  * Created by ADMIN on 24-07-2015.

@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.data.IroningHouseholdsData;
-import com.ascenttechnovation.laundrize.data.OthersData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -21,11 +20,11 @@ import java.util.ArrayList;
 public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAdapter.ViewHolder> {
 
     Context context;
-    private ArrayList<OthersData> othersData;
+    private ArrayList<GeneralData> othersData;
     private TextView title,description,price,quantity;
     private ImageView add,subtract;
 
-    public OthersRecyclerAdapter(Context context, ArrayList<OthersData> othersData) {
+    public OthersRecyclerAdapter(Context context, ArrayList<GeneralData> othersData) {
         this.context = context;
         this.othersData = othersData;
     }
@@ -73,8 +72,8 @@ public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAd
 
         title.setText(Constants.othersData.get(position).getTitle());
         description.setText(Constants.othersData.get(position).getDescription());
-        price.setText(Constants.othersData.get(position).getPrice());
-        quantity.setText(Constants.othersData.get(position).getQuantity());
+//        price.setText(Constants.othersData.get(position).getPrice());
+//        quantity.setText(Constants.othersData.get(position).getQuantity());
 
         add.setTag("add_"+position);
         add.setOnClickListener(listener);
@@ -88,27 +87,27 @@ public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAd
         return othersData.size();
     }
 
-    private void add(int position){
-
-        int value = Integer.parseInt(Constants.othersData.get(position).getQuantity());
-        value++;
-        String quantity = String.valueOf(value);
-        Constants.othersData.get(position).setQuantity(quantity);
-
-    }
-
-    private void subtract(int position){
-
-        int value = Integer.parseInt(Constants.othersData.get(position).getQuantity());
-        if(value !=0){
-
-            value--;
-            String quantity = String.valueOf(value);
-            Constants.othersData.get(position).setQuantity(quantity);
-
-        }
-
-    }
+//    private void add(int position){
+//
+//        int value = Integer.parseInt(Constants.othersData.get(position).getQuantity());
+//        value++;
+//        String quantity = String.valueOf(value);
+//        Constants.othersData.get(position).setQuantity(quantity);
+//
+//    }
+//
+//    private void subtract(int position){
+//
+//        int value = Integer.parseInt(Constants.othersData.get(position).getQuantity());
+//        if(value !=0){
+//
+//            value--;
+//            String quantity = String.valueOf(value);
+//            Constants.othersData.get(position).setQuantity(quantity);
+//
+//        }
+//
+//    }
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -121,12 +120,12 @@ public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAd
             switch (view.getId()){
 
 
-                case R.id.add_image_included: add(position);
-                    notifyDataSetChanged();
-                    break;
-                case R.id.subtract_image_included: subtract(position);
-                    notifyDataSetChanged();
-                    break;
+//                case R.id.add_image_included: add(position);
+//                    notifyDataSetChanged();
+//                    break;
+//                case R.id.subtract_image_included: subtract(position);
+//                    notifyDataSetChanged();
+//                    break;
 
 
             }

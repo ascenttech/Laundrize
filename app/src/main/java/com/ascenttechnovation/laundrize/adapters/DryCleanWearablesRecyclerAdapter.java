@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.data.DryCleanHouseholdsData;
-import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -21,11 +20,11 @@ import java.util.ArrayList;
 public class DryCleanWearablesRecyclerAdapter extends RecyclerView.Adapter<DryCleanWearablesRecyclerAdapter.ViewHolder> {
 
     Context context;
-    private ArrayList<DryCleanWearablesData> dryCleanWearablesData;
+    private ArrayList<GeneralData> dryCleanWearablesData;
     private TextView title,description,price,quantity;
     private ImageView add,subtract;
 
-    public DryCleanWearablesRecyclerAdapter(Context context, ArrayList<DryCleanWearablesData> dryCleanWearablesData) {
+    public DryCleanWearablesRecyclerAdapter(Context context, ArrayList<GeneralData> dryCleanWearablesData) {
         this.context = context;
         this.dryCleanWearablesData = dryCleanWearablesData;
     }
@@ -73,7 +72,7 @@ public class DryCleanWearablesRecyclerAdapter extends RecyclerView.Adapter<DryCl
 
         title.setText(Constants.dryCleanWearablesData.get(position).getTitle());
         description.setText(Constants.dryCleanWearablesData.get(position).getDescription());
-        price.setText(Constants.dryCleanWearablesData.get(position).getPrice());
+        price.setText(Constants.dryCleanWearablesData.get(position).getRegularCost());
         quantity.setText(Constants.dryCleanWearablesData.get(position).getQuantity());
 
         add.setTag("add_"+position);
@@ -94,6 +93,8 @@ public class DryCleanWearablesRecyclerAdapter extends RecyclerView.Adapter<DryCl
         value++;
         String quantity = String.valueOf(value);
         Constants.dryCleanWearablesData.get(position).setQuantity(quantity);
+        String orderId = Constants.dryCleanWearablesData.get(position).getCode();
+        Constants.order.put(orderId,quantity);
 
     }
 
@@ -105,6 +106,8 @@ public class DryCleanWearablesRecyclerAdapter extends RecyclerView.Adapter<DryCl
             value--;
             String quantity = String.valueOf(value);
             Constants.dryCleanWearablesData.get(position).setQuantity(quantity);
+            String orderId = Constants.dryCleanWearablesData.get(position).getCode();
+            Constants.order.put(orderId,quantity);
 
         }
 

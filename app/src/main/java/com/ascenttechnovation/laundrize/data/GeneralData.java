@@ -1,34 +1,44 @@
 package com.ascenttechnovation.laundrize.data;
 
 /**
- * Created by ADMIN on 24-07-2015.
+ * Created by ADMIN on 29-07-2015.
  */
 public class GeneralData {
 
-    private String backgroundImageUrl,title,description,price,quantity;
 
-    public GeneralData(String backgroundImageUrl, String title, String description, String price, String quantity) {
-        this.backgroundImageUrl = backgroundImageUrl;
-        this.title = title;
+    String code, description,title,largeImage,smallImage,regular,regularCost,extraCare,extraCost,quantity;
+
+    public GeneralData(String code, String description, String title, String largeImage, String smallImage, String regular, String regularCost, String extraCare, String extraCost) {
+        this.code = code;
         this.description = description;
-        this.price = price;
+        this.title = title;
+        this.largeImage = largeImage;
+        this.smallImage = smallImage;
+        this.regular = regular;
+        this.regularCost = regularCost;
+        this.extraCare = extraCare;
+        this.extraCost = extraCost;
+    }
+
+    public GeneralData(String code, String description, String title, String largeImage, String smallImage, String regular, String regularCost, String extraCare, String extraCost, String quantity) {
+        this.code = code;
+        this.description = description;
+        this.title = title;
+        this.largeImage = largeImage;
+        this.smallImage = smallImage;
+        this.regular = regular;
+        this.regularCost = regularCost;
+        this.extraCare = extraCare;
+        this.extraCost = extraCost;
         this.quantity = quantity;
     }
 
-    public String getBackgroundImageUrl() {
-        return backgroundImageUrl;
+    public String getCode() {
+        return code;
     }
 
-    public void setBackgroundImageUrl(String backgroundImageUrl) {
-        this.backgroundImageUrl = backgroundImageUrl;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getDescription() {
@@ -39,12 +49,60 @@ public class GeneralData {
         this.description = description;
     }
 
-    public String getPrice() {
-        return price;
+    public String getTitle() {
+        return title;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getLargeImage() {
+        return largeImage;
+    }
+
+    public void setLargeImage(String largeImage) {
+        this.largeImage = largeImage;
+    }
+
+    public String getSmallImage() {
+        return smallImage;
+    }
+
+    public void setSmallImage(String smallImage) {
+        this.smallImage = smallImage;
+    }
+
+    public String getRegular() {
+        return regular;
+    }
+
+    public void setRegular(String regular) {
+        this.regular = regular;
+    }
+
+    public String getRegularCost() {
+        return regularCost;
+    }
+
+    public void setRegularCost(String regularCost) {
+        this.regularCost = regularCost;
+    }
+
+    public String getExtraCare() {
+        return extraCare;
+    }
+
+    public void setExtraCare(String extraCare) {
+        this.extraCare = extraCare;
+    }
+
+    public String getExtraCost() {
+        return extraCost;
+    }
+
+    public void setExtraCost(String extraCost) {
+        this.extraCost = extraCost;
     }
 
     public String getQuantity() {

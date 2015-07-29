@@ -1,51 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-    <include
-        android:id="@+id/first_question_static_faq_fragment"
-        layout="@layout/include_faq_question_answer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
+        <include
+            android:id="@+id/first_question_static_faq_fragment"
+            layout="@layout/include_faq_question_answer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
 
-    <include
-        android:id="@+id/second_question_static_faq_fragment"
-        layout="@layout/include_faq_question_answer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
-    <include
-        android:id="@+id/third_question_static_faq_fragment"
-        layout="@layout/include_faq_question_answer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
-    <include
-        android:id="@+id/fourth_question_static_faq_fragment"
-        layout="@layout/include_faq_question_answer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
-    <include
-        android:id="@+id/fifth_question_static_faq_fragment"
-        layout="@layout/include_faq_question_answer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
-    <include
-        android:id="@+id/sixth_question_static_faq_fragment"
-        layout="@layout/include_faq_question_answer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
-    <include
-        android:id="@+id/seventh_question_static_faq_fragment"
-        layout="@layout/include_faq_question_answer"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        />
+        <include
+            android:id="@+id/second_question_static_faq_fragment"
+            layout="@layout/include_faq_question_answer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+        <include
+            android:id="@+id/third_question_static_faq_fragment"
+            layout="@layout/include_faq_question_answer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+        <include
+            android:id="@+id/fourth_question_static_faq_fragment"
+            layout="@layout/include_faq_question_answer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+        <include
+            android:id="@+id/fifth_question_static_faq_fragment"
+            layout="@layout/include_faq_question_answer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+        <include
+            android:id="@+id/sixth_question_static_faq_fragment"
+            layout="@layout/include_faq_question_answer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+        <include
+            android:id="@+id/seventh_question_static_faq_fragment"
+            layout="@layout/include_faq_question_answer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

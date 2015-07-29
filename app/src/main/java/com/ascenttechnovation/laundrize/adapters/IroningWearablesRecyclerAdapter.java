@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
-import com.ascenttechnovation.laundrize.data.IroningWearablesData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -21,11 +20,11 @@ import java.util.ArrayList;
 public class IroningWearablesRecyclerAdapter extends RecyclerView.Adapter<IroningWearablesRecyclerAdapter.ViewHolder> {
 
     Context context;
-    private ArrayList<IroningWearablesData> ironingWearablesData;
+    private ArrayList<GeneralData> ironingWearablesData;
     private TextView title,description,price,quantity;
     private ImageView add,subtract;
 
-    public IroningWearablesRecyclerAdapter(Context context, ArrayList<IroningWearablesData> ironingWearablesData) {
+    public IroningWearablesRecyclerAdapter(Context context, ArrayList<GeneralData> ironingWearablesData) {
         this.context = context;
         this.ironingWearablesData = ironingWearablesData;
     }
@@ -73,7 +72,7 @@ public class IroningWearablesRecyclerAdapter extends RecyclerView.Adapter<Ironin
 
         title.setText(Constants.ironingWearablesData.get(position).getTitle());
         description.setText(Constants.ironingWearablesData.get(position).getDescription());
-        price.setText(Constants.ironingWearablesData.get(position).getPrice());
+        price.setText(Constants.ironingWearablesData.get(position).getRegularCost());
         quantity.setText(Constants.ironingWearablesData.get(position).getQuantity());
 
         add.setTag("add_"+position);
@@ -95,6 +94,9 @@ public class IroningWearablesRecyclerAdapter extends RecyclerView.Adapter<Ironin
         String quantity = String.valueOf(value);
         Constants.ironingWearablesData.get(position).setQuantity(quantity);
 
+        String orderId = Constants.ironingWearablesData.get(position).getCode();
+        Constants.order.put(orderId,quantity);
+
     }
 
     private void subtract(int position){
@@ -106,6 +108,8 @@ public class IroningWearablesRecyclerAdapter extends RecyclerView.Adapter<Ironin
             String quantity = String.valueOf(value);
             Constants.ironingWearablesData.get(position).setQuantity(quantity);
 
+            String orderId = Constants.ironingWearablesData.get(position).getCode();
+            Constants.order.put(orderId,quantity);
         }
 
     }

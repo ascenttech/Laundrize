@@ -25,9 +25,6 @@
         <activity android:name=".activities.LandingActivity"
             android:screenOrientation="portrait"
             />
-        <activity android:name=".activities.ForgotPasswordActivity"
-            android:screenOrientation="portrait"
-            />
         <activity android:name=".activities.LogInOrRegisterActivity"
             android:screenOrientation="portrait"
             />
@@ -38,6 +35,10 @@
             android:screenOrientation="portrait"
             />
         <activity android:name=".activities.MobileVerificationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MobileVerificationTheme"
+            />
+        <activity android:name=".activities.ForgotPasswordActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MobileVerificationTheme"
             />

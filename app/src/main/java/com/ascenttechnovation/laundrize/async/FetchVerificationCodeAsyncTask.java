@@ -56,8 +56,8 @@ public class FetchVerificationCodeAsyncTask extends AsyncTask<String,Void,Boolea
                 String response = EntityUtils.toString(httpEntity);
 
                 Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
-                JSONObject jsonObject = new JSONObject(response);
-                String message = jsonObject.getString("message");
+//                JSONObject jsonObject = new JSONObject(response);
+//                String message = jsonObject.getString("message");
 
                 return true;
             }

@@ -58,8 +58,7 @@ public class LoginActivity extends Activity {
 
     public void clickHere(){
 
-        Intent i = new Intent(LoginActivity.this,MobileVerificationActivity.class);
-        i.putExtra("from","forgotPassword");
+        Intent i = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
         startActivity(i);
     }
 

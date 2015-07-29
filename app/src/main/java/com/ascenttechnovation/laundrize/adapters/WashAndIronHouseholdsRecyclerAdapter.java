@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.data.ShoeLaundryData;
-import com.ascenttechnovation.laundrize.data.WashAndIronHouseholdsData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -21,11 +20,11 @@ import java.util.ArrayList;
 public class WashAndIronHouseholdsRecyclerAdapter extends RecyclerView.Adapter<WashAndIronHouseholdsRecyclerAdapter.ViewHolder> {
 
     Context context;
-    private ArrayList<WashAndIronHouseholdsData> washAndIronHouseholdsData;
+    private ArrayList<GeneralData> washAndIronHouseholdsData;
     private TextView title,description,price,quantity;
     private ImageView add,subtract;
 
-    public WashAndIronHouseholdsRecyclerAdapter(Context context, ArrayList<WashAndIronHouseholdsData> washAndIronHouseholdsData) {
+    public WashAndIronHouseholdsRecyclerAdapter(Context context, ArrayList<GeneralData> washAndIronHouseholdsData) {
         this.context = context;
         this.washAndIronHouseholdsData = washAndIronHouseholdsData;
     }
@@ -73,7 +72,7 @@ public class WashAndIronHouseholdsRecyclerAdapter extends RecyclerView.Adapter<W
 
         title.setText(Constants.washAndIronHouseholdsData.get(position).getTitle());
         description.setText(Constants.washAndIronHouseholdsData.get(position).getDescription());
-        price.setText(Constants.washAndIronHouseholdsData.get(position).getPrice());
+        price.setText(Constants.washAndIronHouseholdsData.get(position).getRegularCost());
         quantity.setText(Constants.washAndIronHouseholdsData.get(position).getQuantity());
 
         add.setTag("add_"+position);
@@ -95,6 +94,9 @@ public class WashAndIronHouseholdsRecyclerAdapter extends RecyclerView.Adapter<W
         String quantity = String.valueOf(value);
         Constants.washAndIronHouseholdsData.get(position).setQuantity(quantity);
 
+        String orderId = Constants.washAndIronHouseholdsData.get(position).getCode();
+        Constants.order.put(orderId,quantity);
+
     }
 
     private void subtract(int position){
@@ -105,6 +107,8 @@ public class WashAndIronHouseholdsRecyclerAdapter extends RecyclerView.Adapter<W
             value--;
             String quantity = String.valueOf(value);
             Constants.washAndIronHouseholdsData.get(position).setQuantity(quantity);
+            String orderId = Constants.washAndIronHouseholdsData.get(position).getCode();
+            Constants.order.put(orderId,quantity);
 
         }
 

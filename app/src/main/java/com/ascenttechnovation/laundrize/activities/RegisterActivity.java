@@ -57,7 +57,6 @@ public class RegisterActivity extends Activity {
         i.putExtra("emailId",email.getText().toString());
         i.putExtra("mobileNumber",mobileNumber.getText().toString());
         i.putExtra("password",password.getText().toString());
-        i.putExtra("from","registerUser");
         startActivity(i);
 
     }

@@ -1,5 +1,6 @@
 package com.ascenttechnovation.laundrize.fragments;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,23 +15,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.adapters.TabsViewPagerAdapter;
-import com.ascenttechnovation.laundrize.data.BagLaundryData;
-import com.ascenttechnovation.laundrize.data.DryCleanHouseholdsData;
-import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
-import com.ascenttechnovation.laundrize.data.IroningHouseholdsData;
-import com.ascenttechnovation.laundrize.data.IroningWearablesData;
-import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
-import com.ascenttechnovation.laundrize.data.OthersData;
-import com.ascenttechnovation.laundrize.data.ShoeLaundryData;
-import com.ascenttechnovation.laundrize.data.WashAndIronHouseholdsData;
-import com.ascenttechnovation.laundrize.data.WashAndIronWearablesData;
+import com.ascenttechnovation.laundrize.async.FetchLaundryServicesAsyncTask;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
-import java.util.List;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by ADMIN on 01-07-2015.
@@ -41,23 +35,65 @@ public class ServicesFragment extends Fragment {
     ActionBar.Tab tabs;
 
 //    String names[]= {"Ironing: Wearables","Ironing: Households","Dry Cleaning","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables","Dry Clean: Households","Shoe Laundry","Bag Laundry","Others"};
-    String names[]= {"Ironing: Wearables","Ironing: Households","Dry Cleaning","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables"};
+    String names[]= {"Ironing: Wearables","Ironing: Households","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables","Dry Clean : Households"};
     private LinearLayout footer;
     Button mainMenu,placeOrder;
     ViewPager viewPager;
     TabsViewPagerAdapter viewPagerAdapter;
+    private ProgressDialog progressDialog;
+    private View v;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_services,container,false);
+        v = inflater.inflate(R.layout.fragment_services,container,false);
+        viewPager = (ViewPager) v.findViewById(R.id.myviewpager);
+
+        fetchServices();
+
+
+        return v;
+    }
+
+    public void fetchServices(){
+
+        String finalUrl = Constants.fetchLaundrySevicesUrl+ Constants.userId;
+        new FetchLaundryServicesAsyncTask(getActivity().getApplicationContext(), new FetchLaundryServicesAsyncTask.FetchLaundryServicesCallback() {
+            @Override
+            public void onStart(boolean status) {
+
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.LOG_TAG);
+                progressDialog.setMessage("Getting Laundry Services");
+                progressDialog.show();
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                progressDialog.dismiss();
+                if(result){
+
+                    customActionBar();
+                    findViews(v);
+                    setViews();
+
+                }
+                else{
+
+                    Toast.makeText(getActivity().getApplicationContext(),"Couldnt fetch services \nTry Again Later",5000).show();
+                }
+
+            }
+        }).execute(finalUrl);
+
+    }
+
+    public void customActionBar(){
 
         actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayShowTitleEnabled(true);
-
-        viewPager = (ViewPager) v.findViewById(R.id.myviewpager);
 
         for(int i =0 ;i<names.length;i++){
 
@@ -66,18 +102,7 @@ public class ServicesFragment extends Fragment {
                             .setCustomView(makeDummyTab(names[i], R.drawable.baniyan,i))
                             .setTabListener(actionBarListener));
         }
-
-//            tabs = actionBar.newTab()
-//                    .setCustomView(makeDummyTab(names[i], R.drawable.baniyan,i))
-//                    .setTabListener(actionBarListener);
-//            actionBar.addTab(tabs);
-//        }
-
-        findViews(v);
-        setViews();
-        return v;
     }
-
 
     public View makeDummyTab(String tabName, int tabIcon,int position){
 
@@ -108,13 +133,22 @@ public class ServicesFragment extends Fragment {
 //        mainMenu.setOnClickListener(listener);
 
         placeOrder.setText("Place Order");
-//        placeOrder.setOnClickListener(listener);
+        placeOrder.setOnClickListener(listener);
 
         viewPager.setOnPageChangeListener(pageChangeListener);
         viewPager.setAdapter(viewPagerAdapter);
 
     }
 
+    public void getOrder(){
+
+        Iterator iterator = Constants.order.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry mapEntry = (Map.Entry) iterator.next();
+            Log.d(Constants.LOG_TAG, " key " + mapEntry.getKey() + " value " + mapEntry.getValue());
+        }
+
+    }
 
 
     ActionBar.TabListener actionBarListener = new ActionBar.TabListener() {
@@ -123,7 +157,7 @@ public class ServicesFragment extends Fragment {
 
             Log.d(Constants.LOG_TAG,"Position "+tab.getPosition());
 
-            viewPager.setCurrentItem(tab.getPosition());
+//            viewPager.setCurrentItem(tab.getPosition());
 
 
 //            String tag = tab.getCustomView().getTag().toString();
@@ -225,9 +259,10 @@ public class ServicesFragment extends Fragment {
                                                     .commit();
                     break;
 
-                case R.id.right_button_included: ((LandingActivity)getActivity()).getSupportFragmentManager()
+                case R.id.right_button_included: getOrder();
+                    ((LandingActivity)getActivity()).getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.container,new FAQFragment())
+                        .replace(R.id.container,new CheckOutFragment())
                         .commit();
                     break;
             }

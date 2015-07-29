@@ -1,22 +1,13 @@
 package com.ascenttechnovation.laundrize.utils;
 
 import com.ascenttechnovation.laundrize.data.AddressData;
-import com.ascenttechnovation.laundrize.data.BagLaundryData;
-import com.ascenttechnovation.laundrize.data.DryCleanHouseholdsData;
-import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
-import com.ascenttechnovation.laundrize.data.IroningHouseholdsData;
-import com.ascenttechnovation.laundrize.data.IroningWearablesData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesMainCategoryData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
-import com.ascenttechnovation.laundrize.data.OthersData;
-import com.ascenttechnovation.laundrize.data.ShoeLaundryData;
-import com.ascenttechnovation.laundrize.data.WashAndIronHouseholdsData;
-import com.ascenttechnovation.laundrize.data.WashAndIronWearablesData;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 /**
  * Created by ADMIN on 02-07-2015.
@@ -33,43 +24,24 @@ public class Constants {
     public static String address;
     public static String mobileNumber;
 
-    public static ArrayList<String> order;
-
-    public static String ironingWearablesTitles[]={"Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket"};
-    public static String ironingHouseholdsTitles[]={"Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover"};
-    public static String washAndIronWearablesTitles[] ={"Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket"};
-    public static String washAndIronHouseholdsTitles[] = {"Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover"};
-    public static String dryCleanWearablesTitles[] = {"Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket","Suit","Tuxedo","Blazer","Jacket"};
-    public static String dryCleanHouseholdsTitles[] = {"Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover","Shirts","Pants","Bedsheets","Pillow Cover"};
-    public static String shoeLaundryTitles[]={"Loafers","Boat Shoes","Sneakers","Sketchers","Loafers","Boat Shoes","Sneakers","Sketchers","Loafers","Boat Shoes","Sneakers","Sketchers"};
-    public static String bagLaundryTitles[]={"One Strap","Two Strap","Suitcase","HandBag","One Strap","Two Strap","Suitcase","HandBag","One Strap","Two Strap","Suitcase","HandBag"};
-    public static String othersTitles[]={"Underwear","Baniyan","Socks","Handkerchiefs","Underwear","Baniyan","Socks","Handkerchiefs","Underwear","Baniyan","Socks","Handkerchiefs"};
+    // This hashmap would containt the key as orderId and value as quantity
+    public static Map<String,String> order;
 
     // All the arraylists
+    public static ArrayList<GeneralData> subCategory;
     public static ArrayList<AddressData> addressData;
-    public static ArrayList<BagLaundryData> bagLaundryData;
-    public static ArrayList<DryCleanHouseholdsData> dryCleanHouseholdsData;
-    public static ArrayList<DryCleanWearablesData> dryCleanWearablesData;
-    public static ArrayList<IroningHouseholdsData> ironingHouseholdsData;
-    public static ArrayList<IroningWearablesData> ironingWearablesData;
+    public static ArrayList<GeneralData> bagLaundryData;
+    public static ArrayList<GeneralData> dryCleanHouseholdsData;
+    public static ArrayList<GeneralData> dryCleanWearablesData;
+    public static ArrayList<GeneralData> ironingHouseholdsData;
+    public static ArrayList<GeneralData> ironingWearablesData;
     public static ArrayList<LaundryServicesMainCategoryData> laundryServicesMainCategory;
     public static ArrayList<LaundryServicesSubCategoryData> laundryServicesSubCategory;
     public static ArrayList<NavigationDrawerData> navigationDrawerData;
-    public static ArrayList<OthersData> othersData;
-    public static ArrayList<ShoeLaundryData> shoeLaundryData;
-    public static ArrayList<WashAndIronHouseholdsData> washAndIronHouseholdsData;
-    public static ArrayList<WashAndIronWearablesData> washAndIronWearablesData;
-
-    // HashMap for all the data
-    public static HashMap<String,String> ironingWearables;
-    public static HashMap<String,String> ironingHouseholds;
-    public static HashMap<String,String> washAndIronWearables;
-    public static HashMap<String,String> washAndIronHouseholds;
-    public static HashMap<String,String> dryCleanWearables;
-    public static HashMap<String,String> dryCleanHouseholds;
-    public static HashMap<String,String> shoeLaundry;
-    public static HashMap<String,String> bagLaundry;
-    public static HashMap<String,String> others;
+    public static ArrayList<GeneralData> othersData;
+    public static ArrayList<GeneralData> shoeLaundryData;
+    public static ArrayList<GeneralData> washAndIronHouseholdsData;
+    public static ArrayList<GeneralData> washAndIronWearablesData;
 
 
     // Log Tags for all the activities
@@ -113,10 +85,15 @@ public class Constants {
 //    public static final String fetchLaundrySevicesUrl ="http://dev.laundrize.com/api/api/v1/getlaundryservice?user_id=50"
     public static final String fetchLaundrySevicesUrl ="http://dev.laundrize.com/api/api/v1/getlaundryservice?user_id=";
 
-    //  public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=9876543210";
+    //  public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=8879153143";
     public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=";
 
-    //  public static final String confirmVerificationUrl = "http://dev.laundrize.com/api/api/v1/registeruser?mobile_number=9820817089&verification_code=Fzj8GE&password=122345&first_name=sagar&email=abc@gmail.com";
+
+//    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=8097746236";
+    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
+
+
+    //  public static final String confirmVerificationUrl = "http://dev.laundrize.com/api/api/v1/registeruser?mobile_number=8879153143&verification_code=wFIqdi&password=qwerty&first_name=sagar&email=sagardevanga@gmail.com";
     public static final String confirmVerificationUrl = "http://dev.laundrize.com/api/api/v1/registeruser?mobile_number=";
 
     // public static final String signInUrl = "http://dev.laundrize.com/api/api/v1/postlogin?mobile_number=9752493189&password=laundry";
@@ -124,6 +101,9 @@ public class Constants {
 
 //    public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=12";
     public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=";
+
+//    public static final String addNewAddress ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=12&city=Pune&city_zip=411027&city_zip_area=PimpleSaudagar&address=501RajGalaxy"
+    public static final String addNewAddress ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=";
 
 
 }

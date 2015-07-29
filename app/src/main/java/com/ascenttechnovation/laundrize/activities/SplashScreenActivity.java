@@ -10,18 +10,10 @@ import android.view.SurfaceView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.data.AddressData;
-import com.ascenttechnovation.laundrize.data.BagLaundryData;
-import com.ascenttechnovation.laundrize.data.DryCleanHouseholdsData;
-import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
-import com.ascenttechnovation.laundrize.data.IroningHouseholdsData;
-import com.ascenttechnovation.laundrize.data.IroningWearablesData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesMainCategoryData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
-import com.ascenttechnovation.laundrize.data.OthersData;
-import com.ascenttechnovation.laundrize.data.ShoeLaundryData;
-import com.ascenttechnovation.laundrize.data.WashAndIronHouseholdsData;
-import com.ascenttechnovation.laundrize.data.WashAndIronWearablesData;
 import com.ascenttechnovation.laundrize.gif.decoder.GifRun;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -45,8 +37,6 @@ public class SplashScreenActivity extends Activity {
 
 
         initializeArrayList();
-        initializeHashMaps();
-        setData();
         findViews();
         getCredentials();
 
@@ -87,65 +77,23 @@ public class SplashScreenActivity extends Activity {
 
     public void initializeArrayList(){
 
+        Constants.subCategory = new ArrayList<GeneralData>();
         Constants.addressData = new ArrayList<AddressData>();
-        Constants.bagLaundryData = new ArrayList<BagLaundryData>();
-        Constants.dryCleanHouseholdsData = new ArrayList<DryCleanHouseholdsData>();
-        Constants.dryCleanWearablesData = new ArrayList<DryCleanWearablesData>();
-        Constants.ironingHouseholdsData = new ArrayList<IroningHouseholdsData>();
-        Constants.ironingWearablesData = new ArrayList<IroningWearablesData>();
+        Constants.bagLaundryData = new ArrayList<GeneralData>();
+        Constants.dryCleanHouseholdsData = new ArrayList<GeneralData>();
+        Constants.dryCleanWearablesData = new ArrayList<GeneralData>();
+        Constants.ironingHouseholdsData = new ArrayList<GeneralData>();
+        Constants.ironingWearablesData = new ArrayList<GeneralData>();
         Constants.laundryServicesMainCategory = new ArrayList<LaundryServicesMainCategoryData>();
         Constants.laundryServicesSubCategory = new ArrayList<LaundryServicesSubCategoryData>();
         Constants.navigationDrawerData = new ArrayList<NavigationDrawerData>();
-        Constants.othersData = new ArrayList<OthersData>();
-        Constants.shoeLaundryData = new ArrayList<ShoeLaundryData>();
-        Constants.washAndIronHouseholdsData = new ArrayList<WashAndIronHouseholdsData>();
-        Constants.washAndIronWearablesData = new ArrayList<WashAndIronWearablesData>();
+        Constants.othersData = new ArrayList<GeneralData>();
+        Constants.shoeLaundryData = new ArrayList<GeneralData>();
+        Constants.washAndIronHouseholdsData = new ArrayList<GeneralData>();
+        Constants.washAndIronWearablesData = new ArrayList<GeneralData>();
 
-
-    }
-    public void initializeHashMaps(){
-
-        Constants.ironingWearables = new HashMap<String,String>();
-        Constants.ironingHouseholds = new HashMap<String,String>();
-        Constants.washAndIronWearables = new HashMap<String,String>();
-        Constants.washAndIronHouseholds = new HashMap<String,String>();
-        Constants.dryCleanWearables = new HashMap<String,String>();
-        Constants.dryCleanHouseholds = new HashMap<String,String>();
-        Constants.shoeLaundry = new HashMap<String,String>();
-        Constants.bagLaundry = new HashMap<String,String>();
-        Constants.others = new HashMap<String,String>();
-
-    }
-
-    private void setData(){
-
-        for(int i =0;i<1;i++) {
-            Constants.bagLaundryData.add(new BagLaundryData("abc",Constants.bagLaundryTitles[i],"abc","45","0"));
-        }
-        for(int i =0;i<5;i++) {
-            Constants.dryCleanHouseholdsData.add(new DryCleanHouseholdsData("abc",Constants.dryCleanHouseholdsTitles[i],"def","37","0"));
-        }
-        for(int i =0;i<3;i++) {
-            Constants.dryCleanWearablesData.add(new DryCleanWearablesData("abc",Constants.dryCleanWearablesTitles[i],"ghi","23","0"));
-        }
-        for(int i =0;i<2;i++) {
-            Constants.ironingHouseholdsData.add(new IroningHouseholdsData("abc",Constants.ironingHouseholdsTitles[i],"jkl","7","0"));
-        }
-        for(int i =0;i<6;i++) {
-            Constants.ironingWearablesData.add(new IroningWearablesData("abc",Constants.ironingWearablesTitles[i],"mno","19","0"));
-        }
-        for(int i =0;i<1;i++) {
-            Constants.othersData.add(new OthersData("abc",Constants.othersTitles[i],"pqr","11","0"));
-        }
-        for(int i =0;i<4;i++) {
-            Constants.shoeLaundryData.add(new ShoeLaundryData("abc",Constants.shoeLaundryTitles[i],"stu","175","0"));
-        }
-        for(int i =0;i<7;i++) {
-            Constants.washAndIronHouseholdsData.add(new WashAndIronHouseholdsData("abc",Constants.washAndIronHouseholdsTitles[i],"vwx","45","0"));
-        }
-        for(int i =0;i<2;i++) {
-            Constants.washAndIronWearablesData.add(new WashAndIronWearablesData("abc",Constants.washAndIronWearablesTitles[i],"yz","119","0"));
-        }
+        // HashMap
+        Constants.order = new HashMap<String,String>();
 
 
     }

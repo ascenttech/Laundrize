@@ -55,7 +55,7 @@
             android:id="@+id/subtract_image_included"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_delete"
+            android:src="@drawable/icon_subtract"
             android:layout_toLeftOf="@id/price_and_quantity_layout_included"
             android:layout_alignParentBottom="true"
             />

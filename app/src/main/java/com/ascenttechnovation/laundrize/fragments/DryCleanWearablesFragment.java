@@ -11,13 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.adapters.DryCleanHouseholdsRecyclerAdapter;
 import com.ascenttechnovation.laundrize.adapters.DryCleanWearablesRecyclerAdapter;
-import com.ascenttechnovation.laundrize.data.DryCleanHouseholdsData;
-import com.ascenttechnovation.laundrize.data.DryCleanWearablesData;
 import com.ascenttechnovation.laundrize.utils.Constants;
-
-import java.util.ArrayList;
 
 /**
  * Created by ADMIN on 24-07-2015.
@@ -27,7 +22,6 @@ public class DryCleanWearablesFragment extends Fragment {
     private RecyclerView dryCleanWearablesRecyclerView;
     private RecyclerView.Adapter dryCleanWearablesAdapter;
     private RecyclerView.LayoutManager dryCleanWearablesLayoutManager;
-    private ArrayList<DryCleanWearablesData> dryCleanWearablesData;
     Context context;
 
     @Nullable

@@ -27,6 +27,10 @@
         android:padding="@dimen/margin_dp"
         android:visibility="gone"
         android:background="@drawable/rectangle_box"
+        android:ellipsize="none"
+        android:scrollHorizontally="false"
+        android:maxLines="100"
+        android:layout_weight="1"
         />
 
 

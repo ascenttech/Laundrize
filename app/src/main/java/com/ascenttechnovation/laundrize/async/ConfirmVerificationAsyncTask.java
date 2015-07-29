@@ -57,9 +57,9 @@ public class ConfirmVerificationAsyncTask extends AsyncTask<String,Void,Boolean>
                 String response = EntityUtils.toString(httpEntity);
 
                 Log.d(Constants.LOG_TAG," JSON Response ");
-                JSONObject jsonObject = new JSONObject(response);
-                String message = jsonObject.getString("message");
-                Constants.verificationCode = jsonObject.getString("verification_code");
+//                JSONObject jsonObject = new JSONObject(response);
+//                String message = jsonObject.getString("message");
+//                Constants.verificationCode = jsonObject.getString("verification_code");
 
                 return true;
             }

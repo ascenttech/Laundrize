@@ -32,10 +32,9 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.NavigationDrawerAdapter;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.fragments.AddressFragment;
-import com.ascenttechnovation.laundrize.fragments.ContactUsFragment;
+import com.ascenttechnovation.laundrize.fragments.CheckOutFragment;
 import com.ascenttechnovation.laundrize.fragments.FAQFragment;
 import com.ascenttechnovation.laundrize.fragments.PrivacyPolicyFragment;
-import com.ascenttechnovation.laundrize.fragments.QuickFragment;
 import com.ascenttechnovation.laundrize.fragments.ServicesFragment;
 import com.ascenttechnovation.laundrize.fragments.LandingFragment;
 import com.ascenttechnovation.laundrize.fragments.ProfileFragment;
@@ -212,13 +211,13 @@ public class LandingActivity extends ActionBarActivity {
                 fragment = new TrackOrdersFragment();
                 break;
             case 4:
-                fragment = new QuickFragment();
+                fragment = new CheckOutFragment();
                 break;
             case 5:
                 fragment = new ProfileFragment();
                 break;
             case 6:
-                fragment = new QuickFragment();
+                fragment = new CheckOutFragment();
                 break;
             case 7:
                 fragment = new PrivacyPolicyFragment();

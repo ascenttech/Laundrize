@@ -11,13 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.adapters.DryCleanHouseholdsRecyclerAdapter;
 import com.ascenttechnovation.laundrize.adapters.OthersRecyclerAdapter;
-import com.ascenttechnovation.laundrize.data.IroningWearablesData;
-import com.ascenttechnovation.laundrize.data.OthersData;
 import com.ascenttechnovation.laundrize.utils.Constants;
-
-import java.util.ArrayList;
 
 /**
  * Created by ADMIN on 24-07-2015.
@@ -27,7 +22,6 @@ public class OthersFragment extends Fragment {
     private RecyclerView othersRecyclerView;
     private RecyclerView.Adapter othersAdapter;
     private RecyclerView.LayoutManager othersLayoutManager;
-    private ArrayList<OthersData> othersData;
     Context context;
 
     @Nullable

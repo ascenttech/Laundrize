@@ -21,7 +21,7 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 public class MobileVerificationActivity extends Activity {
 
     private Button confirmVerification,verifyNow;
-    private String mobileNumber,name,emailId,password;
+    private String mobileNumber,name,emailId,password,from;
     private EditText mobileNumberEdit,verificationCode;
     private ProgressDialog progressDialog;
 
@@ -74,6 +74,12 @@ public class MobileVerificationActivity extends Activity {
             public void onResult(boolean result) {
 
                 progressDialog.dismiss();
+                if(result){
+                    Toast.makeText(getApplicationContext()," You will receive a message shortly",5000).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"There was an error \nTry Again Later",5000).show();
+                }
 
             }
         }).execute(finalUrl);
@@ -82,39 +88,37 @@ public class MobileVerificationActivity extends Activity {
 
     public void confirmVerification(){
 
-        String verificationCode = verifyNow.getText().toString();
+        String verificationCodeValue = verificationCode.getText().toString();
 
         // verificationCode value (Wo8zxW) has been harcoded
-        String finalUrl = Constants.confirmVerificationUrl+mobileNumber+"&verification_code=Wo8zxW&password="+password+"&first_name="+name+"&email="+emailId;
 
-//        new ConfirmVerificationAsyncTask(getApplicationContext(), new ConfirmVerificationAsyncTask.ConfirmVerificationCallback() {
-//            @Override
-//            public void onStart(boolean status) {
-//
-//                progressDialog = new ProgressDialog(MobileVerificationActivity.this);
-//                progressDialog.setTitle(Constants.APP_NAME);
-//                progressDialog.setMessage("Loading,Please Wait...");
-//                progressDialog.setCancelable(false);
-//                progressDialog.show();
-//            }
-//            @Override
-//            public void onResult(boolean result) {
-//
-//                progressDialog.dismiss();
-//                if(result){
-//
-//                    Intent i = new Intent(MobileVerificationActivity.this,LandingActivity.class);
-//                    startActivity(i);
-//
-//                }
-//                else{
-//                    Toast.makeText(getApplicationContext()," Enter a valid code",5000).show();
-//                }
-//            }
-//        }).execute(finalUrl);
+        String finalUrl = Constants.confirmVerificationUrl+mobileNumber+"&verification_code="+verificationCodeValue+"&password="+password+"&first_name="+name+"&email="+emailId;
 
-        Intent i = new Intent(MobileVerificationActivity.this,LandingActivity.class);
-        startActivity(i);
+        new ConfirmVerificationAsyncTask(getApplicationContext(), new ConfirmVerificationAsyncTask.ConfirmVerificationCallback() {
+            @Override
+            public void onStart(boolean status) {
+
+                progressDialog = new ProgressDialog(MobileVerificationActivity.this);
+                progressDialog.setTitle(Constants.APP_NAME);
+                progressDialog.setMessage("Loading,Please Wait...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                progressDialog.dismiss();
+                if(result){
+
+                    Intent i = new Intent(MobileVerificationActivity.this,LoginActivity.class);
+                    startActivity(i);
+
+                }
+                else{
+                    Toast.makeText(getApplicationContext()," Enter a valid code",5000).show();
+                }
+            }
+        }).execute(finalUrl);
 
     }
 

@@ -3,7 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="20px"
-    android:background="@drawable/blue_border_box">
+    android:background="@drawable/blue_border_box"
+    android:layout_marginRight="@dimen/margin_dp"
+    android:layout_marginLeft="@dimen/margin_dp"
+    android:layout_marginTop="@dimen/margin_dp"
+    >
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:layout_width="wrap_content"
@@ -30,7 +34,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
-        android:id="@+id/mobile_number_included"
+        android:id="@+id/mobile_number_text_included"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_large"

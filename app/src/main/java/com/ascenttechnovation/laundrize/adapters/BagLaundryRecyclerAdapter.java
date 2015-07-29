@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.data.BagLaundryData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -21,11 +22,11 @@ import java.util.ArrayList;
 public class BagLaundryRecyclerAdapter extends RecyclerView.Adapter<BagLaundryRecyclerAdapter.ViewHolder> {
 
     Context context;
-    private ArrayList<BagLaundryData> bagLaundryData;
+    private ArrayList<GeneralData> bagLaundryData;
     private TextView title,description,price,quantity;
     private ImageView add,subtract;
 
-    public BagLaundryRecyclerAdapter(Context context, ArrayList<BagLaundryData> bagLaundryData) {
+    public BagLaundryRecyclerAdapter(Context context, ArrayList<GeneralData> bagLaundryData) {
         this.context = context;
         this.bagLaundryData = bagLaundryData;
     }
@@ -73,8 +74,8 @@ public class BagLaundryRecyclerAdapter extends RecyclerView.Adapter<BagLaundryRe
 
         title.setText(Constants.bagLaundryData.get(position).getTitle());
         description.setText(Constants.bagLaundryData.get(position).getDescription());
-        price.setText(Constants.bagLaundryData.get(position).getPrice());
-        quantity.setText(Constants.bagLaundryData.get(position).getQuantity());
+        price.setText(Constants.bagLaundryData.get(position).getRegularCost());
+//        quantity.setText(Constants.bagLaundryData.get(position).getRegular());
 
         add.setTag("add_"+position);
         add.setOnClickListener(listener);
@@ -88,26 +89,26 @@ public class BagLaundryRecyclerAdapter extends RecyclerView.Adapter<BagLaundryRe
         return bagLaundryData.size();
     }
 
-    public void add(int position){
+//    public void add(int position){
+//
+//        int value = Integer.parseInt(Constants.bagLaundryData.get(position).getQuantity());
+//        value++;
+//        String quantity = String.valueOf(value);
+//        Constants.bagLaundryData.get(position).setQuantity(quantity);
+//
+//    }
 
-        int value = Integer.parseInt(Constants.bagLaundryData.get(position).getQuantity());
-        value++;
-        String quantity = String.valueOf(value);
-        Constants.bagLaundryData.get(position).setQuantity(quantity);
-
-    }
-
-    public void subtract(int position){
-
-        int value = Integer.parseInt(Constants.bagLaundryData.get(position).getQuantity());
-        if(value!=0){
-
-            value--;
-            String quantity = String.valueOf(value);
-            Constants.bagLaundryData.get(position).setQuantity(quantity);
-        }
-
-    }
+//    public void subtract(int position){
+//
+//        int value = Integer.parseInt(Constants.bagLaundryData.get(position).getQuantity());
+//        if(value!=0){
+//
+//            value--;
+//            String quantity = String.valueOf(value);
+//            Constants.bagLaundryData.get(position).setQuantity(quantity);
+//        }
+//
+//    }
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -120,12 +121,12 @@ public class BagLaundryRecyclerAdapter extends RecyclerView.Adapter<BagLaundryRe
             switch (view.getId()){
 
 
-                case R.id.add_image_included: add(position);
-                    notifyDataSetChanged();
-                    break;
-                case R.id.subtract_image_included: subtract(position);
-                    notifyDataSetChanged();
-                    break;
+//                case R.id.add_image_included: add(position);
+//                    notifyDataSetChanged();
+//                    break;
+//                case R.id.subtract_image_included: subtract(position);
+//                    notifyDataSetChanged();
+//                    break;
 
 
 

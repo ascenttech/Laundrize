@@ -27,17 +27,17 @@ public class TabsViewPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position){
 
-            case 0 : return new IroningHouseholdsFragment();
+            case 0 : return new IroningWearablesFragment();
 
-            case 1 : return new IroningWearablesFragment();
+            case 1 : return new IroningHouseholdsFragment();
 
-            case 2 : return new DryCleanHouseholdsFragment();
+            case 2 : return new WashAndIronWearablesFragment();
 
-            case 3 : return new DryCleanWearablesFragment();
+            case 3 : return new WashAndIronHouseholdsFragment();
 
-            case 4 : return new WashAndIronHouseholdsFragment();
+            case 4 : return new DryCleanWearablesFragment();
 
-            case 5 : return new WashAndIronWearablesFragment();
+            case 5 : return new DryCleanHouseholdsFragment();
 
             default:return new IroningHouseholdsFragment();
 

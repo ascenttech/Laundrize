@@ -11,8 +11,6 @@ import android.widget.Button;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
-import com.ascenttechnovation.laundrize.async.PlaceWeeklyOrderAsyncTask;
-import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
  * Created by ADMIN on 23-07-2015.
@@ -26,7 +24,7 @@ public class WeeklyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.layout_collection,container,false);
+        View v = inflater.inflate(R.layout.fragment_checkout,container,false);
         findViews(v);
         setViews();
 

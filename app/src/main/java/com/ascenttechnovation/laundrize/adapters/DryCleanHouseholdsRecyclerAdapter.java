@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.data.DryCleanHouseholdsData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -20,11 +20,11 @@ import java.util.ArrayList;
 public class DryCleanHouseholdsRecyclerAdapter extends RecyclerView.Adapter<DryCleanHouseholdsRecyclerAdapter.ViewHolder> {
 
     Context context;
-    private ArrayList<DryCleanHouseholdsData> dryCleanHouseholdsData;
+    private ArrayList<GeneralData> dryCleanHouseholdsData;
     private TextView title,description,price,quantity;
     private ImageView add,subtract;
 
-    public DryCleanHouseholdsRecyclerAdapter(Context context, ArrayList<DryCleanHouseholdsData> dryCleanHouseholdsData) {
+    public DryCleanHouseholdsRecyclerAdapter(Context context, ArrayList<GeneralData> dryCleanHouseholdsData) {
         this.context = context;
         this.dryCleanHouseholdsData = dryCleanHouseholdsData;
     }
@@ -72,7 +72,7 @@ public class DryCleanHouseholdsRecyclerAdapter extends RecyclerView.Adapter<DryC
 
         title.setText(Constants.dryCleanHouseholdsData.get(position).getTitle());
         description.setText(Constants.dryCleanHouseholdsData.get(position).getDescription());
-        price.setText(Constants.dryCleanHouseholdsData.get(position).getPrice());
+        price.setText(Constants.dryCleanHouseholdsData.get(position).getRegularCost());
         quantity.setText(Constants.dryCleanHouseholdsData.get(position).getQuantity());
 
         add.setTag("add_"+position);
@@ -93,6 +93,8 @@ public class DryCleanHouseholdsRecyclerAdapter extends RecyclerView.Adapter<DryC
         value++;
         String quantity = String.valueOf(value);
         Constants.dryCleanHouseholdsData.get(position).setQuantity(quantity);
+        String orderId = Constants.dryCleanHouseholdsData.get(position).getCode();
+        Constants.order.put(orderId,quantity);
 
     }
 
@@ -104,6 +106,8 @@ public class DryCleanHouseholdsRecyclerAdapter extends RecyclerView.Adapter<DryC
             value--;
             String quantity = String.valueOf(value);
             Constants.dryCleanHouseholdsData.get(position).setQuantity(quantity);
+            String orderId = Constants.dryCleanHouseholdsData.get(position).getCode();
+            Constants.order.put(orderId,quantity);
 
         }
 

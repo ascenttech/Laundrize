@@ -11,13 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.adapters.DryCleanHouseholdsRecyclerAdapter;
 import com.ascenttechnovation.laundrize.adapters.ShoeLaundryRecyclerAdapter;
-import com.ascenttechnovation.laundrize.data.OthersData;
-import com.ascenttechnovation.laundrize.data.ShoeLaundryData;
 import com.ascenttechnovation.laundrize.utils.Constants;
-
-import java.util.ArrayList;
 
 /**
  * Created by ADMIN on 24-07-2015.
@@ -27,7 +22,6 @@ public class ShoeLaundryFragment extends Fragment {
     private RecyclerView shoeLaundryRecyclerView;
     private RecyclerView.Adapter shoeLaundryAdapter;
     private RecyclerView.LayoutManager shoeLaundryLayoutManager;
-    private ArrayList<ShoeLaundryData> shoeLaundryData;
     Context context;
 
     @Nullable

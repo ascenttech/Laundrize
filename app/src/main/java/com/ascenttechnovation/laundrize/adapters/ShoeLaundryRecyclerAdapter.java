@@ -9,8 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.data.OthersData;
-import com.ascenttechnovation.laundrize.data.ShoeLaundryData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -21,11 +20,11 @@ import java.util.ArrayList;
 public class ShoeLaundryRecyclerAdapter extends RecyclerView.Adapter<ShoeLaundryRecyclerAdapter.ViewHolder> {
 
     Context context;
-    private ArrayList<ShoeLaundryData> shoeLaundryData;
+    private ArrayList<GeneralData> shoeLaundryData;
     private TextView title,description,price,quantity;
     private ImageView add,subtract;
 
-    public ShoeLaundryRecyclerAdapter(Context context, ArrayList<ShoeLaundryData> shoeLaundryData) {
+    public ShoeLaundryRecyclerAdapter(Context context, ArrayList<GeneralData> shoeLaundryData) {
         this.context = context;
         this.shoeLaundryData = shoeLaundryData;
     }
@@ -73,8 +72,8 @@ public class ShoeLaundryRecyclerAdapter extends RecyclerView.Adapter<ShoeLaundry
 
         title.setText(Constants.shoeLaundryData.get(position).getTitle());
         description.setText(Constants.shoeLaundryData.get(position).getDescription());
-        price.setText(Constants.shoeLaundryData.get(position).getPrice());
-        quantity.setText(Constants.shoeLaundryData.get(position).getQuantity());
+//        price.setText(Constants.shoeLaundryData.get(position).getPrice());
+//        quantity.setText(Constants.shoeLaundryData.get(position).getQuantity());
 
         add.setTag("add_"+position);
         add.setOnClickListener(listener);
@@ -88,27 +87,27 @@ public class ShoeLaundryRecyclerAdapter extends RecyclerView.Adapter<ShoeLaundry
         return shoeLaundryData.size();
     }
 
-    private void add(int position){
-
-        int value = Integer.parseInt(Constants.shoeLaundryData.get(position).getQuantity());
-        value++;
-        String quantity = String.valueOf(value);
-        Constants.shoeLaundryData.get(position).setQuantity(quantity);
-
-    }
-
-    private void subtract(int position){
-
-        int value = Integer.parseInt(Constants.shoeLaundryData.get(position).getQuantity());
-        if(value !=0){
-
-            value--;
-            String quantity = String.valueOf(value);
-            Constants.shoeLaundryData.get(position).setQuantity(quantity);
-
-        }
-
-    }
+//    private void add(int position){
+//
+//        int value = Integer.parseInt(Constants.shoeLaundryData.get(position).getQuantity());
+//        value++;
+//        String quantity = String.valueOf(value);
+//        Constants.shoeLaundryData.get(position).setQuantity(quantity);
+//
+//    }
+//
+//    private void subtract(int position){
+//
+//        int value = Integer.parseInt(Constants.shoeLaundryData.get(position).getQuantity());
+//        if(value !=0){
+//
+//            value--;
+//            String quantity = String.valueOf(value);
+//            Constants.shoeLaundryData.get(position).setQuantity(quantity);
+//
+//        }
+//
+//    }
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -120,13 +119,13 @@ public class ShoeLaundryRecyclerAdapter extends RecyclerView.Adapter<ShoeLaundry
 
             switch (view.getId()){
 
-
-                case R.id.add_image_included: add(position);
-                    notifyDataSetChanged();
-                    break;
-                case R.id.subtract_image_included: subtract(position);
-                    notifyDataSetChanged();
-                    break;
+//
+//                case R.id.add_image_included: add(position);
+//                    notifyDataSetChanged();
+//                    break;
+//                case R.id.subtract_image_included: subtract(position);
+//                    notifyDataSetChanged();
+//                    break;
 
 
             }

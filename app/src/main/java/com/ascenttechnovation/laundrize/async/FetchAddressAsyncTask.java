@@ -75,6 +75,7 @@ public class FetchAddressAsyncTask extends AsyncTask<String,Void,Boolean> {
                     String mobileNumber = jsonObject.getString("mobile");
                     String fullAddress = address+","+areaName+","+city+","+zipCode;
 
+                    Log.d(Constants.LOG_TAG,"FUll address "+ fullAddress);
                     Constants.addressData.add(new AddressData(id,address,city,zipCode,areaName,mobileNumber,fullAddress));
                 }
 
