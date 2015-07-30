@@ -34,8 +34,8 @@ public class ServicesFragment extends Fragment {
     ActionBar actionBar;
     ActionBar.Tab tabs;
 
-//    String names[]= {"Ironing: Wearables","Ironing: Households","Dry Cleaning","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables","Dry Clean: Households","Shoe Laundry","Bag Laundry","Others"};
     String names[]= {"Ironing: Wearables","Ironing: Households","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables","Dry Clean : Households"};
+    int icons[] = {R.drawable.icon_ironing,R.drawable.icon_ironing,R.drawable.icon_washing,R.drawable.icon_washing,R.drawable.icon_dry_clean,R.drawable.icon_dry_clean};
     private LinearLayout footer;
     Button mainMenu,placeOrder;
     ViewPager viewPager;
@@ -99,7 +99,7 @@ public class ServicesFragment extends Fragment {
 
             actionBar.addTab(
                     actionBar.newTab()
-                            .setCustomView(makeDummyTab(names[i], R.drawable.baniyan,i))
+                            .setCustomView(makeDummyTab(names[i],icons[i],i))
                             .setTabListener(actionBarListener));
         }
     }
@@ -151,69 +151,15 @@ public class ServicesFragment extends Fragment {
     }
 
 
+
     ActionBar.TabListener actionBarListener = new ActionBar.TabListener() {
         @Override
         public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 
             Log.d(Constants.LOG_TAG,"Position "+tab.getPosition());
 
+            viewPager.setCurrentItem(tab.getPosition());
 //            viewPager.setCurrentItem(tab.getPosition());
-
-
-//            String tag = tab.getCustomView().getTag().toString();
-//            String view[] = tag.split("_");
-//            int position = Integer.parseInt(view[1]);
-//
-//            switch(position){
-//
-//                case 0: getChildFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.frame, new BagLaundryFragment())
-//                        .commit();
-//                    break;
-//                case 1: getChildFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.frame, new DryCleanHouseholdsFragment())
-//                        .commit();
-//                     break;
-//                case 2: getChildFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.frame, new DryCleanWearablesFragment())
-//                        .commit();
-//                    break;
-//                case 3: getChildFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.frame, new IroningHouseholdsFragment())
-//                        .commit();
-//                    break;
-//                case 4: getChildFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.frame, new IroningWearablesFragment())
-//                        .commit();
-//                    break;
-//                case 5: getChildFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.frame, new OthersFragment())
-//                        .commit();
-//                    break;
-//                case 6: getChildFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.frame, new ShoeLaundryFragment())
-//                        .commit();
-//                    break;
-//                case 7: getChildFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.frame, new WashAndIronHouseholdsFragment())
-//                        .commit();
-//                    break;
-//                case 8: getChildFragmentManager()
-//                        .beginTransaction()
-//                        .replace(R.id.frame, new WashAndIronWearablesFragment())
-//                        .commit();
-//                    break;
-
-
-//            }
 
         }
 

@@ -2,14 +2,15 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_centerInParent="true"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/margin_large_double"
         >
 
         <com.ascenttechnovation.laundrize.custom.CustomButton
@@ -19,7 +20,7 @@
             android:textColor="@color/text_color_white"
             android:text="Place Order"
             android:background="@drawable/rounded_black_button"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin_large"
             />
         <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/quick_order_button_order_now_fragment"
@@ -28,7 +29,7 @@
             android:textColor="@color/text_color_white"
             android:text="Quick Order"
             android:background="@drawable/rounded_black_button"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin_large"
             />
         <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/weekly_order_button_order_now_fragment"
@@ -37,7 +38,7 @@
             android:textColor="@color/text_color_white"
             android:text="Weekly Order"
             android:background="@drawable/rounded_black_button"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin_large"
             />
         <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/track_order_button_order_now_fragment"
@@ -46,7 +47,7 @@
             android:textColor="@color/text_color_white"
             android:text="Track Order"
             android:background="@drawable/rounded_blue_button"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin_large"
             />
         <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/completed_order_button_order_now_fragment"
@@ -55,7 +56,7 @@
             android:textColor="@color/text_color_white"
             android:text="Completed Order"
             android:background="@drawable/rounded_blue_button"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin_large"
             />
 
 

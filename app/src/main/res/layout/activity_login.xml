@@ -10,15 +10,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Keep me logged in"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin"
+        />
 
     <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/password_edit_log_in_now_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/login_activity_hint_password"
-        android:padding="10dp"
-        android:layout_margin="7dp"
+        android:hint="PASSWORD"
+        android:padding="@dimen/margin_large"
+        android:layout_margin="@dimen/padding"
         android:layout_above="@id/keep_logged_in_checkbox_log_in_now_activity"
         android:background="@drawable/rounded_edit_text"/>
 
@@ -26,9 +28,9 @@
         android:id="@+id/username_edit_log_in_now_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint= "@string/login_activity_hint_number"
-        android:padding="10dp"
-        android:layout_margin="7dp"
+        android:hint= "USERNAME"
+        android:padding="@dimen/margin_large"
+        android:layout_margin="@dimen/padding"
         android:background="@drawable/rounded_edit_text"
         android:layout_above="@id/password_edit_log_in_now_activity"/>
 
@@ -49,6 +51,10 @@
         android:layout_below="@id/keep_logged_in_checkbox_log_in_now_activity"
         android:background="@drawable/rounded_black_button"
         android:textColor="@color/text_color_white"
+        android:padding="@dimen/margin_large"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginRight="@dimen/padding"
+        android:layout_marginBottom="@dimen/padding"
         />
 
     <View

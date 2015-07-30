@@ -1,6 +1,7 @@
 package com.ascenttechnovation.laundrize.fragments;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +24,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.async.FetchAddressAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchUserProfileAsyncTask;
+import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
  * Created by ADMIN on 01-07-2015.
@@ -34,28 +40,68 @@ public class ProfileFragment extends Fragment {
     private ActionBar actionBar;
     private ImageView profileImage;
     private Bitmap bitmap;
-    private TextView editYourProfile;
+    private TextView editYourProfile,address,mobileNumber,userName;
     private Dialog dialog;
-    private Button update,cancel;
+    private Button update,cancel,addNewAddress;
     private LinearLayout footer;
+    private ViewGroup availableAddresses;
+    private ProgressDialog progressDialog;
+    private View v;
+    private boolean inflateAddress;
+    private LayoutInflater parentInflater;
+    private View rowView;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_profile,container,false);
-
+        v = inflater.inflate(R.layout.fragment_profile,container,false);
+        parentInflater = inflater;
         // create bitmap from resource
         bitmap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.profile);
 
-
-        customActionBar();
-        findViews(v);
-        setViews();
-
+        fetchData();
 
         return v;
+    }
+
+    public void fetchData(){
+
+
+
+        String finalUrl = Constants.fetchProfileUrl + Constants.userId;
+        new FetchUserProfileAsyncTask(getActivity().getApplicationContext(),new FetchUserProfileAsyncTask.FetchUserProfileCallback() {
+            @Override
+            public void onStart(boolean status) {
+
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.LOG_TAG);
+                progressDialog.setMessage("Getting Your Profile");
+                progressDialog.show();
+
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                progressDialog.dismiss();
+                if(result){
+                    customActionBar();
+                    findViews(v);
+                    setViews();
+                    displayAddress();
+
+                }
+                else{
+
+                    Toast.makeText(getActivity().getApplicationContext(),"Couldn't Fetch Your Profile.\nTry Again Later",5000).show();
+
+                }
+
+            }
+        }).execute(finalUrl);
+
+
     }
 
     private void customActionBar(){
@@ -69,14 +115,19 @@ public class ProfileFragment extends Fragment {
 
     private void findViews(View v){
 
+        userName = (TextView) v.findViewById(R.id.user_name_text_profile_fragment);
         profileImage = (ImageView) v.findViewById(R.id.profile_image_profile_fragment);
         editYourProfile = (TextView) v.findViewById(R.id.edit_profile_text_profile_fragment);
         footer = (LinearLayout) v.findViewById(R.id.included_buttons_profile_fragment);
         update = (Button) footer.findViewById(R.id.left_button_included);
         cancel = (Button) footer.findViewById(R.id.right_button_included);
+        addNewAddress = (Button) v.findViewById(R.id.add_new_address_button_profile_fragment);
+        availableAddresses = (ViewGroup) v.findViewById(R.id.available_address_container_profile_fragment);
     }
 
     private void setViews(){
+
+        userName.setText(Constants.profileData.get(0).getFirstName());
 
         profileImage.setImageBitmap(getCircleBitmap(bitmap));
         editYourProfile.setOnClickListener(listener);
@@ -86,6 +137,26 @@ public class ProfileFragment extends Fragment {
 
         cancel.setText("Cancel");
         cancel.setOnClickListener(listener);
+
+        addNewAddress.setOnClickListener(listener);
+    }
+
+    public void displayAddress(){
+
+
+        if(Constants.addressFetched) {
+            for(int i = 0;i<Constants.addressData.size();i++) {
+                rowView = parentInflater.inflate(R.layout.include_available_address, availableAddresses);
+
+                address = (TextView) rowView.findViewById(R.id.address_text_included);
+                address.setText(Constants.addressData.get(i).getFullAddress());
+
+                mobileNumber = (TextView) rowView.findViewById(R.id.mobile_number_text_included);
+                mobileNumber.setText(Constants.addressData.get(i).getMobileNumber());
+            }
+
+        } // end of IF statement
+
     }
 
     // This will generate a pop up
@@ -161,7 +232,8 @@ public class ProfileFragment extends Fragment {
                     break;
                 case R.id.right_button_included: cancel();
                     break;
-
+                case R.id.add_new_address_button_profile_fragment : editYourProfile();
+                    break;
             }
 
         }

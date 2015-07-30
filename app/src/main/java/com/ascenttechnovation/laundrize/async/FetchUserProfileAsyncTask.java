@@ -4,7 +4,19 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ascenttechnovation.laundrize.data.ProfileData;
 import com.ascenttechnovation.laundrize.utils.Constants;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by ADMIN on 27-07-2015.
@@ -23,6 +35,7 @@ public class FetchUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
     public FetchUserProfileAsyncTask(Context context, FetchUserProfileCallback callback) {
         this.context = context;
         this.callback = callback;
+        Constants.profileData = new ArrayList<ProfileData>();
     }
 
     @Override
@@ -37,57 +50,52 @@ public class FetchUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
         Log.d(Constants.LOG_TAG, Constants.FetchUserProfileAsyncTask);
         Log.d(Constants.LOG_TAG," URL to be fetched "+ url[0]);
 
-        return false;
-//        try{
-//
-//            HttpGet httpGet = new HttpGet(url[0]);
-//            httpGet.addHeader("Authorization:Bearer",Constants.token);
-//            HttpClient httpClient = new DefaultHttpClient();
-//            HttpResponse httpResponse = httpClient.execute(httpGet);
-//
-//            int statusCode = httpResponse.getStatusLine().getStatusCode();
-//            Log.d(Constants.LOG_TAG," status code "+ statusCode);
-//            if(statusCode == 200){
-//
-//                HttpEntity httpEntity = httpResponse.getEntity();
-//                String response = EntityUtils.toString(httpEntity);
-//
-//                Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
-//                JSONArray jsonArray = new JSONArray(response);
-//                for(int i = 0;i<jsonArray.length();i++){
-//
-//                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                    String id = jsonObject.getString("id");
-//                    String address = jsonObject.getString("username");
-//                    String city = jsonObject.getString("password");
-//                    String zipCode = jsonObject.getString("first_name");
-//                    String areaName = jsonObject.getString("last_name");
-//                    String mobileNumber = jsonObject.getString("email");
-//                    String mobileNumber = jsonObject.getString("confirmed");
-//                    String mobileNumber = jsonObject.getString("confirmation_code");
-//                    String mobileNumber = jsonObject.getString("remember_token");
-//                    String mobileNumber = jsonObject.getString("facebook_id");
-//                    String mobileNumber = jsonObject.getString("google_id");
-//                    String mobileNumber = jsonObject.getString("status");
-//                    String mobileNumber = jsonObject.getString("created_at");
-//                    String mobileNumber = jsonObject.getString("updated_at");
-//                    String fullAddress = address+","+areaName+","+city+","+zipCode;
-//
-//                    Log.d(Constants.LOG_TAG,"FUll address "+ fullAddress);
-//                    Constants.addressData.add(new AddressData(id,address,city,zipCode,areaName,mobileNumber,fullAddress));
-//                }
-//
-//                return true;
-//            }
-//            else{
-//                return false;
-//            }
-//        }
-//        catch (Exception e){
-//
-//            e.printStackTrace();
-//            return false;
-//        }
+        try{
+
+            HttpGet httpGet = new HttpGet(url[0]);
+            httpGet.addHeader("Authorization:Bearer",Constants.token);
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpResponse httpResponse = httpClient.execute(httpGet);
+
+            int statusCode = httpResponse.getStatusLine().getStatusCode();
+            Log.d(Constants.LOG_TAG," status code "+ statusCode);
+            if(statusCode == 200){
+
+                HttpEntity httpEntity = httpResponse.getEntity();
+                String response = EntityUtils.toString(httpEntity);
+
+                Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
+                JSONObject jsonObject = new JSONObject(response);
+
+                JSONObject nestedJsonObject = jsonObject.getJSONObject("user");
+
+                String id = nestedJsonObject.getString("id");
+                String username = nestedJsonObject.getString("username");
+                String password = nestedJsonObject.getString("password");
+                String firstName = nestedJsonObject.getString("first_name");
+                String lastName = nestedJsonObject.getString("last_name");
+                String email = nestedJsonObject.getString("email");
+                String confirmed = nestedJsonObject.getString("confirmed");
+                String confirmationCode = nestedJsonObject.getString("confirmation_code");
+                String token = nestedJsonObject.getString("remember_token");
+                String facebookId = nestedJsonObject.getString("facebook_id");
+                String googleId = nestedJsonObject.getString("google_id");
+                String status = nestedJsonObject.getString("status");
+                String createdAt = nestedJsonObject.getString("created_at");
+                String updatedAt = nestedJsonObject.getString("updated_at");
+
+                Constants.profileData.add(new ProfileData(id,username,password,firstName,lastName,email,confirmed,confirmationCode,token,facebookId,googleId,status,createdAt,updatedAt));
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        catch (Exception e){
+
+            e.printStackTrace();
+            return false;
+        }
 
     }
 

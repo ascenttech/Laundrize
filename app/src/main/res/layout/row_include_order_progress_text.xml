@@ -17,7 +17,7 @@
         android:id="@+id/field_value_text_included"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="HELLO THERE"
+        android:text="12"
         android:textSize="30sp"
         android:textColor="@color/navy_blue_button"
         />

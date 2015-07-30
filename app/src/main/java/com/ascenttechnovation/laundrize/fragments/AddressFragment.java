@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.async.AddNewAddressAsyncTask;
-import com.ascenttechnovation.laundrize.async.FetchAddressAsyncTask;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.net.URLEncoder;
@@ -56,9 +55,13 @@ public class AddressFragment extends Fragment {
 
         customActionBar();
 
-        findViews(v);
+        if(Constants.addressFetched){
 
-        setViews();
+            findViews(v);
+            setViews();
+            addAvailableAddresses();
+        }
+
 
         return v;
     }
@@ -88,59 +91,24 @@ public class AddressFragment extends Fragment {
 
     }
 
-    private void fetchData(){
-
-        String finalUrl = Constants.fetchAddressUrl+Constants.userId+"&default=0";
-        new FetchAddressAsyncTask(getActivity().getApplicationContext(),new FetchAddressAsyncTask.FetchAddressCallback() {
-            @Override
-            public void onStart(boolean status) {
-
-                progressDialog = new ProgressDialog(getActivity());
-                progressDialog.setTitle(Constants.LOG_TAG);
-                progressDialog.setMessage("Getting Your Address");
-                progressDialog.show();
-
-            }
-            @Override
-            public void onResult(boolean result) {
-
-                progressDialog.dismiss();
-                if(result){
-
-                    Constants.addressFetched = true;
-                    addAvailableAddresses();
-                    changeVisibility();
-
-
-                }
-                else{
-                    changeVisibility();
-                    Toast.makeText(getActivity().getApplicationContext(),"Couldnt fetch your address.\nTry Again Later",5000).show();
-                }
-
-            }
-        }).execute(finalUrl);
-
-
-    }
 
     public void addAvailableAddresses(){
 
         for(int i =0;i< Constants.addressData.size();i++){
 
-           rowView = layoutInflater.inflate(R.layout.include_available_address,selectAddressChild);
+            rowView = layoutInflater.inflate(R.layout.include_available_address,selectAddressChild);
 
-           address = (TextView) rowView.findViewById(R.id.address_text_included);
-           address.setTag("address_"+i);
-           Log.d(Constants.LOG_TAG," Setting the adress "+Constants.addressData.get(i).getFullAddress());
-           address.setText(Constants.addressData.get(i).getFullAddress());
-           address.setOnClickListener(inflatedViewListener);
+            address = (TextView) rowView.findViewById(R.id.address_text_included);
+            address.setTag("address_"+i);
+            Log.d(Constants.LOG_TAG," Setting the adress "+Constants.addressData.get(i).getFullAddress());
+            address.setText(Constants.addressData.get(i).getFullAddress());
+            address.setOnClickListener(inflatedViewListener);
 
-           mobileNumber = (TextView) rowView.findViewById(R.id.mobile_number_text_included);
-           mobileNumber.setTag("number_"+i);
-           Log.d(Constants.LOG_TAG," Setting the adress "+Constants.addressData.get(i).getMobileNumber());
-           mobileNumber.setText(Constants.addressData.get(i).getMobileNumber());
-           mobileNumber.setOnClickListener(inflatedViewListener);
+            mobileNumber = (TextView) rowView.findViewById(R.id.mobile_number_text_included);
+            mobileNumber.setTag("number_"+i);
+            Log.d(Constants.LOG_TAG," Setting the adress "+Constants.addressData.get(i).getMobileNumber());
+            mobileNumber.setText(Constants.addressData.get(i).getMobileNumber());
+            mobileNumber.setOnClickListener(inflatedViewListener);
         }
 
     }
@@ -250,6 +218,47 @@ public class AddressFragment extends Fragment {
         return animator;
     }
 
+    public void validateNewAddress(){
+
+        if(!city.getText().toString().equalsIgnoreCase("")){
+
+            if(!pincode.getText().toString().equalsIgnoreCase("")){
+
+
+                if(!area.getText().toString().equalsIgnoreCase("")){
+
+                    if(!buildingName.getText().toString().equalsIgnoreCase("")){
+
+                        if(!houseNumber.getText().toString().equalsIgnoreCase("")){
+
+                            updateNewAddress();
+                        } // end of house Number
+                        else{
+                            Toast.makeText(getActivity().getApplicationContext(),"Please enter the houseNumber",5000).show();
+                        }
+                    } // end of buildiing name
+                    else{
+                        Toast.makeText(getActivity().getApplicationContext(),"Please enter the building name",5000).show();
+                    }
+
+                }// end of area
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(),"Please enter the area",5000).show();
+                }
+
+            } // end of pincode if
+            else{
+                Toast.makeText(getActivity().getApplicationContext(),"Please enter the pincode",5000).show();
+            }
+
+        }// end of city if
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Please enter the city",5000).show();
+        }
+
+
+    }
+
     public void updateNewAddress(){
 
         try {
@@ -266,7 +275,7 @@ public class AddressFragment extends Fragment {
             e.printStackTrace();
         }
 
-        String finalUrl=Constants.addNewAddress+Constants.userId+"&city="+cityValue+"&city_zip="+pincodeValue+"&city_zip_area="+areaValue+"&address="+fullAddressValue ;
+        String finalUrl=Constants.addNewAddressUrl +Constants.userId+"&city="+cityValue+"&city_zip="+pincodeValue+"&city_zip_area="+areaValue+"&address="+fullAddressValue ;
 
         new AddNewAddressAsyncTask(getActivity().getApplicationContext(),new AddNewAddressAsyncTask.AddNewAddressCallback() {
             @Override
@@ -342,16 +351,7 @@ public class AddressFragment extends Fragment {
             switch (view.getId()){
 
                 case R.id.select_address_button_address_fragment:
-                    if(!Constants.addressFetched){
-
-                        fetchData();
-                    }
-                    else{
-
-                        changeVisibility();
-                    }
-
-
+                    changeVisibility();
                     break;
                 case R.id.add_new_address_button_address_fragment:
                     // check if add new address child is visible or not
@@ -375,7 +375,7 @@ public class AddressFragment extends Fragment {
                         collapse(addNewAddressChild);
                     }
                     break;
-                case R.id.update_this_address_add_new_address: updateNewAddress();
+                case R.id.update_this_address_add_new_address: validateNewAddress();
                     break;
 
 

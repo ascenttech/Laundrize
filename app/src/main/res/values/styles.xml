@@ -19,11 +19,11 @@
     <style name="MyActionBar"
         parent="Theme.AppCompat.Light.DarkActionBar">
         <!--<item name="android:background">@drawable/background_action_bar</item>-->
-        <item name="android:background">@color/actionbar</item>
+        <item name="android:background">@drawable/tab_indicator</item>
         <!--<item name="android:textColorPrimary">@color/white</item>-->
 
         <!-- Support library compatibility -->
-        <item name="background">@color/actionbar</item>
+        <item name="background">@drawable/tab_indicator</item>
         <!--<item name="textColorPrimary">@color/white</item>-->
     </style>
 

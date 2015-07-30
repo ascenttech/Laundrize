@@ -5,6 +5,7 @@ import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesMainCategoryData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
+import com.ascenttechnovation.laundrize.data.ProfileData;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -17,12 +18,12 @@ public class Constants {
     public static final String LOG_TAG =" Laundrize ";
     public static final String APP_NAME ="Laundrize";
 
+    public static String address,mobileNumber,currentDate,currentTime,userId,token,verificationCode;
 
-    public static String userId,token,verificationCode;
     public static boolean addressFetched;
+    public static boolean ordersTracked;
+    public static boolean completedOrdersFetched;
 
-    public static String address;
-    public static String mobileNumber;
 
     // This hashmap would containt the key as orderId and value as quantity
     public static Map<String,String> order;
@@ -42,6 +43,7 @@ public class Constants {
     public static ArrayList<GeneralData> shoeLaundryData;
     public static ArrayList<GeneralData> washAndIronHouseholdsData;
     public static ArrayList<GeneralData> washAndIronWearablesData;
+    public static ArrayList<ProfileData> profileData;
 
 
     // Log Tags for all the activities
@@ -65,7 +67,9 @@ public class Constants {
     public static final String AddNewAddressAsyncTask=" ADD NEW ADDRESS ASYNC TASK ";
     public static final String ConfirmVerificationAsyncTask=" CONFIRM VERIFICATION ASYNC TASK ";
     public static final String FetchAddressAsyncTask=" FETCH ADDRESS ASYNC TASK ";
+    public static final String FetchCurrentServerTimeAsyncTask=" FETCH CURRENT SERVER TIME ASYNC TASK ";
     public static final String FetchLaundryServicesAsyncTask=" FETCH LAUNDRY SERVICES ASYNC TASK ";
+    public static final String FetchSlotDifferenceAsyncTask=" FETCH SLOT DIFFERENCE ASYNC TASK ";
     public static final String FetchUserProfileAsyncTask=" FETCH USER PROFILE ASYNC TASK ";
     public static final String FetchVerificationCodeAsyncTask=" FETCH VERIFICATION CODE ASYNC TASK ";
     public static final String PlaceWeeklyOrderAsyncTask=" PLACE WEEKLY ORDER ASYNC TASK ";
@@ -79,6 +83,9 @@ public class Constants {
 
 //    public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=";
     public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=";
+
+//    public static final String fetchProfileUrl = "http://dev.laundrize.com/api/api/v1/getuserinfo?user_id=2";
+    public static final String fetchProfileUrl = "http://dev.laundrize.com/api/api/v1/getuserinfo?user_id=";
 
 //    public static final String fetchLaundrySevicesUrl ="http://dev.laundrize.com/api/api/v1/getlaundryservice?user_id=50"
     public static final String fetchLaundrySevicesUrl ="http://dev.laundrize.com/api/api/v1/getlaundryservice?user_id=";
@@ -100,8 +107,17 @@ public class Constants {
 //    public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=12";
     public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=";
 
-//    public static final String addNewAddress ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=12&city=Pune&city_zip=411027&city_zip_area=PimpleSaudagar&address=501RajGalaxy"
-    public static final String addNewAddress ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=";
+//    public static final String addNewAddressUrl ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=12&city=Pune&city_zip=411027&city_zip_area=PimpleSaudagar&address=501RajGalaxy"
+    public static final String addNewAddressUrl ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=";
+
+//    public static final String getTimeStampUrl ="http://dev.laundrize.com/api/api/v1/currentdatetime?";
+    public static final String getTimeStampUrl ="http://dev.laundrize.com/api/api/v1/currentdatetime?";
+
+
+
+//    public static final String getSlotDifferenceUrl ="http://dev.laundrize.com/api/api/v1/slotdiff?user_id=2";
+    public static final String getSlotDifferenceUrl ="http://dev.laundrize.com/api/api/v1/slotdiff?user_id=";
+
 
 
 }

@@ -101,6 +101,10 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
         Log.d(Constants.LOG_TAG," Value Returned "+result);
+        if(result){
+            Constants.completedOrdersFetched = true;
+            Constants.ordersTracked = true;
+        }
         callback.onResult(result);
     }
 }

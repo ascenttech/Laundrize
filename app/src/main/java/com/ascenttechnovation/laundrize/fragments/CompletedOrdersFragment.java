@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.adapters.CompletedOrdersRecyclerAdapter;
 import com.ascenttechnovation.laundrize.adapters.TrackOrdersRecyclerAdapter;
 import com.ascenttechnovation.laundrize.async.TrackOrdersAsyncTask;
+import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
 import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -25,12 +27,13 @@ import java.util.ArrayList;
 /**
  * Created by ADMIN on 27-07-2015.
  */
-public class TrackOrdersFragment extends Fragment {
+public class CompletedOrdersFragment extends Fragment {
 
-    private RecyclerView trackOrdersRecyclerView;
-    private RecyclerView.Adapter trackOrdersAdapter;
-    private RecyclerView.LayoutManager trackOrdersLayoutManager;
-    private ArrayList<TrackOrdersData> trackOrdersData;
+    private RecyclerView completedOrdersRecyclerView;
+    private RecyclerView.Adapter completedOrdersAdapter;
+    private RecyclerView.LayoutManager completedOrdersLayoutManager;
+    private ArrayList<CompletedOrdersData> completedOrdersData;
+
     Context context;
     ActionBar actionBar;
     private ProgressDialog progressDialog;
@@ -40,12 +43,11 @@ public class TrackOrdersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_track_orders,container,false);
+        v = inflater.inflate(R.layout.fragment_completed_orders,container,false);
 
         customActionBar();
         settingTheAdapter(v);
-
-        if(!Constants.ordersTracked){
+        if(!Constants.completedOrdersFetched){
 
             getOrders();
         }
@@ -58,26 +60,26 @@ public class TrackOrdersFragment extends Fragment {
         actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
         actionBar.removeAllTabs();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle("Track Orders");
+        actionBar.setTitle("Completed Orders");
 
     }
 
     private void settingTheAdapter(View v){
 
-        trackOrdersRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_track_orders_fragment);
+        completedOrdersRecyclerView = (RecyclerView) v.findViewById(R.id.recycler_view_completed_orders_fragment);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        trackOrdersRecyclerView.setHasFixedSize(true);
+        completedOrdersRecyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
-        trackOrdersLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        trackOrdersRecyclerView.setLayoutManager(trackOrdersLayoutManager);
+        completedOrdersLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        completedOrdersRecyclerView.setLayoutManager(completedOrdersLayoutManager);
 
         // specify an adapter (see also next example)
-//        trackOrdersAdapter = new TrackOrdersRecyclerAdapter(getActivity().getApplicationContext(), Constants.laundryServicesSubCategory);
-        trackOrdersAdapter = new TrackOrdersRecyclerAdapter(getActivity().getApplicationContext());
-        trackOrdersRecyclerView.setAdapter(trackOrdersAdapter);
+//        completedOrdersAdapter = new TrackOrdersRecyclerAdapter(getActivity().getApplicationContext(), Constants.laundryServicesSubCategory);
+        completedOrdersAdapter = new CompletedOrdersRecyclerAdapter(getActivity().getApplicationContext());
+        completedOrdersRecyclerView.setAdapter(completedOrdersAdapter);
 
     }
 

@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ascenttechnovation.laundrize.data.AddressData;
+import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import org.apache.http.HttpEntity;
@@ -16,6 +17,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by ADMIN on 22-07-2015.
@@ -35,6 +38,7 @@ public class FetchAddressAsyncTask extends AsyncTask<String,Void,Boolean> {
     public FetchAddressAsyncTask(Context context, FetchAddressCallback callback) {
         this.context = context;
         this.callback = callback;
+        Constants.addressData = new ArrayList<AddressData>();
     }
 
     @Override
@@ -97,6 +101,9 @@ public class FetchAddressAsyncTask extends AsyncTask<String,Void,Boolean> {
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
         Log.d(Constants.LOG_TAG," Value Returned "+result);
+        if(result){
+            Constants.addressFetched = true;
+        }
         callback.onResult(result);
     }
 }

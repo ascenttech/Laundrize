@@ -2,7 +2,8 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_color">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -19,8 +20,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_centerHorizontal="true"
-                android:layout_margin="15dp"
-                android:padding="10dp"
+                android:layout_margin="@dimen/margin_large"
+                android:padding="@dimen/padding_large"
                 android:background="@drawable/white_card">
 
                 <com.ascenttechnovation.laundrize.custom.CustomTextView
@@ -46,58 +47,37 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text=" Welcome "
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                    android:textSize="@dimen/text_size"/>
 
                 <com.ascenttechnovation.laundrize.custom.CustomTextView
+                    android:id="@+id/user_name_text_profile_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text=" RAMKRISHNA JOSHI "
                     android:textColor="#196799"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textSize="@dimen/text_size_extra_large" />
 
             </LinearLayout>
 
-
-
-            <LinearLayout
+            <com.ascenttechnovation.laundrize.custom.CustomButton
+                android:id="@+id/add_new_address_button_profile_fragment"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:padding="10dp"
+                android:text="Add New Address"
+                android:drawableLeft="@drawable/icon_plus"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:layout_marginRight="@dimen/margin_large"
                 android:layout_below="@id/top"
-                android:background="@drawable/blue_card">
-
-                <com.ascenttechnovation.laundrize.custom.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Address "
-                    android:textColor="#212121"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <com.ascenttechnovation.laundrize.custom.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Graden View, Flat 102, Sector 16,\n Navi Mumbai 400708."
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:paddingBottom="30px"/>
-
-                <com.ascenttechnovation.laundrize.custom.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" Mobile "
-                    android:textColor="#212121"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-                <com.ascenttechnovation.laundrize.custom.CustomTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" +91 9167100000 "
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
-            </LinearLayout>
+                />
+            
+            <LinearLayout
+                android:id="@+id/available_address_container_profile_fragment"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/add_new_address_button_profile_fragment"
+                android:orientation="vertical"
+                />
 
         </RelativeLayout>
     </ScrollView>

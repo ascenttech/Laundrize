@@ -26,7 +26,7 @@
             android:drawableLeft="@drawable/calender"
             android:padding="@dimen/padding_large"
             android:drawablePadding="@dimen/padding"
-            android:drawableRight="@android:drawable/ic_menu_compass"
+            android:drawableRight="@drawable/icon_right_arrow"
             />
         <com.ascenttechnovation.laundrize.custom.CustomTextView
             android:id="@+id/select_time_slot_included"
@@ -36,7 +36,7 @@
             android:drawableLeft="@drawable/icon_clock"
             android:padding="@dimen/padding_large"
             android:drawablePadding="@dimen/padding"
-            android:drawableRight="@android:drawable/ic_menu_compass"
+            android:drawableRight="@drawable/icon_right_arrow"
             />
 
 

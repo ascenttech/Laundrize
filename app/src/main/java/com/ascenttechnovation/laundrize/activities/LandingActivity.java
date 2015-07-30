@@ -33,6 +33,7 @@ import com.ascenttechnovation.laundrize.adapters.NavigationDrawerAdapter;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.fragments.AddressFragment;
 import com.ascenttechnovation.laundrize.fragments.CheckOutFragment;
+import com.ascenttechnovation.laundrize.fragments.CompletedOrdersFragment;
 import com.ascenttechnovation.laundrize.fragments.FAQFragment;
 import com.ascenttechnovation.laundrize.fragments.PrivacyPolicyFragment;
 import com.ascenttechnovation.laundrize.fragments.ServicesFragment;
@@ -205,13 +206,13 @@ public class LandingActivity extends ActionBarActivity {
                 fragment = new AddressFragment();
                 break;
             case 2:
-                fragment = new ServicesFragment();
+                fragment = new AddressFragment();
                 break;
             case 3:
                 fragment = new TrackOrdersFragment();
                 break;
             case 4:
-                fragment = new CheckOutFragment();
+                fragment = new CompletedOrdersFragment();
                 break;
             case 5:
                 fragment = new ProfileFragment();

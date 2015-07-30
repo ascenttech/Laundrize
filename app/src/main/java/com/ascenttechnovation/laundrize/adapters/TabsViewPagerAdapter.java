@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 
+import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.fragments.DryCleanHouseholdsFragment;
 import com.ascenttechnovation.laundrize.fragments.DryCleanWearablesFragment;
 import com.ascenttechnovation.laundrize.fragments.IroningHouseholdsFragment;
@@ -18,12 +19,18 @@ import com.ascenttechnovation.laundrize.fragments.WashAndIronWearablesFragment;
  */
 public class TabsViewPagerAdapter extends FragmentStatePagerAdapter {
 
+    FragmentManager fm;
+
     public TabsViewPagerAdapter(FragmentManager fm) {
+
         super(fm);
+        this.fm = fm;
     }
 
     @Override
     public Fragment getItem(int position) {
+
+        Fragment fragment;
 
         switch (position){
 
@@ -39,9 +46,11 @@ public class TabsViewPagerAdapter extends FragmentStatePagerAdapter {
 
             case 5 : return new DryCleanHouseholdsFragment();
 
-            default:return new IroningHouseholdsFragment();
 
         }
+
+        return null;
+
     }
 
     @Override
