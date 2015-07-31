@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.ascenttechnovation.laundrize.data.AddressData;
+import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import org.apache.http.HttpEntity;
@@ -68,19 +69,31 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
 //
 //                    JSONObject jsonObject = jsonArray.getJSONObject(i);
 //                    String id = jsonObject.getString("id");
-//                    String address = jsonObject.getString("service_name");
-//                    String city = jsonObject.getString("collection_slot");
-//                    String zipCode = jsonObject.getString("actual_collected");
-//                    String areaName = jsonObject.getString("actual_ops_submission_time");
-//                    String mobileNumber = jsonObject.getString("actual_ops_collection_time");
-//                    String mobileNumber = jsonObject.getString("price");
-//                    String mobileNumber = jsonObject.getString("actual_delivery");
-//                    String mobileNumber = jsonObject.getString("delivery_slot");
-//                    String mobileNumber = jsonObject.getString("user_delivery_date");
-//                    String fullAddress = address+","+areaName+","+city+","+zipCode;
+//                    String seviceName = jsonObject.getString("service_name");
+//                    String collectionSlot = jsonObject.getString("collection_slot");
+//                    String actualCollected = jsonObject.getString("actual_collected");
+//                    String actualOpsSubmissionTime = jsonObject.getString("actual_ops_submission_time");
+//                    String actualOpsCollectionTime = jsonObject.getString("actual_ops_collection_time");
+//                    String price = jsonObject.getString("price");
+//                    String actualDelivery = jsonObject.getString("actual_delivery");
+//                    String deliverySlot = jsonObject.getString("delivery_slot");
+//                    String deliveryDate = jsonObject.getString("user_delivery_date");
+////
+//                      if(acutalDelivery.equalsIgnoreCase("null")){
 //
-//                    Log.d(Constants.LOG_TAG,"FUll address "+ fullAddress);
-//                    Constants.addressData.add(new AddressData(id,address,city,zipCode,areaName,mobileNumber,fullAddress));
+//                          Constants.completedOrdersData.add(new CompletedOrdersData(id,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate));
+//                      }
+//                      else if(actualOpsCollectionTime.equalsIgnoreCase("null")){
+//
+//                          Constants.orderProgress = 3;
+//                          Constants.completedOrdersData.add(new CompletedOrdersData(id,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,Constants.orderProgress));
+//                      }
+//                      else if(actualOpsSubmissionTime.equalsIgnoreCase("null")){
+//                          Constants.orderProgress = 2;
+//                          Constants.completedOrdersData.add(new CompletedOrdersData((id,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,Constants.orderProgress)));
+//                      }
+//
+////
 //                }
 //
 //                return true;

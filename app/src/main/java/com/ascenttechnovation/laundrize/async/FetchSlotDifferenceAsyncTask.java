@@ -9,6 +9,7 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
@@ -43,10 +44,10 @@ public class FetchSlotDifferenceAsyncTask extends AsyncTask<String,Void,Boolean>
 
         try{
 
-            HttpGet httpGet = new HttpGet(url[0]);
-            httpGet.addHeader("Authorization:Bearer", Constants.token);
+            HttpPost httpPost = new HttpPost(url[0]);
+            httpPost.addHeader("Authorization:Bearer", Constants.token);
             HttpClient httpClient = new DefaultHttpClient();
-            HttpResponse httpResponse = httpClient.execute(httpGet);
+            HttpResponse httpResponse = httpClient.execute(httpPost);
 
             int statusCode = httpResponse.getStatusLine().getStatusCode();
             Log.d(Constants.LOG_TAG, " status code " + statusCode);
@@ -58,13 +59,12 @@ public class FetchSlotDifferenceAsyncTask extends AsyncTask<String,Void,Boolean>
                 Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
                 JSONObject jsonObject = new JSONObject(response);
 
-//                Constants.currentDate = jsonObject.getString("current_date");
-//                Constants.currentTime = jsonObject.getString("current_time");
 
                 return true;
             }
             else{
-                return false;
+                return true;
+//                return false;
             }
         }
         catch (Exception e){
@@ -78,6 +78,10 @@ public class FetchSlotDifferenceAsyncTask extends AsyncTask<String,Void,Boolean>
     @Override
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
+        Log.d(Constants.LOG_TAG," Value returned "+result);
+        if(result){
+            Constants.slotDifferenceFetched = true;
+        }
         callback.onResult(result);
     }
 }

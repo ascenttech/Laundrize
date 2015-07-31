@@ -51,7 +51,7 @@ public class WeeklyFragment extends Fragment {
 
         ((LandingActivity)getActivity()).getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container,new AddressFragment())
+                .replace(R.id.container,new AddressFragment("weekly"))
                 .commit();
 
     }

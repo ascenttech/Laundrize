@@ -62,18 +62,18 @@ public class LandingFragment extends Fragment {
 
     public void placeOrder(){
 
-        replaceFragment(new AddressFragment());
+        replaceFragment(new AddressFragment("place"));
     }
 
     public void quickOrder(){
 
-        replaceFragment(new AddressFragment());
+        replaceFragment(new AddressFragment("quick"));
 
     }
 
     public void weeklyOrder(){
 
-        replaceFragment(new AddressFragment());
+        replaceFragment(new AddressFragment("weekly"));
 
     }
 

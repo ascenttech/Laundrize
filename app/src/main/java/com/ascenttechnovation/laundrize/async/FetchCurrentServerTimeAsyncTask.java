@@ -79,6 +79,10 @@ public class FetchCurrentServerTimeAsyncTask extends AsyncTask<String,Void,Boole
     @Override
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
+        Log.d(Constants.LOG_TAG," Value returned "+result);
+        if(result){
+            Constants.currentServerTimeFetched = true;
+        }
         callback.onResult(result);
     }
 }

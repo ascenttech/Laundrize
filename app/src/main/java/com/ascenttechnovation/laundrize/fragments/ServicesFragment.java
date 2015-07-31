@@ -94,6 +94,7 @@ public class ServicesFragment extends Fragment {
         actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setTitle("Services");
 
         for(int i =0 ;i<names.length;i++){
 

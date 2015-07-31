@@ -203,10 +203,10 @@ public class LandingActivity extends ActionBarActivity {
                 fragment = new LandingFragment();
                 break;
             case 1:
-                fragment = new AddressFragment();
+                fragment = new AddressFragment("quick");
                 break;
             case 2:
-                fragment = new AddressFragment();
+                fragment = new AddressFragment("weekly");
                 break;
             case 3:
                 fragment = new TrackOrdersFragment();

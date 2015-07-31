@@ -1,6 +1,7 @@
 package com.ascenttechnovation.laundrize.utils;
 
 import com.ascenttechnovation.laundrize.data.AddressData;
+import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
 import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesMainCategoryData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
@@ -23,6 +24,14 @@ public class Constants {
     public static boolean addressFetched;
     public static boolean ordersTracked;
     public static boolean completedOrdersFetched;
+    public static boolean currentServerTimeFetched;
+    public static boolean slotDifferenceFetched;
+
+    // This is used to change the image of track orders.
+    // 1 is order placed
+    // 2 is picked up
+    // 3 processing
+    public static int orderProgress = 1;
 
 
     // This hashmap would containt the key as orderId and value as quantity
@@ -32,6 +41,7 @@ public class Constants {
     public static ArrayList<GeneralData> subCategory;
     public static ArrayList<AddressData> addressData;
     public static ArrayList<GeneralData> bagLaundryData;
+    public static ArrayList<CompletedOrdersData> completedOrdersData;
     public static ArrayList<GeneralData> dryCleanHouseholdsData;
     public static ArrayList<GeneralData> dryCleanWearablesData;
     public static ArrayList<GeneralData> ironingHouseholdsData;
@@ -81,7 +91,7 @@ public class Constants {
     // LINKS with a harcoded link for testing
     // verify Now full Url
 
-//    public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=";
+//    public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=2";
     public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=";
 
 //    public static final String fetchProfileUrl = "http://dev.laundrize.com/api/api/v1/getuserinfo?user_id=2";

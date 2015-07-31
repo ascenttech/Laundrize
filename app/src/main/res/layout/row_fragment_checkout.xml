@@ -11,9 +11,9 @@
         android:layout_height="match_parent">
 
         <com.ascenttechnovation.laundrize.custom.CustomTextView
+            android:id="@+id/service_included"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Collection"
             android:drawableLeft="@drawable/icon_delivery"
             android:padding="@dimen/padding_large"
             android:drawablePadding="@dimen/padding"

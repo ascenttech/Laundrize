@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CheckBox
+        android:id="@+id/quick_service_ironing"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_iron"
+        android:textSize="@dimen/text_size_extra_large"/>
+    <CheckBox
+        android:id="@+id/quick_service_washing"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_wash"
+        android:textSize="@dimen/text_size_extra_large"/>
+    <CheckBox
+        android:id="@+id/quick_service_bags"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_laundry"
+        android:textSize="@dimen/text_size_extra_large"/>
+
+    <com.ascenttechnovation.laundrize.custom.CustomButton
+        android:id="@+id/quick_service_done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:layout_gravity="center_horizontal"
+        />
+
+</LinearLayout>

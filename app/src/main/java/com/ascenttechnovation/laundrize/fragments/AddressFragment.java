@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.async.AddNewAddressAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchCurrentServerTimeAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.net.URLEncoder;
@@ -45,7 +47,13 @@ public class AddressFragment extends Fragment {
     private TextView address,mobileNumber;
     private EditText city,pincode,area,buildingName,houseNumber;
     private String cityValue,pincodeValue,areaValue,buildingNameValue,houseNumberValue,fullAddressValue;
+    private String orderType;
 
+    public AddressFragment(String orderType) {
+
+        this.orderType = orderType;
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -71,6 +79,7 @@ public class AddressFragment extends Fragment {
         actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
         actionBar.removeAllTabs();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setTitle("Select Address");
     }
 
     private void findViews(View v){
@@ -96,7 +105,7 @@ public class AddressFragment extends Fragment {
 
         for(int i =0;i< Constants.addressData.size();i++){
 
-            rowView = layoutInflater.inflate(R.layout.include_available_address,selectAddressChild);
+            rowView = layoutInflater.inflate(R.layout.include_available_address,null);
 
             address = (TextView) rowView.findViewById(R.id.address_text_included);
             address.setTag("address_"+i);
@@ -109,6 +118,8 @@ public class AddressFragment extends Fragment {
             Log.d(Constants.LOG_TAG," Setting the adress "+Constants.addressData.get(i).getMobileNumber());
             mobileNumber.setText(Constants.addressData.get(i).getMobileNumber());
             mobileNumber.setOnClickListener(inflatedViewListener);
+
+            selectAddressChild.addView(rowView);
         }
 
     }
@@ -294,10 +305,9 @@ public class AddressFragment extends Fragment {
                 progressDialog.dismiss();
                 if(result){
 
-                    ((LandingActivity)getActivity()).getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.container,new ServicesFragment())
-                            .commit();
+                    replaceFragment(new ServicesFragment());
+
+
                 }
                 else{
                     Toast.makeText(getActivity().getApplicationContext(),"Unable to add adress now.\nPlease try again later",5000).show();
@@ -310,14 +320,81 @@ public class AddressFragment extends Fragment {
 
     }
 
-    public void goAhead(int position){
+    public void replaceFragment(Fragment fragment){
 
-        Toast.makeText(getActivity().getApplicationContext(),"Position "+ position,5000).show();
+        Log.d(Constants.LOG_TAG," Entering Replace Fragment "+ fragment.getClass().getName());
 
         ((LandingActivity)getActivity()).getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.container,new ServicesFragment())
+                .replace(R.id.container,fragment)
+                .addToBackStack(fragment.getClass().getName())
                 .commit();
+
+    }
+
+    public void goAhead(int position){
+
+        new FetchCurrentServerTimeAsyncTask(new FetchCurrentServerTimeAsyncTask.FetchCurrentServerTimeCallBack() {
+            @Override
+            public void onStart(boolean status) {
+
+            }
+
+            @Override
+            public void onResult(boolean result) {
+                if(result){
+
+                    Constants.currentServerTimeFetched = true;
+//                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId;
+                    String finalUrl = Constants.getSlotDifferenceUrl;
+                    new FetchSlotDifferenceAsyncTask(new FetchSlotDifferenceAsyncTask.FetchSlotDifferenceCallback() {
+                        @Override
+                        public void onStart(boolean status) {
+
+
+                        }
+                        @Override
+                        public void onResult(boolean result) {
+
+                            if(result){
+
+                                Constants.slotDifferenceFetched = true;
+                                if(orderType.equalsIgnoreCase("place")){
+
+                                    replaceFragment(new ServicesFragment());
+
+                                }
+                                else if(orderType.equalsIgnoreCase("quick")){
+
+                                    replaceFragment(new QuickOrderFragment());
+
+                                }
+                                else{
+
+                                    replaceFragment(new WeeklyFragment());
+
+                                }
+
+
+                            }
+                            else{
+
+                                Constants.slotDifferenceFetched = false;
+                                ((LandingActivity)getActivity()).getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.container,new ServicesFragment())
+                                        .commit();
+                            }
+
+                        }
+                    }).execute(finalUrl);
+
+                }
+                else{
+                    Constants.currentServerTimeFetched = false;
+                }
+            }
+        }).execute(Constants.getTimeStampUrl);
 
 
     }

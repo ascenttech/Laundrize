@@ -39,7 +39,9 @@
                     android:layout_width="250px"
                     android:layout_height="250px"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile_picture"
+                    />
 
                 <com.ascenttechnovation.laundrize.custom.CustomTextView
                     android:id="@+id/forgot_password_static_text_log_in_now"
@@ -54,7 +56,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text=" RAMKRISHNA JOSHI "
                     android:textColor="#196799"
                     android:textSize="@dimen/text_size_extra_large" />
 
