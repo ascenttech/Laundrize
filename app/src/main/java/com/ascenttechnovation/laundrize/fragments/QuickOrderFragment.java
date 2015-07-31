@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
+import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
  * Created by ADMIN on 31-07-2015.
@@ -35,6 +37,7 @@ public class QuickOrderFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_quick_order,container,false);
 
+        Log.d(Constants.LOG_TAG, Constants.QuickOrderFragement);
 
         customActionBar();
         popUp();

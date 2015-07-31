@@ -55,6 +55,8 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        Log.d(Constants.LOG_TAG,Constants.ProfileFragement);
+
         v = inflater.inflate(R.layout.fragment_profile,container,false);
         parentInflater = inflater;
         // create bitmap from resource

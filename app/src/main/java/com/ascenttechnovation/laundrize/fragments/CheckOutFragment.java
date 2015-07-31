@@ -40,6 +40,8 @@ public class CheckOutFragment extends Fragment {
         findViews(v);
         setViews();
 
+        Log.d(Constants.LOG_TAG, Constants.CheckOutFragement);
+
         return v;
     }
     public void customActionBar(){

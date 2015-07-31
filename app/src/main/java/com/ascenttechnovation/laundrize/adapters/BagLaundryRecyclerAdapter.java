@@ -2,6 +2,7 @@ package com.ascenttechnovation.laundrize.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,8 @@ public class BagLaundryRecyclerAdapter extends RecyclerView.Adapter<BagLaundryRe
     public BagLaundryRecyclerAdapter(Context context, ArrayList<GeneralData> bagLaundryData) {
         this.context = context;
         this.bagLaundryData = bagLaundryData;
+
+        Log.d(Constants.LOG_TAG, Constants.BagLaundryRecyclerAdapter);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

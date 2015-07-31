@@ -33,6 +33,7 @@ public class FAQFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_faq,container,false);
 
+        Log.d(Constants.LOG_TAG,Constants.FAQFragement);
 
         customActionBar();
         questions = getActivity().getApplicationContext().getResources().getStringArray(R.array.faq_questions);

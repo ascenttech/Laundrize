@@ -2,6 +2,7 @@ package com.ascenttechnovation.laundrize.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ public class WashAndIronWearablesRecyclerAdapter extends RecyclerView.Adapter<Wa
         this.context = context;
         this.washAndIronWearablesData = washAndIronWearablesData;
         imgLoader = new ImageLoader(context);
+
+        Log.d(Constants.LOG_TAG, Constants.WashAndIronWearableRecyclerAdapter);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

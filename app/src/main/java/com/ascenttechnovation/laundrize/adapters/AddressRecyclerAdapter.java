@@ -2,6 +2,7 @@ package com.ascenttechnovation.laundrize.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ public class AddressRecyclerAdapter extends RecyclerView.Adapter<AddressRecycler
     public AddressRecyclerAdapter(Context context, ArrayList<AddressData> addressData) {
         this.context = context;
         this.addressData = addressData;
+
+        Log.d(Constants.LOG_TAG,Constants.AddressRecyclerAdapter);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

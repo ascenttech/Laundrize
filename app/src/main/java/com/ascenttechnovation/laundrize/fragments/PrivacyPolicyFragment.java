@@ -33,6 +33,7 @@ public class PrivacyPolicyFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_privacy_policy,container,false);
 
+        Log.d(Constants.LOG_TAG,Constants.PrivacyPolicyFragement);
 
         customActionBar();
         questions = getActivity().getApplicationContext().getResources().getStringArray(R.array.privacy_policy_questions);

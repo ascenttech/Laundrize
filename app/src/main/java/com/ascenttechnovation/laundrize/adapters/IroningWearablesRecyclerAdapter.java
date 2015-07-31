@@ -32,6 +32,8 @@ public class IroningWearablesRecyclerAdapter extends RecyclerView.Adapter<Ironin
         this.context = context;
         this.ironingWearablesData = ironingWearablesData;
         imgLoader = new ImageLoader(context);
+
+        Log.d(Constants.LOG_TAG,Constants.IroningWearablesRecyclerAdapter);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

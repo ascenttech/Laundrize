@@ -53,6 +53,7 @@ public class AddressFragment extends Fragment {
 
         this.orderType = orderType;
 
+        Log.d(Constants.LOG_TAG,Constants.AddressFragement);
     }
 
     @Override

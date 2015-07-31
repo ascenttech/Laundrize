@@ -2,6 +2,7 @@ package com.ascenttechnovation.laundrize.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,8 @@ public class ShoeLaundryRecyclerAdapter extends RecyclerView.Adapter<ShoeLaundry
         this.context = context;
         this.shoeLaundryData = shoeLaundryData;
         imgLoader = new ImageLoader(context);
+
+        Log.d(Constants.LOG_TAG, Constants.ShoeLaundryRecyclerAdapter);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.View;
 
 import com.ascenttechnovation.laundrize.R;
@@ -13,6 +14,7 @@ import com.ascenttechnovation.laundrize.fragments.IroningHouseholdsFragment;
 import com.ascenttechnovation.laundrize.fragments.IroningWearablesFragment;
 import com.ascenttechnovation.laundrize.fragments.WashAndIronHouseholdsFragment;
 import com.ascenttechnovation.laundrize.fragments.WashAndIronWearablesFragment;
+import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
  * Created by ADMIN on 27-07-2015.
@@ -25,6 +27,8 @@ public class TabsViewPagerAdapter extends FragmentStatePagerAdapter {
 
         super(fm);
         this.fm = fm;
+
+        Log.d(Constants.LOG_TAG, Constants.TabsViewPagerAdapter);
     }
 
     @Override

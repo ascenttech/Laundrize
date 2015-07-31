@@ -2,6 +2,7 @@ package com.ascenttechnovation.laundrize.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
+import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -28,6 +30,8 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
     public CompletedOrdersRecyclerAdapter(Context context, ArrayList<LaundryServicesSubCategoryData> laundryServicesSubCategoryData) {
         this.context = context;
         this.laundryServicesSubCategoryData = laundryServicesSubCategoryData;
+
+        Log.d(Constants.LOG_TAG, Constants.CompleteOrdersRecyclerAdapter);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

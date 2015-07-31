@@ -2,6 +2,7 @@ package com.ascenttechnovation.laundrize.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
     public TrackOrdersRecyclerAdapter(Context context, ArrayList<LaundryServicesSubCategoryData> laundryServicesSubCategoryData) {
         this.context = context;
         this.laundryServicesSubCategoryData = laundryServicesSubCategoryData;
+
+        Log.d(Constants.LOG_TAG, Constants.TrackOrderRecyclerAdapter);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

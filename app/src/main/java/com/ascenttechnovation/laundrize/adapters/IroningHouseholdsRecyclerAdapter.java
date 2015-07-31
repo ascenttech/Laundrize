@@ -2,6 +2,7 @@ package com.ascenttechnovation.laundrize.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,8 @@ public class IroningHouseholdsRecyclerAdapter extends RecyclerView.Adapter<Ironi
         this.context = context;
         this.ironingHouseholdsData = ironingHouseholdsData;
         imgLoader = new ImageLoader(context);
+
+        Log.d(Constants.LOG_TAG, Constants.IroningHouseholdsRecyclerAdapter);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

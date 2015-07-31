@@ -49,6 +49,8 @@ public class ServicesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        Log.d(Constants.LOG_TAG,Constants.ServicesFragement);
+
         v = inflater.inflate(R.layout.fragment_services,container,false);
         viewPager = (ViewPager) v.findViewById(R.id.myviewpager);
 
@@ -150,7 +152,7 @@ public class ServicesFragment extends Fragment {
             Map.Entry mapEntry = (Map.Entry) iterator.next();
             Log.d(Constants.LOG_TAG, " key " + mapEntry.getKey() + " value " + mapEntry.getValue());
 
-            HashMap<String,String>
+          //  HashMap<String,String>
         }
 
     }

@@ -4,7 +4,10 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.widget.DatePicker;
+
+import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.Calendar;
 
@@ -16,6 +19,8 @@ public class DatePickerDialogFragment extends DialogFragment implements DatePick
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+        Log.d(Constants.LOG_TAG, Constants.DatePickerDialogFragement);
 
         final Calendar calendar = Calendar.getInstance();
         int yy = calendar.get(Calendar.YEAR);

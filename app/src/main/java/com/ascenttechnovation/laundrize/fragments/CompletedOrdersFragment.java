@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,8 @@ public class CompletedOrdersFragment extends Fragment {
 
             getOrders();
         }
+
+        Log.d(Constants.LOG_TAG, Constants.CompletedOrdersFragement);
 
         return v;
     }

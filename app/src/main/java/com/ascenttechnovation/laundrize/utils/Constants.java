@@ -66,12 +66,43 @@ public class Constants {
     public static final String SplashScreenActivity = " SPLASH SCREEN ACTIVITY ";
 
     // Log Tags for all the fragments
-    public static final String LandingFragment = " LANDING FRAGMENT ";
-    public static final String DataHolderFragment =" DATA HOLDER FRAGMENT ";
+    public static final String AddressFragement ="ADDRESS FRAGMENT";
+    public static final String BagLaundryFragement ="BAG LAUNDRY FRAGMENT";
+    public static final String CheckOutFragement ="CHECK OUT FRAGMENT";
+    public static final String CompletedOrdersFragement ="COMPLETED ORDERS FRAGMENT";
+    public static final String DatePickerDialogFragement ="DATE PICKER DIALOG FRAGMENT";
+    public static final String DryCleanHouseholdsFragement ="DRY CLEAN HOUSEHOLDS FRAGMENT";
+    public static final String DryCleanWearablesFragement ="DRY CLEAN WEARABLES FRAGMENT";
+    public static final String FAQFragement ="FAQ FRAGMENT";
+    public static final String IroningHouseholdsFragement ="IRONING HOUSEHOLDS FRAGMENT";
+    public static final String IroningWearablesFragement ="IRONING WEARABLES FRAGMENT";
+    public static final String OtherFragement ="OTHER FRAGMENT";
+    public static final String LandingFragment = "LANDING FRAGMENT ";
+    public static final String PrivacyPolicyFragement ="PRIVACY POLICY FRAGMENT";
+    public static final String ProfileFragement ="PROFILE FRAGMENT";
+    public static final String QuickOrderFragement ="QUICK ORDER FRAGMENT";
+    public static final String ServicesFragement ="SERVICES FRAGMENT";
+    public static final String ShoeLaundryFragement ="SHOE LAUNDRY FRAGMENT";
+    public static final String TrackOrdersFragement ="TRACK ORDERS FRAGMENT";
+    public static final String WashAndIronHouseholdsFragement ="WASH AND IRON HOUSEHOLDS FRAGMENT";
+    public static final String WashAndIronWearablesFragement ="WASH AND IRON WEARABLES FRAGMENT";
+    public static final String WeeklyFragement ="WEEKLY FRAGMENT";
 
     // Log Tags for all the adapters
-    public static final String LandingFragmentRecyclerAdapter = " LANDING FRAGMENT RECYCLER ADAPTER ";
-    public static final String NavigationDrawerAdapter = " NAVIGATION ADAPTER ";
+    public static final String AddressRecyclerAdapter = "ADDRESS RECYCLER ADAPTER";
+    public static final String BagLaundryRecyclerAdapter = "BAG LAUNDRY RECYCLER ADAPTER";
+    public static final String CompleteOrdersRecyclerAdapter = "COMPLETE ORDERS RECYCLER ADAPTER";
+    public static final String DryCleanHouseholdsRecyclerAdapter = "DRY CLEAN HOUSEHOLD RECYCLER ADAPTER";
+    public static final String DryCleanWearablesRecyclerAdapter = "DRY CLEAN WEARABLES RECYCLER ADAPTER";
+    public static final String IroningHouseholdsRecyclerAdapter = "IRONING HOUSEHOLDS RECYCLER ADAPTER";
+    public static final String IroningWearablesRecyclerAdapter = "IRONING WEARABLES RECYCLER ADAPTER";
+    public static final String OtherRecyclerAdapter = "OTHER RECYCLER ADAPTER";
+    public static final String ShoeLaundryRecyclerAdapter = "SHOE LAUNDRY RECYCLER ADAPTER";
+    public static final String TabsViewPagerAdapter = "TABS VIEW PAGER ADAPTER";
+    public static final String TrackOrderRecyclerAdapter = "TRACK ORDER RECYCLER ADAPTER";
+    public static final String WashAndIronHouseholdsRecyclerAdapter = "WASH IRON HOUSEHOLDS RECYCLER ADAPTER";
+    public static final String WashAndIronWearableRecyclerAdapter = "WASH AND IRON WEARABLE RECYCLER ADAPTER";
+    public static final String NavigationDrawerAdapter = " NAVIGATION DRAWER ADAPTER ";
 
     // Log Tags for async Task
     public static final String AddNewAddressAsyncTask=" ADD NEW ADDRESS ASYNC TASK ";
