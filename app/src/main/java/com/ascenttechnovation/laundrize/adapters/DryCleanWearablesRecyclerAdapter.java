@@ -102,8 +102,15 @@ public class DryCleanWearablesRecyclerAdapter extends RecyclerView.Adapter<DryCl
         value++;
         String quantity = String.valueOf(value);
         Constants.dryCleanWearablesData.get(position).setQuantity(quantity);
+
+        int numberOfPieces = Integer.parseInt(Constants.dryCleanWearablesData.get(position).getQuantity());
+        int price = Integer.parseInt(Constants.dryCleanWearablesData.get(position).getRegularCost());
+        int totalAmount = numberOfPieces * price;
+        String totalAmountValue = String.valueOf(totalAmount);
+        String total = Constants.dryCleanWearablesData.get(position).getQuantity()+"_"+totalAmountValue;
+
         String orderId = Constants.dryCleanWearablesData.get(position).getCode();
-        Constants.order.put(orderId,quantity);
+        Constants.order.put(orderId,total);
 
     }
 
@@ -115,8 +122,15 @@ public class DryCleanWearablesRecyclerAdapter extends RecyclerView.Adapter<DryCl
             value--;
             String quantity = String.valueOf(value);
             Constants.dryCleanWearablesData.get(position).setQuantity(quantity);
+
+            int numberOfPieces = Integer.parseInt(Constants.dryCleanWearablesData.get(position).getQuantity());
+            int price = Integer.parseInt(Constants.dryCleanWearablesData.get(position).getRegularCost());
+            int totalAmount = numberOfPieces * price;
+            String totalAmountValue = String.valueOf(totalAmount);
+            String total = Constants.dryCleanWearablesData.get(position).getQuantity()+"_"+totalAmountValue;
+
             String orderId = Constants.dryCleanWearablesData.get(position).getCode();
-            Constants.order.put(orderId,quantity);
+            Constants.order.put(orderId,total);
 
         }
 

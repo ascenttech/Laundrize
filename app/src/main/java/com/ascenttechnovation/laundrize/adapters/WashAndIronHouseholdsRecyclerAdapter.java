@@ -102,8 +102,14 @@ public class WashAndIronHouseholdsRecyclerAdapter extends RecyclerView.Adapter<W
         String quantity = String.valueOf(value);
         Constants.washAndIronHouseholdsData.get(position).setQuantity(quantity);
 
+        int numberOfPieces = Integer.parseInt(Constants.washAndIronHouseholdsData.get(position).getQuantity());
+        int price = Integer.parseInt(Constants.washAndIronHouseholdsData.get(position).getRegularCost());
+        int totalAmount = numberOfPieces * price;
+        String totalAmountValue = String.valueOf(totalAmount);
+        String total = Constants.washAndIronHouseholdsData.get(position).getQuantity()+"_"+totalAmountValue;
+
         String orderId = Constants.washAndIronHouseholdsData.get(position).getCode();
-        Constants.order.put(orderId,quantity);
+        Constants.order.put(orderId,total);
 
     }
 
@@ -115,8 +121,15 @@ public class WashAndIronHouseholdsRecyclerAdapter extends RecyclerView.Adapter<W
             value--;
             String quantity = String.valueOf(value);
             Constants.washAndIronHouseholdsData.get(position).setQuantity(quantity);
+
+            int numberOfPieces = Integer.parseInt(Constants.washAndIronHouseholdsData.get(position).getQuantity());
+            int price = Integer.parseInt(Constants.washAndIronHouseholdsData.get(position).getRegularCost());
+            int totalAmount = numberOfPieces * price;
+            String totalAmountValue = String.valueOf(totalAmount);
+            String total = Constants.washAndIronHouseholdsData.get(position).getQuantity()+"_"+totalAmountValue;
+
             String orderId = Constants.washAndIronHouseholdsData.get(position).getCode();
-            Constants.order.put(orderId,quantity);
+            Constants.order.put(orderId,total);
 
         }
 

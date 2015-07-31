@@ -102,8 +102,15 @@ public class DryCleanHouseholdsRecyclerAdapter extends RecyclerView.Adapter<DryC
         value++;
         String quantity = String.valueOf(value);
         Constants.dryCleanHouseholdsData.get(position).setQuantity(quantity);
+
+        int numberOfPieces = Integer.parseInt(Constants.dryCleanHouseholdsData.get(position).getQuantity());
+        int price = Integer.parseInt(Constants.dryCleanHouseholdsData.get(position).getRegularCost());
+        int totalAmount = numberOfPieces * price;
+        String totalAmountValue = String.valueOf(totalAmount);
+        String total = Constants.dryCleanHouseholdsData.get(position).getQuantity()+"_"+totalAmountValue;
+
         String orderId = Constants.dryCleanHouseholdsData.get(position).getCode();
-        Constants.order.put(orderId,quantity);
+        Constants.order.put(orderId,total);
 
     }
 
@@ -115,8 +122,16 @@ public class DryCleanHouseholdsRecyclerAdapter extends RecyclerView.Adapter<DryC
             value--;
             String quantity = String.valueOf(value);
             Constants.dryCleanHouseholdsData.get(position).setQuantity(quantity);
+
+            int numberOfPieces = Integer.parseInt(Constants.dryCleanHouseholdsData.get(position).getQuantity());
+            int price = Integer.parseInt(Constants.dryCleanHouseholdsData.get(position).getRegularCost());
+            int totalAmount = numberOfPieces * price;
+            String totalAmountValue = String.valueOf(totalAmount);
+            String total = Constants.dryCleanHouseholdsData.get(position).getQuantity()+"_"+totalAmountValue;
+
+
             String orderId = Constants.dryCleanHouseholdsData.get(position).getCode();
-            Constants.order.put(orderId,quantity);
+            Constants.order.put(orderId,total);
 
         }
 

@@ -104,8 +104,14 @@ public class IroningWearablesRecyclerAdapter extends RecyclerView.Adapter<Ironin
         String quantity = String.valueOf(value);
         Constants.ironingWearablesData.get(position).setQuantity(quantity);
 
+        int numberOfPieces = Integer.parseInt(Constants.ironingWearablesData.get(position).getQuantity());
+        int price = Integer.parseInt(Constants.ironingWearablesData.get(position).getRegularCost());
+        int totalAmount = numberOfPieces * price;
+        String totalAmountValue = String.valueOf(totalAmount);
+        String total = Constants.ironingWearablesData.get(position).getQuantity()+"_"+totalAmountValue;
+
         String orderId = Constants.ironingWearablesData.get(position).getCode();
-        Constants.order.put(orderId,quantity);
+        Constants.order.put(orderId,total);
 
     }
 
@@ -118,8 +124,14 @@ public class IroningWearablesRecyclerAdapter extends RecyclerView.Adapter<Ironin
             String quantity = String.valueOf(value);
             Constants.ironingWearablesData.get(position).setQuantity(quantity);
 
+            int numberOfPieces = Integer.parseInt(Constants.ironingWearablesData.get(position).getQuantity());
+            int price = Integer.parseInt(Constants.ironingWearablesData.get(position).getRegularCost());
+            int totalAmount = numberOfPieces * price;
+            String totalAmountValue = String.valueOf(totalAmount);
+            String total = Constants.ironingWearablesData.get(position).getQuantity()+"_"+totalAmountValue;
+
             String orderId = Constants.ironingWearablesData.get(position).getCode();
-            Constants.order.put(orderId,quantity);
+            Constants.order.put(orderId,total);
         }
 
     }
