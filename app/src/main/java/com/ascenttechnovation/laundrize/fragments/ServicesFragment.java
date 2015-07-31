@@ -23,6 +23,8 @@ import com.ascenttechnovation.laundrize.adapters.TabsViewPagerAdapter;
 import com.ascenttechnovation.laundrize.async.FetchLaundryServicesAsyncTask;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -147,6 +149,8 @@ public class ServicesFragment extends Fragment {
         while (iterator.hasNext()) {
             Map.Entry mapEntry = (Map.Entry) iterator.next();
             Log.d(Constants.LOG_TAG, " key " + mapEntry.getKey() + " value " + mapEntry.getValue());
+
+            HashMap<String,String>
         }
 
     }
