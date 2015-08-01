@@ -39,6 +39,7 @@ public class TrackOrdersFragment extends Fragment {
     ActionBar actionBar;
     private ProgressDialog progressDialog;
     private View v;
+    private CustomButton placeOrder;
 
     @Nullable
     @Override
@@ -49,6 +50,8 @@ public class TrackOrdersFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_track_orders,container,false);
 
         customActionBar();
+        findViews(v);
+        setViews();
         settingTheAdapter(v);
 
         if(!Constants.ordersTracked){
@@ -67,6 +70,19 @@ public class TrackOrdersFragment extends Fragment {
         actionBar.setTitle("Track Orders");
 
     }
+
+    private void findViews(View v){
+
+        placeOrder = (CustomButton) v.findViewById(R.id.footer_button_included);
+
+    }
+
+    private void setViews(){
+
+        placeOrder.setText("PLACE NEW ORDER");
+
+    }
+
 
     private void settingTheAdapter(View v){
 

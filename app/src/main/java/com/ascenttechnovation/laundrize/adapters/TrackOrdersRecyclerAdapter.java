@@ -25,6 +25,7 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
     Context context;
     private ArrayList<LaundryServicesSubCategoryData> laundryServicesSubCategoryData;
     private TextView address,mobileNumber;
+    private CustomButton single_button_below;
 
     public TrackOrdersRecyclerAdapter(Context context) {
         this.context = context;
@@ -67,12 +68,11 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
 
     private void findViews(ViewHolder holder){
 
-
-
+//        single_button_below = (CustomButton) holder.v.findViewById(R.id.footer_button_included);
     }
 
     private void setViews(int position){
-
+//        single_button_below.setText(" PLACE NEW BUTTON ");
 
     }
 

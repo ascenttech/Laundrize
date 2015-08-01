@@ -19,6 +19,7 @@ import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.adapters.CompletedOrdersRecyclerAdapter;
 import com.ascenttechnovation.laundrize.adapters.TrackOrdersRecyclerAdapter;
 import com.ascenttechnovation.laundrize.async.TrackOrdersAsyncTask;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
 import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -34,6 +35,7 @@ public class CompletedOrdersFragment extends Fragment {
     private RecyclerView.Adapter completedOrdersAdapter;
     private RecyclerView.LayoutManager completedOrdersLayoutManager;
     private ArrayList<CompletedOrdersData> completedOrdersData;
+    private CustomButton below_button;
 
     Context context;
     ActionBar actionBar;
@@ -46,6 +48,9 @@ public class CompletedOrdersFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_completed_orders,container,false);
 
+        findViews(v);
+        setViews();
+
         customActionBar();
         settingTheAdapter(v);
         if(!Constants.completedOrdersFetched){
@@ -56,6 +61,16 @@ public class CompletedOrdersFragment extends Fragment {
         Log.d(Constants.LOG_TAG, Constants.CompletedOrdersFragement);
 
         return v;
+    }
+
+    private void findViews(View v){
+
+        below_button = (CustomButton) v.findViewById(R.id.footer_button_included);
+    }
+
+    private void setViews() {
+
+        below_button.setText("Place New Order");
     }
 
     private void customActionBar(){

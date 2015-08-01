@@ -1,6 +1,7 @@
 package com.ascenttechnovation.laundrize.fragments;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -44,9 +46,9 @@ public class PlaceOrderFragment extends Fragment {
     private JSONArray ironingNestedJsonArray,washingNestedJsonArray,bagsNestedJsonArray,itemsJsonArray;
     private boolean ironingCreated,washingCreated,bagsCreated = false;
     private ProgressDialog progressDialog;
-    private DatePickerDialog pickDate;
+    private DatePickerDialog Pickdate;
     private int date,month,year;
-    private ArrayAdapter<CharSequence> collectionAdapter,ironingAdapter,washingAdapter,bagsAdapter;
+
 
     @Nullable
     @Override
@@ -134,6 +136,8 @@ public class PlaceOrderFragment extends Fragment {
         bagsDateText.setTag("date_4");
         bagsDateText.setOnClickListener(datelistener);
 
+        setSpinner();
+
         ironingLayout.setVisibility(View.GONE);
         washingLayout.setVisibility(View.GONE);
         bagsLayout.setVisibility(View.GONE);
@@ -147,36 +151,18 @@ public class PlaceOrderFragment extends Fragment {
 
         placeOrder.setOnClickListener(listener);
 
-        setTheAdapters();
 
     }
 
-    public void setTheAdapters(){
-
-        collectionAdapter = ArrayAdapter.createFromResource(getActivity(),
+    public void setSpinner(){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.time_slot, android.R.layout.simple_spinner_item);
-
-        ironingAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.time_slot, android.R.layout.simple_spinner_item);
-
-        washingAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.time_slot, android.R.layout.simple_spinner_item);
-
-        bagsAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.time_slot, android.R.layout.simple_spinner_item);
-
-        collectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ironingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        washingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bagsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
-        collectionTimeSlot.setAdapter(collectionAdapter);
-        ironingTimeSlot.setAdapter(ironingAdapter);
-        washingTimeSlot.setAdapter(washingAdapter);
-        bagsTimeSlot.setAdapter(bagsAdapter);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        collectionTimeSlot.setAdapter(adapter);
+        ironingTimeSlot.setAdapter(adapter);
+        washingTimeSlot.setAdapter(adapter);
+        bagsTimeSlot.setAdapter(adapter);
     }
-
 
     public void placeOrder(){
 
@@ -316,12 +302,12 @@ public class PlaceOrderFragment extends Fragment {
 
     }
 
-    private void collectionDatePicker() {
+    private void d1() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
@@ -332,15 +318,15 @@ public class PlaceOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        pickDate.show();
+        Pickdate.show();
     }
 
-    private void ironingDatePicker() {
+    private void d2() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
@@ -351,14 +337,14 @@ public class PlaceOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        pickDate.show();
+        Pickdate.show();
     }
-    private void washingDatePicker() {
+    private void d3() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
@@ -369,14 +355,14 @@ public class PlaceOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        pickDate.show();
+        Pickdate.show();
     }
-    private void bagsDatePicker() {
+    private void d4() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
@@ -387,7 +373,7 @@ public class PlaceOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        pickDate.show();
+        Pickdate.show();
     }
 
     View.OnClickListener datelistener = new View.OnClickListener() {
@@ -398,16 +384,16 @@ public class PlaceOrderFragment extends Fragment {
             switch (v.getTag().toString()) {
 
                 case "date_1":
-                    collectionDatePicker();
+                    d1();
                     break;
                 case "date_2":
-                    ironingDatePicker();
+                    d2();
                     break;
                 case "date_3":
-                    washingDatePicker();
+                    d3();
                     break;
                 case "date_4":
-                    bagsDatePicker();
+                    d4();
                     break;
             }
         }
