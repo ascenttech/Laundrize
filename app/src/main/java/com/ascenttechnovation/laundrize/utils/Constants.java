@@ -33,6 +33,8 @@ public class Constants {
     public static boolean slotDifferenceFetched;
     public static boolean slotsFetched;
 
+    public static String collectionDate,collectionSlot,ironingDeliveryDate,ironingDeliverySlot,washingDeliverySlot,washingDeliveryDate,bagsDeliveryDate,bagsDeliverySlot;
+
 
     // This is used to change the image of track orders.
     // 1 is order placed
@@ -173,8 +175,6 @@ public class Constants {
 
 //    public static final String getslotsUrl ="http://dev.laundrize.com/api/api/v1/allslots?user_id=2;
     public static final String getslotsUrl = "http://dev.laundrize.com/api/api/v1/allslots?user_id=";
-
-
 
 //    public static final String getSlotDifferenceUrl ="http://dev.laundrize.com/api/api/v1/slotdiff?user_id=2";
     public static final String getSlotDifferenceUrl ="http://dev.laundrize.com/api/api/v1/slotdiff?user_id=";
