@@ -1,5 +1,6 @@
 package com.ascenttechnovation.laundrize.fragments;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
@@ -23,6 +25,8 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.Calendar;
 
 /**
  * Created by ADMIN on 31-07-2015.
@@ -39,6 +43,8 @@ public class PlaceOrderFragment extends Fragment {
     private JSONArray ironingNestedJsonArray,washingNestedJsonArray,bagsNestedJsonArray,itemsJsonArray;
     private boolean ironingCreated,washingCreated,bagsCreated = false;
     private ProgressDialog progressDialog;
+    private DatePickerDialog Pickdate;
+    private int date,month,year;
 
 
     @Nullable
@@ -47,7 +53,7 @@ public class PlaceOrderFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_place_order,container,false);
 
-        Log.d(Constants.LOG_TAG, Constants.QuickOrderFragement);
+        Log.d(Constants.LOG_TAG, Constants.PlaceOrderFragment);
 
         customActionBar();
         findViews(v);
@@ -115,6 +121,17 @@ public class PlaceOrderFragment extends Fragment {
 
     private void setViews(){
 
+        collectionDateText.setTag("date_1");
+        collectionDateText.setOnClickListener(datelistener);
+
+        ironingDateText.setTag("date_2");
+        ironingDateText.setOnClickListener(datelistener);
+
+        washingDateText.setTag("date_3");
+        washingDateText.setOnClickListener(datelistener);
+
+        bagsDateText.setTag("date_4");
+        bagsDateText.setOnClickListener(datelistener);
 
         ironingLayout.setVisibility(View.GONE);
         washingLayout.setVisibility(View.GONE);
@@ -153,7 +170,7 @@ public class PlaceOrderFragment extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(),"Order Placed Successfully",5000).show();
                 }
                 else{
-                    Toast.makeText(getActivity().getApplicationContext(),"Order couldnt be placed sucessfully\nTry Again Later").show();
+                    Toast.makeText(getActivity().getApplicationContext(),"Order couldnt be placed sucessfully\nTry Again Later",5000).show();
                 }
             }
         }).execute(postOrderJsonObject);
@@ -270,6 +287,102 @@ public class PlaceOrderFragment extends Fragment {
 
     }
 
+    private void d1() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
+                    collectionDateText.setText("Today");
+                else
+                    collectionDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+            }
+
+        },year, month, date);
+        Pickdate.show();
+    }
+
+    private void d2() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
+                    ironingDateText.setText("Today");
+                else
+                    ironingDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+            }
+
+        },year, month, date);
+        Pickdate.show();
+    }
+    private void d3() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
+                    washingDateText.setText("Today");
+                else
+                    washingDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+            }
+
+        },year, month, date);
+        Pickdate.show();
+    }
+    private void d4() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
+                    bagsDateText.setText("Today");
+                else
+                    bagsDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+            }
+
+        },year, month, date);
+        Pickdate.show();
+    }
+
+    View.OnClickListener datelistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+
+            switch (v.getTag().toString()) {
+
+                case "date_1":
+                    d1();
+                    break;
+                case "date_2":
+                    d2();
+                    break;
+                case "date_3":
+                    d3();
+                    break;
+                case "date_4":
+                    d4();
+                    break;
+            }
+        }
+    };
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override

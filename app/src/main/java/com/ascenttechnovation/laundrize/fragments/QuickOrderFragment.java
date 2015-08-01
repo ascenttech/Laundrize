@@ -1,5 +1,6 @@
 package com.ascenttechnovation.laundrize.fragments;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,12 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.utils.Constants;
+
+import java.util.Calendar;
 
 /**
  * Created by ADMIN on 31-07-2015.
@@ -30,6 +34,8 @@ public class QuickOrderFragment extends Fragment {
     private CustomButton done;
     private ActionBar actionBar;
     private CustomTextView ironingTitleText,ironingDateText,ironingTimeText,washingTitleText,washingDateText,washingTimeText,bagsTitleText,bagsDateText,bagsTimeText,collectionTitleText,collectionDateText,collectionTimeText;
+    private DatePickerDialog Pickdate;
+    private int date,month,year;
 
     @Nullable
     @Override
@@ -106,6 +112,18 @@ public class QuickOrderFragment extends Fragment {
 
     private void setViews(){
 
+        collectionDateText.setTag("date_1");
+        collectionDateText.setOnClickListener(datelistener);
+
+        ironingDateText.setTag("date_2");
+        ironingDateText.setOnClickListener(datelistener);
+
+        washingDateText.setTag("date_3");
+        washingDateText.setOnClickListener(datelistener);
+
+        bagsDateText.setTag("date_4");
+        bagsDateText.setOnClickListener(datelistener);
+
 
         ironingLayout.setVisibility(View.GONE);
         washingLayout.setVisibility(View.GONE);
@@ -120,6 +138,103 @@ public class QuickOrderFragment extends Fragment {
 
 
     }
+
+    private void d1() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
+                    collectionDateText.setText("Today");
+                else
+                    collectionDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+            }
+
+        },year, month, date);
+        Pickdate.show();
+    }
+
+    private void d2() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
+                    ironingDateText.setText("Today");
+                else
+                    ironingDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+            }
+
+        },year, month, date);
+        Pickdate.show();
+    }
+    private void d3() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
+                    washingDateText.setText("Today");
+                else
+                    washingDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+            }
+
+        },year, month, date);
+        Pickdate.show();
+    }
+    private void d4() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
+                    bagsDateText.setText("Today");
+                else
+                    bagsDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+            }
+
+        },year, month, date);
+        Pickdate.show();
+    }
+
+    View.OnClickListener datelistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+
+            switch (v.getTag().toString()) {
+
+                case "date_1":
+                    d1();
+                    break;
+                case "date_2":
+                    d2();
+                    break;
+                case "date_3":
+                    d3();
+                    break;
+                case "date_4":
+                    d4();
+                    break;
+            }
+        }
+    };
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override

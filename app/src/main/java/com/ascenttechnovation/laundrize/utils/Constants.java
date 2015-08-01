@@ -86,6 +86,7 @@ public class Constants {
     public static final String OtherFragement ="OTHER FRAGMENT";
     public static final String LandingFragment = "LANDING FRAGMENT ";
     public static final String PrivacyPolicyFragement ="PRIVACY POLICY FRAGMENT";
+    public static final String PlaceOrderFragment ="PLACE ORDER FRAGMENT";
     public static final String ProfileFragement ="PROFILE FRAGMENT";
     public static final String QuickOrderFragement ="QUICK ORDER FRAGMENT";
     public static final String ServicesFragement ="SERVICES FRAGMENT";
