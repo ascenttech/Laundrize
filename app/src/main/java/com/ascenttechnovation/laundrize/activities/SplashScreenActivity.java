@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.SurfaceView;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.async.FetchAllSlotsAsyncTask;
 import com.ascenttechnovation.laundrize.data.AddressData;
 import com.ascenttechnovation.laundrize.data.BagOrderData;
 import com.ascenttechnovation.laundrize.data.GeneralData;
@@ -46,6 +47,10 @@ public class SplashScreenActivity extends Activity {
         GifRun gifRun = new GifRun();
         gifRun.LoadGiff(surface,getApplicationContext(),R.drawable.animated_logo);
 
+        getSlots();
+
+//        if(Constants.)
+
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
         userId = sharedPreferences.getString("userId","null");
         token = sharedPreferences.getString("token","null");
@@ -75,6 +80,23 @@ public class SplashScreenActivity extends Activity {
 
         }
 
+
+    }
+
+    public void getSlots(){
+
+        new FetchAllSlotsAsyncTask(new FetchAllSlotsAsyncTask.FetchAllSlotsCallback() {
+            @Override
+            public void onStart(boolean status) {
+
+
+            }
+            @Override
+            public void onResult(boolean result) {
+
+
+            }
+        });
 
     }
 

@@ -1,6 +1,7 @@
 package com.ascenttechnovation.laundrize.utils;
 
 import com.ascenttechnovation.laundrize.data.AddressData;
+import com.ascenttechnovation.laundrize.data.AllSlotsData;
 import com.ascenttechnovation.laundrize.data.BagOrderData;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
 import com.ascenttechnovation.laundrize.data.GeneralData;
@@ -61,6 +62,7 @@ public class Constants {
     public static ArrayList<IroningOrderData> ironingOrderData;
     public static ArrayList<BagOrderData> bagOrderData;
     public static ArrayList<WashingOrderData> washingOrderData;
+    public static ArrayList<AllSlotsData> allSlotsData;
 
 
     // Log Tags for all the activities
@@ -116,6 +118,7 @@ public class Constants {
     public static final String AddNewAddressAsyncTask=" ADD NEW ADDRESS ASYNC TASK ";
     public static final String ConfirmVerificationAsyncTask=" CONFIRM VERIFICATION ASYNC TASK ";
     public static final String FetchAddressAsyncTask=" FETCH ADDRESS ASYNC TASK ";
+    public static final String FetchAllSlotsAsyncTask=" FETCH ALL SLOTS ASYNC TASK ";
     public static final String FetchCurrentServerTimeAsyncTask=" FETCH CURRENT SERVER TIME ASYNC TASK ";
     public static final String FetchLaundryServicesAsyncTask=" FETCH LAUNDRY SERVICES ASYNC TASK ";
     public static final String FetchSlotDifferenceAsyncTask=" FETCH SLOT DIFFERENCE ASYNC TASK ";
@@ -161,6 +164,10 @@ public class Constants {
 
 //    public static final String getTimeStampUrl ="http://dev.laundrize.com/api/api/v1/currentdatetime?";
     public static final String getTimeStampUrl ="http://dev.laundrize.com/api/api/v1/currentdatetime?";
+
+
+//    public static final String getslotsUrl ="http://dev.laundrize.com/api/api/v1/allslots?user_id=2;
+    public static final String getslotsUrl = "http://dev.laundrize.com/api/api/v1/allslots?user_id=";
 
 
 

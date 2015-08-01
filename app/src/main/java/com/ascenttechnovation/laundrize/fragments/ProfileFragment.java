@@ -148,13 +148,15 @@ public class ProfileFragment extends Fragment {
 
         if(Constants.addressFetched) {
             for(int i = 0;i<Constants.addressData.size();i++) {
-                rowView = parentInflater.inflate(R.layout.include_available_address, availableAddresses);
+                rowView = parentInflater.inflate(R.layout.include_available_address, null);
 
                 address = (TextView) rowView.findViewById(R.id.address_text_included);
                 address.setText(Constants.addressData.get(i).getFullAddress());
 
                 mobileNumber = (TextView) rowView.findViewById(R.id.mobile_number_text_included);
                 mobileNumber.setText(Constants.addressData.get(i).getMobileNumber());
+
+                availableAddresses.addView(rowView);
             }
 
         } // end of IF statement
