@@ -20,7 +20,9 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.adapters.TabsViewPagerAdapter;
+import com.ascenttechnovation.laundrize.async.FetchCurrentServerTimeAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchLaundryServicesAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
 import com.ascenttechnovation.laundrize.data.BagOrderData;
 import com.ascenttechnovation.laundrize.data.IroningOrderData;
 import com.ascenttechnovation.laundrize.data.WashingOrderData;
@@ -55,12 +57,73 @@ public class ServicesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         v = inflater.inflate(R.layout.fragment_services,container,false);
+
+        Log.d(Constants.LOG_TAG,Constants.ServicesFragement);
+
         viewPager = (ViewPager) v.findViewById(R.id.myviewpager);
+
 
         fetchServices();
 
 
         return v;
+    }
+
+    public void getServerTime(){
+
+
+        new FetchCurrentServerTimeAsyncTask(new FetchCurrentServerTimeAsyncTask.FetchCurrentServerTimeCallBack() {
+            @Override
+            public void onStart(boolean status) {
+
+            }
+
+            @Override
+            public void onResult(boolean result) {
+                if(result){
+
+                    Constants.currentServerTimeFetched = true;
+                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId;
+                    new FetchSlotDifferenceAsyncTask(new FetchSlotDifferenceAsyncTask.FetchSlotDifferenceCallback() {
+                        @Override
+                        public void onStart(boolean status) {
+
+
+                        }
+                        @Override
+                        public void onResult(boolean result) {
+
+                            if(result){
+
+                                Constants.slotDifferenceFetched = true;
+                                getOrder();
+                                ((LandingActivity)getActivity()).getSupportFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.container,new PlaceOrderFragment())
+                                        .commit();
+
+                            }
+                            else{
+
+                                Constants.slotDifferenceFetched = false;
+                                Toast.makeText(getActivity().getApplicationContext(),"Unable to connect to the Internet.\nTry Again Later",5000).show();
+                            }
+
+                        }
+                    }).execute(finalUrl);
+
+                }
+                else{
+                    Constants.currentServerTimeFetched = false;
+                    Toast.makeText(getActivity().getApplicationContext(),"Unable to connect to the Internet.\nTry Again Later",5000).show();
+                }
+            }
+        }).execute(Constants.getTimeStampUrl);
+
+
+
+
+
     }
 
     public void fetchServices(){
@@ -230,11 +293,7 @@ public class ServicesFragment extends Fragment {
                                                     .commit();
                     break;
 
-                case R.id.right_button_included: getOrder();
-                    ((LandingActivity)getActivity()).getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container,new PlaceOrderFragment())
-                        .commit();
+                case R.id.right_button_included: getServerTime();
                     break;
             }
         }

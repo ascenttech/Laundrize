@@ -168,11 +168,9 @@ public class AddressFragment extends Fragment {
 
     public void expand(View v){
 
-        Log.d(Constants.LOG_TAG," EXPANDED ");
         //set Visible
         v.setVisibility(View.VISIBLE);
 
-//
         final int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         final int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
         v.measure(widthSpec, heightSpec);
@@ -182,7 +180,6 @@ public class AddressFragment extends Fragment {
     }
     public void collapse(final View v){
 
-        Log.d(Constants.LOG_TAG," COLLAPSE ");
         int finalHeight = v.getHeight();
 
         ValueAnimator mAnimator = slideAnimator(finalHeight, 0,v);
@@ -335,67 +332,25 @@ public class AddressFragment extends Fragment {
 
     public void goAhead(int position){
 
+        Constants.addressId = Constants.addressData.get(position).getId();
 
-        new FetchCurrentServerTimeAsyncTask(new FetchCurrentServerTimeAsyncTask.FetchCurrentServerTimeCallBack() {
-            @Override
-            public void onStart(boolean status) {
+        if(orderType.equalsIgnoreCase("place")){
 
-            }
+            replaceFragment(new ServicesFragment());
 
-            @Override
-            public void onResult(boolean result) {
-                if(result){
+        }
+        else if(orderType.equalsIgnoreCase("quick")){
 
-                    Constants.currentServerTimeFetched = true;
-                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId;
-                    new FetchSlotDifferenceAsyncTask(new FetchSlotDifferenceAsyncTask.FetchSlotDifferenceCallback() {
-                        @Override
-                        public void onStart(boolean status) {
+            replaceFragment(new QuickOrderFragment());
 
+        }
+        else{
 
-                        }
-                        @Override
-                        public void onResult(boolean result) {
+            replaceFragment(new WeeklyFragment());
 
-                            if(result){
-
-                                Constants.slotDifferenceFetched = true;
-                                if(orderType.equalsIgnoreCase("place")){
-
-                                    replaceFragment(new ServicesFragment());
-
-                                }
-                                else if(orderType.equalsIgnoreCase("quick")){
-
-                                    replaceFragment(new QuickOrderFragment());
-
-                                }
-                                else{
-
-                                    replaceFragment(new WeeklyFragment());
-
-                                }
+        }
 
 
-                            }
-                            else{
-
-                                Constants.slotDifferenceFetched = false;
-                                ((LandingActivity)getActivity()).getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.container,new ServicesFragment())
-                                        .commit();
-                            }
-
-                        }
-                    }).execute(finalUrl);
-
-                }
-                else{
-                    Constants.currentServerTimeFetched = false;
-                }
-            }
-        }).execute(Constants.getTimeStampUrl);
 
 
     }

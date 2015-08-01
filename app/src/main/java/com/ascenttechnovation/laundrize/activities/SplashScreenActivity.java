@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.async.FetchAllSlotsAsyncTask;
@@ -47,13 +48,11 @@ public class SplashScreenActivity extends Activity {
         GifRun gifRun = new GifRun();
         gifRun.LoadGiff(surface,getApplicationContext(),R.drawable.animated_logo);
 
-        getSlots();
-
-//        if(Constants.)
 
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
         userId = sharedPreferences.getString("userId","null");
         token = sharedPreferences.getString("token","null");
+        // if user Id is not equal null then we move to landing Activity
         if(!userId.equalsIgnoreCase("null")){
 
             new Handler().postDelayed(new Runnable() {
@@ -83,22 +82,7 @@ public class SplashScreenActivity extends Activity {
 
     }
 
-    public void getSlots(){
 
-        new FetchAllSlotsAsyncTask(new FetchAllSlotsAsyncTask.FetchAllSlotsCallback() {
-            @Override
-            public void onStart(boolean status) {
-
-
-            }
-            @Override
-            public void onResult(boolean result) {
-
-
-            }
-        });
-
-    }
 
     public void initializeArrayList(){
 

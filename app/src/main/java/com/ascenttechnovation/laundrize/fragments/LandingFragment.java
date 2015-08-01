@@ -9,9 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.async.FetchAllSlotsAsyncTask;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
@@ -21,6 +23,7 @@ public class LandingFragment extends Fragment {
 
     private Button placeOrder,quickOrder,weeklyOrder,trackOrder,completedOrder;
     private ActionBar actionBar;
+    private View v;
 
     @Nullable
     @Override
@@ -31,9 +34,8 @@ public class LandingFragment extends Fragment {
         Log.d(Constants.LOG_TAG, Constants.LandingFragment);
 
         customActionBar();
+        getSlots();
 
-        findViews(v);
-        setViews();
         return v;
     }
 
@@ -44,6 +46,36 @@ public class LandingFragment extends Fragment {
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setTitle("Home");
     }
+
+
+    public void getSlots(){
+
+        new FetchAllSlotsAsyncTask(new FetchAllSlotsAsyncTask.FetchAllSlotsCallback() {
+            @Override
+            public void onStart(boolean status) {
+
+
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                if(result){
+
+                    Constants.slotsFetched = true;
+                    findViews(v);
+                    setViews();
+
+                }
+                else{
+
+                    Toast.makeText(getActivity().getApplicationContext(), "Unable to connect to the internet.\nTry again Later", 5000).show();
+                }
+
+            }
+        }).execute(Constants.getslotsUrl);
+
+    }
+
 
     private void findViews(View v){
 

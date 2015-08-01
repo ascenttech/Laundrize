@@ -28,7 +28,6 @@ import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
-import com.ascenttechnovation.laundrize.async.FetchAddressAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchUserProfileAsyncTask;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -55,7 +54,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        Log.d(Constants.LOG_TAG,Constants.ProfileFragement);
+        Log.d(Constants.LOG_TAG,Constants.ProfileFragment);
 
         v = inflater.inflate(R.layout.fragment_profile,container,false);
         parentInflater = inflater;
