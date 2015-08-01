@@ -335,7 +335,7 @@ public class AddressFragment extends Fragment {
 
     public void goAhead(int position){
 
-        Constants.addressId =
+
         new FetchCurrentServerTimeAsyncTask(new FetchCurrentServerTimeAsyncTask.FetchCurrentServerTimeCallBack() {
             @Override
             public void onStart(boolean status) {

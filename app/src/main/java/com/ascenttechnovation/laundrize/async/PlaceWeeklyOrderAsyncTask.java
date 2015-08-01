@@ -6,10 +6,12 @@ import android.util.Log;
 
 import com.ascenttechnovation.laundrize.utils.Constants;
 
+import org.json.JSONObject;
+
 /**
  * Created by ADMIN on 23-07-2015.
  */
-public class PlaceWeeklyOrderAsyncTask extends AsyncTask<String,Void,Boolean> {
+public class PlaceWeeklyOrderAsyncTask extends AsyncTask<JSONObject,Void,Boolean> {
 
     Context context;
     PlaceWeeklyOrderCallback callback;
@@ -31,19 +33,24 @@ public class PlaceWeeklyOrderAsyncTask extends AsyncTask<String,Void,Boolean> {
     }
 
     @Override
-    protected Boolean doInBackground(String... url) {
+    protected Boolean doInBackground(JSONObject... jsonObject) {
+
 
         Log.d(Constants.LOG_TAG,Constants.PlaceWeeklyOrderAsyncTask);
-        Log.d(Constants.LOG_TAG," URL to be fetched "+ url[0]);
+        Log.d(Constants.LOG_TAG," JSON to be posted "+ jsonObject);
+
+
+
 
         return false;
+
     }
+
 
     @Override
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
         Log.d(Constants.LOG_TAG," Value Returned "+result);
         callback.onResult(result);
-
     }
 }
