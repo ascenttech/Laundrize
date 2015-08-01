@@ -21,6 +21,9 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.adapters.TabsViewPagerAdapter;
 import com.ascenttechnovation.laundrize.async.FetchLaundryServicesAsyncTask;
+import com.ascenttechnovation.laundrize.data.BagOrderData;
+import com.ascenttechnovation.laundrize.data.IroningOrderData;
+import com.ascenttechnovation.laundrize.data.WashingOrderData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -44,6 +47,8 @@ public class ServicesFragment extends Fragment {
     TabsViewPagerAdapter viewPagerAdapter;
     private ProgressDialog progressDialog;
     private View v;
+
+    private String quantity,ordertotal,total,orderId;
 
     @Nullable
     @Override
@@ -150,7 +155,22 @@ public class ServicesFragment extends Fragment {
             Map.Entry mapEntry = (Map.Entry) iterator.next();
             Log.d(Constants.LOG_TAG, " key " + mapEntry.getKey() + " value " + mapEntry.getValue());
 
-//            HashMap<String,String>
+            String orderId = mapEntry.getKey().toString();
+            String serviceType = String.valueOf(orderId.charAt(2));
+            String orderDetails[] = mapEntry.getValue().toString().split("_");
+            if(serviceType.equalsIgnoreCase("1") || serviceType.equalsIgnoreCase("2")){
+
+                Constants.ironingOrderData.add(new IroningOrderData(orderId,orderDetails[1],orderDetails[0]));
+            }
+            else if(serviceType.equalsIgnoreCase("3")||serviceType.equalsIgnoreCase("4")||serviceType.equalsIgnoreCase("5")||serviceType.equalsIgnoreCase("6")){
+
+                Constants.washingOrderData.add(new WashingOrderData(orderId,orderDetails[1],orderDetails[0]));
+            }
+            else if(serviceType.equalsIgnoreCase("7") || serviceType.equalsIgnoreCase("8")){
+
+                Constants.bagOrderData.add(new BagOrderData(orderId,orderDetails[1],orderDetails[0]));
+            }
+
         }
 
     }
@@ -213,7 +233,7 @@ public class ServicesFragment extends Fragment {
                 case R.id.right_button_included: getOrder();
                     ((LandingActivity)getActivity()).getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.container,new CheckOutFragment())
+                        .replace(R.id.container,new PlaceOrderFragment())
                         .commit();
                     break;
             }

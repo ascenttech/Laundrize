@@ -12,6 +12,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -57,14 +58,20 @@ public class FetchSlotDifferenceAsyncTask extends AsyncTask<String,Void,Boolean>
                 String response = EntityUtils.toString(httpEntity);
 
                 Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
-                JSONObject jsonObject = new JSONObject(response);
+                JSONArray jsonArray = new JSONArray(response);
+                for (int i=0;i<jsonArray.length();i++){
 
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String serviceCode = jsonObject.getString("service_code");
+                    String slots = jsonObject.getString("slots");
 
+                    Constants.slots.put(serviceCode,slots);
+
+                }
                 return true;
             }
             else{
-                return true;
-//                return false;
+                return false;
             }
         }
         catch (Exception e){

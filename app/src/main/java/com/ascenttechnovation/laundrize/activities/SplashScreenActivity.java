@@ -10,10 +10,13 @@ import android.view.SurfaceView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.data.AddressData;
+import com.ascenttechnovation.laundrize.data.BagOrderData;
 import com.ascenttechnovation.laundrize.data.GeneralData;
+import com.ascenttechnovation.laundrize.data.IroningOrderData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesMainCategoryData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
+import com.ascenttechnovation.laundrize.data.WashingOrderData;
 import com.ascenttechnovation.laundrize.gif.decoder.GifRun;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -91,9 +94,13 @@ public class SplashScreenActivity extends Activity {
         Constants.shoeLaundryData = new ArrayList<GeneralData>();
         Constants.washAndIronHouseholdsData = new ArrayList<GeneralData>();
         Constants.washAndIronWearablesData = new ArrayList<GeneralData>();
+        Constants.ironingOrderData = new ArrayList<IroningOrderData>();
+        Constants.bagOrderData = new ArrayList<BagOrderData>();
+        Constants.washingOrderData = new ArrayList<WashingOrderData>();
 
         // HashMap
         Constants.order = new HashMap<String,String>();
+        Constants.slots = new HashMap<String,String>();
 
 
     }

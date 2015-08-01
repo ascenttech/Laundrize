@@ -335,6 +335,7 @@ public class AddressFragment extends Fragment {
 
     public void goAhead(int position){
 
+        Constants.addressId =
         new FetchCurrentServerTimeAsyncTask(new FetchCurrentServerTimeAsyncTask.FetchCurrentServerTimeCallBack() {
             @Override
             public void onStart(boolean status) {
@@ -346,8 +347,7 @@ public class AddressFragment extends Fragment {
                 if(result){
 
                     Constants.currentServerTimeFetched = true;
-//                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId;
-                    String finalUrl = Constants.getSlotDifferenceUrl;
+                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId;
                     new FetchSlotDifferenceAsyncTask(new FetchSlotDifferenceAsyncTask.FetchSlotDifferenceCallback() {
                         @Override
                         public void onStart(boolean status) {

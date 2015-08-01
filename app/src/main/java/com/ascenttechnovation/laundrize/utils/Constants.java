@@ -1,12 +1,15 @@
 package com.ascenttechnovation.laundrize.utils;
 
 import com.ascenttechnovation.laundrize.data.AddressData;
+import com.ascenttechnovation.laundrize.data.BagOrderData;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
 import com.ascenttechnovation.laundrize.data.GeneralData;
+import com.ascenttechnovation.laundrize.data.IroningOrderData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesMainCategoryData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.data.ProfileData;
+import com.ascenttechnovation.laundrize.data.WashingOrderData;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -36,6 +39,7 @@ public class Constants {
 
     // This hashmap would containt the key as orderId and value as quantity
     public static Map<String,String> order;
+    public static Map<String,String> slots;
 
     // All the arraylists
     public static ArrayList<GeneralData> subCategory;
@@ -54,6 +58,9 @@ public class Constants {
     public static ArrayList<GeneralData> washAndIronHouseholdsData;
     public static ArrayList<GeneralData> washAndIronWearablesData;
     public static ArrayList<ProfileData> profileData;
+    public static ArrayList<IroningOrderData> ironingOrderData;
+    public static ArrayList<BagOrderData> bagOrderData;
+    public static ArrayList<WashingOrderData> washingOrderData;
 
 
     // Log Tags for all the activities

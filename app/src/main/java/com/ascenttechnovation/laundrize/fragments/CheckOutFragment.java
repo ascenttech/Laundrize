@@ -93,8 +93,6 @@ public class CheckOutFragment extends Fragment {
 
     public void selectDate(){
 
-//        DialogFragment newFragment = new DatePickerDialogFragment();
-//        newFragment.show(getFragmentManager(), "DatePicker");
 
     }
     public void selectTime(){
