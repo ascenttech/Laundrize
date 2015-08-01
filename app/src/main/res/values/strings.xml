@@ -95,4 +95,19 @@
 
     </string-array>
 
+    <string-array name="time_slot">
+        <item>Time Slot</item>
+        <item>12:00 - 02:00 pm</item>
+        <item>02:00 - 04:00 pm</item>
+        <item>04:00 - 06:00 pm</item>
+        <item>06:00 - 08:00 pm</item>
+        <item>08:00 - 10:00 pm</item>
+        <item>10:00 - 12:00 pm</item>
+        <item>12:00 - 02:00 am</item>
+        <item>02:00 - 04:00 am</item>
+        <item>04:00 - 06:00 am</item>
+        <item>06:00 - 08:00 am</item>
+        <item>08:00 - 10:00 am</item>
+        <item>10:00 - 12:00 am</item>
+    </string-array>
 </resources>

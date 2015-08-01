@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,6 +19,7 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.adapters.TrackOrdersRecyclerAdapter;
 import com.ascenttechnovation.laundrize.async.TrackOrdersAsyncTask;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -32,6 +34,7 @@ public class TrackOrdersFragment extends Fragment {
     private RecyclerView.Adapter trackOrdersAdapter;
     private RecyclerView.LayoutManager trackOrdersLayoutManager;
     private ArrayList<TrackOrdersData> trackOrdersData;
+    private CustomButton cb1;
     Context context;
     ActionBar actionBar;
     private ProgressDialog progressDialog;
@@ -41,6 +44,8 @@ public class TrackOrdersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        //collectionLayout = (CardView) v.findViewById(R.id.collection_layout_quick_fragment);
+        //cb1 = (CustomButton) v.findViewById(R.id.)
         Log.d(Constants.LOG_TAG, Constants.TrackOrdersFragement);
 
         v = inflater.inflate(R.layout.fragment_track_orders,container,false);

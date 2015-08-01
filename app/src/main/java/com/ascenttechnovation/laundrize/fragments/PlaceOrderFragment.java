@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
@@ -37,7 +39,8 @@ public class PlaceOrderFragment extends Fragment {
     private CardView ironingLayout,washingLayout,bagsLayout,collectionLayout;
     private CustomButton done;
     private ActionBar actionBar;
-    private CustomTextView ironingTitleText,ironingDateText,ironingTimeText,washingTitleText,washingDateText,washingTimeText,bagsTitleText,bagsDateText,bagsTimeText,collectionTitleText,collectionDateText,collectionTimeText;
+    private CustomTextView ironingTitleText,ironingDateText,washingTitleText,washingDateText,bagsTitleText,bagsDateText,collectionTitleText,collectionDateText;
+    private Spinner collectionTimeSlot, ironingTimeSlot, washingTimeSlot, bagsTimeSlot;
     private CustomButton placeOrder,cancel;
     private JSONObject ironingNestedJsonObject,washingNestedJsonObject,bagsNestedJsonObject,ironingJsonObject,washingJsonObject,bagsJsonObject,postOrderJsonObject;
     private JSONArray ironingNestedJsonArray,washingNestedJsonArray,bagsNestedJsonArray,itemsJsonArray;
@@ -97,23 +100,23 @@ public class PlaceOrderFragment extends Fragment {
         collectionLayout = (CardView) v.findViewById(R.id.collection_layout_place_order_fragment);
         collectionTitleText = (CustomTextView) collectionLayout.findViewById(R.id.service_included);
         collectionDateText = (CustomTextView) collectionLayout.findViewById(R.id.select_date_slot_included);
-        collectionTimeText = (CustomTextView) collectionLayout.findViewById(R.id.select_time_slot_included);
+        collectionTimeSlot = (Spinner) collectionLayout.findViewById(R.id.select_time_slot_included);
 
         ironingLayout = (CardView) v.findViewById(R.id.ironing_layout_place_order_fragment);
         ironingTitleText = (CustomTextView) ironingLayout.findViewById(R.id.service_included);
         ironingDateText = (CustomTextView) ironingLayout.findViewById(R.id.select_date_slot_included);
-        ironingTimeText = (CustomTextView) ironingLayout.findViewById(R.id.select_time_slot_included);
+        ironingTimeSlot = (Spinner) ironingLayout.findViewById(R.id.select_time_slot_included);
 
 
         washingLayout = (CardView) v.findViewById(R.id.washing_layout_place_order_fragment);
         washingTitleText = (CustomTextView) washingLayout.findViewById(R.id.service_included);
         washingDateText = (CustomTextView) washingLayout.findViewById(R.id.select_date_slot_included);
-        washingTimeText = (CustomTextView) washingLayout.findViewById(R.id.select_time_slot_included);
+        washingTimeSlot = (Spinner) washingLayout.findViewById(R.id.select_time_slot_included);
 
         bagsLayout = (CardView) v.findViewById(R.id.bags_layout_place_order_fragment);
         bagsTitleText = (CustomTextView) bagsLayout.findViewById(R.id.service_included);
         bagsDateText = (CustomTextView) bagsLayout.findViewById(R.id.select_date_slot_included);
-        bagsTimeText = (CustomTextView) bagsLayout.findViewById(R.id.select_time_slot_included);
+        bagsTimeSlot = (Spinner) bagsLayout.findViewById(R.id.select_time_slot_included);
 
 
 
@@ -133,6 +136,8 @@ public class PlaceOrderFragment extends Fragment {
         bagsDateText.setTag("date_4");
         bagsDateText.setOnClickListener(datelistener);
 
+        setSpinner();
+
         ironingLayout.setVisibility(View.GONE);
         washingLayout.setVisibility(View.GONE);
         bagsLayout.setVisibility(View.GONE);
@@ -147,6 +152,16 @@ public class PlaceOrderFragment extends Fragment {
         placeOrder.setOnClickListener(listener);
 
 
+    }
+
+    public void setSpinner(){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.time_slot, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        collectionTimeSlot.setAdapter(adapter);
+        ironingTimeSlot.setAdapter(adapter);
+        washingTimeSlot.setAdapter(adapter);
+        bagsTimeSlot.setAdapter(adapter);
     }
 
     public void placeOrder(){

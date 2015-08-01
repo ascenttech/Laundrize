@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
@@ -33,7 +35,8 @@ public class QuickOrderFragment extends Fragment {
     private CardView ironingLayout,washingLayout,bagsLayout,collectionLayout;
     private CustomButton done;
     private ActionBar actionBar;
-    private CustomTextView ironingTitleText,ironingDateText,ironingTimeText,washingTitleText,washingDateText,washingTimeText,bagsTitleText,bagsDateText,bagsTimeText,collectionTitleText,collectionDateText,collectionTimeText;
+    private CustomTextView ironingTitleText,ironingDateText,washingTitleText,washingDateText,bagsTitleText,bagsDateText,collectionTitleText,collectionDateText;
+    private Spinner collectionTimeSlot, ironingTimeSlot, washingTimeSlot, bagsTimeSlot;
     private DatePickerDialog Pickdate;
     private int date,month,year;
 
@@ -90,23 +93,23 @@ public class QuickOrderFragment extends Fragment {
         collectionLayout = (CardView) v.findViewById(R.id.collection_layout_quick_fragment);
         collectionTitleText = (CustomTextView) collectionLayout.findViewById(R.id.service_included);
         collectionDateText = (CustomTextView) collectionLayout.findViewById(R.id.select_date_slot_included);
-        collectionTimeText = (CustomTextView) collectionLayout.findViewById(R.id.select_time_slot_included);
+        collectionTimeSlot = (Spinner) collectionLayout.findViewById(R.id.select_time_slot_included);
 
         ironingLayout = (CardView) v.findViewById(R.id.ironing_layout_quick_fragment);
         ironingTitleText = (CustomTextView) ironingLayout.findViewById(R.id.service_included);
         ironingDateText = (CustomTextView) ironingLayout.findViewById(R.id.select_date_slot_included);
-        ironingTimeText = (CustomTextView) ironingLayout.findViewById(R.id.select_time_slot_included);
+        ironingTimeSlot = (Spinner) ironingLayout.findViewById(R.id.select_time_slot_included);
 
 
         washingLayout = (CardView) v.findViewById(R.id.washing_layout_quick_fragment);
         washingTitleText = (CustomTextView) washingLayout.findViewById(R.id.service_included);
         washingDateText = (CustomTextView) washingLayout.findViewById(R.id.select_date_slot_included);
-        washingTimeText = (CustomTextView) washingLayout.findViewById(R.id.select_time_slot_included);
+        washingTimeSlot = (Spinner) washingLayout.findViewById(R.id.select_time_slot_included);
 
         bagsLayout = (CardView) v.findViewById(R.id.bags_layout_quick_fragment);
         bagsTitleText = (CustomTextView) bagsLayout.findViewById(R.id.service_included);
         bagsDateText = (CustomTextView) bagsLayout.findViewById(R.id.select_date_slot_included);
-        bagsTimeText = (CustomTextView) bagsLayout.findViewById(R.id.select_time_slot_included);
+        bagsTimeSlot = (Spinner) bagsLayout.findViewById(R.id.select_time_slot_included);
 
     }
 
@@ -124,6 +127,7 @@ public class QuickOrderFragment extends Fragment {
         bagsDateText.setTag("date_4");
         bagsDateText.setOnClickListener(datelistener);
 
+        setSpinner();
 
         ironingLayout.setVisibility(View.GONE);
         washingLayout.setVisibility(View.GONE);
@@ -137,6 +141,15 @@ public class QuickOrderFragment extends Fragment {
         bagsTitleText.setText("Delivery : Bags & Shoes");
 
 
+    }
+    private void setSpinner(){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.time_slot, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        collectionTimeSlot.setAdapter(adapter);
+        ironingTimeSlot.setAdapter(adapter);
+        washingTimeSlot.setAdapter(adapter);
+        bagsTimeSlot.setAdapter(adapter);
     }
 
     private void d1() {
