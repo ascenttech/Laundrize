@@ -44,8 +44,6 @@ public class TrackOrdersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        //collectionLayout = (CardView) v.findViewById(R.id.collection_layout_quick_fragment);
-        //cb1 = (CustomButton) v.findViewById(R.id.)
         Log.d(Constants.LOG_TAG, Constants.TrackOrdersFragement);
 
         v = inflater.inflate(R.layout.fragment_track_orders,container,false);
