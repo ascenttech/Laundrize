@@ -1,7 +1,6 @@
 package com.ascenttechnovation.laundrize.fragments;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,13 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.async.FetchCurrentServerTimeAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
 import com.ascenttechnovation.laundrize.async.PlaceWeeklyOrderAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
@@ -37,7 +37,6 @@ public class PlaceOrderFragment extends Fragment {
 
     View v;
     private CardView ironingLayout,washingLayout,bagsLayout,collectionLayout;
-    private CustomButton done;
     private ActionBar actionBar;
     private CustomTextView ironingTitleText,ironingDateText,washingTitleText,washingDateText,bagsTitleText,bagsDateText,collectionTitleText,collectionDateText;
     private Spinner collectionTimeSlot, ironingTimeSlot, washingTimeSlot, bagsTimeSlot;
@@ -46,8 +45,9 @@ public class PlaceOrderFragment extends Fragment {
     private JSONArray ironingNestedJsonArray,washingNestedJsonArray,bagsNestedJsonArray,itemsJsonArray;
     private boolean ironingCreated,washingCreated,bagsCreated = false;
     private ProgressDialog progressDialog;
-    private DatePickerDialog Pickdate;
+    private DatePickerDialog pickDate;
     private int date,month,year;
+    private ArrayAdapter<CharSequence> collectionAdapter,ironingAdapter,washingAdapter,bagsAdapter;
 
 
     @Nullable
@@ -59,29 +59,10 @@ public class PlaceOrderFragment extends Fragment {
         Log.d(Constants.LOG_TAG, Constants.PlaceOrderFragment);
 
         customActionBar();
-        findViews(v);
-        setViews();
-        inflateViews();
+        getServerTime();
+
 
         return v;
-    }
-
-    public void inflateViews(){
-
-        if(Constants.ironingOrderData.size()>0){
-
-            ironingLayout.setVisibility(View.VISIBLE);
-
-        }
-        if(Constants.washingOrderData.size()>0){
-
-            washingLayout.setVisibility(View.VISIBLE);
-        }
-        if(Constants.bagOrderData.size()>0){
-
-            bagsLayout.setVisibility(View.VISIBLE);
-        }
-
     }
 
     private void customActionBar(){
@@ -93,6 +74,58 @@ public class PlaceOrderFragment extends Fragment {
 
     }
 
+    public void getServerTime(){
+
+
+        new FetchCurrentServerTimeAsyncTask(new FetchCurrentServerTimeAsyncTask.FetchCurrentServerTimeCallBack() {
+            @Override
+            public void onStart(boolean status) {
+
+            }
+
+            @Override
+            public void onResult(boolean result) {
+                if(result){
+
+                    Constants.currentServerTimeFetched = true;
+                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId;
+                    new FetchSlotDifferenceAsyncTask(new FetchSlotDifferenceAsyncTask.FetchSlotDifferenceCallback() {
+                        @Override
+                        public void onStart(boolean status) {
+
+
+                        }
+                        @Override
+                        public void onResult(boolean result) {
+
+                            if(result){
+
+                                Constants.slotDifferenceFetched = true;
+                                findViews(v);
+                                setViews();
+                                inflateViews();
+
+
+                            }
+                            else{
+
+                                Constants.slotDifferenceFetched = false;
+                                Toast.makeText(getActivity().getApplicationContext(),"Unable to connect to the Internet.\nTry Again Later",5000).show();
+                            }
+
+                        }
+                    }).execute(finalUrl);
+
+                }
+                else{
+                    Constants.currentServerTimeFetched = false;
+                    Toast.makeText(getActivity().getApplicationContext(),"Unable to connect to the Internet.\nTry Again Later",5000).show();
+                }
+            }
+        }).execute(Constants.getTimeStampUrl);
+
+
+    }
     private void findViews(View v){
 
         placeOrder = (CustomButton) v.findViewById(R.id.right_button_included);
@@ -136,8 +169,7 @@ public class PlaceOrderFragment extends Fragment {
         bagsDateText.setTag("date_4");
         bagsDateText.setOnClickListener(datelistener);
 
-        setSpinner();
-
+//        collectionLayout.setVisibility(View.GONE);
         ironingLayout.setVisibility(View.GONE);
         washingLayout.setVisibility(View.GONE);
         bagsLayout.setVisibility(View.GONE);
@@ -154,15 +186,34 @@ public class PlaceOrderFragment extends Fragment {
 
     }
 
-    public void setSpinner(){
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.time_slot, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        collectionTimeSlot.setAdapter(adapter);
-        ironingTimeSlot.setAdapter(adapter);
-        washingTimeSlot.setAdapter(adapter);
-        bagsTimeSlot.setAdapter(adapter);
+    public void inflateViews(){
+
+        int ironingSize = Constants.ironingOrderData.size();
+        int washingSize = Constants.washingOrderData.size();
+        int bagsSize = Constants.bagOrderData.size();
+        if(ironingSize>0){
+
+            ironingLayout.setVisibility(View.VISIBLE);
+
+        }
+        if(washingSize>0){
+
+            washingLayout.setVisibility(View.VISIBLE);
+
+        }
+        if(bagsSize>0){
+
+            bagsLayout.setVisibility(View.VISIBLE);
+
+        }
+
+//        if(((ironingSize==0)&&(washingSize==0))&&(bagsSize==0)){
+//            collectionLayout.setVisibility(View.INVISIBLE);
+//            Toast.makeText(getActivity().getApplicationContext(),"No order Placed",5000).show();
+//        }
+
     }
+
 
     public void placeOrder(){
 
@@ -302,31 +353,48 @@ public class PlaceOrderFragment extends Fragment {
 
     }
 
-    private void d1() {
+    private void collectionDatePicker() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
-                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth){
                     collectionDateText.setText("Today");
-                else
+                    Constants.collectionDate = String.valueOf(date)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    setCollectionsAdapter();
+
+                }
+                else{
                     collectionDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+                    Constants.collectionDate = String.valueOf(date)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    setCollectionsAdapter();
+                }
+
             }
 
         },year, month, date);
-        Pickdate.show();
+        pickDate.show();
     }
 
-    private void d2() {
+    public void setCollectionsAdapter(){
+
+        // only once the date is set only then you can select the time
+        collectionAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.time_slot, android.R.layout.simple_spinner_item);
+        collectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        collectionTimeSlot.setAdapter(collectionAdapter);
+    }
+
+    private void ironingDatePicker() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
@@ -337,14 +405,26 @@ public class PlaceOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        Pickdate.show();
+        pickDate.show();
     }
-    private void d3() {
+
+    public void setIroningAdapter(){
+
+        ironingAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.time_slot, android.R.layout.simple_spinner_item);
+        ironingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        ironingTimeSlot.setAdapter(ironingAdapter);
+
+
+    }
+
+    private void washingDatePicker() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
@@ -355,14 +435,25 @@ public class PlaceOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        Pickdate.show();
+        pickDate.show();
     }
-    private void d4() {
+
+    public void setWashingAdapter(){
+
+        washingAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.time_slot, android.R.layout.simple_spinner_item);
+        washingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        washingTimeSlot.setAdapter(washingAdapter);
+
+    }
+
+    private void bagsDatePicker() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
@@ -373,9 +464,16 @@ public class PlaceOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        Pickdate.show();
+        pickDate.show();
     }
 
+    public void setBagsAdapter(){
+
+        bagsAdapter = ArrayAdapter.createFromResource(getActivity(),
+                R.array.time_slot, android.R.layout.simple_spinner_item);
+        bagsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bagsTimeSlot.setAdapter(bagsAdapter);
+    }
     View.OnClickListener datelistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -384,16 +482,16 @@ public class PlaceOrderFragment extends Fragment {
             switch (v.getTag().toString()) {
 
                 case "date_1":
-                    d1();
+                    collectionDatePicker();
                     break;
                 case "date_2":
-                    d2();
+                    ironingDatePicker();
                     break;
                 case "date_3":
-                    d3();
+                    washingDatePicker();
                     break;
                 case "date_4":
-                    d4();
+                    bagsDatePicker();
                     break;
             }
         }

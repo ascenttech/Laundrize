@@ -37,7 +37,7 @@ public class QuickOrderFragment extends Fragment {
     private ActionBar actionBar;
     private CustomTextView ironingTitleText,ironingDateText,washingTitleText,washingDateText,bagsTitleText,bagsDateText,collectionTitleText,collectionDateText;
     private Spinner collectionTimeSlot, ironingTimeSlot, washingTimeSlot, bagsTimeSlot;
-    private DatePickerDialog Pickdate;
+    private DatePickerDialog pickDate;
     private int date,month,year;
 
     @Nullable
@@ -152,12 +152,12 @@ public class QuickOrderFragment extends Fragment {
         bagsTimeSlot.setAdapter(adapter);
     }
 
-    private void d1() {
+    private void collectionDatePicker() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
@@ -168,15 +168,15 @@ public class QuickOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        Pickdate.show();
+        pickDate.show();
     }
 
-    private void d2() {
+    private void ironingDatePicker() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
@@ -187,14 +187,14 @@ public class QuickOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        Pickdate.show();
+        pickDate.show();
     }
-    private void d3() {
+    private void washingDatePicker() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
@@ -205,14 +205,14 @@ public class QuickOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        Pickdate.show();
+        pickDate.show();
     }
-    private void d4() {
+    private void bagsDatePicker() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
-        Pickdate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
@@ -223,7 +223,7 @@ public class QuickOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        Pickdate.show();
+        pickDate.show();
     }
 
     View.OnClickListener datelistener = new View.OnClickListener() {
@@ -234,16 +234,16 @@ public class QuickOrderFragment extends Fragment {
             switch (v.getTag().toString()) {
 
                 case "date_1":
-                    d1();
+                    collectionDatePicker();
                     break;
                 case "date_2":
-                    d2();
+                    ironingDatePicker();
                     break;
                 case "date_3":
-                    d3();
+                    washingDatePicker();
                     break;
                 case "date_4":
-                    d4();
+                    bagsDatePicker();
                     break;
             }
         }

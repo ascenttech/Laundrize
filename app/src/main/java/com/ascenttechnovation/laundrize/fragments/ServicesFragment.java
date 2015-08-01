@@ -69,62 +69,7 @@ public class ServicesFragment extends Fragment {
         return v;
     }
 
-    public void getServerTime(){
 
-
-        new FetchCurrentServerTimeAsyncTask(new FetchCurrentServerTimeAsyncTask.FetchCurrentServerTimeCallBack() {
-            @Override
-            public void onStart(boolean status) {
-
-            }
-
-            @Override
-            public void onResult(boolean result) {
-                if(result){
-
-                    Constants.currentServerTimeFetched = true;
-                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId;
-                    new FetchSlotDifferenceAsyncTask(new FetchSlotDifferenceAsyncTask.FetchSlotDifferenceCallback() {
-                        @Override
-                        public void onStart(boolean status) {
-
-
-                        }
-                        @Override
-                        public void onResult(boolean result) {
-
-                            if(result){
-
-                                Constants.slotDifferenceFetched = true;
-                                getOrder();
-                                ((LandingActivity)getActivity()).getSupportFragmentManager()
-                                        .beginTransaction()
-                                        .replace(R.id.container,new PlaceOrderFragment())
-                                        .commit();
-
-                            }
-                            else{
-
-                                Constants.slotDifferenceFetched = false;
-                                Toast.makeText(getActivity().getApplicationContext(),"Unable to connect to the Internet.\nTry Again Later",5000).show();
-                            }
-
-                        }
-                    }).execute(finalUrl);
-
-                }
-                else{
-                    Constants.currentServerTimeFetched = false;
-                    Toast.makeText(getActivity().getApplicationContext(),"Unable to connect to the Internet.\nTry Again Later",5000).show();
-                }
-            }
-        }).execute(Constants.getTimeStampUrl);
-
-
-
-
-
-    }
 
     public void fetchServices(){
 
@@ -239,7 +184,6 @@ public class ServicesFragment extends Fragment {
     }
 
 
-
     ActionBar.TabListener actionBarListener = new ActionBar.TabListener() {
         @Override
         public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -293,7 +237,11 @@ public class ServicesFragment extends Fragment {
                                                     .commit();
                     break;
 
-                case R.id.right_button_included: getServerTime();
+                case R.id.right_button_included:
+                    ((LandingActivity)getActivity()).getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.container,new PlaceOrderFragment())
+                        .commit();
                     break;
             }
         }

@@ -29,7 +29,7 @@ public class LandingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_landing,container,false);
+        v = inflater.inflate(R.layout.fragment_landing,container,false);
 
         Log.d(Constants.LOG_TAG, Constants.LandingFragment);
 
@@ -50,6 +50,7 @@ public class LandingFragment extends Fragment {
 
     public void getSlots(){
 
+        String finalUrl = Constants.getslotsUrl+Constants.userId;
         new FetchAllSlotsAsyncTask(new FetchAllSlotsAsyncTask.FetchAllSlotsCallback() {
             @Override
             public void onStart(boolean status) {
@@ -72,7 +73,7 @@ public class LandingFragment extends Fragment {
                 }
 
             }
-        }).execute(Constants.getslotsUrl);
+        }).execute(finalUrl);
 
     }
 
