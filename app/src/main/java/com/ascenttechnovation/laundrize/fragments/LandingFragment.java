@@ -140,7 +140,7 @@ public class LandingFragment extends Fragment {
 
             switch (view.getId()){
 
-                case R.id.place_order_button_order_now_fragment:placeOrder();
+                case R.id.place_order_button_order_now_fragment: placeOrder();
                     break;
                 case R.id.quick_order_button_order_now_fragment:quickOrder();
                     break;

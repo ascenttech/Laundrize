@@ -146,7 +146,7 @@ public class ServicesFragment extends Fragment {
     private void setViews(){
 
         mainMenu.setText("Main Menu");
-//        mainMenu.setOnClickListener(listener);
+        mainMenu.setOnClickListener(listener);
 
         placeOrder.setText("Place Order");
         placeOrder.setOnClickListener(listener);
@@ -224,6 +224,15 @@ public class ServicesFragment extends Fragment {
         }
     };
 
+    public void replaceFragment(Fragment fragment){
+
+        ((LandingActivity)getActivity()).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,fragment)
+                .addToBackStack(fragment.getClass().getName())
+                .commit();
+
+    }
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -231,17 +240,10 @@ public class ServicesFragment extends Fragment {
 
             switch (view.getId()){
 
-                case R.id.left_button_included: ((LandingActivity)getActivity()).getSupportFragmentManager()
-                                                    .beginTransaction()
-                                                    .replace(R.id.container,new FAQFragment())
-                                                    .commit();
+                case R.id.left_button_included: replaceFragment(new LandingFragment());
                     break;
 
-                case R.id.right_button_included:
-                    ((LandingActivity)getActivity()).getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.container,new PlaceOrderFragment())
-                        .commit();
+                case R.id.right_button_included: replaceFragment(new PlaceOrderFragment());
                     break;
             }
         }

@@ -6,13 +6,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
-import com.ascenttechnovation.laundrize.data.AddressData;
-import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
+import com.ascenttechnovation.laundrize.custom.CustomTextView;
+import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -22,18 +23,17 @@ import java.util.ArrayList;
  */
 public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrdersRecyclerAdapter.ViewHolder> {
 
-    Context context;
-    private ArrayList<LaundryServicesSubCategoryData> laundryServicesSubCategoryData;
-    private TextView address,mobileNumber;
+    private Context context;
+    private ArrayList<TrackOrdersData> trackOrdersData;
     private CustomButton single_button_below;
+    private LinearLayout numberOfItems,deliveryDate,totalAmount,totalBalance;
+    private CustomTextView numberOfItemsValue,deliveryDateValue,totalAmountValue,totalBalanceValue;
+    private CustomTextView numberOfItemsStaticText,deliveryDateStaticText,totalAmountStaticText,totalBalanceStaticText;
+    private ImageView progressIndicator;
 
-    public TrackOrdersRecyclerAdapter(Context context) {
+    public TrackOrdersRecyclerAdapter(Context context, ArrayList<TrackOrdersData> trackOrdersData) {
         this.context = context;
-    }
-
-    public TrackOrdersRecyclerAdapter(Context context, ArrayList<LaundryServicesSubCategoryData> laundryServicesSubCategoryData) {
-        this.context = context;
-        this.laundryServicesSubCategoryData = laundryServicesSubCategoryData;
+        this.trackOrdersData = trackOrdersData;
 
         Log.d(Constants.LOG_TAG, Constants.TrackOrderRecyclerAdapter);
     }
@@ -68,47 +68,51 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
 
     private void findViews(ViewHolder holder){
 
-//        single_button_below = (CustomButton) holder.v.findViewById(R.id.footer_button_included);
+        progressIndicator = (ImageView) holder.v.findViewById(R.id.progress_indicator_image_track_order);
+
+        numberOfItems = (LinearLayout) holder.v.findViewById(R.id.number_of_items_included);
+        deliveryDate = (LinearLayout) holder.v.findViewById(R.id.delivery_date_included);
+        totalAmount = (LinearLayout) holder.v.findViewById(R.id.total_amount_included);
+        totalBalance = (LinearLayout) holder.v.findViewById(R.id.total_balance_included);
+
+        numberOfItemsValue = (CustomTextView) numberOfItems.findViewById(R.id.field_value_text_included);
+        deliveryDateValue = (CustomTextView) deliveryDate.findViewById(R.id.field_value_text_included);
+        totalAmountValue = (CustomTextView) totalAmount.findViewById(R.id.field_value_text_included);
+        totalBalanceValue = (CustomTextView) totalBalance.findViewById(R.id.field_value_text_included);
+
+        numberOfItemsStaticText = (CustomTextView) numberOfItems.findViewById(R.id.field_static_text);
+        deliveryDateStaticText = (CustomTextView) deliveryDate.findViewById(R.id.field_static_text);
+        totalAmountStaticText = (CustomTextView) totalAmount.findViewById(R.id.field_static_text);
+        totalBalanceStaticText = (CustomTextView) totalBalance.findViewById(R.id.field_static_text);
+
+
+
     }
 
     private void setViews(int position){
-//        single_button_below.setText(" PLACE NEW BUTTON ");
+
+//        progressIndicator.setImageResource();
+
+        numberOfItemsStaticText.setText("Number of Items");
+        deliveryDateStaticText.setText("Delivery Date");
+        totalAmountStaticText.setText("Total Amount");
+        totalBalanceStaticText.setText("Total Balance");
+
+
+        numberOfItemsValue.setText("12");
+        deliveryDateValue.setText(Constants.trackOrdersData.get(position).getDeliveryDate());
+        totalAmountValue.setText(Constants.trackOrdersData.get(position).getPrice());
+//        totalBalanceValue.setText(Constants.trackOrdersData.get(position).getTotalBalance());
+        totalBalanceValue.setText("0");
+
+
 
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return trackOrdersData.size();
     }
 
-
-    public void myAddress(int position){
-
-    }
-
-    View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-//            String tag = view.getTag().toString();
-//            String pos[] = tag.split("_");
-//            int position = Integer.parseInt(pos[1]);
-//
-//            switch (view.getId()){
-//
-//
-//                case R.id.address_text_included: myAddress(position);
-//                    notifyDataSetChanged();
-//                    break;
-//                case R.id.mobile_number_included: myAddress(position);
-//                    notifyDataSetChanged();
-//                    break;
-//
-//
-//
-//            }
-
-        }
-    };
 
 }

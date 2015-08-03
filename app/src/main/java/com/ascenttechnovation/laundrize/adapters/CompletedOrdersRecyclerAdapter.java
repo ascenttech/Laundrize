@@ -6,9 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.custom.CustomTextView;
+import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -20,16 +23,19 @@ import java.util.ArrayList;
 public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<CompletedOrdersRecyclerAdapter.ViewHolder> {
 
     Context context;
-    private ArrayList<LaundryServicesSubCategoryData> laundryServicesSubCategoryData;
+    private ArrayList<CompletedOrdersData> completedOrdersData;
     private TextView address,mobileNumber;
+    private LinearLayout numberOfItems,deliveryDate,totalAmount,totalBalance;
+    private CustomTextView numberOfItemsValue,deliveryDateValue,totalAmountValue,totalBalanceValue;
+    private CustomTextView numberOfItemsStaticText,deliveryDateStaticText,totalAmountStaticText,totalBalanceStaticText;
 
     public CompletedOrdersRecyclerAdapter(Context context) {
         this.context = context;
     }
 
-    public CompletedOrdersRecyclerAdapter(Context context, ArrayList<LaundryServicesSubCategoryData> laundryServicesSubCategoryData) {
+    public CompletedOrdersRecyclerAdapter(Context context, ArrayList<CompletedOrdersData> completedOrdersData) {
         this.context = context;
-        this.laundryServicesSubCategoryData = laundryServicesSubCategoryData;
+        this.completedOrdersData = completedOrdersData;
 
         Log.d(Constants.LOG_TAG, Constants.CompleteOrdersRecyclerAdapter);
     }
@@ -64,49 +70,44 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
 
     private void findViews(ViewHolder holder){
 
+        numberOfItems = (LinearLayout) holder.v.findViewById(R.id.number_of_items_included);
+        deliveryDate = (LinearLayout) holder.v.findViewById(R.id.delivery_date_included);
+        totalAmount = (LinearLayout) holder.v.findViewById(R.id.total_amount_included);
+        totalBalance = (LinearLayout) holder.v.findViewById(R.id.total_balance_included);
 
+        numberOfItemsValue = (CustomTextView) numberOfItems.findViewById(R.id.field_value_text_included);
+        deliveryDateValue = (CustomTextView) deliveryDate.findViewById(R.id.field_value_text_included);
+        totalAmountValue = (CustomTextView) totalAmount.findViewById(R.id.field_value_text_included);
+        totalBalanceValue = (CustomTextView) totalBalance.findViewById(R.id.field_value_text_included);
+
+        numberOfItemsStaticText = (CustomTextView) numberOfItems.findViewById(R.id.field_static_text);
+        deliveryDateStaticText = (CustomTextView) deliveryDate.findViewById(R.id.field_static_text);
+        totalAmountStaticText = (CustomTextView) totalAmount.findViewById(R.id.field_static_text);
+        totalBalanceStaticText = (CustomTextView) totalBalance.findViewById(R.id.field_static_text);
 
 
     }
 
     private void setViews(int position){
 
+        numberOfItemsStaticText.setText("Number of Items");
+        deliveryDateStaticText.setText("Delivery Date");
+        totalAmountStaticText.setText("Total Amount");
+        totalBalanceStaticText.setText("Total Balance");
+
+        numberOfItemsValue.setText("12");
+        deliveryDateValue.setText(Constants.completedOrdersData.get(position).getDeliveryDate());
+        totalAmountValue.setText(Constants.completedOrdersData.get(position).getPrice());
+//        totalBalanceValue.setText(Constants.completedOrdersData.get(position).getTotalBalance());
+        totalBalanceValue.setText("0");
 
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        return completedOrdersData.size();
     }
 
 
-    public void myAddress(int position){
-
-    }
-
-    View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-//            String tag = view.getTag().toString();
-//            String pos[] = tag.split("_");
-//            int position = Integer.parseInt(pos[1]);
-//
-//            switch (view.getId()){
-//
-//
-//                case R.id.address_text_included: myAddress(position);
-//                    notifyDataSetChanged();
-//                    break;
-//                case R.id.mobile_number_included: myAddress(position);
-//                    notifyDataSetChanged();
-//                    break;
-//
-//
-//
-//            }
-
-        }
-    };
 
 }

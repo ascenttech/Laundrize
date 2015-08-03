@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.Spinner;
@@ -28,7 +29,10 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by ADMIN on 31-07-2015.
@@ -40,14 +44,14 @@ public class PlaceOrderFragment extends Fragment {
     private ActionBar actionBar;
     private CustomTextView ironingTitleText,ironingDateText,washingTitleText,washingDateText,bagsTitleText,bagsDateText,collectionTitleText,collectionDateText;
     private Spinner collectionTimeSlot, ironingTimeSlot, washingTimeSlot, bagsTimeSlot;
-    private CustomButton placeOrder,cancel;
+    private CustomButton placeOrder,newOrder;
     private JSONObject ironingNestedJsonObject,washingNestedJsonObject,bagsNestedJsonObject,ironingJsonObject,washingJsonObject,bagsJsonObject,postOrderJsonObject;
     private JSONArray ironingNestedJsonArray,washingNestedJsonArray,bagsNestedJsonArray,itemsJsonArray;
     private boolean ironingCreated,washingCreated,bagsCreated = false;
     private ProgressDialog progressDialog;
     private DatePickerDialog pickDate;
     private int date,month,year;
-    private ArrayAdapter<CharSequence> collectionAdapter,ironingAdapter,washingAdapter,bagsAdapter;
+    private ArrayAdapter<String> collectionAdapter,ironingAdapter,washingAdapter,bagsAdapter;
 
 
     @Nullable
@@ -129,6 +133,7 @@ public class PlaceOrderFragment extends Fragment {
     private void findViews(View v){
 
         placeOrder = (CustomButton) v.findViewById(R.id.right_button_included);
+        newOrder = (CustomButton) v.findViewById(R.id.left_button_included);
 
         collectionLayout = (CardView) v.findViewById(R.id.collection_layout_place_order_fragment);
         collectionTitleText = (CustomTextView) collectionLayout.findViewById(R.id.service_included);
@@ -157,6 +162,12 @@ public class PlaceOrderFragment extends Fragment {
 
     private void setViews(){
 
+        newOrder.setText("NEW ORDER");
+        newOrder.setOnClickListener(listener);
+
+        placeOrder.setText("PLACE ORDER");
+        placeOrder.setOnClickListener(listener);
+
         collectionDateText.setTag("date_1");
         collectionDateText.setOnClickListener(datelistener);
 
@@ -169,7 +180,7 @@ public class PlaceOrderFragment extends Fragment {
         bagsDateText.setTag("date_4");
         bagsDateText.setOnClickListener(datelistener);
 
-//        collectionLayout.setVisibility(View.GONE);
+//      collectionLayout.setVisibility(View.GONE);
         ironingLayout.setVisibility(View.GONE);
         washingLayout.setVisibility(View.GONE);
         bagsLayout.setVisibility(View.GONE);
@@ -181,7 +192,7 @@ public class PlaceOrderFragment extends Fragment {
         washingTitleText.setText("Delivery : Washables");
         bagsTitleText.setText("Delivery : Bags & Shoes");
 
-        placeOrder.setOnClickListener(listener);
+
 
 
     }
@@ -214,6 +225,267 @@ public class PlaceOrderFragment extends Fragment {
 
     }
 
+
+    private void collectionDatePicker() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth){
+                    collectionDateText.setText("Today");
+                    monthOfYear = month+1;
+                    Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    String collect = Constants.collectionDate;
+                    setCollectionsAdapter(collect,"today");
+
+                }
+                else{
+                    monthOfYear = month+1;
+                    collectionDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+                    Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    String collect = Constants.collectionDate;
+                    setCollectionsAdapter(collect, "later");
+                }
+
+            }
+
+        },year, month, date);
+        pickDate.show();
+    }
+
+    public void setCollectionsAdapter(String date,String when){
+
+        ArrayList<String> collectionSlots = getSlots(date,when,"collection");
+        if(collectionSlots.size() != 0) {
+            collectionAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, collectionSlots);
+            collectionAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
+            collectionTimeSlot.setAdapter(collectionAdapter);
+        }
+        else{
+
+            Toast.makeText(getActivity().getApplicationContext(),"Collection cannot be done on the given date.\nPlease select another date",5000).show();
+        }
+    }
+
+    private void ironingDatePicker() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth) {
+                    ironingDateText.setText("Today");
+
+                    monthOfYear = month+1;
+                    Constants.ironingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    String collect = Constants.ironingDeliveryDate;
+                    setIroningAdapter(collect,"today");
+
+                }
+                else{
+                    monthOfYear = month+1;
+                    ironingDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+                    Constants.ironingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    String collect = Constants.ironingDeliveryDate;
+                    setIroningAdapter(collect,"later");
+
+                }
+            }
+
+        },year, month, date);
+        pickDate.show();
+    }
+
+    public void setIroningAdapter(String date,String when){
+
+        ArrayList<String> ironingSlots = getSlots(date,when,"ironing");
+        if(ironingSlots.size()!=0) {
+            ironingAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, ironingSlots);
+            ironingAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
+            ironingTimeSlot.setAdapter(ironingAdapter);
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Ironed clothes cannot be done on the given date.\nPlease select another date",5000).show();
+        }
+
+    }
+
+    private void washingDatePicker() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth) {
+                    washingDateText.setText("Today");
+
+                    monthOfYear = month+1;
+                    Constants.washingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    String collect = Constants.washingDeliveryDate;
+                    setWashingAdapter(collect,"today");
+
+                }
+                else{
+                    monthOfYear = month+1;
+                    washingDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+                    Constants.washingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    String collect = Constants.washingDeliveryDate;
+                    setWashingAdapter(collect,"later");
+
+                }
+            }
+
+        },year, month, date);
+        pickDate.show();
+    }
+
+    public void setWashingAdapter(String date,String when){
+
+        ArrayList<String> washingSlots = getSlots(date,when,"washing");
+        if(washingSlots.size()!=0) {
+            washingAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, washingSlots);
+            washingAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
+            washingTimeSlot.setAdapter(washingAdapter);
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Washed Clothes cannot be done on the given date.\nPlease select another date",5000).show();
+        }
+
+    }
+
+    private void bagsDatePicker() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth) {
+
+                    monthOfYear = month+1;
+                    bagsDateText.setText("Today");
+                    Constants.bagsDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    String collect = Constants.bagsDeliveryDate;
+                    setBagsAdapter(collect,"today");
+
+                }
+                else{
+                    monthOfYear = month+1;
+                    bagsDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+                    Constants.bagsDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    String collect = Constants.bagsDeliveryDate;
+                    setBagsAdapter(collect,"later");
+
+                }
+            }
+
+        },year, month, date);
+        pickDate.show();
+    }
+
+    public void setBagsAdapter(String date,String when){
+
+        ArrayList<String> bagsSlots = getSlots(date,when,"bags");
+        if(bagsSlots.size()!=0) {
+            bagsAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, bagsSlots);
+            bagsAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
+            bagsTimeSlot.setAdapter(bagsAdapter);
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Bags and shoes cannot be done on the given date.\nPlease select another date",5000).show();
+        }
+    }
+
+    public ArrayList<String> getSlots(String date, String when,String service){
+
+        ArrayList<String> options = new ArrayList<String>();
+        try {
+            Log.d(Constants.LOG_TAG, " Collection Date " + date);
+            SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date MyDate = newDateFormat.parse(date);
+            newDateFormat.applyPattern("EEEE");
+            String day = newDateFormat.format(MyDate);
+
+            Log.d(Constants.LOG_TAG," my DATE STRING "+ day);
+
+            if(when.equalsIgnoreCase("today")){
+
+                String presentTime = Constants.currentTime;
+                day = day.toLowerCase();
+                String availableSlots = (String)Constants.slots.get(day);
+                Log.d(Constants.LOG_TAG," Present Time "+presentTime);
+                Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
+
+                String getSlots[] = availableSlots.split("_");
+                for(int i=2 ;i<=getSlots.length;i++){
+
+                    int validSlot = Integer.parseInt(getSlots[i].substring(0, 2));
+                    Log.d(Constants.LOG_TAG," Check Validity String "+ validSlot);
+                    int now = Integer.parseInt(presentTime.substring(0,2));
+                    Log.d(Constants.LOG_TAG," abc Strin "+now);
+
+                    if(validSlot>now){
+
+                        options.add(getSlots[i]);
+
+                    }
+
+                }
+            } // if the date is set for today
+            else{
+
+                day = day.toLowerCase();
+                String availableSlots = (String)Constants.slots.get(day);
+                Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
+
+                String getSlots[] = availableSlots.split("_");
+                if(service.equalsIgnoreCase("collection")){
+
+                    for(int i=0;i<getSlots.length;i++){
+
+                        options.add(getSlots[i]);
+                    }
+
+                }
+                // check what service is it
+                else if(service.equalsIgnoreCase("ironing")){
+
+                }
+                else if(service.equalsIgnoreCase("washing")){
+
+                }
+                else if(service.equalsIgnoreCase("bags")){
+
+                }
+                // Which day is set for collections then if it is the next day do step 1 2 3 if not display all slots
+                // collection 1
+                // if it is comming for ironing 1
+                //  washing 2
+                // bags = slotDifference 3
+
+            }
+
+        }
+
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        // return the array of available slots
+        return options;
+    }
 
     public void placeOrder(){
 
@@ -335,10 +607,10 @@ public class PlaceOrderFragment extends Fragment {
 
             postOrderJsonObject = new JSONObject();
             postOrderJsonObject.put("user_id",Constants.userId);
-            postOrderJsonObject.put("addr_id",12);
-            postOrderJsonObject.put("total_amt",350);
-            postOrderJsonObject.put("totalquantity",12);
-            postOrderJsonObject.put("user_collection_time",12);
+            postOrderJsonObject.put("addr_id",Constants.addressId);
+            postOrderJsonObject.put("total_amt",Constants.totalAmount);
+            postOrderJsonObject.put("totalquantity",Constants.totalQuantity);
+            postOrderJsonObject.put("user_collection_time",Constants.collectionDate);
             postOrderJsonObject.put("user_collection_slot",12);
             postOrderJsonObject.put("items",itemsJsonArray);
 
@@ -350,130 +622,23 @@ public class PlaceOrderFragment extends Fragment {
             e.printStackTrace();
         }
 
+    }
+
+    public void newOrder(){
+
+        replaceFragment(new ServicesFragment());
+    }
+
+    public void replaceFragment(Fragment fragment){
+
+        ((LandingActivity)getActivity()).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,fragment)
+                .addToBackStack(fragment.getClass().getName())
+                .commit();
 
     }
 
-    private void collectionDatePicker() {
-        Calendar c = Calendar.getInstance();
-        year  = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
-        date   = c.get(Calendar.DAY_OF_MONTH);
-        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
-
-                if(year==yearofc && month==monthOfYear && date==dayOfMonth){
-                    collectionDateText.setText("Today");
-                    Constants.collectionDate = String.valueOf(date)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
-                    setCollectionsAdapter();
-
-                }
-                else{
-                    collectionDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
-                    Constants.collectionDate = String.valueOf(date)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
-                    setCollectionsAdapter();
-                }
-
-            }
-
-        },year, month, date);
-        pickDate.show();
-    }
-
-    public void setCollectionsAdapter(){
-
-        // only once the date is set only then you can select the time
-        collectionAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.time_slot, android.R.layout.simple_spinner_item);
-        collectionAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        collectionTimeSlot.setAdapter(collectionAdapter);
-    }
-
-    private void ironingDatePicker() {
-        Calendar c = Calendar.getInstance();
-        year  = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
-        date   = c.get(Calendar.DAY_OF_MONTH);
-        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
-
-                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
-                    ironingDateText.setText("Today");
-                else
-                    ironingDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
-            }
-
-        },year, month, date);
-        pickDate.show();
-    }
-
-    public void setIroningAdapter(){
-
-        ironingAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.time_slot, android.R.layout.simple_spinner_item);
-        ironingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        ironingTimeSlot.setAdapter(ironingAdapter);
-
-
-    }
-
-    private void washingDatePicker() {
-        Calendar c = Calendar.getInstance();
-        year  = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
-        date   = c.get(Calendar.DAY_OF_MONTH);
-        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
-
-                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
-                    washingDateText.setText("Today");
-                else
-                    washingDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
-            }
-
-        },year, month, date);
-        pickDate.show();
-    }
-
-    public void setWashingAdapter(){
-
-        washingAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.time_slot, android.R.layout.simple_spinner_item);
-        washingAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        washingTimeSlot.setAdapter(washingAdapter);
-
-    }
-
-    private void bagsDatePicker() {
-        Calendar c = Calendar.getInstance();
-        year  = c.get(Calendar.YEAR);
-        month = c.get(Calendar.MONTH);
-        date   = c.get(Calendar.DAY_OF_MONTH);
-        pickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
-
-                if(year==yearofc && month==monthOfYear && date==dayOfMonth)
-                    bagsDateText.setText("Today");
-                else
-                    bagsDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
-            }
-
-        },year, month, date);
-        pickDate.show();
-    }
-
-    public void setBagsAdapter(){
-
-        bagsAdapter = ArrayAdapter.createFromResource(getActivity(),
-                R.array.time_slot, android.R.layout.simple_spinner_item);
-        bagsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        bagsTimeSlot.setAdapter(bagsAdapter);
-    }
     View.OnClickListener datelistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -501,8 +666,18 @@ public class PlaceOrderFragment extends Fragment {
         @Override
         public void onClick(View view) {
 
-            placeOrder();
+            switch (view.getId()){
+
+                case R.id.left_button_included: newOrder();
+                    break;
+                case R.id.right_button_included: placeOrder();
+                    break;
+
+            }
+
         }
     };
+
+
 
 }

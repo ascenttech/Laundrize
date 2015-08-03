@@ -35,7 +35,7 @@ public class CompletedOrdersFragment extends Fragment {
     private RecyclerView.Adapter completedOrdersAdapter;
     private RecyclerView.LayoutManager completedOrdersLayoutManager;
     private ArrayList<CompletedOrdersData> completedOrdersData;
-    private CustomButton below_button;
+    private CustomButton placeOrder;
 
     Context context;
     ActionBar actionBar;
@@ -48,8 +48,8 @@ public class CompletedOrdersFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_completed_orders,container,false);
 
-        findViews(v);
-        setViews();
+//        findViews(v);
+//        setViews();
 
         customActionBar();
         settingTheAdapter(v);
@@ -65,12 +65,12 @@ public class CompletedOrdersFragment extends Fragment {
 
     private void findViews(View v){
 
-        below_button = (CustomButton) v.findViewById(R.id.footer_button_included);
+        placeOrder = (CustomButton) v.findViewById(R.id.footer_button_included);
     }
 
     private void setViews() {
 
-        below_button.setText("Place New Order");
+        placeOrder.setText("Place New Order");
     }
 
     private void customActionBar(){
@@ -96,7 +96,7 @@ public class CompletedOrdersFragment extends Fragment {
 
         // specify an adapter (see also next example)
 //        completedOrdersAdapter = new TrackOrdersRecyclerAdapter(getActivity().getApplicationContext(), Constants.laundryServicesSubCategory);
-        completedOrdersAdapter = new CompletedOrdersRecyclerAdapter(getActivity().getApplicationContext());
+        completedOrdersAdapter = new CompletedOrdersRecyclerAdapter(getActivity().getApplicationContext(),Constants.completedOrdersData);
         completedOrdersRecyclerView.setAdapter(completedOrdersAdapter);
 
     }
@@ -136,5 +136,31 @@ public class CompletedOrdersFragment extends Fragment {
 
 
     }
+
+    public void placeOrder(){
+
+        replaceFragment(new LandingFragment());
+    }
+
+    public void replaceFragment(Fragment fragment){
+
+        ((LandingActivity)getActivity()).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,fragment)
+                .addToBackStack(fragment.getClass().getName())
+                .commit();
+
+    }
+
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            switch (view.getId()){
+
+                case R.id.footer_button_included: placeOrder();
+            }
+        }
+    };
 
 }

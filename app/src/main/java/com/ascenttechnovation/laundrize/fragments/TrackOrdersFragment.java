@@ -50,14 +50,19 @@ public class TrackOrdersFragment extends Fragment {
         v = inflater.inflate(R.layout.fragment_track_orders,container,false);
 
         customActionBar();
-        findViews(v);
-        setViews();
         settingTheAdapter(v);
 
+        // we will check if the orders have been parsed from the server or not
         if(!Constants.ordersTracked){
 
             getOrders();
+
         }
+
+        // The find Views and setViews are only for the footer button so it doesnt matter if the oreders are there
+        // or not because you want to show the footer button
+        findViews(v);
+        setViews();
 
         return v;
     }
@@ -80,6 +85,7 @@ public class TrackOrdersFragment extends Fragment {
     private void setViews(){
 
         placeOrder.setText("PLACE NEW ORDER");
+        placeOrder.setOnClickListener(listener);
 
     }
 
@@ -98,7 +104,7 @@ public class TrackOrdersFragment extends Fragment {
 
         // specify an adapter (see also next example)
 //        trackOrdersAdapter = new TrackOrdersRecyclerAdapter(getActivity().getApplicationContext(), Constants.laundryServicesSubCategory);
-        trackOrdersAdapter = new TrackOrdersRecyclerAdapter(getActivity().getApplicationContext());
+        trackOrdersAdapter = new TrackOrdersRecyclerAdapter(getActivity().getApplicationContext(),Constants.trackOrdersData);
         trackOrdersRecyclerView.setAdapter(trackOrdersAdapter);
 
     }
@@ -138,5 +144,31 @@ public class TrackOrdersFragment extends Fragment {
 
 
     }
+
+    public void placeOrder(){
+
+        replaceFragment(new LandingFragment());
+    }
+
+    public void replaceFragment(Fragment fragment){
+
+        ((LandingActivity)getActivity()).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,fragment)
+                .addToBackStack(fragment.getClass().getName())
+                .commit();
+
+    }
+
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            switch (view.getId()){
+
+                case R.id.footer_button_included: placeOrder();
+            }
+        }
+    };
 
 }

@@ -9,6 +9,9 @@
     <color name="grey">#777</color>
     <color name="sky_blue">#5FB4EB</color>
     <color name="actionbar">#0BADFE</color>
+    <color name="actionbar_tabs">#05577F</color>
+
+
 
     <color name="blue_button">#05577F</color>
     <color name="navy_blue_button">#1F2D3A</color>

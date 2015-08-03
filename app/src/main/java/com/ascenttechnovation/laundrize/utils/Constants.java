@@ -10,6 +10,7 @@ import com.ascenttechnovation.laundrize.data.LaundryServicesMainCategoryData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.data.ProfileData;
+import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.data.WashingOrderData;
 
 import java.util.ArrayList;
@@ -23,9 +24,7 @@ public class Constants {
     public static final String LOG_TAG =" Laundrize ";
     public static final String APP_NAME ="Laundrize";
 
-    public static String address,mobileNumber,currentDate,currentTime,userId,token,verificationCode;
 
-    public static String addressId;
     public static boolean addressFetched;
     public static boolean ordersTracked;
     public static boolean completedOrdersFetched;
@@ -33,8 +32,13 @@ public class Constants {
     public static boolean slotDifferenceFetched;
     public static boolean slotsFetched;
 
-    public static String collectionDate,collectionSlot,ironingDeliveryDate,ironingDeliverySlot,washingDeliverySlot,washingDeliveryDate,bagsDeliveryDate,bagsDeliverySlot;
-
+    public static String mobileNumber,userId,token,verificationCode,totalAmount,totalQuantity;
+    public static String addressId,address;
+    public static String collectionDate,collectionSlot;
+    public static String ironingDeliveryDate,ironingDeliverySlot;
+    public static String washingDeliverySlot,washingDeliveryDate;
+    public static String bagsDeliveryDate,bagsDeliverySlot;
+    public static String currentDate,currentTime;
 
     // This is used to change the image of track orders.
     // 1 is order placed
@@ -68,6 +72,7 @@ public class Constants {
     public static ArrayList<BagOrderData> bagOrderData;
     public static ArrayList<WashingOrderData> washingOrderData;
     public static ArrayList<AllSlotsData> allSlotsData;
+    public static ArrayList<TrackOrdersData> trackOrdersData;
 
 
     // Log Tags for all the activities

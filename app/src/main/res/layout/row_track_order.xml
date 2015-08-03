@@ -46,6 +46,7 @@
         >
 
         <ImageView
+            android:id="@+id/progress_indicator_image_track_order"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
