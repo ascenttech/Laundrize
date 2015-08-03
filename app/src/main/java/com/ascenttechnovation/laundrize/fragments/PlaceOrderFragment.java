@@ -266,8 +266,7 @@ public class PlaceOrderFragment extends Fragment {
             collectionAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, collectionSlots);
             collectionAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
             collectionTimeSlot.setAdapter(collectionAdapter);
-
-
+            collectionAdapter.notifyDataSetChanged();
             collectionTimeSlot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
