@@ -3,6 +3,7 @@ package com.ascenttechnovation.laundrize.activities;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,10 +21,10 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class ForgotPasswordActivity extends Activity {
 
-    private Button confirmVerification,verifyNow;
-    private String mobileNumber,name,emailId,password,from;
-    private EditText mobileNumberEdit,verificationCode;
+    private Button verifyDetailsButton,submitButton;
+    private EditText mobileNumberEdit,newPasswordEdit,confirmPasswordEdit,verificationCodeEdit;
     private ProgressDialog progressDialog;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,50 +39,67 @@ public class ForgotPasswordActivity extends Activity {
 
     private void findViews(){
 
-        mobileNumberEdit = (EditText) findViewById(R.id.mobileno_edit_verification_activity);
-        verificationCode = (EditText) findViewById(R.id.username_edit_verification_activity);
-        verifyNow = (Button) findViewById(R.id.verify_now_button_mobile_verification_activity);
-        confirmVerification = (Button) findViewById(R.id.confirm_verification_button_mobile_verification_activity);
+        mobileNumberEdit = (EditText) findViewById(R.id.mobileno_edit_forgot_password_activity);
+        newPasswordEdit = (EditText) findViewById(R.id.new_password_edit_forgot_password_activity);
+        confirmPasswordEdit = (EditText) findViewById(R.id.confirm_password_edit_forgot_password_activity);
+        verificationCodeEdit = (EditText) findViewById(R.id.verify_code_edit_forgot_password_activity);
+        verifyDetailsButton = (Button) findViewById(R.id.verify_details_button_forgot_password_activity);
+        submitButton =(Button) findViewById(R.id.submit_button_forgot_password_activity);
     }
 
     private void setViews(){
 
-        verifyNow.setOnClickListener(listener);
-        confirmVerification.setOnClickListener(listener);
+        verifyDetailsButton.setOnClickListener(listener);
+        submitButton.setOnClickListener(listener);
     }
 
     public void verifyNow(){
 
-        String finalUrl = Constants.forgotPasswordUrl+mobileNumberEdit.getText().toString();
-        new FetchVerificationCodeAsyncTask(getApplicationContext(), new FetchVerificationCodeAsyncTask.FetchVerificationCodeCallback() {
-            @Override
-            public void onStart(boolean status) {
+        String s1=newPasswordEdit.getText().toString();
+        String s2=confirmPasswordEdit.getText().toString();
+        if(s1.equals(s2))
+        {
+            String finalUrl = Constants.verifyNowUrl + mobileNumberEdit.getText().toString();
+            new FetchVerificationCodeAsyncTask(getApplicationContext(), new FetchVerificationCodeAsyncTask.FetchVerificationCodeCallback() {
+                @Override
+                public void onStart(boolean status) {
 
-                progressDialog = new ProgressDialog(ForgotPasswordActivity.this);
-                progressDialog.setTitle(Constants.APP_NAME);
-                progressDialog.setMessage("Loading,Please Wait...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+                    progressDialog = new ProgressDialog(ForgotPasswordActivity.this);
+                    progressDialog.setTitle(Constants.APP_NAME);
+                    progressDialog.setMessage("Loading,Please Wait...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
 
-            }
-            @Override
-            public void onResult(boolean result) {
-
-                progressDialog.dismiss();
-                if(result){
-                    Toast.makeText(getApplicationContext()," You will receive a message shortly",5000).show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(),"There was an error \nTry Again Later",5000).show();
                 }
 
-            }
-        }).execute(finalUrl);
+                @Override
+                public void onResult(boolean result) {
 
+                    progressDialog.dismiss();
+                    if (result) {
+                        Toast.makeText(getApplicationContext(), " You will receive a message shortly", 5000).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "There was an error \nTry Again Later", 5000).show();
+                    }
+
+                }
+            }).execute(finalUrl);
+        }
+        else
+        {
+            newPasswordEdit.setText("");
+            confirmPasswordEdit.setText("");
+            Toast.makeText(getApplicationContext(), " New Password and Confirm Password does not Match ", 5000).show();
+        }
     }
 
     public void confirmVerification(){
-//
+
+        String abc = prefs.getString("vc","");
+        if(abc.equals(verificationCodeEdit.getText().toString()))
+        {
+
+        }
 //        String verificationCodeValue = verificationCode.getText().toString();
 //
 //        String finalUrl = Constants.confirmVerificationUrl+mobileNumber+"&verification_code="+verificationCodeValue+"&password="+password+"&first_name="+name+"&email="+emailId;
@@ -120,9 +138,9 @@ public class ForgotPasswordActivity extends Activity {
 
             switch (view.getId()){
 
-                case R.id.verify_now_button_mobile_verification_activity: verifyNow();
+                case R.id.verify_details_button_forgot_password_activity: verifyNow();
                     break;
-                case R.id.confirm_verification_button_mobile_verification_activity: confirmVerification();
+                case R.id.submit_button_forgot_password_activity: confirmVerification();
                     break;
 
             }

@@ -1,9 +1,13 @@
 package com.ascenttechnovation.laundrize.async;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.util.Log;
 
+import com.ascenttechnovation.laundrize.activities.ForgotPasswordActivity;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import org.apache.http.HttpEntity;
@@ -41,8 +45,8 @@ public class FetchVerificationCodeAsyncTask extends AsyncTask<String,Void,Boolea
     @Override
     protected Boolean doInBackground(String... url) {
 
-        Log.d(Constants.LOG_TAG,Constants.FetchVerificationCodeAsyncTask);
-        Log.d(Constants.LOG_TAG," The url to be fetched "+url[0]);
+        Log.d(Constants.LOG_TAG, Constants.FetchVerificationCodeAsyncTask);
+        Log.d(Constants.LOG_TAG, " The url to be fetched " + url[0]);
         try{
 
             HttpPost httpPost = new HttpPost(url[0]);
@@ -56,8 +60,11 @@ public class FetchVerificationCodeAsyncTask extends AsyncTask<String,Void,Boolea
                 String response = EntityUtils.toString(httpEntity);
 
                 Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
-//                JSONObject jsonObject = new JSONObject(response);
-//                String message = jsonObject.getString("message");
+                JSONObject jsonObject = new JSONObject(response);
+                String verify_code = jsonObject.getString("verification_code");
+
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+                prefs.edit().putString("vc", verify_code ).commit();
 
                 return true;
             }
