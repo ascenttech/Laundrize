@@ -40,7 +40,6 @@ public class ForgotPasswordActivity extends Activity {
 
     private void findViews(){
 
-        mobileNumberEdit = (EditText) findViewById(R.id.mobileno_edit_verification_activity);
         verificationCode = (EditText) findViewById(R.id.username_edit_verification_activity);
         verifyNow = (Button) findViewById(R.id.verify_now_button_mobile_verification_activity);
         confirmVerification = (Button) findViewById(R.id.confirm_verification_button_mobile_verification_activity);
