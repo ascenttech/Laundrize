@@ -32,6 +32,7 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 
 /**
@@ -52,6 +53,13 @@ public class PlaceOrderFragment extends Fragment {
     private DatePickerDialog pickDate;
     private int date,month,year;
     private ArrayAdapter<String> collectionAdapter,ironingAdapter,washingAdapter,bagsAdapter;
+    // slot difference is 4 but +1 is added to get the correct index in the array same logic for washingDeliveryCounter
+    private int ironingDeliveryCounter = 5;
+    private int washingDeliveryCounter = 22;
+    private int bagsDeliveryCounter = 22;
+
+    // This will hold the index of the slot from the array of Collections Slots;
+    private int j;
 
 
     @Nullable
@@ -193,8 +201,6 @@ public class PlaceOrderFragment extends Fragment {
         bagsTitleText.setText("Delivery : Bags & Shoes");
 
 
-
-
     }
 
     public void inflateViews(){
@@ -218,10 +224,6 @@ public class PlaceOrderFragment extends Fragment {
 
         }
 
-//        if(((ironingSize==0)&&(washingSize==0))&&(bagsSize==0)){
-//            collectionLayout.setVisibility(View.INVISIBLE);
-//            Toast.makeText(getActivity().getApplicationContext(),"No order Placed",5000).show();
-//        }
 
     }
 
@@ -257,13 +259,31 @@ public class PlaceOrderFragment extends Fragment {
         pickDate.show();
     }
 
-    public void setCollectionsAdapter(String date,String when){
+    public void setCollectionsAdapter(final String date,final String when){
 
-        ArrayList<String> collectionSlots = getSlots(date,when,"collection");
+        final ArrayList<String> collectionSlots = getSlots(date,when);
         if(collectionSlots.size() != 0) {
             collectionAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, collectionSlots);
             collectionAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
             collectionTimeSlot.setAdapter(collectionAdapter);
+
+
+            collectionTimeSlot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    // Collection Slot id
+                    // minus 2 because the slots start from 1 instead of 1 and the slot 1 is not accessbile current
+                    j = Integer.parseInt(Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()))-2;
+                    setIroningAdapter(date,when);
+
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
         }
         else{
 
@@ -305,11 +325,15 @@ public class PlaceOrderFragment extends Fragment {
 
     public void setIroningAdapter(String date,String when){
 
-        ArrayList<String> ironingSlots = getSlots(date,when,"ironing");
+        ArrayList<String> ironingSlots = getIroningSlots(Constants.collectionDate,5);
+        Log.d(Constants.LOG_TAG," SLots available for ironing "+ ironingSlots.size());
+
         if(ironingSlots.size()!=0) {
+            ironingDateText.setText(Constants.ironingDeliveryDate);
             ironingAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, ironingSlots);
             ironingAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
             ironingTimeSlot.setAdapter(ironingAdapter);
+            ironingAdapter.notifyDataSetChanged();
         }
         else{
             Toast.makeText(getActivity().getApplicationContext(),"Delivery of Ironed clothes cannot be done on the given date.Please select another date",5000).show();
@@ -351,7 +375,7 @@ public class PlaceOrderFragment extends Fragment {
 
     public void setWashingAdapter(String date,String when){
 
-        ArrayList<String> washingSlots = getSlots(date,when,"washing");
+        ArrayList<String> washingSlots = getSlots(date,when);
         if(washingSlots.size()!=0) {
             washingAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, washingSlots);
             washingAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
@@ -397,7 +421,7 @@ public class PlaceOrderFragment extends Fragment {
 
     public void setBagsAdapter(String date,String when){
 
-        ArrayList<String> bagsSlots = getSlots(date,when,"bags");
+        ArrayList<String> bagsSlots = getSlots(date,when);
         if(bagsSlots.size()!=0) {
             bagsAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, bagsSlots);
             bagsAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
@@ -408,7 +432,11 @@ public class PlaceOrderFragment extends Fragment {
         }
     }
 
-    public ArrayList<String> getSlots(String date, String when,String service){
+    // setting the available slots  for collection
+    // date : the selected date
+    // when : today or later
+    public ArrayList<String> getSlots(String date, String when){
+
 
         ArrayList<String> options = new ArrayList<String>();
         try {
@@ -418,23 +446,17 @@ public class PlaceOrderFragment extends Fragment {
             newDateFormat.applyPattern("EEEE");
             String day = newDateFormat.format(MyDate);
 
-            Log.d(Constants.LOG_TAG," my DATE STRING "+ day);
-
             if(when.equalsIgnoreCase("today")){
 
                 String presentTime = Constants.currentTime;
                 day = day.toLowerCase();
                 String availableSlots = (String)Constants.slots.get(day);
-                Log.d(Constants.LOG_TAG," Present Time "+presentTime);
-                Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
 
                 String getSlots[] = availableSlots.split("_");
                 for(int i=0 ;i<getSlots.length;i++){
 
                     int validSlot = Integer.parseInt(getSlots[i].substring(0, 2));
-                    Log.d(Constants.LOG_TAG," Check Validity String "+ validSlot);
                     int now = Integer.parseInt(presentTime.substring(0,2));
-                    Log.d(Constants.LOG_TAG," abc Strin "+now);
 
                     if(validSlot>now){
 
@@ -451,29 +473,11 @@ public class PlaceOrderFragment extends Fragment {
                 Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
 
                 String getSlots[] = availableSlots.split("_");
-                if(service.equalsIgnoreCase("collection")){
 
-                    for(int i=0;i<getSlots.length;i++){
+                for(int i=0;i<getSlots.length;i++){
 
-                        options.add(getSlots[i]);
-                    }
-
+                    options.add(getSlots[i]);
                 }
-                // check what service is it
-                else if(service.equalsIgnoreCase("ironing")){
-
-                }
-                else if(service.equalsIgnoreCase("washing")){
-
-                }
-                else if(service.equalsIgnoreCase("bags")){
-
-                }
-                // Which day is set for collections then if it is the next day do step 1 2 3 if not display all slots
-                // collection 1
-                // if it is comming for ironing 1
-                //  washing 2
-                // bags = slotDifference 3
 
             }
 
@@ -484,6 +488,84 @@ public class PlaceOrderFragment extends Fragment {
         }
 
         // return the array of available slots
+        return options;
+    }
+
+    public ArrayList<String> getIroningSlots(String date,int ironingDeliveryCounter){
+
+        ArrayList<String> options = new ArrayList<String>();
+        Constants.ironingDeliveryDate = date;
+        String dateDetails[] = Constants.ironingDeliveryDate.split("/");
+        try {
+            SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date MyDate = newDateFormat.parse(date);
+            newDateFormat.applyPattern("EEEE");
+            String day = newDateFormat.format(MyDate);
+
+            Log.d(Constants.LOG_TAG," Day "+ day);
+
+            day = day.toLowerCase();
+            String availableSlots = (String) Constants.slots.get(day);
+            Log.d(Constants.LOG_TAG," SLOTS AVAILABLE "+ availableSlots);
+            String getSlots[] = availableSlots.split("_");
+            Log.d(Constants.LOG_TAG," SLOTS LENGHT "+ getSlots.length);
+            int arrayLength = getSlots.length;
+            if(arrayLength > 0){
+                while (ironingDeliveryCounter != 0) {
+
+                    Log.d(Constants.LOG_TAG,"IRONING DELIVERY COUNTER "+ ironingDeliveryCounter);
+                    ironingDeliveryCounter--;
+                    Log.d(Constants.LOG_TAG,"IRONING DELIVERY COUNTER "+ ironingDeliveryCounter);
+                    // check if the slot of the collection time is less than
+                    // the (size-1) of the given day's slots
+                    //if that is the case then increase the slot counter
+                    // else check if it is equal to the last index in the array
+                    // if that is the case then change the date and call the function again.
+                    Log.d(Constants.LOG_TAG," The value of j "+j);
+                    int checkLength = arrayLength - 1;
+                    Log.d(Constants.LOG_TAG," The value of check Length "+checkLength);
+                    if (j < checkLength) {
+                        j++;
+                        Log.d(Constants.LOG_TAG," Value of J after incementing "+j);
+
+
+                    } else if (j == checkLength) {
+
+                        j = 0;
+                        Log.d(Constants.LOG_TAG," Value of J after setting  "+j);
+                        int dateForChange = Integer.parseInt(dateDetails[0]);
+                        dateForChange++;
+                        String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                        getIroningSlots(dateForFunction,ironingDeliveryCounter);
+                    }
+
+                }//
+            }
+            else{
+
+                j = 0;
+                int dateForChange = Integer.parseInt(dateDetails[0]);
+                dateForChange++;
+                String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                getIroningSlots(dateForFunction,ironingDeliveryCounter);
+
+            }
+
+
+            Log.d(Constants.LOG_TAG," About to enter while loop "+ getSlots.length);
+            while(j < getSlots.length){
+
+                Log.d(Constants.LOG_TAG," The value about to add "+getSlots[j]);
+                options.add(getSlots[j]);
+                j++;
+            }
+
+        } // end of TRY
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
         return options;
     }
 

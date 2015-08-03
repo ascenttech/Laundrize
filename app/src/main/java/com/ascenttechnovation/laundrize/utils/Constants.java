@@ -40,6 +40,7 @@ public class Constants {
     public static String bagsDeliveryDate,bagsDeliverySlot;
     public static String currentDate,currentTime;
     public static int totalQuantityToBeCollected,totalAmountToBeCollected;
+    public static int collectionTimeSlot;
 
     // This is used to change the image of track orders.
     // 1 is order placed
@@ -51,6 +52,8 @@ public class Constants {
     // This hashmap would containt the key as orderId and value as quantity
     public static Map<String,String> order;
     public static Map<String,String> slots;
+    public static Map<String,String> getSlotsId;
+
 
     // All the arraylists
     public static ArrayList<GeneralData> subCategory;
@@ -162,6 +165,8 @@ public class Constants {
 //    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=8097746236";
     public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
 
+//    public static final String changePasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=9752493189&verification_code=039293&new_password=Abc";
+    public static final String changePasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=";
 
     //  public static final String confirmVerificationUrl = "http://dev.laundrize.com/api/api/v1/registeruser?mobile_number=8879153143&verification_code=wFIqdi&password=qwerty&first_name=sagar&email=sagardevanga@gmail.com";
     public static final String confirmVerificationUrl = "http://dev.laundrize.com/api/api/v1/registeruser?mobile_number=";
