@@ -32,6 +32,8 @@ public class ForgotPasswordActivity extends Activity {
 
         Log.d(Constants.LOG_TAG,Constants.ForgotPasswordActivity);
 
+        Log.d(Constants.LOG_TAG,Constants.ForgotPasswordActivity);
+
         findViews();
         setViews();
     }
