@@ -267,7 +267,7 @@ public class PlaceOrderFragment extends Fragment {
         }
         else{
 
-            Toast.makeText(getActivity().getApplicationContext(),"Collection cannot be done on the given date.\nPlease select another date",5000).show();
+            Toast.makeText(getActivity().getApplicationContext(),"Collection cannot be done on the given date.Please select another date",5000).show();
         }
     }
 
@@ -312,7 +312,7 @@ public class PlaceOrderFragment extends Fragment {
             ironingTimeSlot.setAdapter(ironingAdapter);
         }
         else{
-            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Ironed clothes cannot be done on the given date.\nPlease select another date",5000).show();
+            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Ironed clothes cannot be done on the given date.Please select another date",5000).show();
         }
 
     }
@@ -358,7 +358,7 @@ public class PlaceOrderFragment extends Fragment {
             washingTimeSlot.setAdapter(washingAdapter);
         }
         else{
-            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Washed Clothes cannot be done on the given date.\nPlease select another date",5000).show();
+            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Washed Clothes cannot be done on the given date.Please select another date",5000).show();
         }
 
     }
@@ -404,7 +404,7 @@ public class PlaceOrderFragment extends Fragment {
             bagsTimeSlot.setAdapter(bagsAdapter);
         }
         else{
-            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Bags and shoes cannot be done on the given date.\nPlease select another date",5000).show();
+            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Bags and shoes cannot be done on the given date.Please select another date",5000).show();
         }
     }
 
@@ -429,7 +429,7 @@ public class PlaceOrderFragment extends Fragment {
                 Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
 
                 String getSlots[] = availableSlots.split("_");
-                for(int i=2 ;i<=getSlots.length;i++){
+                for(int i=0 ;i<getSlots.length;i++){
 
                     int validSlot = Integer.parseInt(getSlots[i].substring(0, 2));
                     Log.d(Constants.LOG_TAG," Check Validity String "+ validSlot);
@@ -516,8 +516,11 @@ public class PlaceOrderFragment extends Fragment {
 
     }
 
-    public void createJson(){
 
+
+    // This function would be used to create JSON which contains the
+    // users orders to be placed
+    public void createJson(){
 
         itemsJsonArray = new JSONArray();
         washingNestedJsonArray = new JSONArray();
@@ -608,8 +611,8 @@ public class PlaceOrderFragment extends Fragment {
             postOrderJsonObject = new JSONObject();
             postOrderJsonObject.put("user_id",Constants.userId);
             postOrderJsonObject.put("addr_id",Constants.addressId);
-            postOrderJsonObject.put("total_amt",Constants.totalAmount);
-            postOrderJsonObject.put("totalquantity",Constants.totalQuantity);
+            postOrderJsonObject.put("total_amt",Constants.totalAmountToBeCollected);
+            postOrderJsonObject.put("totalquantity",Constants.totalQuantityToBeCollected);
             postOrderJsonObject.put("user_collection_time",Constants.collectionDate);
             postOrderJsonObject.put("user_collection_slot",12);
             postOrderJsonObject.put("items",itemsJsonArray);
@@ -629,6 +632,8 @@ public class PlaceOrderFragment extends Fragment {
         replaceFragment(new ServicesFragment());
     }
 
+    // This function would be used to update the UI
+    // and change the fragment
     public void replaceFragment(Fragment fragment){
 
         ((LandingActivity)getActivity()).getSupportFragmentManager()

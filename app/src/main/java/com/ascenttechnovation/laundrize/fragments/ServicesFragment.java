@@ -169,17 +169,26 @@ public class ServicesFragment extends Fragment {
             if(serviceType.equalsIgnoreCase("1") || serviceType.equalsIgnoreCase("2")){
 
                 Constants.ironingOrderData.add(new IroningOrderData(orderId,orderDetails[1],orderDetails[0]));
+                Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+                Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
             }
             else if(serviceType.equalsIgnoreCase("3")||serviceType.equalsIgnoreCase("4")||serviceType.equalsIgnoreCase("5")||serviceType.equalsIgnoreCase("6")){
 
                 Constants.washingOrderData.add(new WashingOrderData(orderId,orderDetails[1],orderDetails[0]));
+                Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+                Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
             }
             else if(serviceType.equalsIgnoreCase("7") || serviceType.equalsIgnoreCase("8")){
 
                 Constants.bagOrderData.add(new BagOrderData(orderId,orderDetails[1],orderDetails[0]));
+                Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+                Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
             }
 
         }
+
+        Log.d(Constants.LOG_TAG,"Total Quantity "+Constants.totalQuantityToBeCollected);
+        Log.d(Constants.LOG_TAG,"Total Amount "+Constants.totalAmountToBeCollected);
 
     }
 
@@ -243,7 +252,8 @@ public class ServicesFragment extends Fragment {
                 case R.id.left_button_included: replaceFragment(new LandingFragment());
                     break;
 
-                case R.id.right_button_included: replaceFragment(new PlaceOrderFragment());
+                case R.id.right_button_included: getOrder();
+                    replaceFragment(new PlaceOrderFragment());
                     break;
             }
         }

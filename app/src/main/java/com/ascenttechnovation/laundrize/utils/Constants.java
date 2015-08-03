@@ -39,6 +39,7 @@ public class Constants {
     public static String washingDeliverySlot,washingDeliveryDate;
     public static String bagsDeliveryDate,bagsDeliverySlot;
     public static String currentDate,currentTime;
+    public static int totalQuantityToBeCollected,totalAmountToBeCollected;
 
     // This is used to change the image of track orders.
     // 1 is order placed
