@@ -112,6 +112,8 @@ public class Constants {
     public static final String FetchCurrentServerTimeAsyncTask=" FETCH CURRENT SERVER TIME ASYNC TASK ";
     public static final String FetchLaundryServicesAsyncTask=" FETCH LAUNDRY SERVICES ASYNC TASK ";
     public static final String FetchSlotDifferenceAsyncTask=" FETCH SLOT DIFFERENCE ASYNC TASK ";
+    public static final String FetchUserAddressAsyncTask=" FETCH USER ADDRESS ASYNC TASK ";
+    public static final String FetchUserCityAsyncTask=" FETCH USER CITY ASYNC TASK ";
     public static final String FetchUserProfileAsyncTask=" FETCH USER PROFILE ASYNC TASK ";
     public static final String FetchVerificationCodeAsyncTask=" FETCH VERIFICATION CODE ASYNC TASK ";
     public static final String PlaceWeeklyOrderAsyncTask=" PLACE WEEKLY ORDER ASYNC TASK ";

@@ -95,8 +95,8 @@ public class ForgotPasswordActivity extends Activity {
 
     public void confirmVerification(){
 
-        String abc = prefs.getString("vc","");
-        if(abc.equals(verificationCodeEdit.getText().toString()))
+        String verificationCode = prefs.getString("vc","");
+        if(verificationCode.equals(verificationCodeEdit.getText().toString()))
         {
 
         }
