@@ -2,6 +2,7 @@ package com.ascenttechnovation.laundrize.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
@@ -19,7 +20,7 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 /**
  * Created by ADMIN on 27-07-2015.
  */
-public class TabsViewPagerAdapter extends FragmentStatePagerAdapter {
+public class TabsViewPagerAdapter extends FragmentPagerAdapter {
 
     FragmentManager fm;
 
@@ -50,10 +51,10 @@ public class TabsViewPagerAdapter extends FragmentStatePagerAdapter {
 
             case 5 : return new DryCleanHouseholdsFragment();
 
+            default: return null;
 
         }
 
-        return null;
 
     }
 

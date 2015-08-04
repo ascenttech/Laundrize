@@ -34,10 +34,10 @@ public class Constants {
 
     public static String mobileNumber,userId,token,verificationCode,totalAmount,totalQuantity;
     public static String addressId,address;
-    public static String collectionDate,collectionSlot;
-    public static String ironingDeliveryDate,ironingDeliverySlot;
-    public static String washingDeliverySlot,washingDeliveryDate;
-    public static String bagsDeliveryDate,bagsDeliverySlot;
+    public static String collectionDate,collectionSlotId;
+    public static String ironingDeliveryDate,ironingDeliverySlotId;
+    public static String washingDeliverySlotId,washingDeliveryDate;
+    public static String bagsDeliveryDate,bagsDeliverySlotId;
     public static String currentDate,currentTime;
     public static int totalQuantityToBeCollected,totalAmountToBeCollected;
     public static int collectionTimeSlot;
