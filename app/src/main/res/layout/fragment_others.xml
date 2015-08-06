@@ -9,8 +9,7 @@
         android:id="@+id/recycler_view_others_fragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginLeft="@dimen/five_dp"
-        android:layout_marginRight="@dimen/five_dp"
+        android:layout_marginLeft="@dimen/margin_small"
         />
 
 </RelativeLayout>

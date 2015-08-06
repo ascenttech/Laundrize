@@ -16,6 +16,9 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.async.FetchAddressAsyncTask;
 import com.ascenttechnovation.laundrize.async.SignInUserAsyncTask;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
+import com.ascenttechnovation.laundrize.custom.CustomEditText;
+import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
@@ -23,8 +26,9 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class LoginActivity extends Activity {
 
-    private EditText mobileNumber,password;
-    private TextView clickHere,logInNow;
+    private CustomEditText mobileNumber,password;
+    private CustomTextView clickHere;
+    private CustomButton logInNow;
     private ProgressDialog progressDialog;
     private String finalUrl;
     private CheckBox keepLoggedIn;
@@ -43,11 +47,11 @@ public class LoginActivity extends Activity {
 
     private void findViews(){
 
-        mobileNumber = (EditText) findViewById(R.id.username_edit_log_in_now_activity);
-        password = (EditText) findViewById(R.id.password_edit_log_in_now_activity);
+        mobileNumber = (CustomEditText) findViewById(R.id.username_edit_log_in_now_activity);
+        password = (CustomEditText) findViewById(R.id.password_edit_log_in_now_activity);
         keepLoggedIn = (CheckBox) findViewById(R.id.keep_logged_in_checkbox_log_in_now_activity);
-        clickHere = (TextView) findViewById(R.id.click_here_static_text_log_in_now_activity);
-        logInNow = (Button) findViewById(R.id.log_in_now_button_log_in_now_activity);
+        clickHere = (CustomTextView) findViewById(R.id.click_here_static_text_log_in_now_activity);
+        logInNow = (CustomButton) findViewById(R.id.log_in_now_button_log_in_now_activity);
 
     }
 

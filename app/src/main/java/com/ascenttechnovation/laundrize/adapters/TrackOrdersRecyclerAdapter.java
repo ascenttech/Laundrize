@@ -25,7 +25,6 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
 
     private Context context;
     private ArrayList<TrackOrdersData> trackOrdersData;
-    private CustomButton single_button_below;
     private LinearLayout numberOfItems,deliveryDate,totalAmount,totalBalance;
     private CustomTextView numberOfItemsValue,deliveryDateValue,totalAmountValue,totalBalanceValue;
     private CustomTextView numberOfItemsStaticText,deliveryDateStaticText,totalAmountStaticText,totalBalanceStaticText;

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -23,7 +24,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
     Context context;
     ArrayList<NavigationDrawerData> navigationDrawerData;
     View v;
-    TextView menuItemName;
+    CustomTextView menuItemName;
     ImageView menuItemLogo;
 
     public NavigationDrawerAdapter(Context context, ArrayList<NavigationDrawerData> navigationDrawerData) {
@@ -65,7 +66,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
     private void findViews(){
 
         menuItemLogo = (ImageView) v.findViewById(R.id.menu_logo_image_navigation_drawer);
-        menuItemName = (TextView) v.findViewById(R.id.menu_item_text_navigation_drawer);
+        menuItemName = (CustomTextView) v.findViewById(R.id.menu_item_text_navigation_drawer);
     }
 
     private void setViews(int position){

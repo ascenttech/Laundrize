@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.async.ConfirmVerificationAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchVerificationCodeAsyncTask;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
+import com.ascenttechnovation.laundrize.custom.CustomEditText;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
@@ -21,8 +23,8 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class ForgotPasswordActivity extends Activity {
 
-    private Button verifyDetailsButton,submitButton;
-    private EditText mobileNumberEdit,newPasswordEdit,confirmPasswordEdit,verificationCodeEdit;
+    private CustomButton verifyDetailsButton,submitButton;
+    private CustomEditText mobileNumberEdit,newPasswordEdit,confirmPasswordEdit,verificationCodeEdit;
     private ProgressDialog progressDialog;
     SharedPreferences prefs;
 
@@ -39,12 +41,12 @@ public class ForgotPasswordActivity extends Activity {
 
     private void findViews(){
 
-        mobileNumberEdit = (EditText) findViewById(R.id.mobileno_edit_forgot_password_activity);
-        newPasswordEdit = (EditText) findViewById(R.id.new_password_edit_forgot_password_activity);
-        confirmPasswordEdit = (EditText) findViewById(R.id.confirm_password_edit_forgot_password_activity);
-        verificationCodeEdit = (EditText) findViewById(R.id.verify_code_edit_forgot_password_activity);
-        verifyDetailsButton = (Button) findViewById(R.id.verify_details_button_forgot_password_activity);
-        submitButton =(Button) findViewById(R.id.submit_button_forgot_password_activity);
+        mobileNumberEdit = (CustomEditText) findViewById(R.id.mobileno_edit_forgot_password_activity);
+        newPasswordEdit = (CustomEditText) findViewById(R.id.new_password_edit_forgot_password_activity);
+        confirmPasswordEdit = (CustomEditText) findViewById(R.id.confirm_password_edit_forgot_password_activity);
+        verificationCodeEdit = (CustomEditText) findViewById(R.id.verify_code_edit_forgot_password_activity);
+        verifyDetailsButton = (CustomButton) findViewById(R.id.verify_details_button_forgot_password_activity);
+        submitButton =(CustomButton) findViewById(R.id.submit_button_forgot_password_activity);
     }
 
     private void setViews(){

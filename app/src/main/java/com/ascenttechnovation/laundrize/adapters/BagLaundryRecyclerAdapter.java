@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.data.BagLaundryData;
 import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -24,7 +25,7 @@ public class BagLaundryRecyclerAdapter extends RecyclerView.Adapter<BagLaundryRe
 
     Context context;
     private ArrayList<GeneralData> bagLaundryData;
-    private TextView title,description,price,quantity;
+    private CustomTextView title,description,price,quantity;
     private ImageView add,subtract;
 
     public BagLaundryRecyclerAdapter(Context context, ArrayList<GeneralData> bagLaundryData) {
@@ -64,10 +65,10 @@ public class BagLaundryRecyclerAdapter extends RecyclerView.Adapter<BagLaundryRe
 
     private void findViews(ViewHolder holder){
 
-        title = (TextView) holder.v.findViewById(R.id.title_text_included);
-        description = (TextView)holder.v.findViewById(R.id.description_text_included);
-        price = (TextView)holder.v.findViewById(R.id.price_text_included);
-        quantity = (TextView)holder.v.findViewById(R.id.quantity_text_included);
+        title = (CustomTextView) holder.v.findViewById(R.id.title_text_included);
+        description = (CustomTextView)holder.v.findViewById(R.id.description_text_included);
+        price = (CustomTextView)holder.v.findViewById(R.id.price_text_included);
+        quantity = (CustomTextView)holder.v.findViewById(R.id.quantity_text_included);
         add = (ImageView) holder.v.findViewById(R.id.add_image_included);
         subtract = (ImageView) holder.v.findViewById(R.id.subtract_image_included);
 

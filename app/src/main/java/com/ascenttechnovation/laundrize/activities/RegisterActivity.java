@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.async.RegisterUserAsyncTask;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
+import com.ascenttechnovation.laundrize.custom.CustomEditText;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
@@ -19,10 +21,10 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class RegisterActivity extends Activity {
 
-    private Button signUp;
+    private CustomButton signUp;
     private String finalUrl;
     private ProgressDialog progressDialog;
-    private EditText name,email,mobileNumber,password;
+    private CustomEditText name,email,mobileNumber,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +39,11 @@ public class RegisterActivity extends Activity {
 
     private void findViews(){
 
-        name = (EditText) findViewById(R.id.name_edit_register_activity);
-        email = (EditText) findViewById(R.id.email_edit_register_activity);
-        mobileNumber = (EditText) findViewById(R.id.mobileno_edit_register_activity);
-        password = (EditText) findViewById(R.id.password_edit_register_activity);
-        signUp = (Button) findViewById(R.id.footer_button_included);
+        name = (CustomEditText) findViewById(R.id.name_edit_register_activity);
+        email = (CustomEditText) findViewById(R.id.email_edit_register_activity);
+        mobileNumber = (CustomEditText) findViewById(R.id.mobileno_edit_register_activity);
+        password = (CustomEditText) findViewById(R.id.password_edit_register_activity);
+        signUp = (CustomButton) findViewById(R.id.footer_button_included);
     }
 
     private void setViews(){

@@ -34,7 +34,6 @@ public class TrackOrdersFragment extends Fragment {
     private RecyclerView.Adapter trackOrdersAdapter;
     private RecyclerView.LayoutManager trackOrdersLayoutManager;
     private ArrayList<TrackOrdersData> trackOrdersData;
-    private CustomButton cb1;
     Context context;
     ActionBar actionBar;
     private ProgressDialog progressDialog;

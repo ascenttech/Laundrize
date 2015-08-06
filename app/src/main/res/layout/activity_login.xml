@@ -22,7 +22,9 @@
         android:padding="@dimen/margin_large"
         android:layout_margin="@dimen/padding"
         android:layout_above="@id/keep_logged_in_checkbox_log_in_now_activity"
-        android:background="@drawable/rounded_edit_text"/>
+        android:background="@drawable/rounded_edit_text"
+        android:inputType="textPassword"
+        />
 
     <com.ascenttechnovation.laundrize.custom.CustomEditText
         android:id="@+id/username_edit_log_in_now_activity"

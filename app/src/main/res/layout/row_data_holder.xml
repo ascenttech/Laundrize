@@ -4,13 +4,15 @@
     android:layout_width="match_parent" 
     android:layout_height="@dimen/card_layout_size"
     android:padding="@dimen/five_dp"
+    android:background="@drawable/rectangle_box"
+    android:layout_marginBottom="@dimen/margin"
     >
 
     <ImageView
         android:id="@+id/background_image_row_order"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/background_image_size"
-        android:background="#709080"
+        android:scaleType="fitXY"
         />
 
     <include

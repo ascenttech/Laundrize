@@ -1,15 +1,15 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashScreen"
+    android:background="#FFF"
     >
 
-    <SurfaceView
-        android:id="@+id/gif_surface_splash_screen_activity"
+    <ImageView
+        android:id="@+id/animated_logo_image_splash_screen_activity"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
         />
-
 </RelativeLayout>
+

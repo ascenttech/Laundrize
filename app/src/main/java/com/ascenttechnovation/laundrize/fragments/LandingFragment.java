@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.async.FetchAllSlotsAsyncTask;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
@@ -21,7 +22,7 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class LandingFragment extends Fragment {
 
-    private Button placeOrder,quickOrder,weeklyOrder,trackOrder,completedOrder;
+    private CustomButton placeOrder,quickOrder,weeklyOrder,trackOrder,completedOrder;
     private ActionBar actionBar;
     private View v;
 
@@ -80,11 +81,11 @@ public class LandingFragment extends Fragment {
 
     private void findViews(View v){
 
-        placeOrder = (Button) v.findViewById(R.id.place_order_button_order_now_fragment);
-        quickOrder = (Button) v.findViewById(R.id.quick_order_button_order_now_fragment);
-        weeklyOrder = (Button) v.findViewById(R.id.weekly_order_button_order_now_fragment);
-        trackOrder = (Button) v.findViewById(R.id.track_order_button_order_now_fragment);
-        completedOrder = (Button) v.findViewById(R.id.completed_order_button_order_now_fragment);
+        placeOrder = (CustomButton) v.findViewById(R.id.place_order_button_order_now_fragment);
+        quickOrder = (CustomButton) v.findViewById(R.id.quick_order_button_order_now_fragment);
+        weeklyOrder = (CustomButton) v.findViewById(R.id.weekly_order_button_order_now_fragment);
+        trackOrder = (CustomButton) v.findViewById(R.id.track_order_button_order_now_fragment);
+        completedOrder = (CustomButton) v.findViewById(R.id.completed_order_button_order_now_fragment);
 
     }
 

@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
@@ -19,7 +20,7 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class WeeklyFragment extends Fragment {
 
-    private Button back,placeOrder;
+    private CustomButton back,placeOrder;
     private ProgressDialog progressDialog;
 
     @Nullable
@@ -37,8 +38,8 @@ public class WeeklyFragment extends Fragment {
 
     private void findViews(View v){
 
-        back = (Button) v.findViewById(R.id.left_button_included);
-        placeOrder = (Button) v.findViewById(R.id.right_button_included);
+        back = (CustomButton) v.findViewById(R.id.left_button_included);
+        placeOrder = (CustomButton) v.findViewById(R.id.right_button_included);
     }
 
     private void setViews(){

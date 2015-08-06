@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.async.ConfirmVerificationAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchVerificationCodeAsyncTask;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
+import com.ascenttechnovation.laundrize.custom.CustomEditText;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
@@ -20,9 +22,9 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class MobileVerificationActivity extends Activity {
 
-    private Button confirmVerification,verifyNow;
+    private CustomButton confirmVerification,verifyNow;
     private String mobileNumber,name,emailId,password,from;
-    private EditText mobileNumberEdit,verificationCode;
+    private CustomEditText mobileNumberEdit,verificationCode;
     private ProgressDialog progressDialog;
 
     @Override
@@ -44,10 +46,10 @@ public class MobileVerificationActivity extends Activity {
 
     private void findViews(){
 
-        mobileNumberEdit = (EditText) findViewById(R.id.mobileno_edit_verification_activity);
-        verificationCode = (EditText) findViewById(R.id.username_edit_verification_activity);
-        verifyNow = (Button) findViewById(R.id.verify_now_button_mobile_verification_activity);
-        confirmVerification = (Button) findViewById(R.id.confirm_verification_button_mobile_verification_activity);
+        mobileNumberEdit = (CustomEditText) findViewById(R.id.mobileno_edit_verification_activity);
+        verificationCode = (CustomEditText) findViewById(R.id.username_edit_verification_activity);
+        verifyNow = (CustomButton) findViewById(R.id.verify_now_button_mobile_verification_activity);
+        confirmVerification = (CustomButton) findViewById(R.id.confirm_verification_button_mobile_verification_activity);
     }
 
     private void setViews(){

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.imageloader.ImageLoader;
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -23,10 +24,9 @@ public class IroningHouseholdsRecyclerAdapter extends RecyclerView.Adapter<Ironi
 
     Context context;
     private ArrayList<GeneralData> ironingHouseholdsData;
-    private TextView title,description,price,quantity;
-    private ImageView add,subtract;
+    private CustomTextView title,description,price,quantity;
+    private ImageView add,subtract,backgroundImage;
     private ImageLoader imgLoader;
-    private ImageView backgroundImage;
 
     public IroningHouseholdsRecyclerAdapter(Context context, ArrayList<GeneralData> ironingHouseholdsData) {
         this.context = context;
@@ -67,10 +67,10 @@ public class IroningHouseholdsRecyclerAdapter extends RecyclerView.Adapter<Ironi
     private void findViews(ViewHolder holder){
 
         backgroundImage = (ImageView) holder.v.findViewById(R.id.background_image_row_order);
-        title = (TextView) holder.v.findViewById(R.id.title_text_included);
-        description = (TextView) holder.v.findViewById(R.id.description_text_included);
-        price = (TextView) holder.v.findViewById(R.id.price_text_included);
-        quantity = (TextView) holder.v.findViewById(R.id.quantity_text_included);
+        title = (CustomTextView) holder.v.findViewById(R.id.title_text_included);
+        description = (CustomTextView) holder.v.findViewById(R.id.description_text_included);
+        price = (CustomTextView) holder.v.findViewById(R.id.price_text_included);
+        quantity = (CustomTextView) holder.v.findViewById(R.id.quantity_text_included);
         add = (ImageView) holder.v.findViewById(R.id.add_image_included);
         subtract = (ImageView) holder.v.findViewById(R.id.subtract_image_included);
 

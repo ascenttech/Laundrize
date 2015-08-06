@@ -24,7 +24,6 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
 
     Context context;
     private ArrayList<CompletedOrdersData> completedOrdersData;
-    private TextView address,mobileNumber;
     private LinearLayout numberOfItems,deliveryDate,totalAmount,totalBalance;
     private CustomTextView numberOfItemsValue,deliveryDateValue,totalAmountValue,totalBalanceValue;
     private CustomTextView numberOfItemsStaticText,deliveryDateStaticText,totalAmountStaticText,totalBalanceStaticText;

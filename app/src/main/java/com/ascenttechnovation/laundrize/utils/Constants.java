@@ -164,6 +164,10 @@ public class Constants {
     public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=";
 
 
+//    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/postorders?user_id=";
+//    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/postorders?user_id=";
+    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/placeorder";
+
 //    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=8097746236";
     public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
 
@@ -175,6 +179,7 @@ public class Constants {
 
     // public static final String signInUrl = "http://dev.laundrize.com/api/api/v1/postlogin?mobile_number=9752493189&password=laundry";
     public static final String signInUrl = "http://dev.laundrize.com/api/api/v1/postlogin?mobile_number=";
+//    public static final String signInUrl = "http://dev.laundrize.com/api/api/v1/postlogin";
 
 //    public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=12";
     public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=";

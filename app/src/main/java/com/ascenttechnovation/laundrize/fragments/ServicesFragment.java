@@ -23,6 +23,7 @@ import com.ascenttechnovation.laundrize.adapters.TabsViewPagerAdapter;
 import com.ascenttechnovation.laundrize.async.FetchCurrentServerTimeAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchLaundryServicesAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.data.BagOrderData;
 import com.ascenttechnovation.laundrize.data.IroningOrderData;
 import com.ascenttechnovation.laundrize.data.WashingOrderData;
@@ -44,7 +45,7 @@ public class ServicesFragment extends Fragment {
     String names[]= {"Ironing: Wearables","Ironing: Households","Wash & Iron: Wearables","Wash & Iron: Households","Dry Clean: Wearables","Dry Clean : Households"};
     int icons[] = {R.drawable.icon_ironing,R.drawable.icon_ironing,R.drawable.icon_washing,R.drawable.icon_washing,R.drawable.icon_dry_clean,R.drawable.icon_dry_clean};
     private LinearLayout footer;
-    Button mainMenu,placeOrder;
+    private CustomButton mainMenu,placeOrder;
     ViewPager viewPager;
     TabsViewPagerAdapter viewPagerAdapter;
     private ProgressDialog progressDialog;
@@ -135,8 +136,8 @@ public class ServicesFragment extends Fragment {
 
     private void findViews(View v){
 
-        mainMenu = (Button) v.findViewById(R.id.left_button_included);
-        placeOrder = (Button) v.findViewById(R.id.right_button_included);
+        mainMenu = (CustomButton) v.findViewById(R.id.left_button_included);
+        placeOrder = (CustomButton) v.findViewById(R.id.right_button_included);
 
 
         viewPagerAdapter = new TabsViewPagerAdapter(getChildFragmentManager());

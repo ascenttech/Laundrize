@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
@@ -21,8 +22,8 @@ import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.data.WashingOrderData;
-import com.ascenttechnovation.laundrize.gif.decoder.GifRun;
 import com.ascenttechnovation.laundrize.utils.Constants;
+import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,7 +33,7 @@ import java.util.HashMap;
  */
 public class SplashScreenActivity extends Activity {
 
-    SurfaceView surface;
+    private ImageView logo;
     String userId,token;
 
     @Override
@@ -44,12 +45,9 @@ public class SplashScreenActivity extends Activity {
 
 
         initializeArrayList();
+        intializeHashMap();
         findViews();
-        getCredentials();
-
-        GifRun gifRun = new GifRun();
-        gifRun.LoadGiff(surface,getApplicationContext(),R.drawable.animated_logo);
-
+        setViews();
 
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
         userId = sharedPreferences.getString("userId","null");
@@ -108,7 +106,10 @@ public class SplashScreenActivity extends Activity {
         Constants.trackOrdersData = new ArrayList<TrackOrdersData>();
         Constants.completedOrdersData = new ArrayList<CompletedOrdersData>();
 
-        // HashMap
+    }
+
+    public void intializeHashMap(){
+
         Constants.order = new HashMap<String,String>();
         Constants.slots = new HashMap<String,String>();
         Constants.getSlotsId = new HashMap<String,String>();
@@ -120,28 +121,19 @@ public class SplashScreenActivity extends Activity {
         Constants.getSlotsId.put("18:00 PM - 20:00 PM","6");
         Constants.getSlotsId.put("20:00 PM - 22:00 PM","7");
 
-
     }
 
     private void findViews(){
 
 
-        surface = (SurfaceView) findViewById(R.id.gif_surface_splash_screen_activity);
+        logo = (ImageView) findViewById(R.id.animated_logo_image_splash_screen_activity);
 
     }
-
-    public void getCredentials(){
-
-
-        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
-        Constants.userId = sharedPreferences.getString("userId","null");
-        Constants.token = sharedPreferences.getString("token","null");
-    };
-
 
     private void setViews(){
 
 
+        Ion.with(logo).load("android.resource://com.ascenttechnovation.laundrize/" + R.drawable.animated_logo);
 
     }
 

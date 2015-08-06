@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.utils.Constants;
 import com.facebook.FacebookSdk;
 
@@ -23,7 +24,7 @@ import java.security.NoSuchAlgorithmException;
  */
 public class LogInOrRegisterActivity extends Activity {
 
-    Button signInNow,registerNow;
+    CustomButton signInNow,registerNow;
 
 
     @Override
@@ -41,8 +42,8 @@ public class LogInOrRegisterActivity extends Activity {
 
     private void findViews(){
 
-        signInNow = (Button) findViewById(R.id.sign_in_now_button_login_or_register_activity);
-        registerNow = (Button) findViewById(R.id.register_now_button_login_or_register_activity);
+        signInNow = (CustomButton) findViewById(R.id.sign_in_now_button_login_or_register_activity);
+        registerNow = (CustomButton) findViewById(R.id.register_now_button_login_or_register_activity);
 
     }
 

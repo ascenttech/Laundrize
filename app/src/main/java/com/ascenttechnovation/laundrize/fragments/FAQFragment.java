@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
@@ -23,7 +24,7 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 public class FAQFragment extends Fragment {
 
     private ActionBar actionBar;
-    private TextView firstQuestion,firstAnswer,secondQuestion,secondAnswer,thirdQuestion,thirdAnswer,fourthQuestion,fourthAnswer,fifthQuestion,fifthAnswer,sixthQuestion,sixthAnswer,seventhQuestion,seventhAnswer;
+    private CustomTextView firstQuestion,firstAnswer,secondQuestion,secondAnswer,thirdQuestion,thirdAnswer,fourthQuestion,fourthAnswer,fifthQuestion,fifthAnswer,sixthQuestion,sixthAnswer,seventhQuestion,seventhAnswer;
     private LinearLayout firstLayout,secondLayout,thirdLayout,fourthLayout,fifthLayout,sixthLayout,seventhLayout;
     private String questions[],answers[];
 
@@ -59,32 +60,32 @@ public class FAQFragment extends Fragment {
     private void findViews(View v){
 
         firstLayout = (LinearLayout) v.findViewById(R.id.first_question_static_faq_fragment);
-        firstQuestion = (TextView) firstLayout.findViewById(R.id.question_text_faq_fragment);
-        firstAnswer = (TextView) firstLayout.findViewById(R.id.answer_text_faq_fragment);
+        firstQuestion = (CustomTextView) firstLayout.findViewById(R.id.question_text_faq_fragment);
+        firstAnswer = (CustomTextView) firstLayout.findViewById(R.id.answer_text_faq_fragment);
 
         secondLayout = (LinearLayout) v.findViewById(R.id.second_question_static_faq_fragment);
-        secondQuestion = (TextView) secondLayout.findViewById(R.id.question_text_faq_fragment);
-        secondAnswer = (TextView) secondLayout.findViewById(R.id.answer_text_faq_fragment);
+        secondQuestion = (CustomTextView) secondLayout.findViewById(R.id.question_text_faq_fragment);
+        secondAnswer = (CustomTextView) secondLayout.findViewById(R.id.answer_text_faq_fragment);
 
         thirdLayout = (LinearLayout) v.findViewById(R.id.third_question_static_faq_fragment);
-        thirdQuestion = (TextView) thirdLayout.findViewById(R.id.question_text_faq_fragment);
-        thirdAnswer = (TextView) thirdLayout.findViewById(R.id.answer_text_faq_fragment);
+        thirdQuestion = (CustomTextView) thirdLayout.findViewById(R.id.question_text_faq_fragment);
+        thirdAnswer = (CustomTextView) thirdLayout.findViewById(R.id.answer_text_faq_fragment);
 
         fourthLayout = (LinearLayout) v.findViewById(R.id.fourth_question_static_faq_fragment);
-        fourthQuestion = (TextView) fourthLayout.findViewById(R.id.question_text_faq_fragment);
-        fourthAnswer = (TextView) fourthLayout.findViewById(R.id.answer_text_faq_fragment);
+        fourthQuestion = (CustomTextView) fourthLayout.findViewById(R.id.question_text_faq_fragment);
+        fourthAnswer = (CustomTextView) fourthLayout.findViewById(R.id.answer_text_faq_fragment);
 
         fifthLayout = (LinearLayout) v.findViewById(R.id.fifth_question_static_faq_fragment);
-        fifthQuestion = (TextView) fifthLayout.findViewById(R.id.question_text_faq_fragment);
-        fifthAnswer = (TextView) fifthLayout.findViewById(R.id.answer_text_faq_fragment);
+        fifthQuestion = (CustomTextView) fifthLayout.findViewById(R.id.question_text_faq_fragment);
+        fifthAnswer = (CustomTextView) fifthLayout.findViewById(R.id.answer_text_faq_fragment);
 
         sixthLayout = (LinearLayout) v.findViewById(R.id.sixth_question_static_faq_fragment);
-        sixthQuestion = (TextView) sixthLayout.findViewById(R.id.question_text_faq_fragment);
-        sixthAnswer = (TextView) sixthLayout.findViewById(R.id.answer_text_faq_fragment);
+        sixthQuestion = (CustomTextView) sixthLayout.findViewById(R.id.question_text_faq_fragment);
+        sixthAnswer = (CustomTextView) sixthLayout.findViewById(R.id.answer_text_faq_fragment);
 
         seventhLayout = (LinearLayout) v.findViewById(R.id.seventh_question_static_faq_fragment);
-        seventhQuestion = (TextView) seventhLayout.findViewById(R.id.question_text_faq_fragment);
-        seventhAnswer = (TextView) seventhLayout.findViewById(R.id.answer_text_faq_fragment);
+        seventhQuestion = (CustomTextView) seventhLayout.findViewById(R.id.question_text_faq_fragment);
+        seventhAnswer = (CustomTextView) seventhLayout.findViewById(R.id.answer_text_faq_fragment);
 
 
     }

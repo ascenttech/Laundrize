@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.data.AddressData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -22,7 +23,7 @@ public class AddressRecyclerAdapter extends RecyclerView.Adapter<AddressRecycler
 
     Context context;
     private ArrayList<AddressData> addressData;
-    private TextView address,mobileNumber;
+    private CustomTextView address,mobileNumber;
 
     public AddressRecyclerAdapter(Context context, ArrayList<AddressData> addressData) {
         this.context = context;
@@ -61,8 +62,8 @@ public class AddressRecyclerAdapter extends RecyclerView.Adapter<AddressRecycler
 
     private void findViews(ViewHolder holder){
 
-            address = (TextView) holder.v.findViewById(R.id.address_text_included);
-            mobileNumber = (TextView) holder.v.findViewById(R.id.mobile_number_text_included);
+            address = (CustomTextView) holder.v.findViewById(R.id.address_text_included);
+            mobileNumber = (CustomTextView) holder.v.findViewById(R.id.mobile_number_text_included);
 
 
     }

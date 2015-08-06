@@ -24,6 +24,8 @@ import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.async.AddNewAddressAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchCurrentServerTimeAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
+import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.net.URLEncoder;
@@ -34,7 +36,7 @@ import java.net.URLEncoder;
 public class AddressFragment extends Fragment {
 
     private ViewGroup selectAddressChild;
-    private Button selectAddress,addNewAddress,updateNewAddress;
+    private CustomButton selectAddress,addNewAddress,updateNewAddress;
     private LinearLayout addNewAddressChild;
     private int height;
     private ActionBar actionBar;
@@ -44,7 +46,7 @@ public class AddressFragment extends Fragment {
 
     private Context context;
     private View v,rowView;
-    private TextView address,mobileNumber;
+    private CustomTextView address,mobileNumber;
     private EditText city,pincode,area,buildingName,houseNumber;
     private String cityValue,pincodeValue,areaValue,buildingNameValue,houseNumberValue,fullAddressValue;
     private String orderType;
@@ -85,9 +87,9 @@ public class AddressFragment extends Fragment {
 
     private void findViews(View v){
 
-        selectAddress = (Button) v.findViewById(R.id.select_address_button_address_fragment);
+        selectAddress = (CustomButton) v.findViewById(R.id.select_address_button_address_fragment);
         selectAddressChild = (ViewGroup) v.findViewById(R.id.available_address_layout_container);
-        addNewAddress = (Button) v.findViewById(R.id.add_new_address_button_address_fragment);
+        addNewAddress = (CustomButton) v.findViewById(R.id.add_new_address_button_address_fragment);
 
         addNewAddressChild = (LinearLayout) v.findViewById(R.id.add_new_address_linear_layout_address_fragment);
         city = (EditText) v.findViewById(R.id.city_add_new_address);
@@ -97,7 +99,7 @@ public class AddressFragment extends Fragment {
         houseNumber = (EditText) v.findViewById(R.id.flat_or_house_number_add_new_address);
 
 
-        updateNewAddress = (Button) v.findViewById(R.id.update_this_address_add_new_address);
+        updateNewAddress = (CustomButton) v.findViewById(R.id.update_this_address_add_new_address);
 
     }
 
@@ -108,13 +110,13 @@ public class AddressFragment extends Fragment {
 
             rowView = layoutInflater.inflate(R.layout.include_available_address,null);
 
-            address = (TextView) rowView.findViewById(R.id.address_text_included);
+            address = (CustomTextView) rowView.findViewById(R.id.address_text_included);
             address.setTag("address_"+i);
             Log.d(Constants.LOG_TAG," Setting the adress "+Constants.addressData.get(i).getFullAddress());
             address.setText(Constants.addressData.get(i).getFullAddress());
             address.setOnClickListener(inflatedViewListener);
 
-            mobileNumber = (TextView) rowView.findViewById(R.id.mobile_number_text_included);
+            mobileNumber = (CustomTextView) rowView.findViewById(R.id.mobile_number_text_included);
             mobileNumber.setTag("number_"+i);
             Log.d(Constants.LOG_TAG," Setting the adress "+Constants.addressData.get(i).getMobileNumber());
             mobileNumber.setText(Constants.addressData.get(i).getMobileNumber());

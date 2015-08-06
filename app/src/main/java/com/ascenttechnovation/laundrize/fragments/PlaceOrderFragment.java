@@ -33,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by ADMIN on 31-07-2015.
@@ -246,7 +247,7 @@ public class PlaceOrderFragment extends Fragment {
                 }
                 else{
                     monthOfYear = month+1;
-                    collectionDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+                    collectionDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
                     Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
                     setCollectionsAdapter(Constants.collectionDate, "later");
                 }
@@ -313,7 +314,7 @@ public class PlaceOrderFragment extends Fragment {
                 }
                 else{
                     monthOfYear = month+1;
-                    ironingDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+                    ironingDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
                     Constants.ironingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
                     setIroningAdapter(Constants.ironingDeliveryDate,-1);
 
@@ -396,7 +397,7 @@ public class PlaceOrderFragment extends Fragment {
                 }
                 else{
                     monthOfYear = month+1;
-                    washingDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+                    washingDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
                     Constants.washingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
                     setWashingAdapter(Constants.washingDeliveryDate,-1);
 
@@ -464,7 +465,7 @@ public class PlaceOrderFragment extends Fragment {
                 }
                 else{
                     monthOfYear = month+1;
-                    bagsDateText.setText(dayOfMonth+"-"+monthOfYear+"-"+yearofc);
+                    bagsDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
                     Constants.bagsDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
                     setBagsAdapter(Constants.bagsDeliveryDate,-1);
 
@@ -665,21 +666,23 @@ public class PlaceOrderFragment extends Fragment {
 
     public void placeOrder(){
 
+        formatDate();
         createJson();
+
         new PlaceWeeklyOrderAsyncTask(getActivity().getApplicationContext(),new PlaceWeeklyOrderAsyncTask.PlaceWeeklyOrderCallback() {
             @Override
             public void onStart(boolean status) {
 
-                progressDialog = new ProgressDialog(getActivity());
-                progressDialog.setTitle(Constants.LOG_TAG);
-                progressDialog.setMessage("Placing Your Order");
-                progressDialog.show();
+//                progressDialog = new ProgressDialog(getActivity());
+//                progressDialog.setTitle(Constants.LOG_TAG);
+//                progressDialog.setMessage("Placing Your Order");
+//                progressDialog.show();
             }
 
             @Override
             public void onResult(boolean result) {
 
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
                 if(result){
                     Toast.makeText(getActivity().getApplicationContext(),"Order Placed Successfully",5000).show();
                 }
@@ -691,7 +694,6 @@ public class PlaceOrderFragment extends Fragment {
 
 
     }
-
 
 
     // This function would be used to create JSON which contains the
@@ -722,9 +724,9 @@ public class PlaceOrderFragment extends Fragment {
                 }
 
                 ironingJsonObject = new JSONObject();
-                ironingJsonObject.put("user_delivery_date:",Constants.ironingDeliveryDate);
-                ironingJsonObject.put("user_delivery_slot:",Constants.ironingDeliverySlotId);
-                ironingJsonObject.put("itemarr:",ironingNestedJsonArray);
+                ironingJsonObject.put("user_delivery_date",Constants.ironingDeliveryDate);
+                ironingJsonObject.put("user_delivery_slot",Constants.ironingDeliverySlotId);
+                ironingJsonObject.put("itemarr",ironingNestedJsonArray);
             }
             if(Constants.washingOrderData.size()>0){
 
@@ -742,9 +744,9 @@ public class PlaceOrderFragment extends Fragment {
                 }
 
                 washingJsonObject = new JSONObject();
-                washingJsonObject.put("user_delivery_date:",Constants.washingDeliveryDate);
-                washingJsonObject.put("user_delivery_slot:",Constants.washingDeliverySlotId);
-                washingJsonObject.put("itemarr:",washingNestedJsonArray);
+                washingJsonObject.put("user_delivery_date",Constants.washingDeliveryDate);
+                washingJsonObject.put("user_delivery_slot",Constants.washingDeliverySlotId);
+                washingJsonObject.put("itemarr",washingNestedJsonArray);
 
 
             }
@@ -765,9 +767,9 @@ public class PlaceOrderFragment extends Fragment {
                 }
 
                 bagsJsonObject = new JSONObject();
-                bagsJsonObject.put("user_delivery_date:",Constants.bagsDeliveryDate);
-                bagsJsonObject.put("user_delivery_slot:",Constants.bagsDeliverySlotId);
-                bagsJsonObject.put("itemarr:",bagsNestedJsonArray);
+                bagsJsonObject.put("user_delivery_date",Constants.bagsDeliveryDate);
+                bagsJsonObject.put("user_delivery_slot",Constants.bagsDeliverySlotId);
+                bagsJsonObject.put("itemarr",bagsNestedJsonArray);
             }
 
 
@@ -787,8 +789,8 @@ public class PlaceOrderFragment extends Fragment {
             postOrderJsonObject = new JSONObject();
             postOrderJsonObject.put("user_id",Constants.userId);
             postOrderJsonObject.put("addr_id",Constants.addressId);
-            postOrderJsonObject.put("total_amt",Constants.totalAmountToBeCollected);
-            postOrderJsonObject.put("totalquantity",Constants.totalQuantityToBeCollected);
+            postOrderJsonObject.put("total_amt",String.valueOf(Constants.totalAmountToBeCollected));
+            postOrderJsonObject.put("totalquantity",String.valueOf(Constants.totalQuantityToBeCollected));
             postOrderJsonObject.put("user_collection_time",Constants.collectionDate);
             postOrderJsonObject.put("user_collection_slot",Constants.collectionSlotId);
             postOrderJsonObject.put("items",itemsJsonArray);
@@ -801,6 +803,49 @@ public class PlaceOrderFragment extends Fragment {
             e.printStackTrace();
         }
 
+    }
+
+    public void formatDate(){
+
+
+        try {
+            if (Constants.collectionDate != null) {
+
+                Log.d(Constants.LOG_TAG," collection date "+Constants.collectionDate);
+                SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = originalFormat.parse(Constants.washingDeliveryDate);
+
+
+                SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Constants.collectionDate = newDateFormat.format(date);
+                Log.d(Constants.LOG_TAG,"  NEW Collections Date "+ Constants.collectionDate);
+            }
+            if (Constants.ironingDeliveryDate != null) {
+
+                Log.d(Constants.LOG_TAG," Ironing date "+Constants.ironingDeliveryDate);
+                SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = originalFormat.parse(Constants.washingDeliveryDate);
+
+
+                SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Constants.ironingDeliveryDate = newDateFormat.format(date);
+                Log.d(Constants.LOG_TAG,"  NEW Ironing Date "+ Constants.ironingDeliveryDate);
+            }
+            if (Constants.washingDeliveryDate != null) {
+
+                Log.d(Constants.LOG_TAG," Old washing delivery Date"+Constants.washingDeliveryDate);
+                SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = originalFormat.parse(Constants.washingDeliveryDate);
+
+                SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Constants.washingDeliveryDate = newDateFormat.format(date);
+                Log.d(Constants.LOG_TAG,"  NEW Washing Date "+ Constants.washingDeliveryDate);
+            }
+        }
+        catch (Exception e){
+
+            e.printStackTrace();
+        }
     }
 
     public void newOrder(){

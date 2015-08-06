@@ -29,6 +29,8 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.async.FetchUserProfileAsyncTask;
+import com.ascenttechnovation.laundrize.custom.CustomButton;
+import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 /**
@@ -39,9 +41,9 @@ public class ProfileFragment extends Fragment {
     private ActionBar actionBar;
     private ImageView profileImage;
     private Bitmap bitmap;
-    private TextView editYourProfile,address,mobileNumber,userName;
+    private CustomTextView editYourProfile,address,mobileNumber,userName;
     private Dialog dialog;
-    private Button update,cancel,addNewAddress;
+    private CustomButton update,cancel,addNewAddress;
     private LinearLayout footer;
     private ViewGroup availableAddresses;
     private ProgressDialog progressDialog;
@@ -116,13 +118,13 @@ public class ProfileFragment extends Fragment {
 
     private void findViews(View v){
 
-        userName = (TextView) v.findViewById(R.id.user_name_text_profile_fragment);
+        userName = (CustomTextView) v.findViewById(R.id.user_name_text_profile_fragment);
         profileImage = (ImageView) v.findViewById(R.id.profile_image_profile_fragment);
-        editYourProfile = (TextView) v.findViewById(R.id.edit_profile_text_profile_fragment);
+        editYourProfile = (CustomTextView) v.findViewById(R.id.edit_profile_text_profile_fragment);
         footer = (LinearLayout) v.findViewById(R.id.included_buttons_profile_fragment);
-        update = (Button) footer.findViewById(R.id.left_button_included);
-        cancel = (Button) footer.findViewById(R.id.right_button_included);
-        addNewAddress = (Button) v.findViewById(R.id.add_new_address_button_profile_fragment);
+        update = (CustomButton) footer.findViewById(R.id.left_button_included);
+        cancel = (CustomButton) footer.findViewById(R.id.right_button_included);
+        addNewAddress = (CustomButton) v.findViewById(R.id.add_new_address_button_profile_fragment);
         availableAddresses = (ViewGroup) v.findViewById(R.id.available_address_container_profile_fragment);
     }
 
@@ -149,10 +151,10 @@ public class ProfileFragment extends Fragment {
             for(int i = 0;i<Constants.addressData.size();i++) {
                 rowView = parentInflater.inflate(R.layout.include_available_address, null);
 
-                address = (TextView) rowView.findViewById(R.id.address_text_included);
+                address = (CustomTextView) rowView.findViewById(R.id.address_text_included);
                 address.setText(Constants.addressData.get(i).getFullAddress());
 
-                mobileNumber = (TextView) rowView.findViewById(R.id.mobile_number_text_included);
+                mobileNumber = (CustomTextView) rowView.findViewById(R.id.mobile_number_text_included);
                 mobileNumber.setText(Constants.addressData.get(i).getMobileNumber());
 
                 availableAddresses.addView(rowView);
