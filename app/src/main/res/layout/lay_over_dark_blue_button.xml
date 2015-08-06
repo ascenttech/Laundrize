@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/margin_large_thirty_five"
+    android:layout_marginRight="@dimen/margin_large_thirty_five"
+    android:layout_marginBottom="@dimen/margin_large"
+    android:layout_marginTop="@dimen/margin_large"
+    android:layout_gravity="center_horizontal"
+    >
+
+    <com.ascenttechnovation.laundrize.custom.CustomButton
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_large"
+        android:background="@drawable/rounded_blue_button"
+        android:textColor="@color/text_color_white"
+        />
+
+
+
+</FrameLayout>

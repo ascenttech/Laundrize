@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:text=" Mobile "
         android:textColor="#212121"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
+        android:textSize="@dimen/text_size_extra_large"/>
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/mobile_number_text_included"

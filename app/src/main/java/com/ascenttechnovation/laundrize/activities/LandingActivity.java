@@ -67,7 +67,7 @@ public class LandingActivity extends ActionBarActivity {
     LinearLayout sliderLayout;
     RelativeLayout profileLayout;
     ImageView profileImage;
-    int icons[]={R.drawable.drawer_logo_profile,R.drawable.drawer_logo_tnc,R.drawable.drawer_logo_privacy_policy,R.drawable.drawer_logo_faq,R.drawable.drawer_logo_contact_us,R.drawable.drawer_logo_profile,R.drawable.drawer_logo_tnc,R.drawable.drawer_logo_privacy_policy,R.drawable.drawer_logo_faq,R.drawable.drawer_logo_contact_us};
+    int icons[]={R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_watch,R.drawable.icon_shirt,R.drawable.drawer_logo_profile,R.drawable.drawer_logo_tnc,R.drawable.drawer_logo_privacy_policy,R.drawable.drawer_logo_faq,R.drawable.drawer_logo_contact_us};
 
 
     @Override
@@ -201,30 +201,33 @@ public class LandingActivity extends ActionBarActivity {
                 fragment = new LandingFragment();
                 break;
             case 1:
-                fragment = new AddressFragment("quick");
+                fragment = new AddressFragment("place");
                 break;
             case 2:
-                fragment = new AddressFragment("weekly");
+                fragment = new AddressFragment("quick");
                 break;
             case 3:
-                fragment = new TrackOrdersFragment();
+                fragment = new AddressFragment("weekly");
                 break;
             case 4:
-                fragment = new CompletedOrdersFragment();
+                fragment = new TrackOrdersFragment();
                 break;
             case 5:
-                fragment = new ProfileFragment();
+                fragment = new CompletedOrdersFragment();
                 break;
             case 6:
                 fragment = new ProfileFragment();
                 break;
             case 7:
-                fragment = new PrivacyPolicyFragment();
+                fragment = new ProfileFragment();
                 break;
             case 8:
-                fragment = new FAQFragment();
+                fragment = new PrivacyPolicyFragment();
                 break;
             case 9:
+                fragment = new FAQFragment();
+                break;
+            case 10:
                 mDrawerLayout.closeDrawer(sliderLayout);
                 mailToSupport();
                 break;

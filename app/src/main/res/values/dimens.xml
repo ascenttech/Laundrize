@@ -20,12 +20,15 @@
     <dimen name="five_dp">5dp</dimen>
     <dimen name="five_sp">5sp</dimen>
 
+    <dimen name="text_size_extra_extra_large">22sp</dimen>
     <dimen name="text_size_extra_large">20sp</dimen>
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size">16sp</dimen>
     <dimen name="text_size_small">14sp</dimen>
     <dimen name="text_size_extra_small">12sp</dimen>
 
+    <dimen name="margin_large_thirty_five">35dp</dimen>
+    <dimen name="margin_large_triple">30dp</dimen>
     <dimen name="margin_large_double">20dp</dimen>
     <dimen name="margin_large">10dp</dimen>
     <dimen name="margin">8dp</dimen>

@@ -5,60 +5,87 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/email_edit_register_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edit_text"
-        android:layout_centerInParent="true"
-        android:padding="10dp"
-        android:layout_margin="7dp"
-        android:hint=" EMAIL "/>
-
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/name_edit_register_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_margin="7dp"
-        android:hint=" NAME "
-        android:layout_above="@id/email_edit_register_activity"
-        android:background="@drawable/rounded_edit_text"/>
-
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <ImageView
+        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:src="@drawable/logo_with_name"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_centerHorizontal="true"
+        />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_large_triple"
+        android:layout_marginRight="@dimen/margin_large_triple"
+        android:orientation="vertical"
         android:layout_centerInParent="true"
-        android:text=" Register to Laundrize "
-        android:padding="10dp"
-        android:layout_above="@id/name_edit_register_activity"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_below="@id/logo"
+        >
 
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/mobileno_edit_register_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint=" MOBILE NUMBER AS USER ID "
-        android:padding="10dp"
-        android:layout_margin="7dp"
-        android:layout_below="@id/email_edit_register_activity"
-        android:background="@drawable/rounded_edit_text"/>
+        <com.ascenttechnovation.laundrize.custom.CustomTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=" Register to Laundrize "
+            android:textSize="@dimen/text_size_extra_extra_large"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:textColor="@color/activity_static_text"
+            />
 
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/password_edit_register_activity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint=" PASSWORD "
-        android:padding="10dp"
-        android:layout_margin="7dp"
-        android:layout_below="@id/mobileno_edit_register_activity"
-        android:background="@drawable/rounded_edit_text"/>
+        <com.ascenttechnovation.laundrize.custom.CustomEditText
+            android:id="@+id/name_edit_register_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=" NAME "
+            android:padding="@dimen/padding_large"
+            android:layout_marginBottom="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@drawable/rounded_edit_text">
+            <requestFocus/>
+            </com.ascenttechnovation.laundrize.custom.CustomEditText>
+
+
+        <com.ascenttechnovation.laundrize.custom.CustomEditText
+            android:id="@+id/email_edit_register_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=" EMAIL "
+            android:padding="@dimen/padding_large"
+            android:layout_marginBottom="@dimen/margin"
+            android:background="@drawable/rounded_edit_text"
+            android:layout_marginTop="@dimen/margin"
+            />
+        <com.ascenttechnovation.laundrize.custom.CustomEditText
+            android:id="@+id/mobileno_edit_register_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=" MOBILE NO. AS USER ID "
+            android:padding="@dimen/padding_large"
+            android:layout_marginBottom="@dimen/margin"
+            android:background="@drawable/rounded_edit_text"
+            android:layout_marginTop="@dimen/margin"/>
+
+        <com.ascenttechnovation.laundrize.custom.CustomEditText
+            android:id="@+id/password_edit_register_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=" PASSWORD "
+            android:padding="@dimen/padding_large"
+            android:layout_marginBottom="@dimen/margin"
+            android:background="@drawable/rounded_edit_text"
+            android:layout_marginTop="@dimen/margin"/>
+
+
+    </LinearLayout>
 
     <include
         layout="@layout/include_single_button_in_the_footer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         />
+
 
 </RelativeLayout>

@@ -30,8 +30,6 @@ public class LoginActivity extends Activity {
     private CustomTextView clickHere;
     private CustomButton logInNow;
     private ProgressDialog progressDialog;
-    private String finalUrl;
-    private CheckBox keepLoggedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +47,6 @@ public class LoginActivity extends Activity {
 
         mobileNumber = (CustomEditText) findViewById(R.id.username_edit_log_in_now_activity);
         password = (CustomEditText) findViewById(R.id.password_edit_log_in_now_activity);
-        keepLoggedIn = (CheckBox) findViewById(R.id.keep_logged_in_checkbox_log_in_now_activity);
         clickHere = (CustomTextView) findViewById(R.id.click_here_static_text_log_in_now_activity);
         logInNow = (CustomButton) findViewById(R.id.log_in_now_button_log_in_now_activity);
 
@@ -91,14 +88,11 @@ public class LoginActivity extends Activity {
                 progressDialog.dismiss();
                 if(result){
 
-                    if(keepLoggedIn.isChecked()){
-
-                        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("userId",Constants.userId);
-                        editor.putString("token",Constants.token);
-                        editor.commit();
-                    }
+                    SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("userId",Constants.userId);
+                    editor.putString("token",Constants.token);
+                    editor.commit();
 
                     String finalURL = Constants.fetchAddressUrl + Constants.userId;
                     new FetchAddressAsyncTask(getApplicationContext(),new FetchAddressAsyncTask.FetchAddressCallback() {
@@ -116,6 +110,7 @@ public class LoginActivity extends Activity {
 
                             progressDialog.dismiss();
                             Intent i = new Intent(LoginActivity.this,LandingActivity.class);
+//                            Intent i = new Intent(LoginActivity.this,LandActivity.class);
                             startActivity(i);
                         }
                     }).execute(finalURL);

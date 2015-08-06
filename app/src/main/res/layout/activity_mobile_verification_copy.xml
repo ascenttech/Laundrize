@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#EEEEEE"
+    android:layout_margin="10dp"
+    >
+
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
+        android:id="@+id/tv2"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:text=" Enter Your Verification Code "
+        android:textColor="@color/blue_button"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        />
+
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
+        android:id="@+id/mobileno_edit_verification_activity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_edit_text"
+        android:hint=" +91 - "
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        />
+
+    <com.ascenttechnovation.laundrize.custom.CustomButton
+        android:id="@+id/verify_now_button_mobile_verification_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text=" Verify Now "
+        android:background="@drawable/rounded_blue_button"
+        android:textStyle="normal"
+        android:textColor="@color/text_color_white"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:text=" Enter Your Mobile Number "
+        android:textColor="#196799"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        />
+
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
+        android:id="@+id/tv3"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="This is just a 4 digit number you must\nhave received on your mobile number"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_color_black"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        />
+
+    <com.ascenttechnovation.laundrize.custom.CustomEditText
+        android:id="@+id/username_edit_verification_activity"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/rounded_edit_text"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        />
+
+    <com.ascenttechnovation.laundrize.custom.CustomButton
+        android:id="@+id/confirm_verification_button_mobile_verification_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text=" Confirm my verification "
+        android:background="@drawable/rounded_blue_button"
+        android:textColor="@color/text_color_white"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal"
+        />
+
+</LinearLayout>

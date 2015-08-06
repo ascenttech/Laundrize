@@ -10,6 +10,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
@@ -25,6 +26,7 @@ import java.security.NoSuchAlgorithmException;
 public class LogInOrRegisterActivity extends Activity {
 
     CustomButton signInNow,registerNow;
+    int counter;
 
 
     @Override
@@ -64,6 +66,18 @@ public class LogInOrRegisterActivity extends Activity {
         Intent i = new Intent(LogInOrRegisterActivity.this,RegisterActivity.class);
         startActivity(i);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        counter++;
+        if(counter%2 ==0){
+            finish();
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Press Back Again to Exit",5000).show();
+
+        }
     }
 
     @Override

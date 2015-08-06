@@ -59,7 +59,8 @@ public class PlaceWeeklyOrderAsyncTask extends AsyncTask<JSONObject,Void,Boolean
 
 
 
-        HttpPost httpPost = new HttpPost(Constants.postOrderUrl+Constants.userId);
+//        HttpPost httpPost = new HttpPost(Constants.postOrderUrl+Constants.userId);
+        HttpPost httpPost = new HttpPost(Constants.postOrderUrl);
 //        HttpPost httpPost = new HttpPost(Constants.postOrderUrl);
 
         try {

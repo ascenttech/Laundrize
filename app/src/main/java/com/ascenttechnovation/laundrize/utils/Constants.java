@@ -167,6 +167,7 @@ public class Constants {
 //    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/postorders?user_id=";
 //    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/postorders?user_id=";
     public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/placeorder";
+//    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/placeorder?";
 
 //    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=8097746236";
     public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
