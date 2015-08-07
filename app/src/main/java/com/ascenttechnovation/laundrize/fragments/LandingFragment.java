@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
@@ -22,7 +23,8 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class LandingFragment extends Fragment {
 
-    private CustomButton placeOrder,quickOrder,weeklyOrder,trackOrder,completedOrder;
+    private FrameLayout placeOrder,quickOrder,weeklyOrder,trackOrder,completedOrder;
+    private CustomButton placeOrderBtn,quickOrderBtn,weeklyOrderBtn,trackOrderBtn,completedOrderBtn;
     private ActionBar actionBar;
     private View v;
 
@@ -81,11 +83,11 @@ public class LandingFragment extends Fragment {
 
     private void findViews(View v){
 
-        placeOrder = (CustomButton) v.findViewById(R.id.place_order_button_order_now_fragment);
-        quickOrder = (CustomButton) v.findViewById(R.id.quick_order_button_order_now_fragment);
-        weeklyOrder = (CustomButton) v.findViewById(R.id.weekly_order_button_order_now_fragment);
-        trackOrder = (CustomButton) v.findViewById(R.id.track_order_button_order_now_fragment);
-        completedOrder = (CustomButton) v.findViewById(R.id.completed_order_button_order_now_fragment);
+        placeOrder = (FrameLayout) v.findViewById(R.id.place_order_layout_order_now_fragment);
+        quickOrder = (FrameLayout) v.findViewById(R.id.quick_order_layout_order_now_fragment);
+        weeklyOrder = (FrameLayout) v.findViewById(R.id.weekly_order_layout_order_now_fragment);
+        trackOrder = (FrameLayout) v.findViewById(R.id.track_order_layout_order_now_fragment);
+        completedOrder = (FrameLayout) v.findViewById(R.id.completed_order_layout_order_now_fragment);
 
     }
 
@@ -96,7 +98,31 @@ public class LandingFragment extends Fragment {
         weeklyOrder.setOnClickListener(listener);
         trackOrder.setOnClickListener(listener);
         completedOrder.setOnClickListener(listener);
+
+        placeOrderBtn = (CustomButton) placeOrder.findViewById(R.id.styled_button_included);
+        placeOrderBtn.setText("PLACE ORDER");
+
+        quickOrderBtn = (CustomButton) quickOrder.findViewById(R.id.styled_button_included);
+        quickOrderBtn.setText("QUICK ORDER");
+
+
+        weeklyOrderBtn = (CustomButton) weeklyOrder.findViewById(R.id.styled_button_included);
+        weeklyOrderBtn.setText("WEEKLY ORDER");
+
+
+        trackOrderBtn = (CustomButton) trackOrder.findViewById(R.id.styled_button_included);
+        trackOrderBtn.setText("TRACK ORDER");
+        trackOrderBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_watch,0,0,0);
+
+
+        completedOrderBtn = (CustomButton) completedOrder.findViewById(R.id.styled_button_included);
+        completedOrderBtn.setText("COMPLETED ORDER");
+        completedOrderBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_shirt,0,0,0);
+
+
+
     }
+
 
     public void placeOrder(){
 
@@ -141,15 +167,15 @@ public class LandingFragment extends Fragment {
 
             switch (view.getId()){
 
-                case R.id.place_order_button_order_now_fragment: placeOrder();
+                case R.id.place_order_layout_order_now_fragment: placeOrder();
                     break;
-                case R.id.quick_order_button_order_now_fragment:quickOrder();
+                case R.id.quick_order_layout_order_now_fragment:quickOrder();
                     break;
-                case R.id.weekly_order_button_order_now_fragment:weeklyOrder();
+                case R.id.weekly_order_layout_order_now_fragment:weeklyOrder();
                     break;
-                case R.id.track_order_button_order_now_fragment:trackOrder();
+                case R.id.track_order_layout_order_now_fragment:trackOrder();
                     break;
-                case R.id.completed_order_button_order_now_fragment:completedOrder();
+                case R.id.completed_order_layout_order_now_fragment:completedOrder();
                     break;
 
             }

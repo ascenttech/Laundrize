@@ -33,7 +33,7 @@ public class QuickOrderFragment extends Fragment {
     private Dialog dialog;
     private CheckBox ironing,washing,bags;
     private CardView ironingLayout,washingLayout,bagsLayout,collectionLayout;
-    private CustomButton done;
+    private CustomButton done,newOrder,placeOrder;
     private ActionBar actionBar;
     private CustomTextView ironingTitleText,ironingDateText,washingTitleText,washingDateText,bagsTitleText,bagsDateText,collectionTitleText,collectionDateText;
     private Spinner collectionTimeSlot, ironingTimeSlot, washingTimeSlot, bagsTimeSlot;
@@ -111,6 +111,9 @@ public class QuickOrderFragment extends Fragment {
         bagsDateText = (CustomTextView) bagsLayout.findViewById(R.id.select_date_slot_included);
         bagsTimeSlot = (Spinner) bagsLayout.findViewById(R.id.select_time_slot_included);
 
+        newOrder = (CustomButton) v.findViewById(R.id.left_button_included);
+        placeOrder = (CustomButton) v.findViewById(R.id.right_button_included);
+
     }
 
     private void setViews(){
@@ -139,6 +142,12 @@ public class QuickOrderFragment extends Fragment {
         ironingTitleText.setText("Delivery : Ironing");
         washingTitleText.setText("Delivery : Washables");
         bagsTitleText.setText("Delivery : Bags & Shoes");
+
+        newOrder.setText("NEW ORDER");
+        newOrder.setOnClickListener(listener);
+
+        placeOrder.setText("PLACE ORDER");
+        placeOrder.setOnClickListener(listener);
 
 
     }
@@ -226,6 +235,29 @@ public class QuickOrderFragment extends Fragment {
         pickDate.show();
     }
 
+    public void newOrder(){
+
+        replaceFragment(new LandingFragment());
+
+    }
+
+    public void placeOrder(){
+
+        // we need to send a json from here
+        replaceFragment(new LandingFragment());
+
+    }
+
+    public void replaceFragment(Fragment fragment){
+
+        ((LandingActivity)getActivity()).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,fragment)
+                .addToBackStack(fragment.getClass().getName())
+                .commit();
+
+    }
+
     View.OnClickListener datelistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -280,6 +312,10 @@ public class QuickOrderFragment extends Fragment {
                     }
                     break;
                 case R.id.quick_service_done: dialog.dismiss();
+                    break;
+                case R.id.left_button_included : newOrder();
+                    break;
+                case R.id.right_button_included : placeOrder();
                     break;
 
 

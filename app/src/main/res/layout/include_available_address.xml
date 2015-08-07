@@ -2,18 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="20px"
     android:background="@drawable/blue_border_box"
+    android:padding="20px"
     android:layout_marginRight="@dimen/margin_dp"
     android:layout_marginLeft="@dimen/margin_dp"
     android:layout_marginTop="@dimen/margin_dp"
+    android:id="@+id/address_layout_included"
     >
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Address "
-        android:textColor="#212121"
+        android:textColor="@color/address_mobile_color"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:drawableLeft="@drawable/icon_tick"
         />
@@ -24,19 +25,22 @@
         android:layout_height="wrap_content"
         android:paddingBottom="30px"
         android:textSize="@dimen/text_size_extra_large"
+        android:layout_marginLeft="@dimen/icon_offset"
         />
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" Mobile "
-        android:textColor="#212121"
-        android:textSize="@dimen/text_size_extra_large"/>
+        android:text="Mobile"
+        android:textColor="@color/address_mobile_color"
+        android:textSize="@dimen/text_size_extra_large"
+        android:layout_marginLeft="@dimen/icon_offset"/>
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/mobile_number_text_included"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_large"
+        android:layout_marginLeft="@dimen/icon_offset"
         />
 </LinearLayout>

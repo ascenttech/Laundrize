@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    style="?android:attr/buttonStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/rounded_black_button"
+    >
+
+    <com.ascenttechnovation.laundrize.custom.CustomButton
+        android:id="@+id/styled_button_included"
+        style="@style/captionOnly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableLeft="@drawable/icon_checkbox"
+        android:drawablePadding="@dimen/padding"
+        android:textColor="@color/text_color_white"
+        android:textSize="@dimen/text_size_extra_large"
+        />
+</FrameLayout>

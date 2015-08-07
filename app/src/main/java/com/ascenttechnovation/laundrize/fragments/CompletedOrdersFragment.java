@@ -48,8 +48,8 @@ public class CompletedOrdersFragment extends Fragment {
 
         v = inflater.inflate(R.layout.fragment_completed_orders,container,false);
 
-//        findViews(v);
-//        setViews();
+        findViews(v);
+        setViews();
 
         customActionBar();
         settingTheAdapter(v);

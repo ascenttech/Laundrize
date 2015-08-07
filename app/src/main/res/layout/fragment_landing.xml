@@ -13,53 +13,41 @@
         android:layout_margin="@dimen/margin_large_double"
         >
 
-        <com.ascenttechnovation.laundrize.custom.CustomButton
-            android:id="@+id/place_order_button_order_now_fragment"
+        <include
+            android:id="@+id/place_order_layout_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color_white"
-            android:text="Place Order"
-            android:background="@drawable/rounded_black_button"
+            layout="@layout/button_dark_blue"
             android:layout_margin="@dimen/margin_large"
             />
-        <com.ascenttechnovation.laundrize.custom.CustomButton
-            android:id="@+id/quick_order_button_order_now_fragment"
+        <include
+            android:id="@+id/quick_order_layout_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color_white"
-            android:text="Quick Order"
-            android:background="@drawable/rounded_black_button"
+            layout="@layout/button_dark_blue"
             android:layout_margin="@dimen/margin_large"
             />
-        <com.ascenttechnovation.laundrize.custom.CustomButton
-            android:id="@+id/weekly_order_button_order_now_fragment"
+        <include
+            android:id="@+id/weekly_order_layout_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color_white"
-            android:text="Weekly Order"
-            android:background="@drawable/rounded_black_button"
+            layout="@layout/button_dark_blue"
             android:layout_margin="@dimen/margin_large"
             />
-        <com.ascenttechnovation.laundrize.custom.CustomButton
-            android:id="@+id/track_order_button_order_now_fragment"
+        <include
+            android:id="@+id/track_order_layout_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color_white"
-            android:text="Track Order"
-            android:background="@drawable/rounded_blue_button"
+            layout="@layout/button_light_blue"
             android:layout_margin="@dimen/margin_large"
             />
-        <com.ascenttechnovation.laundrize.custom.CustomButton
-            android:id="@+id/completed_order_button_order_now_fragment"
+        <include
+            android:id="@+id/completed_order_layout_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color_white"
-            android:text="Completed Order"
-            android:background="@drawable/rounded_blue_button"
+            layout="@layout/button_light_blue"
             android:layout_margin="@dimen/margin_large"
             />
-
-
 
     </LinearLayout>
 

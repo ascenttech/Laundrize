@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo_with_name"
-        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginTop="@dimen/margin_logo"
         android:layout_centerHorizontal="true"
         />
 
@@ -95,8 +95,8 @@
             android:layout_marginTop="@dimen/margin_large"
             />
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
-            android:id="@+id/tv2"
+        <com.ascenttechnovation.laundrize.custom.CustomEditText
+            android:id="@+id/username_edit_verification_activity"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text=" Enter Your Verification Code "
