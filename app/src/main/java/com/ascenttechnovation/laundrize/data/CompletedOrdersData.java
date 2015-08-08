@@ -7,11 +7,13 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class CompletedOrdersData {
 
-    String id,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate;
+    String id,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,orderId,quantity;
 
-    public CompletedOrdersData(String id, String serviceName, String collectionSlot, String actualCollected, String actualOpsSubmissionTime, String actualOpsCollectionTime, String price, String actualDelivery, String deliverySlot, String deliveryDate) {
+    public CompletedOrdersData(String id,String orderId,String serviceName,String quantity, String collectionSlot, String actualCollected, String actualOpsSubmissionTime, String actualOpsCollectionTime, String price, String actualDelivery, String deliverySlot, String deliveryDate) {
         this.id = id;
+        this.orderId = orderId;
         this.serviceName = serviceName;
+        this.quantity = quantity;
         this.collectionSlot = collectionSlot;
         this.actualCollected = actualCollected;
         this.actualOpsSubmissionTime = actualOpsSubmissionTime;
@@ -28,6 +30,22 @@ public class CompletedOrdersData {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getServiceName() {

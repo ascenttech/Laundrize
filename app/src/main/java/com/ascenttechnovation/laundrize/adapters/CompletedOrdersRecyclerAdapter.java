@@ -94,10 +94,9 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
         totalAmountStaticText.setText("Total Amount");
         totalBalanceStaticText.setText("Total Balance");
 
-        numberOfItemsValue.setText("12");
+        numberOfItemsValue.setText(Constants.completedOrdersData.get(position).getQuantity());
         deliveryDateValue.setText(Constants.completedOrdersData.get(position).getDeliveryDate());
         totalAmountValue.setText(Constants.completedOrdersData.get(position).getPrice());
-//        totalBalanceValue.setText(Constants.completedOrdersData.get(position).getTotalBalance());
         totalBalanceValue.setText("0");
 
     }

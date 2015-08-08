@@ -90,7 +90,16 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
 
     private void setViews(int position){
 
-//        progressIndicator.setImageResource();
+        if(Constants.orderProgress == 2){
+            progressIndicator.setImageResource(R.drawable.track_progress_2);
+        }
+        else if(Constants.orderProgress == 3){
+            progressIndicator.setImageResource(R.drawable.track_progress_3);
+        }
+        else{
+            progressIndicator.setImageResource(R.drawable.track_progress_1);
+        }
+
 
         numberOfItemsStaticText.setText("Number of Items");
         deliveryDateStaticText.setText("Delivery Date");

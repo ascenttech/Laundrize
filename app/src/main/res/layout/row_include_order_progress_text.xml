@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="HELLO THERE"
-        android:textSize="@dimen/text_size_extra_large"
+        android:textSize="@dimen/text_size"
         android:textColor="@color/sky_blue"
         />
     <com.ascenttechnovation.laundrize.custom.CustomTextView
@@ -18,7 +18,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="12"
-        android:textSize="30sp"
+        android:textSize="@dimen/text_size_extra_large"
         android:textColor="@color/navy_blue_button"
         />
 

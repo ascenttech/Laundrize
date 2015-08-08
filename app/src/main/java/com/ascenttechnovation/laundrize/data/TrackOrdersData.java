@@ -5,12 +5,14 @@ package com.ascenttechnovation.laundrize.data;
  */
 public class TrackOrdersData {
 
-    String id,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate;
+    String serviceId,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,orderId,quantity;
     int orderProgress;
 
-    public TrackOrdersData(String id, String serviceName, String collectionSlot, String actualCollected, String actualOpsSubmissionTime, String actualOpsCollectionTime, String price, String actualDelivery, String deliverySlot, String deliveryDate, int orderProgress) {
-        this.id = id;
+    public TrackOrdersData(String serviceId,String orderId,String serviceName,String quantity,String collectionSlot, String actualCollected, String actualOpsSubmissionTime, String actualOpsCollectionTime, String price, String actualDelivery, String deliverySlot, String deliveryDate, int orderProgress) {
+        this.serviceId = serviceId;
+        this.orderId = orderId;
         this.serviceName = serviceName;
+        this.quantity = quantity;
         this.collectionSlot = collectionSlot;
         this.actualCollected = actualCollected;
         this.actualOpsSubmissionTime = actualOpsSubmissionTime;
@@ -22,12 +24,28 @@ public class TrackOrdersData {
         this.orderProgress = orderProgress;
     }
 
-    public String getId() {
-        return id;
+    public String getServiceId() {
+        return serviceId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getServiceName() {

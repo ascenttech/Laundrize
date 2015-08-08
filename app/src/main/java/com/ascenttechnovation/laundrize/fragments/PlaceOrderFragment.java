@@ -1,11 +1,14 @@
 package com.ascenttechnovation.laundrize.fragments;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -684,7 +687,7 @@ public class PlaceOrderFragment extends Fragment {
 
 //                progressDialog.dismiss();
                 if(result){
-                    Toast.makeText(getActivity().getApplicationContext(),"Order Placed Successfully",5000).show();
+                    showDialog();
                 }
                 else{
                     Toast.makeText(getActivity().getApplicationContext(),"Order couldnt be placed sucessfully\nTry Again Later",5000).show();
@@ -805,6 +808,23 @@ public class PlaceOrderFragment extends Fragment {
 
     }
 
+
+    public void showDialog(){
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+        alert.setTitle("Laundrize");
+        alert.setMessage("Your Order has been Placed");
+        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                replaceFragment(new TrackOrdersFragment());
+            }
+        });
+        alert.show();
+
+
+    }
+
     public void formatDate(){
 
 
@@ -813,7 +833,7 @@ public class PlaceOrderFragment extends Fragment {
 
                 Log.d(Constants.LOG_TAG," collection date "+Constants.collectionDate);
                 SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date date = originalFormat.parse(Constants.washingDeliveryDate);
+                Date date = originalFormat.parse(Constants.collectionDate);
 
 
                 SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -824,7 +844,7 @@ public class PlaceOrderFragment extends Fragment {
 
                 Log.d(Constants.LOG_TAG," Ironing date "+Constants.ironingDeliveryDate);
                 SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date date = originalFormat.parse(Constants.washingDeliveryDate);
+                Date date = originalFormat.parse(Constants.ironingDeliveryDate);
 
 
                 SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -840,6 +860,16 @@ public class PlaceOrderFragment extends Fragment {
                 SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Constants.washingDeliveryDate = newDateFormat.format(date);
                 Log.d(Constants.LOG_TAG,"  NEW Washing Date "+ Constants.washingDeliveryDate);
+            }
+            if (Constants.bagsDeliveryDate != null) {
+
+                Log.d(Constants.LOG_TAG," Old washing delivery Date"+Constants.bagsDeliveryDate);
+                SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = originalFormat.parse(Constants.bagsDeliveryDate);
+
+                SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Constants.washingDeliveryDate = newDateFormat.format(date);
+                Log.d(Constants.LOG_TAG,"  NEW Washing Date "+ Constants.bagsDeliveryDate);
             }
         }
         catch (Exception e){

@@ -64,33 +64,40 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
                 String response = EntityUtils.toString(httpEntity);
 
                 Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
-                JSONArray jsonArray = new JSONArray(response);
+                JSONObject jsonObject= new JSONObject(response);
+                JSONArray jsonArray = jsonObject.getJSONArray("orders");
                 for(int i = 0;i<jsonArray.length();i++){
 
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String id = jsonObject.getString("id");
-                    String serviceName = jsonObject.getString("service_name");
-                    String collectionSlot = jsonObject.getString("collection_slot");
-                    String actualCollected = jsonObject.getString("actual_collected");
-                    String actualOpsSubmissionTime = jsonObject.getString("actual_ops_submission_time");
-                    String actualOpsCollectionTime = jsonObject.getString("actual_ops_collection_time");
-                    String price = jsonObject.getString("price");
-                    String actualDelivery = jsonObject.getString("actual_delivery");
-                    String deliverySlot = jsonObject.getString("delivery_slot");
-                    String deliveryDate = jsonObject.getString("user_delivery_date");
+                    JSONObject nestedJsonObject = jsonArray.getJSONObject(i);
+                    String serviceId = nestedJsonObject.getString("service_id");
+                    String orderId = nestedJsonObject.getString("order_id");
+                    String serviceName = nestedJsonObject.getString("service_name");
+                    String quantity = nestedJsonObject.getString("quantity");
+                    String collectionSlot = nestedJsonObject.getString("collection_slot");
+                    String actualCollected = nestedJsonObject.getString("actual_collected");
+                    String actualOpsSubmissionTime = nestedJsonObject.getString("actual_ops_submission_time");
+                    String actualOpsCollectionTime = nestedJsonObject.getString("actual_ops_collection_time");
+                    String price = nestedJsonObject.getString("price");
+                    String actualDelivery = nestedJsonObject.getString("actual_delivery");
+                    String deliverySlot = nestedJsonObject.getString("delivery_slot");
+                    String deliveryDate = nestedJsonObject.getString("user_delivery_date");
 
                       if(actualDelivery.equalsIgnoreCase("null")){
 
-                          Constants.completedOrdersData.add(new CompletedOrdersData(id,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate));
+                          Constants.completedOrdersData.add(new CompletedOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate));
                       }
                       else if(actualOpsCollectionTime.equalsIgnoreCase("null")){
 
                           Constants.orderProgress = 3;
-                          Constants.trackOrdersData.add(new TrackOrdersData(id, serviceName, collectionSlot, actualCollected, actualOpsSubmissionTime, actualOpsCollectionTime, price, actualDelivery, deliverySlot, deliveryDate, Constants.orderProgress));
+                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot, actualCollected, actualOpsSubmissionTime, actualOpsCollectionTime, price, actualDelivery, deliverySlot, deliveryDate, Constants.orderProgress));
                       }
                       else if(actualOpsSubmissionTime.equalsIgnoreCase("null")){
                           Constants.orderProgress = 2;
-                          Constants.trackOrdersData.add(new TrackOrdersData(id,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,Constants.orderProgress));
+                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,Constants.orderProgress));
+                      }
+                        else if(actualCollected.equalsIgnoreCase("null")){
+                          Constants.orderProgress =1;
+                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,Constants.orderProgress));
                       }
 
                 }
