@@ -17,7 +17,7 @@
         />
     <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/answer_text_faq_fragment"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="@dimen/margin_dp"
         android:layout_marginLeft="@dimen/margin_dp"
@@ -26,11 +26,9 @@
         android:gravity="center_vertical"
         android:padding="@dimen/margin_dp"
         android:visibility="gone"
-        android:background="@drawable/rectangle_box"
-        android:ellipsize="none"
-        android:scrollHorizontally="false"
-        android:maxLines="100"
+        android:background="@drawable/blue_rectangle_box"
         android:layout_weight="1"
+        android:ems="19"
         />
 
 

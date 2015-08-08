@@ -71,6 +71,7 @@ public class CompletedOrdersFragment extends Fragment {
     private void setViews() {
 
         placeOrder.setText("Place New Order");
+        placeOrder.setOnClickListener(listener);
     }
 
     private void customActionBar(){

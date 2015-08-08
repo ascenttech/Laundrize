@@ -37,6 +37,7 @@ import com.ascenttechnovation.laundrize.fragments.FAQFragment;
 import com.ascenttechnovation.laundrize.fragments.PrivacyPolicyFragment;
 import com.ascenttechnovation.laundrize.fragments.LandingFragment;
 import com.ascenttechnovation.laundrize.fragments.ProfileFragment;
+import com.ascenttechnovation.laundrize.fragments.TermAndConditionsFragment;
 import com.ascenttechnovation.laundrize.fragments.TrackOrdersFragment;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -219,7 +220,7 @@ public class LandingActivity extends ActionBarActivity {
                 fragment = new ProfileFragment();
                 break;
             case 7:
-                fragment = new ProfileFragment();
+                fragment = new TermAndConditionsFragment();
                 break;
             case 8:
                 fragment = new PrivacyPolicyFragment();

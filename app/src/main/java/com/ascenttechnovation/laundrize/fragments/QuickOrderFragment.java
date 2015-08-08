@@ -141,6 +141,10 @@ public class QuickOrderFragment extends Fragment {
 
     private void setViews(){
 
+        ironingLayout.setBackgroundResource(R.color.background_for_answers);
+        washingLayout.setBackgroundResource(R.color.background_for_answers);
+        bagsLayout.setBackgroundResource(R.color.background_for_answers);
+
         collectionDateText.setTag("date_1");
         collectionDateText.setOnClickListener(datelistener);
 

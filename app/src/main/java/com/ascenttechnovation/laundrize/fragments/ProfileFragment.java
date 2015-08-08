@@ -42,7 +42,7 @@ public class ProfileFragment extends Fragment {
     private ImageView profileImage;
     private Bitmap bitmap;
     private CustomTextView editYourProfile,address,mobileNumber,userName;
-    private Dialog dialog;
+    private Dialog dialog,dialogForAddress;
     private CustomButton update,cancel,addNewAddress;
     private LinearLayout footer;
     private ViewGroup availableAddresses;
@@ -164,30 +164,7 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    // This will generate a pop up
-    // Since the pop up is totally new screen
-    // we wont find its id in the findViews
-    public void editYourProfile(){
 
-        // custom dialog
-        dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.custom_dialog);
-        dialog.setTitle("Update Profile");
-
-        Button dialogButton = (Button) dialog.findViewById(R.id.update_button_custom_dialog);
-        EditText dateOfBirth = (EditText) dialog.findViewById(R.id.date_of_birth_edit_custom_dialog);
-//        dateOfBirth.setOnClickListener();
-
-
-        dialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-
-    }
 
     public Bitmap getCircleBitmap(Bitmap bitmap){
 
@@ -225,6 +202,54 @@ public class ProfileFragment extends Fragment {
 
     }
 
+    // This will generate a pop up
+    // Since the pop up is totally new screen
+    // we wont find its id in the findViews
+    public void editYourProfile(){
+
+        // custom dialog
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.custom_dialog);
+        dialog.setTitle("Update Profile");
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.update_button_custom_dialog);
+        EditText dateOfBirth = (EditText) dialog.findViewById(R.id.date_of_birth_edit_custom_dialog);
+//        dateOfBirth.setOnClickListener();
+
+
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+
+    }
+
+    public void update(){
+
+        // custom dialog
+        dialogForAddress = new Dialog(getActivity());
+        dialogForAddress.setContentView(R.layout.custom_dialog_for_address);
+        dialogForAddress.setTitle("Add New Address");
+
+        EditText city = (EditText) dialogForAddress.findViewById(R.id.city_profile_fragment);
+        EditText pincode = (EditText) dialogForAddress.findViewById(R.id.pincode_profile_fragment);
+        EditText building = (EditText) dialogForAddress.findViewById(R.id.building_or_street_profile_fragment);
+        EditText houseNumber = (EditText) dialogForAddress.findViewById(R.id.flat_or_house_number_profile_fragment);
+        Button update = (Button) dialogForAddress.findViewById(R.id.update_this_address_profile_fragment);
+
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogForAddress.dismiss();
+            }
+        });
+        dialogForAddress.show();
+
+    }
+
     View.OnClickListener listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -233,11 +258,11 @@ public class ProfileFragment extends Fragment {
 
                 case R.id.edit_profile_text_profile_fragment: editYourProfile();
                     break;
-                case R.id.left_button_included: cancel();
+                case R.id.left_button_included: update();
                     break;
                 case R.id.right_button_included: cancel();
                     break;
-                case R.id.add_new_address_button_profile_fragment : editYourProfile();
+                case R.id.add_new_address_button_profile_fragment : update();
                     break;
             }
 

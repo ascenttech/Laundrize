@@ -17,6 +17,7 @@
             android:drawableLeft="@drawable/icon_delivery"
             android:padding="@dimen/padding_large"
             android:drawablePadding="@dimen/padding"
+            android:textColor="@color/checkout_card_text"
             />
         <com.ascenttechnovation.laundrize.custom.CustomTextView
             android:id="@+id/select_date_slot_included"

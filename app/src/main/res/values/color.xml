@@ -11,9 +11,12 @@
     <color name="actionbar">#0BADFE</color>
     <color name="actionbar_tabs">#05577F</color>
 
+    <color name="checkout_card_text">#00567E</color>
+
     <color name="activity_static_text">#08557F</color>
 
     <color name="address_mobile_color">#074D6F</color>
+    <color name="background_for_answers">#CEEFFF</color>
 
 
     <color name="blue_button">#05577F</color>

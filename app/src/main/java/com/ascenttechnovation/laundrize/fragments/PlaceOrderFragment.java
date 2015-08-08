@@ -173,6 +173,10 @@ public class PlaceOrderFragment extends Fragment {
 
     private void setViews(){
 
+        ironingLayout.setBackgroundResource(R.color.background_for_answers);
+        washingLayout.setBackgroundResource(R.color.background_for_answers);
+        bagsLayout.setBackgroundResource(R.color.background_for_answers);
+
         newOrder.setText("NEW ORDER");
         newOrder.setOnClickListener(listener);
 
