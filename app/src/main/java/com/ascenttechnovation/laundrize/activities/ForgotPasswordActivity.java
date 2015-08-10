@@ -1,7 +1,9 @@
 package com.ascenttechnovation.laundrize.activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -35,8 +37,31 @@ public class ForgotPasswordActivity extends Activity {
 
         Log.d(Constants.LOG_TAG,Constants.ForgotPasswordActivity);
 
-        findViews();
-        setViews();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());
+        if(internetAvailable){
+
+            findViews();
+            setViews();
+        }
+        else{
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPasswordActivity.this);
+            builder.setMessage("This app requires app connection")
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // FIRE ZE MISSILES!
+                            dialog.dismiss();
+                        }
+                    });
+            builder.create();
+            builder.show();
+
+        }
     }
 
     private void findViews(){

@@ -2,8 +2,10 @@ package com.ascenttechnovation.laundrize.fragments;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -76,6 +78,29 @@ public class AddressFragment extends Fragment {
 
         return v;
     }
+
+//    @Override
+//    protected void onResume() {
+//        boolean internetAvailable = Constants.isInternetAvailable(getActivity());
+//        if(internetAvailable){
+//
+//
+//        }
+//        else{
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            builder.setMessage("This app requires app connection")
+//                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            // FIRE ZE MISSILES!
+//                            dialog.dismiss();
+//                        }
+//                    });
+//            builder.create();
+//            builder.show();
+//
+//        }
+//    }
 
     private void customActionBar(){
 

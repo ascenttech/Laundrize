@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.async.FetchCurrentServerTimeAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
 import com.ascenttechnovation.laundrize.async.PlaceWeeklyOrderAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
@@ -60,6 +62,8 @@ public class QuickOrderFragment extends Fragment {
     private int washingDeliveryCounter = 22;
     private int bagsDeliveryCounter = 22;
 
+    private ArrayList<String> minimumIroningSlots,minimumWashingSlots,minimumBagsSlots;
+
     // This will hold the index of the slot from the array of Collections Slots;
     private int j;
 
@@ -73,8 +77,7 @@ public class QuickOrderFragment extends Fragment {
 
         customActionBar();
         popUp();
-        findViews();
-        setViews();
+        getServerTime();
 
         return v;
     }
@@ -111,7 +114,60 @@ public class QuickOrderFragment extends Fragment {
 
     }
 
-    private void findViews(){
+
+    public void getServerTime(){
+
+        new FetchCurrentServerTimeAsyncTask(new FetchCurrentServerTimeAsyncTask.FetchCurrentServerTimeCallBack() {
+            @Override
+            public void onStart(boolean status) {
+
+            }
+
+            @Override
+            public void onResult(boolean result) {
+                if(result){
+
+                    Constants.currentServerTimeFetched = true;
+                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId;
+                    new FetchSlotDifferenceAsyncTask(new FetchSlotDifferenceAsyncTask.FetchSlotDifferenceCallback() {
+                        @Override
+                        public void onStart(boolean status) {
+
+
+                        }
+                        @Override
+                        public void onResult(boolean result) {
+
+                            if(result){
+
+                                Constants.slotDifferenceFetched = true;
+                                findViews(v);
+                                setViews();
+
+                            }
+                            else{
+
+                                Constants.slotDifferenceFetched = false;
+                                Toast.makeText(getActivity().getApplicationContext(),"Unable to connect to the Internet.\nTry Again Later",5000).show();
+                            }
+
+                        }
+                    }).execute(finalUrl);
+
+                }
+                else{
+                    Constants.currentServerTimeFetched = false;
+                    Toast.makeText(getActivity().getApplicationContext(),"Unable to connect to the Internet.\nTry Again Later",5000).show();
+                }
+            }
+        }).execute(Constants.getTimeStampUrl);
+
+
+    }
+
+
+
+    private void findViews(View v){
 
         collectionLayout = (CardView) v.findViewById(R.id.collection_layout_quick_fragment);
         collectionTitleText = (CustomTextView) collectionLayout.findViewById(R.id.service_included);
@@ -210,7 +266,7 @@ public class QuickOrderFragment extends Fragment {
     public void setCollectionsAdapter(final String date,final String when){
 
         final ArrayList<String> collectionSlots = getSlots(date,when);
-        if(collectionSlots.size() != 0) {
+        if(collectionSlots != null) {
 
             collectionAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, collectionSlots);
             collectionAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
@@ -250,7 +306,11 @@ public class QuickOrderFragment extends Fragment {
         }
         else{
 
-            Toast.makeText(getActivity().getApplicationContext(),"Collection cannot be done on the given date.Please select another date",5000).show();
+            String completedDate[] = date.split("/");
+            int newDate = Integer.parseInt(completedDate[0]);
+            newDate++;
+            Constants.collectionDate = String.valueOf(newDate)+"/"+completedDate[1]+"/"+completedDate[2];
+            setCollectionsAdapter(Constants.collectionDate, "later");
         }
     }
 
@@ -286,7 +346,7 @@ public class QuickOrderFragment extends Fragment {
                 }
 
         },year, month, date);
-        ironingDatePicker.getDatePicker().setMinDate(getLongDate(Constants.collectionDate));
+        ironingDatePicker.getDatePicker().setMinDate(getLongDate(Constants.minIroningDate));
         ironingDatePicker.show();
     }
 
@@ -312,12 +372,30 @@ public class QuickOrderFragment extends Fragment {
 
         ArrayList<String> ironingSlots;
         if(collectionArrayIndex == -1){
-            ironingSlots = getSlots(date,"later");
-        }
-        else {
+
+            String minimumDate[] = Constants.minIroningDate.split("/");
+            String ironingDate[] = date.split("/");
+
+            int min = Integer.parseInt(minimumDate[0]);
+            int iron = Integer.parseInt(ironingDate[0]);
+
+            if(iron == min){
+
+                ironingSlots = minimumIroningSlots;
+
+            }
+            else{
+
+                ironingSlots = getSlots(date,"later");
+            }
+
+        }else {
             ironingSlots = getSlotsForIroningAndWashing(date, ironingDeliveryCounter, "ironing", collectionArrayIndex);
+            minimumIroningSlots = ironingSlots;
+            Constants.minIroningDate = Constants.ironingDeliveryDate;
+            Log.d(Constants.LOG_TAG," The minimum date for washing is "+ Constants.minIroningDate);
         }
-        if(ironingSlots.size()!=0) {
+        if(ironingSlots != null) {
             ironingDateText.setText(Constants.ironingDeliveryDate);
             ironingAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, ironingSlots);
             ironingAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
@@ -337,7 +415,11 @@ public class QuickOrderFragment extends Fragment {
             });
         }
         else{
-            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Ironed clothes cannot be done on the given date.Please select another date",5000).show();
+            String completedDate[] = date.split("/");
+            int newDate = Integer.parseInt(completedDate[0]);
+            newDate++;
+            Constants.ironingDeliveryDate = String.valueOf(newDate)+"/"+completedDate[1]+"/"+completedDate[2];
+            setIroningAdapter(Constants.ironingDeliveryDate, -1);
         }
 
     }
@@ -370,7 +452,7 @@ public class QuickOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        washingDatePicker.getDatePicker().setMinDate(Long.parseLong(Constants.washingDeliveryDate));
+        washingDatePicker.getDatePicker().setMinDate(getLongDate(Constants.minWashingDate));
         washingDatePicker.show();
     }
 
@@ -379,14 +461,30 @@ public class QuickOrderFragment extends Fragment {
         ArrayList<String> washingSlots;
         if(collectionArrayIndex == -1){
 
-            washingSlots = getSlots(date,"later");
+            String minDate[] = Constants.minWashingDate.split("/");
+            String washingDate[] = date.split("/");
+
+            int min = Integer.parseInt(minDate[0]);
+            int wash = Integer.parseInt(washingDate[0]);
+
+            if(wash == min){
+
+                washingSlots = minimumWashingSlots;
+
+            }
+            else{
+
+                washingSlots = getSlots(date,"later");
+            }
 
         }
-        else{
-
-            washingSlots = getSlotsForIroningAndWashing(date, washingDeliveryCounter,"washing",collectionArrayIndex);
+        else {
+            washingSlots = getSlotsForIroningAndWashing(date, washingDeliveryCounter, "washing", collectionArrayIndex);
+            minimumWashingSlots = washingSlots;
+            Constants.minWashingDate = Constants.washingDeliveryDate;
+            Log.d(Constants.LOG_TAG," The minimum date for washing is "+ Constants.minWashingDate);
         }
-        if(washingSlots.size()!=0) {
+        if(washingSlots != null) {
             washingDateText.setText(Constants.washingDeliveryDate);
             washingAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, washingSlots);
             washingAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
@@ -406,7 +504,12 @@ public class QuickOrderFragment extends Fragment {
 
         }
         else{
-            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Washed Clothes cannot be done on the given date.Please select another date",5000).show();
+
+            String completedDate[] = date.split("/");
+            int newDate = Integer.parseInt(completedDate[0]);
+            newDate++;
+            Constants.washingDeliveryDate = String.valueOf(newDate)+"/"+completedDate[1]+"/"+completedDate[2];
+            setWashingAdapter(Constants.washingDeliveryDate, -1);
         }
 
     }
@@ -439,7 +542,7 @@ public class QuickOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        bagsDatePicker.getDatePicker().setMinDate(Long.parseLong(Constants.bagsDeliveryDate));
+        bagsDatePicker.getDatePicker().setMinDate(getLongDate(Constants.minBagsDate));
         bagsDatePicker.show();
     }
 
@@ -449,19 +552,39 @@ public class QuickOrderFragment extends Fragment {
         ArrayList<String> bagsSlots;
         if(collectionArrayIndex == -1){
 
-            bagsSlots= getSlots(date,"later");
-        }
-        else{
+            String minimumDate[] = Constants.minBagsDate.split("/");
+            String bagsDate[] = date.split("/");
 
-            bagsSlots = getSlotsForIroningAndWashing(date,bagsDeliveryCounter,"bags",collectionArrayIndex);
+            int min = Integer.parseInt(minimumDate[0]);
+            int bags = Integer.parseInt(bagsDate[0]);
+
+            if(bags == min){
+
+                bagsSlots = minimumBagsSlots;
+
+            }
+            else{
+
+                bagsSlots = getSlots(date,"later");
+            }
+
         }
-        if(bagsSlots.size()!=0) {
+        else {
+            bagsSlots = getSlotsForIroningAndWashing(date,bagsDeliveryCounter,"bags",collectionArrayIndex);
+            minimumBagsSlots = bagsSlots;
+            Constants.minBagsDate = Constants.bagsDeliveryDate;
+        }
+        if(bagsSlots != null) {
             bagsAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, bagsSlots);
             bagsAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
             bagsTimeSlot.setAdapter(bagsAdapter);
         }
         else{
-            Toast.makeText(getActivity().getApplicationContext(),"Delivery of Bags and shoes cannot be done on the given date.Please select another date",5000).show();
+            String completedDate[] = date.split("/");
+            int newDate = Integer.parseInt(completedDate[0]);
+            newDate++;
+            Constants.bagsDeliveryDate = String.valueOf(newDate)+"/"+completedDate[1]+"/"+completedDate[2];
+            setBagsAdapter(Constants.bagsDeliveryDate, -1);
         }
     }
 
@@ -854,13 +977,27 @@ public class QuickOrderFragment extends Fragment {
                     collectionDatePicker();
                     break;
                 case "date_2":
-                    ironingDatePicker();
+                    if(Constants.collectionDate != null){
+                        ironingDatePicker();
+                    }
+                    else{
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the Collection Date",5000).show();
+                    }
                     break;
                 case "date_3":
-                    washingDatePicker();
+                    if(Constants.collectionDate != null){
+                        washingDatePicker();
+                    }
+                    else{
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the Collection Date",5000).show();
+                    }
                     break;
                 case "date_4":
-                    bagsDatePicker();
+                    if(Constants.collectionDate != null) {
+                        bagsDatePicker();
+                    }else{
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the Collection Date",5000).show();
+                    }
                     break;
             }
         }

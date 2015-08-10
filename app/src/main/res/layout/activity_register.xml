@@ -43,7 +43,8 @@
             android:padding="@dimen/padding_large"
             android:layout_marginBottom="@dimen/margin"
             android:layout_marginTop="@dimen/margin"
-            android:background="@drawable/rounded_edit_text">
+            android:background="@drawable/rounded_edit_text"
+            android:textSize="@dimen/text_size_edit_text">
             <requestFocus/>
             </com.ascenttechnovation.laundrize.custom.CustomEditText>
 
@@ -57,7 +58,7 @@
             android:layout_marginBottom="@dimen/margin"
             android:background="@drawable/rounded_edit_text"
             android:layout_marginTop="@dimen/margin"
-            />
+            android:textSize="@dimen/text_size_edit_text"/>
         <com.ascenttechnovation.laundrize.custom.CustomEditText
             android:id="@+id/mobileno_edit_register_activity"
             android:layout_width="match_parent"
@@ -66,7 +67,8 @@
             android:padding="@dimen/padding_large"
             android:layout_marginBottom="@dimen/margin"
             android:background="@drawable/rounded_edit_text"
-            android:layout_marginTop="@dimen/margin"/>
+            android:layout_marginTop="@dimen/margin"
+            android:textSize="@dimen/text_size_edit_text"/>
 
         <com.ascenttechnovation.laundrize.custom.CustomEditText
             android:id="@+id/password_edit_register_activity"
@@ -76,7 +78,9 @@
             android:padding="@dimen/padding_large"
             android:layout_marginBottom="@dimen/margin"
             android:background="@drawable/rounded_edit_text"
-            android:layout_marginTop="@dimen/margin"/>
+            android:layout_marginTop="@dimen/margin"
+            android:textSize="@dimen/text_size_edit_text"
+            />
 
 
     </LinearLayout>

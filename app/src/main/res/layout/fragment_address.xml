@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:hint="City"
                 android:background="@drawable/rounded_edit_text"
-                android:textSize="@dimen/text_size"
+                android:textSize="@dimen/text_size_edit_text"
                 android:padding="@dimen/padding_large"
                 />
             <com.ascenttechnovation.laundrize.custom.CustomEditText
@@ -61,7 +61,7 @@
                 android:hint="Pincode"
                 android:background="@drawable/rounded_edit_text"
                 android:layout_marginTop="@dimen/margin_dp"
-                android:textSize="@dimen/text_size"
+                android:textSize="@dimen/text_size_edit_text"
                 android:padding="@dimen/padding_large"
                 />
             <com.ascenttechnovation.laundrize.custom.CustomEditText
@@ -71,7 +71,7 @@
                 android:hint="Area"
                 android:background="@drawable/rounded_edit_text"
                 android:layout_marginTop="@dimen/margin_dp"
-                android:textSize="@dimen/text_size"
+                android:textSize="@dimen/text_size_edit_text"
                 android:padding="@dimen/padding_large"
                 />
             <com.ascenttechnovation.laundrize.custom.CustomEditText
@@ -81,7 +81,7 @@
                 android:hint="Building or Street Name"
                 android:background="@drawable/rounded_edit_text"
                 android:layout_marginTop="@dimen/margin_dp"
-                android:textSize="@dimen/text_size"
+                android:textSize="@dimen/text_size_edit_text"
                 android:padding="@dimen/padding_large"
                 />
             <com.ascenttechnovation.laundrize.custom.CustomEditText
@@ -91,7 +91,7 @@
                 android:hint="Flat or House Number"
                 android:background="@drawable/rounded_edit_text"
                 android:layout_marginTop="@dimen/margin_dp"
-                android:textSize="@dimen/text_size"
+                android:textSize="@dimen/text_size_edit_text"
                 android:padding="@dimen/padding_large"
                 />
 

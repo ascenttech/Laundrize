@@ -1,5 +1,9 @@
 package com.ascenttechnovation.laundrize.utils;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import com.ascenttechnovation.laundrize.data.AddressData;
 import com.ascenttechnovation.laundrize.data.AllSlotsData;
 import com.ascenttechnovation.laundrize.data.BagOrderData;
@@ -34,6 +38,9 @@ public class Constants {
 
     public static String mobileNumber,userId,token,verificationCode,totalAmount,totalQuantity;
     public static String addressId,address;
+    public static String minIroningDate,minIroningSlotId;
+    public static String minWashingDate,minWashingSlotId;
+    public static String minBagsDate,minBagsSlotId;
     public static String collectionDate,collectionSlotId;
     public static String ironingDeliveryDate,ironingDeliverySlotId;
     public static String washingDeliverySlotId,washingDeliveryDate;
@@ -198,6 +205,22 @@ public class Constants {
 //    public static final String getSlotDifferenceUrl ="http://dev.laundrize.com/api/api/v1/slotdiff?user_id=2";
     public static final String getSlotDifferenceUrl ="http://dev.laundrize.com/api/api/v1/slotdiff?user_id=";
 
+    public static boolean isInternetAvailable(Context context){
 
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null)
+        {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null)
+                for (int i = 0; i < info.length; i++)
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED)
+                    {
+                        return true;
+                    }
+
+        }
+        return false;
+
+    }
 
 }

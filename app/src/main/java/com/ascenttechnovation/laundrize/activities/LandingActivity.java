@@ -1,5 +1,7 @@
 package com.ascenttechnovation.laundrize.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -135,6 +137,29 @@ public class LandingActivity extends ActionBarActivity {
         if (savedInstanceState == null) {
             // on first time display view for first nav item
             displayView(0);
+        }
+    }
+
+
+    protected void onResume() {
+        super.onResume();
+        boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());
+        if(internetAvailable){
+
+        }
+        else{
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(LandingActivity.this);
+            builder.setMessage("This app requires app connection")
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // FIRE ZE MISSILES!
+                            dialog.dismiss();
+                        }
+                    });
+            builder.create();
+            builder.show();
+
         }
     }
 
