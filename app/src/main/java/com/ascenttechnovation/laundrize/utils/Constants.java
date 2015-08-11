@@ -86,7 +86,7 @@ public class Constants {
     public static ArrayList<TrackOrdersData> trackOrdersData;
     public static ArrayList<String> areas;
     public static ArrayList<String> cities;
-    public static ArrayList<String> pincodes;
+    public static ArrayList<String> zipcodes;
 
 
     // Log Tags for all the activities
@@ -118,6 +118,7 @@ public class Constants {
     public static final String AddNewAddressAsyncTask=" ADD NEW ADDRESS ASYNC TASK ";
     public static final String ConfirmVerificationAsyncTask=" CONFIRM VERIFICATION ASYNC TASK ";
     public static final String FetchAddressAsyncTask=" FETCH ADDRESS ASYNC TASK ";
+    public static final String FetchAddressRelatedDataAsyncTask=" FETCH ADDRESS RELATED DATA ASYNC TASK ";
     public static final String FetchAllSlotsAsyncTask=" FETCH ALL SLOTS ASYNC TASK ";
     public static final String FetchCurrentServerTimeAsyncTask=" FETCH CURRENT SERVER TIME ASYNC TASK ";
     public static final String FetchLaundryServicesAsyncTask=" FETCH LAUNDRY SERVICES ASYNC TASK ";
@@ -173,9 +174,6 @@ public class Constants {
     //  public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=8879153143";
     public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=";
 
-
-//    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/postorders?user_id=";
-//    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/postorders?user_id=";
     public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/placeorder";
 //    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/placeorder?";
 
@@ -195,7 +193,7 @@ public class Constants {
 //    public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=12";
     public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=";
 
-//    public static final String addNewAddressUrl ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=12&city=Pune&city_zip=411027&city_zip_area=PimpleSaudagar&address=501RajGalaxy"
+//  public static final String addNewAddressUrl ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=12&city=Pune&city_zip=411027&city_zip_area=PimpleSaudagar&address=501RajGalaxy"
     public static final String addNewAddressUrl ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=";
 
 //    public static final String getTimeStampUrl ="http://dev.laundrize.com/api/api/v1/currentdatetime?";

@@ -5,10 +5,10 @@ package com.ascenttechnovation.laundrize.data;
  */
 public class TrackOrdersData {
 
-    String serviceId,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,orderId,quantity;
+    String serviceId,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,orderId,quantity,typeOfService;
     int orderProgress;
 
-    public TrackOrdersData(String serviceId,String orderId,String serviceName,String quantity,String collectionSlot, String actualCollected, String actualOpsSubmissionTime, String actualOpsCollectionTime, String price, String actualDelivery, String deliverySlot, String deliveryDate, int orderProgress) {
+    public TrackOrdersData(String serviceId,String orderId,String serviceName,String quantity,String collectionSlot, String actualCollected, String actualOpsSubmissionTime, String actualOpsCollectionTime, String price, String actualDelivery, String deliverySlot, String deliveryDate,String typeOfService, int orderProgress) {
         this.serviceId = serviceId;
         this.orderId = orderId;
         this.serviceName = serviceName;
@@ -22,6 +22,7 @@ public class TrackOrdersData {
         this.deliverySlot = deliverySlot;
         this.deliveryDate = deliveryDate;
         this.orderProgress = orderProgress;
+        this.typeOfService = typeOfService;
     }
 
     public String getServiceId() {
@@ -126,5 +127,13 @@ public class TrackOrdersData {
 
     public void setOrderProgress(int orderProgress) {
         this.orderProgress = orderProgress;
+    }
+
+    public String getTypeOfService() {
+        return typeOfService;
+    }
+
+    public void setTypeOfService(String typeOfService) {
+        this.typeOfService = typeOfService;
     }
 }

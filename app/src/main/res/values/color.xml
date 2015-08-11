@@ -19,6 +19,8 @@
     <color name="background_for_answers">#CEEFFF</color>
 
 
+    <color name="navigation_drawer_background">#05577F</color>
+
     <color name="blue_button">#05577F</color>
     <color name="navy_blue_button">#1F2D3A</color>
     <color name="footer_button">#022231</color>

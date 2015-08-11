@@ -50,16 +50,18 @@ public class SplashScreenActivity extends Activity {
         setViews();
 
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
-        userId = sharedPreferences.getString("userId","null");
-        token = sharedPreferences.getString("token","null");
+        Constants.userId = sharedPreferences.getString("userId","null");
+        Constants.token = sharedPreferences.getString("token","null");
+
         // if user Id is not equal null then we move to landing Activity
-        if(!userId.equalsIgnoreCase("null")){
+        if(!Constants.userId.equalsIgnoreCase("null")){
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
 
                     Intent intent = new Intent(SplashScreenActivity.this,LandingActivity.class);
+//                    Intent intent = new Intent(SplashScreenActivity.this,LandActivity.class);
                     startActivity(intent);
                 }
             },3000);

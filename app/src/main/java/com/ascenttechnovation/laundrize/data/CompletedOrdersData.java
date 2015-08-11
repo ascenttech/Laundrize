@@ -7,9 +7,9 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class CompletedOrdersData {
 
-    String id,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,orderId,quantity;
+    String id,serviceName,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,orderId,quantity,typeOfService;
 
-    public CompletedOrdersData(String id,String orderId,String serviceName,String quantity, String collectionSlot, String actualCollected, String actualOpsSubmissionTime, String actualOpsCollectionTime, String price, String actualDelivery, String deliverySlot, String deliveryDate) {
+    public CompletedOrdersData(String id,String orderId,String serviceName,String quantity, String collectionSlot, String actualCollected, String actualOpsSubmissionTime, String actualOpsCollectionTime, String price, String actualDelivery, String deliverySlot, String deliveryDate,String typeOfService) {
         this.id = id;
         this.orderId = orderId;
         this.serviceName = serviceName;
@@ -22,6 +22,7 @@ public class CompletedOrdersData {
         this.actualDelivery = actualDelivery;
         this.deliverySlot = deliverySlot;
         this.deliveryDate = deliveryDate;
+        this.typeOfService = typeOfService;
     }
 
     public String getId() {
@@ -120,4 +121,11 @@ public class CompletedOrdersData {
         this.deliveryDate = deliveryDate;
     }
 
+    public String getTypeOfService() {
+        return typeOfService;
+    }
+
+    public void setTypeOfService(String typeOfService) {
+        this.typeOfService = typeOfService;
+    }
 }

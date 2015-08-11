@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,6 +27,7 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.async.AddNewAddressAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchAddressAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchCurrentServerTimeAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
@@ -73,13 +75,7 @@ public class AddressFragment extends Fragment {
         findViews(v);
         setViews();
 
-        if(Constants.addressFetched){
-
-            setClickListeners();
-            addAvailableAddresses();
-        }
-
-
+        fetchAddresses();
         return v;
     }
 
@@ -148,6 +144,35 @@ public class AddressFragment extends Fragment {
         ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.areas);
         areaAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
         area.setAdapter(areaAdapter);
+    }
+
+    private void fetchAddresses(){
+
+        String finalURL = Constants.fetchAddressUrl + Constants.userId;
+        new FetchAddressAsyncTask(getActivity().getApplicationContext(),new FetchAddressAsyncTask.FetchAddressCallback() {
+            @Override
+            public void onStart(boolean status) {
+
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.LOG_TAG);
+                progressDialog.setMessage("Loading,Please Wait...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                progressDialog.dismiss();
+
+                setClickListeners();
+                addAvailableAddresses();
+
+            }
+        }).execute(finalURL);
+
+
+
+
     }
 
     private void setClickListeners(){
@@ -272,41 +297,41 @@ public class AddressFragment extends Fragment {
 
     public void validateNewAddress(){
 
-        if(!city.getText().toString().equalsIgnoreCase("")){
-
-            if(!pincode.getText().toString().equalsIgnoreCase("")){
-
-
-                if(!area.getText().toString().equalsIgnoreCase("")){
-
-                    if(!buildingName.getText().toString().equalsIgnoreCase("")){
-
-                        if(!houseNumber.getText().toString().equalsIgnoreCase("")){
-
-                            updateNewAddress();
-                        } // end of house Number
-                        else{
-                            Toast.makeText(getActivity().getApplicationContext(),"Please enter the houseNumber",5000).show();
-                        }
-                    } // end of buildiing name
-                    else{
-                        Toast.makeText(getActivity().getApplicationContext(),"Please enter the building name",5000).show();
-                    }
-
-                }// end of area
-                else{
-                    Toast.makeText(getActivity().getApplicationContext(),"Please enter the area",5000).show();
-                }
-
-            } // end of pincode if
-            else{
-                Toast.makeText(getActivity().getApplicationContext(),"Please enter the pincode",5000).show();
-            }
-
-        }// end of city if
-        else{
-            Toast.makeText(getActivity().getApplicationContext(),"Please enter the city",5000).show();
-        }
+//        if(!city.getText().toString().equalsIgnoreCase("")){
+//
+//            if(!pincode.getText().toString().equalsIgnoreCase("")){
+//
+//
+//                if(!area.getText().toString().equalsIgnoreCase("")){
+//
+//                    if(!buildingName.getText().toString().equalsIgnoreCase("")){
+//
+//                        if(!houseNumber.getText().toString().equalsIgnoreCase("")){
+//
+//                            updateNewAddress();
+//                        } // end of house Number
+//                        else{
+//                            Toast.makeText(getActivity().getApplicationContext(),"Please enter the houseNumber",5000).show();
+//                        }
+//                    } // end of buildiing name
+//                    else{
+//                        Toast.makeText(getActivity().getApplicationContext(),"Please enter the building name",5000).show();
+//                    }
+//
+//                }// end of area
+//                else{
+//                    Toast.makeText(getActivity().getApplicationContext(),"Please enter the area",5000).show();
+//                }
+//
+//            } // end of pincode if
+//            else{
+//                Toast.makeText(getActivity().getApplicationContext(),"Please enter the pincode",5000).show();
+//            }
+//
+//        }// end of city if
+//        else{
+//            Toast.makeText(getActivity().getApplicationContext(),"Please enter the city",5000).show();
+//        }
 
 
     }
@@ -314,10 +339,10 @@ public class AddressFragment extends Fragment {
     public void updateNewAddress(){
 
         try {
-            cityValue = URLEncoder.encode(city.getText().toString(), "UTF-8");
-            pincodeValue = URLEncoder.encode(pincode.getText().toString(), "UTF-8");
-            areaValue = URLEncoder.encode(area.getText().toString(), "UTF-8");
-            buildingNameValue = URLEncoder.encode(buildingName.getText().toString(), "UTF-8");
+//            cityValue = URLEncoder.encode(city.getText().toString(), "UTF-8");
+//            pincodeValue = URLEncoder.encode(pincode.getText().toString(), "UTF-8");
+//            areaValue = URLEncoder.encode(area.getText().toString(), "UTF-8");
+//            buildingNameValue = URLEncoder.encode(buildingName.getText().toString(), "UTF-8");
             houseNumberValue = URLEncoder.encode(houseNumber.getText().toString(), "UTF-8");
 
             String temp = houseNumberValue+","+buildingNameValue;

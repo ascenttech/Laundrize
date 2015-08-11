@@ -25,6 +25,7 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     Context context;
     TrackOrdersCallback callback;
+    String typeOfService;
     public interface TrackOrdersCallback{
 
         public void onStart(boolean status);
@@ -82,22 +83,45 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
                     String deliverySlot = nestedJsonObject.getString("delivery_slot");
                     String deliveryDate = nestedJsonObject.getString("user_delivery_date");
 
-                      if(actualDelivery.equalsIgnoreCase("null")){
+                    switch(serviceId){
 
-                          Constants.completedOrdersData.add(new CompletedOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate));
+                        case "001" : typeOfService = "Ironing";
+                            break;
+                        case "002" : typeOfService = "Ironing";
+                            break;
+                        case "003" : typeOfService = "Washing";
+                            break;
+                        case "004" : typeOfService = "Washing";
+                            break;
+                        case "005" : typeOfService = "Washing";
+                            break;
+                        case "006" : typeOfService = "Washing";
+                            break;
+                        case "007" : typeOfService = "Washing";
+                            break;
+                        case "008" : typeOfService = "Washing";
+                            break;
+                    }
+
+                      if(!actualDelivery.equalsIgnoreCase("null")){
+
+                          Constants.completedOrdersData.add(new CompletedOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService));
                       }
-                      else if(actualOpsCollectionTime.equalsIgnoreCase("null")){
+                      else if(!actualOpsCollectionTime.equalsIgnoreCase("null")){
 
+                          Constants.orderProgress = 4;
+                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot, actualCollected, actualOpsSubmissionTime, actualOpsCollectionTime, price, actualDelivery, deliverySlot, deliveryDate,typeOfService,Constants.orderProgress));
+                      }
+                      else if(!actualOpsSubmissionTime.equalsIgnoreCase("null")){
                           Constants.orderProgress = 3;
-                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot, actualCollected, actualOpsSubmissionTime, actualOpsCollectionTime, price, actualDelivery, deliverySlot, deliveryDate, Constants.orderProgress));
+                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService,Constants.orderProgress));
                       }
-                      else if(actualOpsSubmissionTime.equalsIgnoreCase("null")){
+                        else if(!actualCollected.equalsIgnoreCase("null")){
                           Constants.orderProgress = 2;
-                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,Constants.orderProgress));
-                      }
-                        else if(actualCollected.equalsIgnoreCase("null")){
-                          Constants.orderProgress =1;
-                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,Constants.orderProgress));
+                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService,Constants.orderProgress));
+                      } else if(!collectionSlot.equalsIgnoreCase("null")){
+                          Constants.orderProgress = 1;
+                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService,Constants.orderProgress));
                       }
 
                 }

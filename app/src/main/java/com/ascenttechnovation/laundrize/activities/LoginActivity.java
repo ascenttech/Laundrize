@@ -119,27 +119,6 @@ public class LoginActivity extends Activity {
                     editor.putString("token",Constants.token);
                     editor.commit();
 
-                    String finalURL = Constants.fetchAddressUrl + Constants.userId;
-                    new FetchAddressAsyncTask(getApplicationContext(),new FetchAddressAsyncTask.FetchAddressCallback() {
-                        @Override
-                        public void onStart(boolean status) {
-
-                            progressDialog = new ProgressDialog(LoginActivity.this);
-                            progressDialog.setTitle(Constants.LOG_TAG);
-                            progressDialog.setMessage("Loading,Please Wait...");
-                            progressDialog.setCancelable(false);
-                            progressDialog.show();
-                        }
-                        @Override
-                        public void onResult(boolean result) {
-
-                            progressDialog.dismiss();
-                            Intent i = new Intent(LoginActivity.this,LandingActivity.class);
-//                            Intent i = new Intent(LoginActivity.this,LandActivity.class);
-                            startActivity(i);
-                        }
-                    }).execute(finalURL);
-
 
                 }
                 else{

@@ -26,7 +26,7 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
     private Context context;
     private ArrayList<TrackOrdersData> trackOrdersData;
     private LinearLayout numberOfItems,deliveryDate,totalAmount,totalBalance;
-    private CustomTextView numberOfItemsValue,deliveryDateValue,totalAmountValue,totalBalanceValue;
+    private CustomTextView numberOfItemsValue,deliveryDateValue,totalAmountValue,totalBalanceValue,title;
     private CustomTextView numberOfItemsStaticText,deliveryDateStaticText,totalAmountStaticText,totalBalanceStaticText;
     private ImageView progressIndicator;
 
@@ -69,11 +69,14 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
 
         progressIndicator = (ImageView) holder.v.findViewById(R.id.progress_indicator_image_track_order);
 
+
+
         numberOfItems = (LinearLayout) holder.v.findViewById(R.id.number_of_items_included);
         deliveryDate = (LinearLayout) holder.v.findViewById(R.id.delivery_date_included);
         totalAmount = (LinearLayout) holder.v.findViewById(R.id.total_amount_included);
         totalBalance = (LinearLayout) holder.v.findViewById(R.id.total_balance_included);
 
+        title = (CustomTextView) holder.v.findViewById(R.id.status_static_text_track_order_fragment);
         numberOfItemsValue = (CustomTextView) numberOfItems.findViewById(R.id.field_value_text_included);
         deliveryDateValue = (CustomTextView) deliveryDate.findViewById(R.id.field_value_text_included);
         totalAmountValue = (CustomTextView) totalAmount.findViewById(R.id.field_value_text_included);
@@ -90,22 +93,25 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
 
     private void setViews(int position){
 
-        if(Constants.orderProgress == 2){
-            progressIndicator.setImageResource(R.drawable.track_progress_2);
-        }
-        else if(Constants.orderProgress == 3){
-            progressIndicator.setImageResource(R.drawable.track_progress_3);
-        }
-        else{
+        if(Constants.trackOrdersData.get(position).getOrderProgress() == 1){
             progressIndicator.setImageResource(R.drawable.track_progress_1);
         }
+        else if(Constants.trackOrdersData.get(position).getOrderProgress() == 2){
+            progressIndicator.setImageResource(R.drawable.track_progress_2);
+        }
+        else if(Constants.trackOrdersData.get(position).getOrderProgress() == 3){
+            progressIndicator.setImageResource(R.drawable.track_progress_3);
+        }
+        else if(Constants.trackOrdersData.get(position).getOrderProgress() == 4){
 
+        }
 
         numberOfItemsStaticText.setText("Number of Items");
         deliveryDateStaticText.setText("Delivery Date");
         totalAmountStaticText.setText("Total Amount");
         totalBalanceStaticText.setText("Total Balance");
 
+        title.setText(Constants.trackOrdersData.get(position).getTypeOfService()+" | "+ Constants.trackOrdersData.get(position).getOrderId());
 
         numberOfItemsValue.setText("12");
         deliveryDateValue.setText(Constants.trackOrdersData.get(position).getDeliveryDate());
