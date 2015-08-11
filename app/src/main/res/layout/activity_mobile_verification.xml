@@ -43,7 +43,9 @@
             android:padding="@dimen/padding_large"
             android:layout_marginBottom="@dimen/margin"
             android:background="@drawable/rounded_edit_text"
-            android:textSize="@dimen/text_size_edit_text">
+            android:textSize="@dimen/text_size_edit_text"
+            android:inputType="number"
+            >
             <requestFocus/>
             </com.ascenttechnovation.laundrize.custom.CustomEditText>
 
@@ -99,7 +101,6 @@
             android:id="@+id/username_edit_verification_activity"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text=" Enter Your Verification Code "
             android:padding="@dimen/padding_large"
             android:background="@drawable/rounded_edit_text"
             android:inputType="textPassword"

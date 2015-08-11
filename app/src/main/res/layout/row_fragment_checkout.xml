@@ -19,6 +19,13 @@
             android:drawablePadding="@dimen/padding"
             android:textColor="@color/checkout_card_text"
             />
+        <View
+            android:id="@+id/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="#777"
+            android:layout_margin="@dimen/margin"
+           />
         <com.ascenttechnovation.laundrize.custom.CustomTextView
             android:id="@+id/select_date_slot_included"
             android:layout_width="fill_parent"
@@ -28,6 +35,13 @@
             android:padding="@dimen/padding_large"
             android:drawablePadding="@dimen/padding"
             android:drawableRight="@drawable/icon_right_arrow"
+            />
+        <View
+            android:id="@+id/horizontal_line"
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="#777"
+            android:layout_margin="@dimen/margin"
             />
         <Spinner
             android:id="@+id/select_time_slot_included"

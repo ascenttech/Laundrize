@@ -67,11 +67,12 @@ public class AddressFragment extends Fragment {
         layoutInflater= inflater;
 
         customActionBar();
+        findViews(v);
+        setViews();
 
         if(Constants.addressFetched){
 
-            findViews(v);
-            setViews();
+            setClickListeners();
             addAvailableAddresses();
         }
 
@@ -134,6 +135,9 @@ public class AddressFragment extends Fragment {
         for(int i =0;i< Constants.addressData.size();i++){
 
             rowView = layoutInflater.inflate(R.layout.include_available_address,null);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            params.setMargins(0,0,0,5);
+            rowView.setLayoutParams(params);
 
             address = (CustomTextView) rowView.findViewById(R.id.address_text_included);
             address.setTag("address_"+i);
@@ -183,12 +187,13 @@ public class AddressFragment extends Fragment {
     private void setViews(){
 
         selectAddressChild.setVisibility(View.GONE);
-
         selectAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus, 0, 0, 0);
-        selectAddress.setOnClickListener(listener);
-
-
         addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
+
+    }
+
+    private void setClickListeners(){
+        selectAddress.setOnClickListener(listener);
         addNewAddress.setOnClickListener(listener);
         updateNewAddress.setOnClickListener(listener);
     }

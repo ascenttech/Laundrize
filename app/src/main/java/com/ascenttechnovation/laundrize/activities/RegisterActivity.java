@@ -34,6 +34,8 @@ public class RegisterActivity extends Activity {
         setContentView(R.layout.activity_register);
 
         Log.d(Constants.LOG_TAG,Constants.RegisterActivity);
+        findViews();
+        setViews();
 
     }
 
@@ -43,8 +45,7 @@ public class RegisterActivity extends Activity {
         boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());
         if(internetAvailable){
 
-            findViews();
-            setViews();
+           setClickListeners();
         }
         else{
 
@@ -74,6 +75,10 @@ public class RegisterActivity extends Activity {
     private void setViews(){
 
         signUp.setText("SIGN UP");
+
+    }
+
+    private void setClickListeners(){
         signUp.setOnClickListener(listener);
     }
 

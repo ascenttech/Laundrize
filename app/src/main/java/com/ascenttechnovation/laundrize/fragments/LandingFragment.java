@@ -37,6 +37,8 @@ public class LandingFragment extends Fragment {
         Log.d(Constants.LOG_TAG, Constants.LandingFragment);
 
         customActionBar();
+        findViews(v);
+        setViews();
         getSlots();
 
         return v;
@@ -66,8 +68,7 @@ public class LandingFragment extends Fragment {
                 if(result){
 
                     Constants.slotsFetched = true;
-                    findViews(v);
-                    setViews();
+                    setClickListeners();
 
                 }
                 else{
@@ -93,12 +94,6 @@ public class LandingFragment extends Fragment {
 
     private void setViews(){
 
-        placeOrder.setOnClickListener(listener);
-        quickOrder.setOnClickListener(listener);
-        weeklyOrder.setOnClickListener(listener);
-        trackOrder.setOnClickListener(listener);
-        completedOrder.setOnClickListener(listener);
-
         placeOrderBtn = (CustomButton) placeOrder.findViewById(R.id.styled_button_included);
         placeOrderBtn.setText("PLACE ORDER");
 
@@ -119,7 +114,15 @@ public class LandingFragment extends Fragment {
         completedOrderBtn.setText("COMPLETED ORDER");
         completedOrderBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_shirt,0,0,0);
 
+    }
 
+    private void setClickListeners(){
+
+        placeOrder.setOnClickListener(listener);
+        quickOrder.setOnClickListener(listener);
+        weeklyOrder.setOnClickListener(listener);
+        trackOrder.setOnClickListener(listener);
+        completedOrder.setOnClickListener(listener);
 
     }
 

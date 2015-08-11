@@ -68,7 +68,8 @@
             android:layout_marginBottom="@dimen/margin"
             android:background="@drawable/rounded_edit_text"
             android:layout_marginTop="@dimen/margin"
-            android:textSize="@dimen/text_size_edit_text"/>
+            android:textSize="@dimen/text_size_edit_text"
+            android:inputType="number"/>
 
         <com.ascenttechnovation.laundrize.custom.CustomEditText
             android:id="@+id/password_edit_register_activity"
@@ -80,6 +81,7 @@
             android:background="@drawable/rounded_edit_text"
             android:layout_marginTop="@dimen/margin"
             android:textSize="@dimen/text_size_edit_text"
+            android:inputType="textPassword"
             />
 
 

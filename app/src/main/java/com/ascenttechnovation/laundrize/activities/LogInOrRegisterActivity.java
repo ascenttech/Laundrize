@@ -42,7 +42,7 @@ public class LogInOrRegisterActivity extends Activity {
         // This will give you the HashKey that is sent to the facebook
         getHashKey();
         findViews();
-        setViews();
+
     }
 
     @Override
@@ -51,6 +51,7 @@ public class LogInOrRegisterActivity extends Activity {
         boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());
         if(internetAvailable){
 
+            setClickListeners();
         }
         else{
 
@@ -75,7 +76,7 @@ public class LogInOrRegisterActivity extends Activity {
 
     }
 
-    private void setViews(){
+    private void setClickListeners(){
 
         signInNow.setOnClickListener(listener);
         registerNow.setOnClickListener(listener);

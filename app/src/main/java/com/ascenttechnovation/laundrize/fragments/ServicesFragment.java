@@ -1,6 +1,8 @@
 package com.ascenttechnovation.laundrize.fragments;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -63,8 +65,27 @@ public class ServicesFragment extends Fragment {
 
         viewPager = (ViewPager) v.findViewById(R.id.myviewpager);
 
+        customActionBar();
+        findViews(v);
+        setViews();
 
-        fetchServices();
+        if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
+
+            fetchServices();
+        }
+        else{
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("This app requires app connection")
+                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // FIRE ZE MISSILES!
+                            dialog.dismiss();
+                        }
+                    });
+            builder.create();
+            builder.show();
+        }
 
 
         return v;
@@ -90,9 +111,7 @@ public class ServicesFragment extends Fragment {
                 progressDialog.dismiss();
                 if(result){
 
-                    customActionBar();
-                    findViews(v);
-                    setViews();
+                    setClickListeners();
 
                 }
                 else{
@@ -138,8 +157,6 @@ public class ServicesFragment extends Fragment {
 
         mainMenu = (CustomButton) v.findViewById(R.id.left_button_included);
         placeOrder = (CustomButton) v.findViewById(R.id.right_button_included);
-
-
         viewPagerAdapter = new TabsViewPagerAdapter(getChildFragmentManager());
 
     }
@@ -147,14 +164,16 @@ public class ServicesFragment extends Fragment {
     private void setViews(){
 
         mainMenu.setText("Main Menu");
-        mainMenu.setOnClickListener(listener);
-
         placeOrder.setText("Place Order");
-        placeOrder.setOnClickListener(listener);
-
         viewPager.setOnPageChangeListener(pageChangeListener);
         viewPager.setAdapter(viewPagerAdapter);
 
+    }
+
+    private void setClickListeners(){
+
+        mainMenu.setOnClickListener(listener);
+        placeOrder.setOnClickListener(listener);
     }
 
     public void getOrder(){

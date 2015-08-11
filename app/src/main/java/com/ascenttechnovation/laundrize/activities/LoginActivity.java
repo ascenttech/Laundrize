@@ -40,7 +40,7 @@ public class LoginActivity extends Activity {
 
         Log.d(Constants.LOG_TAG,Constants.LoginActivity);
 
-
+        findViews();
 
     }
 
@@ -50,8 +50,7 @@ public class LoginActivity extends Activity {
         boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());
         if(internetAvailable){
 
-            findViews();
-            setViews();
+            setClickListeners();
         }
         else{
 
@@ -78,7 +77,7 @@ public class LoginActivity extends Activity {
 
     }
 
-    private void setViews(){
+    private void setClickListeners(){
 
         clickHere.setOnClickListener(listener);
         logInNow.setOnClickListener(listener);

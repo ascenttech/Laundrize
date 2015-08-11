@@ -42,6 +42,7 @@
             android:layout_marginBottom="@dimen/margin"
             android:background="@drawable/rounded_edit_text"
             android:textSize="@dimen/text_size_edit_text"
+            android:inputType="number"
             >
         <requestFocus/>
         </com.ascenttechnovation.laundrize.custom.CustomEditText>
