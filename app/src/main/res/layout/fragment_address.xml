@@ -45,7 +45,7 @@
             android:visibility="gone"
             >
 
-            <com.ascenttechnovation.laundrize.custom.CustomEditText
+            <Spinner
                 android:id="@+id/city_add_new_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:textSize="@dimen/text_size_edit_text"
                 android:padding="@dimen/padding_large"
                 />
-            <com.ascenttechnovation.laundrize.custom.CustomEditText
+            <Spinner
                 android:id="@+id/pincode_add_new_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 android:textSize="@dimen/text_size_edit_text"
                 android:padding="@dimen/padding_large"
                 />
-            <com.ascenttechnovation.laundrize.custom.CustomEditText
+            <Spinner
                 android:id="@+id/area_add_new_address"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

@@ -43,7 +43,7 @@ public class SplashScreenActivity extends Activity {
 
         Log.d(Constants.LOG_TAG,Constants.SplashScreenActivity);
 
-
+        fetchAreasCitiesPincodes();
         initializeArrayList();
         intializeHashMap();
         findViews();
@@ -82,6 +82,12 @@ public class SplashScreenActivity extends Activity {
 
     }
 
+    private void fetchAreasCitiesPincodes(){
+
+
+
+    }
+
 
 
     public void initializeArrayList(){
@@ -105,6 +111,10 @@ public class SplashScreenActivity extends Activity {
         Constants.washingOrderData = new ArrayList<WashingOrderData>();
         Constants.trackOrdersData = new ArrayList<TrackOrdersData>();
         Constants.completedOrdersData = new ArrayList<CompletedOrdersData>();
+        Constants.areas = new ArrayList<String>();
+        Constants.cities = new ArrayList<String>();
+        Constants.pincodes = new ArrayList<String>();
+
 
     }
 

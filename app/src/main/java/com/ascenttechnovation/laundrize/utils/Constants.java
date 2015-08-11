@@ -84,6 +84,9 @@ public class Constants {
     public static ArrayList<WashingOrderData> washingOrderData;
     public static ArrayList<AllSlotsData> allSlotsData;
     public static ArrayList<TrackOrdersData> trackOrdersData;
+    public static ArrayList<String> areas;
+    public static ArrayList<String> cities;
+    public static ArrayList<String> pincodes;
 
 
     // Log Tags for all the activities
@@ -204,6 +207,15 @@ public class Constants {
 
 //    public static final String getSlotDifferenceUrl ="http://dev.laundrize.com/api/api/v1/slotdiff?user_id=2";
     public static final String getSlotDifferenceUrl ="http://dev.laundrize.com/api/api/v1/slotdiff?user_id=";
+
+//    public static final String getCityUrl ="http://dev.laundrize.com/api/api/v1/getCity
+    public static final String getCityUrl ="http://dev.laundrize.com/api/api/v1/getCity";
+
+//    public static final String getZipCodeUrl ="http://dev.laundrize.com/api/api/v1/getCityZipCode?city_id=1";
+    public static final String getZipCodeUrl ="http://dev.laundrize.com/api/api/v1/getCityZipCode?city_id=";
+
+//    public static final String getZipAreaUrl ="http://dev.laundrize.com/api/api/v1/getZipArea?zip_code_id=1";
+    public static final String getZipAreaUrl ="http://dev.laundrize.com/api/api/v1/getZipArea?zip_code_id=";
 
     public static boolean isInternetAvailable(Context context){
 
