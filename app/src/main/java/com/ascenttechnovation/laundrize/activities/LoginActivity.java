@@ -119,6 +119,8 @@ public class LoginActivity extends Activity {
                     editor.putString("token",Constants.token);
                     editor.commit();
 
+                    Intent i = new Intent(LoginActivity.this,LandingActivity.class);
+                    startActivity(i);
 
                 }
                 else{

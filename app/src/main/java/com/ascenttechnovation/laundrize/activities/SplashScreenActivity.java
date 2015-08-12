@@ -13,7 +13,9 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.async.FetchAllSlotsAsyncTask;
 import com.ascenttechnovation.laundrize.data.AddressData;
+import com.ascenttechnovation.laundrize.data.AreasData;
 import com.ascenttechnovation.laundrize.data.BagOrderData;
+import com.ascenttechnovation.laundrize.data.CitiesData;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
 import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.data.IroningOrderData;
@@ -22,6 +24,7 @@ import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.data.WashingOrderData;
+import com.ascenttechnovation.laundrize.data.ZipCodeData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 import com.koushikdutta.ion.Ion;
 
@@ -113,9 +116,9 @@ public class SplashScreenActivity extends Activity {
         Constants.washingOrderData = new ArrayList<WashingOrderData>();
         Constants.trackOrdersData = new ArrayList<TrackOrdersData>();
         Constants.completedOrdersData = new ArrayList<CompletedOrdersData>();
-        Constants.areas = new ArrayList<String>();
-        Constants.cities = new ArrayList<String>();
-        Constants.pincodes = new ArrayList<String>();
+        Constants.areas = new ArrayList<AreasData>();
+        Constants.cities = new ArrayList<CitiesData>();
+        Constants.zipcodes = new ArrayList<ZipCodeData>();
 
 
     }

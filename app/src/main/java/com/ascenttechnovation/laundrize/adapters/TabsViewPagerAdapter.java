@@ -51,10 +51,9 @@ public class TabsViewPagerAdapter extends FragmentPagerAdapter {
 
             case 5 : return new DryCleanHouseholdsFragment();
 
-            default: return null;
-
         }
 
+        return null;
 
     }
 

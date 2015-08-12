@@ -765,16 +765,16 @@ public class PlaceOrderFragment extends Fragment {
             @Override
             public void onStart(boolean status) {
 
-//                progressDialog = new ProgressDialog(getActivity());
-//                progressDialog.setTitle(Constants.LOG_TAG);
-//                progressDialog.setMessage("Placing Your Order");
-//                progressDialog.show();
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.APP_NAME);
+                progressDialog.setMessage("Placing Your Order");
+                progressDialog.show();
             }
 
             @Override
             public void onResult(boolean result) {
 
-//                progressDialog.dismiss();
+                progressDialog.dismiss();
                 if(result){
                     showDialog();
                 }

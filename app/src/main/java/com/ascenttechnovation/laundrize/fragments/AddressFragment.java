@@ -133,17 +133,17 @@ public class AddressFragment extends Fragment {
         addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
 
 
-        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.cities);
-        cityAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
-        city.setAdapter(cityAdapter);
-
-        ArrayAdapter<String> pincodeAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.pincodes);
-        pincodeAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
-        pincode.setAdapter(pincodeAdapter);
-
-        ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.areas);
-        areaAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
-        area.setAdapter(areaAdapter);
+//        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.cities);
+//        cityAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
+//        city.setAdapter(cityAdapter);
+//
+//        ArrayAdapter<String> pincodeAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.zipcodes);
+//        pincodeAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
+//        pincode.setAdapter(pincodeAdapter);
+//
+//        ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.areas);
+//        areaAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
+//        area.setAdapter(areaAdapter);
     }
 
     private void fetchAddresses(){

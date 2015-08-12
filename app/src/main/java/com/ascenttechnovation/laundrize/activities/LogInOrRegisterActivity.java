@@ -18,10 +18,15 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.utils.Constants;
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.facebook.FacebookSdk;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 
 /**
  * Created by ADMIN on 29-06-2015.
@@ -30,7 +35,7 @@ public class LogInOrRegisterActivity extends Activity {
 
     CustomButton signInNow,registerNow;
     int counter;
-
+    private SliderLayout mDemoSlider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,7 @@ public class LogInOrRegisterActivity extends Activity {
         // This will give you the HashKey that is sent to the facebook
         getHashKey();
         findViews();
+        setSlider();
 
     }
 
@@ -73,6 +79,42 @@ public class LogInOrRegisterActivity extends Activity {
 
         signInNow = (CustomButton) findViewById(R.id.sign_in_now_button_login_or_register_activity);
         registerNow = (CustomButton) findViewById(R.id.register_now_button_login_or_register_activity);
+        mDemoSlider = (SliderLayout)findViewById(R.id.slider);
+
+
+    }
+
+    private void setSlider(){
+
+
+        HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
+        file_maps.put("Hannibal",R.drawable.icon_delivery);
+        file_maps.put("Big Bang Theory",R.drawable.icon_collection);
+        file_maps.put("House of Cards",R.drawable.icon_minus);
+        file_maps.put("Game of Thrones", R.drawable.icon_clock);
+
+        for(String name : file_maps.keySet()){
+            TextSliderView textSliderView = new TextSliderView(this);
+            // initialize a SliderLayout
+            textSliderView
+                    .description(name)
+                    .image(file_maps.get(name))
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
+//                    .setOnSliderClickListener(this);
+
+            //add your extra information
+            textSliderView.bundle(new Bundle());
+            textSliderView.getBundle()
+                    .putString("extra",name);
+
+            mDemoSlider.addSlider(textSliderView);
+        }
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        mDemoSlider.setDuration(4000);
+//        mDemoSlider.addOnPageChangeListener(this);
+
 
     }
 

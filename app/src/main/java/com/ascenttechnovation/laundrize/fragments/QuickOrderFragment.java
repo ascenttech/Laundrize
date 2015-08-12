@@ -2,6 +2,7 @@ package com.ascenttechnovation.laundrize.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -61,6 +62,7 @@ public class QuickOrderFragment extends Fragment {
     private int ironingDeliveryCounter = 5;
     private int washingDeliveryCounter = 22;
     private int bagsDeliveryCounter = 22;
+    private ProgressDialog progressDialog;
 
     private ArrayList<String> minimumIroningSlots,minimumWashingSlots,minimumBagsSlots;
 
@@ -768,16 +770,16 @@ public class QuickOrderFragment extends Fragment {
             @Override
             public void onStart(boolean status) {
 
-//                progressDialog = new ProgressDialog(getActivity());
-//                progressDialog.setTitle(Constants.LOG_TAG);
-//                progressDialog.setMessage("Placing Your Order");
-//                progressDialog.show();
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.APP_NAME);
+                progressDialog.setMessage("Placing Your Order");
+                progressDialog.show();
             }
 
             @Override
             public void onResult(boolean result) {
 
-//                progressDialog.dismiss();
+                progressDialog.dismiss();
                 if(result){
                     showDialog();
                 }

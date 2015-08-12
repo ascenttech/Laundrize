@@ -6,7 +6,9 @@ import android.net.NetworkInfo;
 
 import com.ascenttechnovation.laundrize.data.AddressData;
 import com.ascenttechnovation.laundrize.data.AllSlotsData;
+import com.ascenttechnovation.laundrize.data.AreasData;
 import com.ascenttechnovation.laundrize.data.BagOrderData;
+import com.ascenttechnovation.laundrize.data.CitiesData;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
 import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.data.IroningOrderData;
@@ -16,6 +18,7 @@ import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.data.ProfileData;
 import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.data.WashingOrderData;
+import com.ascenttechnovation.laundrize.data.ZipCodeData;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -84,9 +87,9 @@ public class Constants {
     public static ArrayList<WashingOrderData> washingOrderData;
     public static ArrayList<AllSlotsData> allSlotsData;
     public static ArrayList<TrackOrdersData> trackOrdersData;
-    public static ArrayList<String> areas;
-    public static ArrayList<String> cities;
-    public static ArrayList<String> zipcodes;
+    public static ArrayList<AreasData> areas;
+    public static ArrayList<CitiesData> cities;
+    public static ArrayList<ZipCodeData> zipcodes;
 
 
     // Log Tags for all the activities

@@ -78,7 +78,7 @@ public class WashAndIronWearablesRecyclerAdapter extends RecyclerView.Adapter<Wa
 
     private void setViews(int position){
 
-        imgLoader.DisplayImage(Constants.ironingWearablesData.get(position).getLargeImage(),backgroundImage);
+        imgLoader.DisplayImage(Constants.washAndIronWearablesData.get(position).getLargeImage(),backgroundImage);
         title.setText(Constants.washAndIronWearablesData.get(position).getTitle());
         description.setText(Constants.washAndIronWearablesData.get(position).getDescription());
         price.setText(Constants.washAndIronWearablesData.get(position).getRegularCost());

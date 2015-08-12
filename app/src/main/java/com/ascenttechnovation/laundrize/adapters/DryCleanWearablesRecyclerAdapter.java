@@ -78,7 +78,7 @@ public class DryCleanWearablesRecyclerAdapter extends RecyclerView.Adapter<DryCl
 
     private void setViews(int position){
 
-        imgLoader.DisplayImage(Constants.ironingWearablesData.get(position).getLargeImage(),backgroundImage);
+        imgLoader.DisplayImage(Constants.dryCleanWearablesData.get(position).getLargeImage(),backgroundImage);
         title.setText(Constants.dryCleanWearablesData.get(position).getTitle());
         description.setText(Constants.dryCleanWearablesData.get(position).getDescription());
         price.setText(Constants.dryCleanWearablesData.get(position).getRegularCost());

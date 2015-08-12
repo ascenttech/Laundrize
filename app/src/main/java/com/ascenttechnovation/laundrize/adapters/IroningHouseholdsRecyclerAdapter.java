@@ -78,7 +78,7 @@ public class IroningHouseholdsRecyclerAdapter extends RecyclerView.Adapter<Ironi
 
     private void setViews(int position){
 
-        imgLoader.DisplayImage(Constants.ironingWearablesData.get(position).getLargeImage(),backgroundImage);
+        imgLoader.DisplayImage(Constants.ironingHouseholdsData.get(position).getLargeImage(),backgroundImage);
         title.setText(Constants.ironingHouseholdsData.get(position).getTitle());
         description.setText(Constants.ironingHouseholdsData.get(position).getDescription());
         price.setText(Constants.ironingHouseholdsData.get(position).getRegularCost());

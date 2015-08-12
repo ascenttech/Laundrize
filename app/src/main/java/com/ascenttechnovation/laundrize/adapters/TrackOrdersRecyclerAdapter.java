@@ -103,7 +103,7 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
             progressIndicator.setImageResource(R.drawable.track_progress_3);
         }
         else if(Constants.trackOrdersData.get(position).getOrderProgress() == 4){
-
+            progressIndicator.setImageResource(R.drawable.track_progress_4);
         }
 
         numberOfItemsStaticText.setText("Number of Items");
