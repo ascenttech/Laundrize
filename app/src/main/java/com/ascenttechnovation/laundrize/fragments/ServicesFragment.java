@@ -39,7 +39,7 @@ import java.util.Map;
 /**
  * Created by ADMIN on 01-07-2015.
  */
-public class ServicesFragment extends Fragment {
+public class ServicesFragment extends Fragment implements ActionBar.TabListener,ViewPager.OnPageChangeListener {
 
     ActionBar actionBar;
     ActionBar.Tab tabs;
@@ -136,7 +136,7 @@ public class ServicesFragment extends Fragment {
             actionBar.addTab(
                     actionBar.newTab()
                             .setCustomView(makeDummyTab(names[i],icons[i],i))
-                            .setTabListener(actionBarListener));
+                            .setTabListener(this));
         }
     }
 
@@ -157,7 +157,7 @@ public class ServicesFragment extends Fragment {
 
         mainMenu = (CustomButton) v.findViewById(R.id.left_button_included);
         placeOrder = (CustomButton) v.findViewById(R.id.right_button_included);
-        viewPagerAdapter = new TabsViewPagerAdapter(getChildFragmentManager());
+        viewPagerAdapter = new TabsViewPagerAdapter(getFragmentManager());
 
     }
 
@@ -165,9 +165,8 @@ public class ServicesFragment extends Fragment {
 
         mainMenu.setText("Main Menu");
         placeOrder.setText("Place Order");
-        viewPager.setOnPageChangeListener(pageChangeListener);
         viewPager.setAdapter(viewPagerAdapter);
-
+        viewPager.setOnPageChangeListener(this);
     }
 
     private void setClickListeners(){
@@ -212,46 +211,38 @@ public class ServicesFragment extends Fragment {
 
     }
 
+    @Override
+    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 
-    ActionBar.TabListener actionBarListener = new ActionBar.TabListener() {
-        @Override
-        public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+        Log.d(Constants.LOG_TAG,"Position "+tab.getPosition());
+        viewPager.setCurrentItem(tab.getPosition());
+    }
 
-            Log.d(Constants.LOG_TAG,"Position "+tab.getPosition());
+    @Override
+    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
-            viewPager.setCurrentItem(tab.getPosition());
-//            viewPager.setCurrentItem(tab.getPosition());
+    }
 
-        }
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
 
-        @Override
-        public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    }
 
-        }
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-        @Override
-        public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+    }
 
-        }
-    };
+    @Override
+    public void onPageSelected(int position) {
 
-    ViewPager.OnPageChangeListener pageChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        actionBar.setSelectedNavigationItem(position);
+    }
 
-            actionBar.setSelectedNavigationItem(position);
-        }
+    @Override
+    public void onPageScrollStateChanged(int state) {
 
-        @Override
-        public void onPageSelected(int position) {
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
+    }
 
     public void replaceFragment(Fragment fragment){
 
@@ -278,4 +269,7 @@ public class ServicesFragment extends Fragment {
             }
         }
     };
+
+
+
 }

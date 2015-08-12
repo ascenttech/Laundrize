@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,12 +27,15 @@ import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.adapters.CustomCityAdapter;
 import com.ascenttechnovation.laundrize.async.AddNewAddressAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchAddressAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchAddressRelatedDataAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchCurrentServerTimeAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
+import com.ascenttechnovation.laundrize.data.GeneralAddressRelatedData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.net.URLEncoder;
@@ -54,7 +58,7 @@ public class AddressFragment extends Fragment {
     private View v,rowView;
     private CustomTextView address,mobileNumber;
     private EditText buildingName,houseNumber;
-    private Spinner city,pincode,area;
+    private Spinner city,zipcode,area;
     private String cityValue,pincodeValue,areaValue,buildingNameValue,houseNumberValue,fullAddressValue;
     private String orderType;
 
@@ -118,7 +122,7 @@ public class AddressFragment extends Fragment {
 
         addNewAddressChild = (LinearLayout) v.findViewById(R.id.add_new_address_linear_layout_address_fragment);
         city = (Spinner) v.findViewById(R.id.city_add_new_address);
-        pincode = (Spinner) v.findViewById(R.id.pincode_add_new_address);
+        zipcode = (Spinner) v.findViewById(R.id.pincode_add_new_address);
         area = (Spinner) v.findViewById(R.id.area_add_new_address);
         buildingName = (EditText) v.findViewById(R.id.building_or_street_add_new_address);
         houseNumber = (EditText) v.findViewById(R.id.flat_or_house_number_add_new_address);
@@ -133,17 +137,10 @@ public class AddressFragment extends Fragment {
         addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
 
 
-//        ArrayAdapter<String> cityAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.cities);
-//        cityAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
-//        city.setAdapter(cityAdapter);
-//
-//        ArrayAdapter<String> pincodeAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.zipcodes);
-//        pincodeAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
-//        pincode.setAdapter(pincodeAdapter);
-//
-//        ArrayAdapter<String> areaAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.areas);
-//        areaAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
-//        area.setAdapter(areaAdapter);
+//        city.setAdapter(new CustomCityAdapter(getActivity().getApplicationContext(), R.layout.row_spinner_layout,Constants.cities));
+//        area.setAdapter(new CustomCityAdapter(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.areas));
+//        zipcode.setAdapter(new CustomCityAdapter(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.zipcodes));
+
     }
 
     private void fetchAddresses(){
@@ -455,26 +452,55 @@ public class AddressFragment extends Fragment {
                     changeVisibility();
                     break;
                 case R.id.add_new_address_button_address_fragment:
-                    // check if add new address child is visible or not
-                    if(addNewAddressChild.getVisibility()==View.GONE){
-                        addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_minus,0,0,0);
-                        if(selectAddressChild.getVisibility() == View.GONE){
 
-                            expand(addNewAddressChild);
+                    String finalUrl = Constants.getCityUrl;
+                    new FetchAddressRelatedDataAsyncTask(getActivity().getApplicationContext(),new FetchAddressRelatedDataAsyncTask.FetchAddressRelatedDataCallback() {
+                        @Override
+                        public void onStart(boolean status) {
+
+                            progressDialog = new ProgressDialog(getActivity());
+                            progressDialog.setTitle(Constants.APP_NAME);
+                            progressDialog.setMessage("Please Wait");
+                            progressDialog.show();
                         }
-                        else{
+                        @Override
+                        public void onResult(boolean result) {
 
-                            expand(addNewAddressChild);
-                            selectAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
-                            collapse(selectAddressChild);
+                            progressDialog.dismiss();
+                            if(result){
+
+                                // check if add new address child is visible or not
+                                if(addNewAddressChild.getVisibility()==View.GONE){
+                                    addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_minus,0,0,0);
+                                    if(selectAddressChild.getVisibility() == View.GONE){
+
+                                        expand(addNewAddressChild);
+                                    }
+                                    else{
+
+                                        expand(addNewAddressChild);
+                                        selectAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
+                                        collapse(selectAddressChild);
+                                    }
+
+
+                                }// if it is visible then execute the else part and collapse it
+                                else{
+                                    addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
+                                    collapse(addNewAddressChild);
+                                }
+
+
+                            }
+                            else{
+
+                                Toast.makeText(getActivity().getApplicationContext()," Cannot add address now.\nTry Again Later",5000).show();
+                            }
+
                         }
+                    }).execute(finalUrl,"city");
 
 
-                    }// if it is visible then execute the else part and collapse it
-                    else{
-                        addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
-                        collapse(addNewAddressChild);
-                    }
                     break;
                 case R.id.update_this_address_add_new_address: validateNewAddress();
                     break;

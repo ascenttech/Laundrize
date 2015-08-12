@@ -61,29 +61,38 @@
             android:layout_marginBottom="@dimen/margin_large"
             />
 
-        <com.ascenttechnovation.laundrize.custom.CustomButton
+        <com.google.android.gms.common.SignInButton
             android:id="@+id/google_button_login_or_register_activity"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_large_triple"
+            android:layout_marginRight="@dimen/margin_large_triple"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large"/>
+
+        <!--<com.google.android.gms.common.SignInButton-->
+            <!--android:id="@+id/google_button_login_or_register_activity"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="gone"/>-->
+
+        <!--<include-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/margin_large_triple"-->
+            <!--android:layout_marginRight="@dimen/margin_large_triple"-->
+            <!--android:layout_marginBottom="@dimen/margin_large"-->
+            <!--layout="@layout/include_google_button"-->
+            <!--/>-->
+
+        <include
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=" Sign in with Google + "
-            android:background="@drawable/rounded_red_button"
             android:layout_marginLeft="@dimen/margin_large_triple"
             android:layout_marginRight="@dimen/margin_large_triple"
             android:layout_marginBottom="@dimen/margin_large"
-            android:textColor="@color/text_color_white"
+            layout="@layout/include_facebook_button"
             />
-        <com.ascenttechnovation.laundrize.custom.CustomButton
-            android:id="@+id/facebook_button_login_or_register_activity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=" Sign in with Facebook "
-            android:background="@drawable/rounded_purple_button"
-            android:textColor="@color/text_color_white"
-            android:layout_marginLeft="@dimen/margin_large_triple"
-            android:layout_marginRight="@dimen/margin_large_triple"
-            android:layout_marginBottom="@dimen/margin_large"/>
-
-
 
 
     </LinearLayout>

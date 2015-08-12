@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.async.FetchAddressAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchUserProfileAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
@@ -92,8 +93,27 @@ public class ProfileFragment extends Fragment {
                     customActionBar();
                     findViews(v);
                     setViews();
-                    displayAddress();
 
+                    String finalURL = Constants.fetchAddressUrl + Constants.userId;
+                    new FetchAddressAsyncTask(getActivity().getApplicationContext(),new FetchAddressAsyncTask.FetchAddressCallback() {
+                        @Override
+                        public void onStart(boolean status) {
+
+                            progressDialog = new ProgressDialog(getActivity());
+                            progressDialog.setTitle(Constants.LOG_TAG);
+                            progressDialog.setMessage("Loading,Please Wait...");
+                            progressDialog.setCancelable(false);
+                            progressDialog.show();
+                        }
+                        @Override
+                        public void onResult(boolean result) {
+
+                            progressDialog.dismiss();
+
+                            displayAddress();
+
+                        }
+                    }).execute(finalURL);
                 }
                 else{
 
@@ -150,6 +170,9 @@ public class ProfileFragment extends Fragment {
         if(Constants.addressFetched) {
             for(int i = 0;i<Constants.addressData.size();i++) {
                 rowView = parentInflater.inflate(R.layout.include_available_address, null);
+                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                params.setMargins(5,0,5,5);
+                rowView.setLayoutParams(params);
 
                 address = (CustomTextView) rowView.findViewById(R.id.address_text_included);
                 address.setText(Constants.addressData.get(i).getFullAddress());

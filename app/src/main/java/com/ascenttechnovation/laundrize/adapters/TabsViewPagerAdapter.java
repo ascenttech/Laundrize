@@ -20,9 +20,10 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 /**
  * Created by ADMIN on 27-07-2015.
  */
-public class TabsViewPagerAdapter extends FragmentPagerAdapter {
+public class TabsViewPagerAdapter extends FragmentStatePagerAdapter  {
 
     FragmentManager fm;
+    Fragment fragment;
 
     public TabsViewPagerAdapter(FragmentManager fm) {
 
@@ -35,25 +36,23 @@ public class TabsViewPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        Fragment fragment;
-
         switch (position){
 
-            case 0 : return new IroningWearablesFragment();
-
-            case 1 : return new IroningHouseholdsFragment();
-
-            case 2 : return new WashAndIronWearablesFragment();
-
-            case 3 : return new WashAndIronHouseholdsFragment();
-
-            case 4 : return new DryCleanWearablesFragment();
-
-            case 5 : return new DryCleanHouseholdsFragment();
-
+            case 0 : fragment = new IroningWearablesFragment();
+                break;
+            case 1 : fragment = new IroningHouseholdsFragment();
+                break;
+            case 2 : fragment = new WashAndIronWearablesFragment();
+                break;
+            case 3 : fragment = new WashAndIronHouseholdsFragment();
+                break;
+            case 4 : fragment = new DryCleanWearablesFragment();
+                break;
+            case 5 : fragment = new DryCleanHouseholdsFragment();
+                break;
         }
 
-        return null;
+        return fragment;
 
     }
 

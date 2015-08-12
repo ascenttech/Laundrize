@@ -6,17 +6,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.SurfaceView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.async.FetchAllSlotsAsyncTask;
 import com.ascenttechnovation.laundrize.data.AddressData;
-import com.ascenttechnovation.laundrize.data.AreasData;
 import com.ascenttechnovation.laundrize.data.BagOrderData;
-import com.ascenttechnovation.laundrize.data.CitiesData;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
+import com.ascenttechnovation.laundrize.data.GeneralAddressRelatedData;
 import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.data.IroningOrderData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesMainCategoryData;
@@ -24,7 +20,6 @@ import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.data.WashingOrderData;
-import com.ascenttechnovation.laundrize.data.ZipCodeData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 import com.koushikdutta.ion.Ion;
 
@@ -55,6 +50,8 @@ public class SplashScreenActivity extends Activity {
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
         Constants.userId = sharedPreferences.getString("userId","null");
         Constants.token = sharedPreferences.getString("token","null");
+
+        Log.d(Constants.LOG_TAG,"token "+Constants.token);
 
         // if user Id is not equal null then we move to landing Activity
         if(!Constants.userId.equalsIgnoreCase("null")){
@@ -98,6 +95,7 @@ public class SplashScreenActivity extends Activity {
     public void initializeArrayList(){
 
         Constants.subCategory = new ArrayList<GeneralData>();
+        Constants.generalAddressRelatedData = new ArrayList<GeneralAddressRelatedData>();
         Constants.addressData = new ArrayList<AddressData>();
         Constants.bagLaundryData = new ArrayList<GeneralData>();
         Constants.dryCleanHouseholdsData = new ArrayList<GeneralData>();
@@ -116,9 +114,9 @@ public class SplashScreenActivity extends Activity {
         Constants.washingOrderData = new ArrayList<WashingOrderData>();
         Constants.trackOrdersData = new ArrayList<TrackOrdersData>();
         Constants.completedOrdersData = new ArrayList<CompletedOrdersData>();
-        Constants.areas = new ArrayList<AreasData>();
-        Constants.cities = new ArrayList<CitiesData>();
-        Constants.zipcodes = new ArrayList<ZipCodeData>();
+        Constants.areas = new ArrayList<GeneralAddressRelatedData>();
+        Constants.cities = new ArrayList<GeneralAddressRelatedData>();
+        Constants.zipcodes = new ArrayList<GeneralAddressRelatedData>();
 
 
     }

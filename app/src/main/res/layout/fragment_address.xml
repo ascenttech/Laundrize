@@ -63,6 +63,7 @@
                 android:layout_marginTop="@dimen/margin_dp"
                 android:textSize="@dimen/text_size_edit_text"
                 android:padding="@dimen/padding_large"
+                android:visibility="gone"
                 />
             <Spinner
                 android:id="@+id/area_add_new_address"
@@ -73,6 +74,7 @@
                 android:layout_marginTop="@dimen/margin_dp"
                 android:textSize="@dimen/text_size_edit_text"
                 android:padding="@dimen/padding_large"
+                android:visibility="gone"
                 />
             <com.ascenttechnovation.laundrize.custom.CustomEditText
                 android:id="@+id/building_or_street_add_new_address"

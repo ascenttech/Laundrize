@@ -9,7 +9,9 @@
         android:id="@+id/recycler_view_ironing_house_holds_fragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_marginTop="@dimen/margin_small"
         android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
         />
 
 </RelativeLayout>

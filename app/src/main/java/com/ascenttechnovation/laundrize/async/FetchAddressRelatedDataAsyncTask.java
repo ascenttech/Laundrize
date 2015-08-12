@@ -4,10 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.ascenttechnovation.laundrize.data.AddressData;
-import com.ascenttechnovation.laundrize.data.AreasData;
-import com.ascenttechnovation.laundrize.data.CitiesData;
-import com.ascenttechnovation.laundrize.data.ZipCodeData;
+import com.ascenttechnovation.laundrize.data.GeneralAddressRelatedData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import org.apache.http.HttpEntity;
@@ -19,6 +16,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by ADMIN on 11-08-2015.
  */
@@ -26,7 +25,7 @@ public class FetchAddressRelatedDataAsyncTask extends AsyncTask<String,Void,Bool
 
     Context context;
     FetchAddressRelatedDataCallback callback;
-    String areaName,zipCode,cityName;
+    String areaName,zipCode,cityName,type;
 
     public interface FetchAddressRelatedDataCallback{
 
@@ -52,6 +51,8 @@ public class FetchAddressRelatedDataAsyncTask extends AsyncTask<String,Void,Bool
         Log.d(Constants.LOG_TAG," The url to  be fetched "+ url[0]);
         try{
 
+            type = url[1];
+
             HttpGet httpGet = new HttpGet(url[0]);
             HttpClient httpClient = new DefaultHttpClient();
             HttpResponse httpResponse = httpClient.execute(httpGet);
@@ -69,24 +70,26 @@ public class FetchAddressRelatedDataAsyncTask extends AsyncTask<String,Void,Bool
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String id = jsonObject.getString("id");
-                    if(url[1].equalsIgnoreCase("city")){
+                    if(type.equalsIgnoreCase("city")){
 
-//                        cityName = jsonObject.getString("city");
-//                        Constants.cities.add(new CitiesData(id,cityName));
+                        cityName = jsonObject.getString("city");
+                        Constants.generalAddressRelatedData.add(new GeneralAddressRelatedData(id,cityName));
                     }
-                    else if(url[1].equalsIgnoreCase("area")){
+                    else if(type.equalsIgnoreCase("area")){
 
                         areaName = jsonObject.getString("area_name");
-                        Constants.areas.add(new AreasData(id,areaName));
+                        Constants.generalAddressRelatedData.add(new GeneralAddressRelatedData(id,cityName));
 
                     }
-                    else if(url[1].equalsIgnoreCase("")){
+                    else if(type.equalsIgnoreCase("zipcode")){
 
                         zipCode = jsonObject.getString("zip_code");
-                        Constants.zipcodes.add(new ZipCodeData(id,zipCode));
+                        Constants.generalAddressRelatedData.add(new GeneralAddressRelatedData(id,cityName));
                     }
 
                 }
+
+                categorizeData();
 
                 return true;
             }
@@ -98,6 +101,26 @@ public class FetchAddressRelatedDataAsyncTask extends AsyncTask<String,Void,Bool
 
             e.printStackTrace();
             return false;
+        }
+
+    }
+
+    private void categorizeData() {
+
+        if(type.equalsIgnoreCase("city")){
+            Constants.cities = Constants.generalAddressRelatedData;
+            Constants.generalAddressRelatedData = new ArrayList<GeneralAddressRelatedData>();
+
+        }
+        else if(type.equalsIgnoreCase("area")){
+
+            Constants.areas = Constants.generalAddressRelatedData;
+            Constants.generalAddressRelatedData = new ArrayList<GeneralAddressRelatedData>();
+        }
+        else if(type.equalsIgnoreCase("zipcode")){
+
+            Constants.zipcodes = Constants.generalAddressRelatedData;
+            Constants.generalAddressRelatedData = new ArrayList<GeneralAddressRelatedData>();
         }
 
     }

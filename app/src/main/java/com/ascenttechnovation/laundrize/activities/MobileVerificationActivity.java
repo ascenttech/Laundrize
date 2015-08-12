@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.async.ConfirmVerificationAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchVerificationCodeAsyncTask;
+import com.ascenttechnovation.laundrize.async.RegisterUserViaSocialAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomEditText;
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -25,9 +26,10 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 public class MobileVerificationActivity extends Activity {
 
     private CustomButton confirmVerification,verifyNow;
-    private String mobileNumber,name,emailId,password,from;
+    private String mobileNumber,name,emailId,password;
     private CustomEditText mobileNumberEdit,verificationCode;
     private ProgressDialog progressDialog;
+    private String from,id,firstName,lastName,email,url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +39,25 @@ public class MobileVerificationActivity extends Activity {
         Log.d(Constants.LOG_TAG,Constants.MobileVerificationActivity);
 
         Intent i = getIntent();
-        mobileNumber = i.getStringExtra("mobileNumber");
-        name = i.getStringExtra("name");
-        emailId = i.getStringExtra("emailId");
-        password = i.getStringExtra("password");
+        from = i.getStringExtra("from");
+        if(from.equalsIgnoreCase("register")){
+
+            mobileNumber = i.getStringExtra("mobileNumber");
+            name = i.getStringExtra("name");
+            emailId = i.getStringExtra("emailId");
+            password = i.getStringExtra("password");
+        }
+        else{
+
+            mobileNumber = "";
+            id = i.getStringExtra("id");
+            firstName = i.getStringExtra("firstName");
+            lastName = i.getStringExtra("lastName");
+            email = i.getStringExtra("email");
+            url = i.getStringExtra("url");
+
+        }
+
 
     }
 
@@ -86,31 +103,64 @@ public class MobileVerificationActivity extends Activity {
 
     public void verifyNow(){
 
-        String finalUrl = Constants.verifyNowUrl+mobileNumberEdit.getText().toString();
-        new FetchVerificationCodeAsyncTask(getApplicationContext(), new FetchVerificationCodeAsyncTask.FetchVerificationCodeCallback() {
-            @Override
-            public void onStart(boolean status) {
+        if(from.equalsIgnoreCase("register")){
 
-                progressDialog = new ProgressDialog(MobileVerificationActivity.this);
-                progressDialog.setTitle(Constants.APP_NAME);
-                progressDialog.setMessage("Loading,Please Wait...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
+            String finalUrl = Constants.verifyNowUrl+mobileNumberEdit.getText().toString();
+            new FetchVerificationCodeAsyncTask(getApplicationContext(), new FetchVerificationCodeAsyncTask.FetchVerificationCodeCallback() {
+                @Override
+                public void onStart(boolean status) {
 
-            }
-            @Override
-            public void onResult(boolean result) {
+                    progressDialog = new ProgressDialog(MobileVerificationActivity.this);
+                    progressDialog.setTitle(Constants.APP_NAME);
+                    progressDialog.setMessage("Loading,Please Wait...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
 
-                progressDialog.dismiss();
-                if(result){
-                    Toast.makeText(getApplicationContext()," You will receive a message shortly",5000).show();
                 }
-                else{
-                    Toast.makeText(getApplicationContext(),"There was an error \nTry Again Later",5000).show();
-                }
+                @Override
+                public void onResult(boolean result) {
 
-            }
-        }).execute(finalUrl);
+                    progressDialog.dismiss();
+                    if(result){
+                        Toast.makeText(getApplicationContext()," You will receive a message shortly",5000).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"There was an error \nTry Again Later",5000).show();
+                    }
+
+                }
+            }).execute(finalUrl);
+
+        }
+        else if(from.equalsIgnoreCase("social")){
+
+            String finalUrl = "a";
+            new RegisterUserViaSocialAsyncTask(getApplicationContext(),new RegisterUserViaSocialAsyncTask.RegisterUserViaSocialCallback() {
+                @Override
+                public void onStart(boolean status) {
+
+                    progressDialog = new ProgressDialog(getApplicationContext());
+                    progressDialog.setTitle(Constants.APP_NAME);
+                    progressDialog.setMessage("Registering, Please wait...");
+                    progressDialog.show();
+
+                }
+                @Override
+                public void onResult(boolean result) {
+
+                    progressDialog.dismiss();
+                    if(result){
+
+                    }
+                    else{
+
+                        Toast.makeText(getApplicationContext(),"Cannot register now\nTry Again Later",5000).show();
+                    }
+
+                }
+            }).execute(finalUrl);
+
+        }
 
     }
 

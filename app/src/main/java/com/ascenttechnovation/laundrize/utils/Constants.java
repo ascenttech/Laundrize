@@ -6,10 +6,9 @@ import android.net.NetworkInfo;
 
 import com.ascenttechnovation.laundrize.data.AddressData;
 import com.ascenttechnovation.laundrize.data.AllSlotsData;
-import com.ascenttechnovation.laundrize.data.AreasData;
 import com.ascenttechnovation.laundrize.data.BagOrderData;
-import com.ascenttechnovation.laundrize.data.CitiesData;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
+import com.ascenttechnovation.laundrize.data.GeneralAddressRelatedData;
 import com.ascenttechnovation.laundrize.data.GeneralData;
 import com.ascenttechnovation.laundrize.data.IroningOrderData;
 import com.ascenttechnovation.laundrize.data.LaundryServicesMainCategoryData;
@@ -18,7 +17,6 @@ import com.ascenttechnovation.laundrize.data.NavigationDrawerData;
 import com.ascenttechnovation.laundrize.data.ProfileData;
 import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.data.WashingOrderData;
-import com.ascenttechnovation.laundrize.data.ZipCodeData;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -67,6 +65,7 @@ public class Constants {
 
     // All the arraylists
     public static ArrayList<GeneralData> subCategory;
+    public static ArrayList<GeneralAddressRelatedData> generalAddressRelatedData;
     public static ArrayList<AddressData> addressData;
     public static ArrayList<GeneralData> bagLaundryData;
     public static ArrayList<CompletedOrdersData> completedOrdersData;
@@ -87,9 +86,9 @@ public class Constants {
     public static ArrayList<WashingOrderData> washingOrderData;
     public static ArrayList<AllSlotsData> allSlotsData;
     public static ArrayList<TrackOrdersData> trackOrdersData;
-    public static ArrayList<AreasData> areas;
-    public static ArrayList<CitiesData> cities;
-    public static ArrayList<ZipCodeData> zipcodes;
+    public static ArrayList<GeneralAddressRelatedData> areas;
+    public static ArrayList<GeneralAddressRelatedData> cities;
+    public static ArrayList<GeneralAddressRelatedData> zipcodes;
 
 
     // Log Tags for all the activities
@@ -132,6 +131,7 @@ public class Constants {
     public static final String FetchVerificationCodeAsyncTask=" FETCH VERIFICATION CODE ASYNC TASK ";
     public static final String PlaceWeeklyOrderAsyncTask=" PLACE WEEKLY ORDER ASYNC TASK ";
     public static final String RegisterUserAsyncTask=" REGISTER USER ASYNC TASK ";
+    public static final String RegisterUserViaSocialAsyncTask=" REGISTER USER VIA SOCIAL ASYNC TASK ";
     public static final String SignInUserAsyncTask=" SIGN IN USER ASYNC TASK ";
     public static final String TrackOrdersAsyncTask=" TRACK ORDERS ASYNC TASK ";
     public static final String UpdateUserProfileAsyncTask=" UPDATE USER PROFILE ASYNC TASK ";
@@ -217,6 +217,13 @@ public class Constants {
 
 //    public static final String getZipAreaUrl ="http://dev.laundrize.com/api/api/v1/getZipArea?zip_code_id=1";
     public static final String getZipAreaUrl ="http://dev.laundrize.com/api/api/v1/getZipArea?zip_code_id=";
+
+
+//    public static final String registerViaFBUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?facebookId=891231289&mobile_number=98765454323&password=null&verification_code=909juew&first_name=sagar&last_name=devanga&email=abc@gmail.com";
+    public static final String registerViaFBUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?facebookId=";
+
+//    public static final String registerViaGoogleUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?googleId=758924621&mobile_number=98765454323&password=null&verification_code=909juew&first_name=sagar&last_name=devanga&email=abc@gmail.com";
+    public static final String registerViaGoogleUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?googleId=";
 
     public static boolean isInternetAvailable(Context context){
 
