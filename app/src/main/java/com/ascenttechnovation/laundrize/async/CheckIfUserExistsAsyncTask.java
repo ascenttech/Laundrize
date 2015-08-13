@@ -9,25 +9,26 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 /**
- * Created by ADMIN on 08-07-2015.
+ * Created by ADMIN on 13-08-2015.
  */
-public class ConfirmVerificationAsyncTask extends AsyncTask<String,Void,Boolean> {
+public class CheckIfUserExistsAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     Context context;
-    ConfirmVerificationCallback callback;
-    public interface ConfirmVerificationCallback{
+    CheckIfUserExistsCallback callback;
+    public interface CheckIfUserExistsCallback{
 
-        public void onStart(boolean status);
+        public void onStart();
         public void onResult(boolean result);
     }
 
-    public ConfirmVerificationAsyncTask(Context context, ConfirmVerificationCallback callback) {
+    public CheckIfUserExistsAsyncTask(Context context, CheckIfUserExistsCallback callback) {
         this.context = context;
         this.callback = callback;
     }
@@ -35,19 +36,19 @@ public class ConfirmVerificationAsyncTask extends AsyncTask<String,Void,Boolean>
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        callback.onStart(true);
+        callback.onStart();
     }
 
     @Override
     protected Boolean doInBackground(String... url) {
 
-        Log.d(Constants.LOG_TAG,Constants.ConfirmVerificationAsyncTask);
+        Log.d(Constants.LOG_TAG,Constants.CheckIfUserExistsAsyncTask);
         Log.d(Constants.LOG_TAG," The url to be fetched "+url[0]);
         try{
 
-            HttpPost httpPost = new HttpPost(url[0]);
+            HttpGet httpGet = new HttpGet(url[0]);
             HttpClient httpClient = new DefaultHttpClient();
-            HttpResponse httpResponse = httpClient.execute(httpPost);
+            HttpResponse httpResponse = httpClient.execute(httpGet);
 
             int statusCode = httpResponse.getStatusLine().getStatusCode();
             Log.d(Constants.LOG_TAG," status code "+statusCode);
@@ -57,9 +58,10 @@ public class ConfirmVerificationAsyncTask extends AsyncTask<String,Void,Boolean>
                 String response = EntityUtils.toString(httpEntity);
 
                 Log.d(Constants.LOG_TAG," JSON Response "+response);
-//                JSONObject jsonObject = new JSONObject(response);
-//                String message = jsonObject.getString("message");
-//                Constants.verificationCode = jsonObject.getString("verification_code");
+                JSONObject jsonObject = new JSONObject(response);
+                JSONObject nestedJsonObject = jsonObject.getJSONObject("user_details");
+                Constants.userId = nestedJsonObject.getString("id");
+                Constants.token = nestedJsonObject.getString("remember_token");
 
                 return true;
             }
@@ -78,7 +80,7 @@ public class ConfirmVerificationAsyncTask extends AsyncTask<String,Void,Boolean>
     @Override
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
-        Log.d(Constants.LOG_TAG," Value Returned "+result);
+        Log.d(Constants.LOG_TAG," The value returned "+ result);
         callback.onResult(result);
     }
 }

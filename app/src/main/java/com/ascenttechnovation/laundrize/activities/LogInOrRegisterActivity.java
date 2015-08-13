@@ -2,7 +2,6 @@ package com.ascenttechnovation.laundrize.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,7 +17,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
-import com.ascenttechnovation.laundrize.async.RegisterUserViaSocialAsyncTask;
+import com.ascenttechnovation.laundrize.async.CheckIfUserExistsAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.utils.Constants;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -65,8 +64,8 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
 //    Client used to interact with Google APIs. */
     private GoogleApiClient mGoogleApiClient;
     private ProgressDialog progressDialog;
-    private String googleName,googlePhotoUrl,googlePlusProfile,googleemail,googlefname,googlelname,googledisplayname;
-
+    private String googleName,googlePhotoUrl,googlePlusProfile,googleemail,googlefname,googlelname,googledisplayname,googleId;
+    private boolean res;
     private boolean mSignInClicked;
 
     @Override
@@ -136,37 +135,46 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-                new GraphRequest(
-                        AccessToken.getCurrentAccessToken(),
-                        "/me",
-                        null,
-                        HttpMethod.GET,
-                        new GraphRequest.Callback() {
-                            public void onCompleted(GraphResponse response) {
+                    new GraphRequest(
+                            AccessToken.getCurrentAccessToken(),
+                            "/me",
+                            null,
+                            HttpMethod.GET,
+                            new GraphRequest.Callback() {
+                                public void onCompleted(GraphResponse response) {
 
-                                try {
-                                    String id = URLEncoder.encode(response.getJSONObject().getString("id"), "UTF-8");
-                                    String firstName = URLEncoder.encode(response.getJSONObject().getString("first_name"), "UTF-8");
-                                    String lastName = URLEncoder.encode(response.getJSONObject().getString("last_name"), "UTF-8");
-                                    String email = URLEncoder.encode(response.getJSONObject().getString("email"), "UTF-8");
+                                    try {
+                                        String id = URLEncoder.encode(response.getJSONObject().getString("id"), "UTF-8");
+                                        String firstName = URLEncoder.encode(response.getJSONObject().getString("first_name"), "UTF-8");
+                                        String lastName = URLEncoder.encode(response.getJSONObject().getString("last_name"), "UTF-8");
+                                        String email = URLEncoder.encode(response.getJSONObject().getString("email"), "UTF-8");
 
-                                    Intent i = new Intent(LogInOrRegisterActivity.this, MobileVerificationActivity.class);
-                                    i.putExtra("from", "social");
-                                    i.putExtra("id", id);
-                                    i.putExtra("firstName", firstName);
-                                    i.putExtra("lastName", lastName);
-                                    i.putExtra("email", email);
-                                    i.putExtra("url", Constants.registerViaFBUrl);
-                                    startActivity(i);
+                                        Log.d(Constants.LOG_TAG," Valued of already Registered "+isAlreadyRegistered(id,"FB"));
 
+                                        if(isAlreadyRegistered(id,"FB")){
+
+                                            Intent i = new Intent(LogInOrRegisterActivity.this,LandingActivity.class);
+                                            startActivity(i);
+                                        }else{
+                                            Intent i = new Intent(LogInOrRegisterActivity.this, MobileVerificationActivity.class);
+                                            i.putExtra("from", "facebook");
+                                            i.putExtra("id", id);
+                                            i.putExtra("firstName", firstName);
+                                            i.putExtra("lastName", lastName);
+                                            i.putExtra("email", email);
+                                            startActivity(i);
+
+                                        }
+
+                                    }
+                                    catch(Exception e){
+                                        e.printStackTrace();
+                                    }
                                 }
-                                catch(Exception e){
-                                    e.printStackTrace();
-                                }
-                            }
-                        }).executeAsync();
+                            }).executeAsync();
 
-            }
+                }
+
             @Override
             public void onCancel() {
 
@@ -231,6 +239,27 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
 
         Intent i = new Intent(LogInOrRegisterActivity.this,RegisterActivity.class);
         startActivity(i);
+
+    }
+
+    public boolean isAlreadyRegistered(String id,String type){
+
+
+        String finalUrl = Constants.checkUserExistsUrl+id+"&type="+type;
+        new CheckIfUserExistsAsyncTask(getApplicationContext(),new CheckIfUserExistsAsyncTask.CheckIfUserExistsCallback() {
+            @Override
+            public void onStart() {
+
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                res = result;
+
+            }
+        }).execute(finalUrl);
+
+        return res;
 
     }
 
@@ -311,42 +340,37 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
 
     private void getProfileInformation() {
 
-        if (mGoogleApiClient.isConnected()) {
-            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-            mGoogleApiClient.disconnect();
-            mGoogleApiClient.connect();
-        }
+        try {
+            if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
 
-//        try {
-//            if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
-//
-//
-//                Person currentPerson = Plus.PeopleApi
-//                        .getCurrentPerson(mGoogleApiClient);
-//
-//                googlePlusProfile = currentPerson.getUrl();
-//                googleemail = Plus.AccountApi.getAccountName(mGoogleApiClient);
-//                googlefname = currentPerson.getName().getGivenName();
-//                googlelname = currentPerson.getName().getFamilyName();
-//
-//                googlePlusProfile = URLEncoder.encode(googlePlusProfile, "UTF-8");
-//                googleemail = URLEncoder.encode(googleemail, "UTF-8");
-//                googlefname = URLEncoder.encode(googlefname, "UTF-8");
-//                googlelname = URLEncoder.encode(googlelname, "UTF-8");
-//
-//
-//
-//                if (mGoogleApiClient.isConnected()) {
-//                    Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-//                    mGoogleApiClient.disconnect();
-//                    mGoogleApiClient.connect();
-//                }
-//            }
-//        }
-//        catch(Exception e){
-//
-//            e.printStackTrace();
-//        }
+
+                Person currentPerson = Plus.PeopleApi
+                        .getCurrentPerson(mGoogleApiClient);
+
+                googlePlusProfile = currentPerson.getUrl();
+                googleemail = Plus.AccountApi.getAccountName(mGoogleApiClient);
+                googlefname = currentPerson.getName().getGivenName();
+                googlelname = currentPerson.getName().getFamilyName();
+                googleId = currentPerson.getId();
+
+                googlePlusProfile = URLEncoder.encode(googlePlusProfile, "UTF-8");
+                googleemail = URLEncoder.encode(googleemail, "UTF-8");
+                googlefname = URLEncoder.encode(googlefname, "UTF-8");
+                googlelname = URLEncoder.encode(googlelname, "UTF-8");
+                googleId = URLEncoder.encode(googleId,"UTF-8");
+
+                if (mGoogleApiClient.isConnected()) {
+                    Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+                    mGoogleApiClient.disconnect();
+                    mGoogleApiClient.connect();
+                }
+
+            }
+        }
+        catch(Exception e){
+
+            e.printStackTrace();
+        }
     }
     @Override
     public void onConnectionSuspended(int arg0)
@@ -361,12 +385,29 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
     {
         if (isSignedIn)
         {
-//            Intent i = new Intent(RegisterLoginActivity.this,LandingActivity.class);
-//            startActivity(i);
+
+            if(isAlreadyRegistered(googleId,"GP")){
+
+                Intent i = new Intent(LogInOrRegisterActivity.this,LandingActivity.class);
+                startActivity(i);
+            }
+            else{
+
+                Intent i = new Intent(LogInOrRegisterActivity.this, MobileVerificationActivity.class);
+                i.putExtra("from","google");
+                i.putExtra("id", googleId);
+                i.putExtra("firstName", googlefname);
+                i.putExtra("lastName", googlelname);
+                i.putExtra("email", googleemail);
+                startActivity(i);
+
+            }
+
+
         }
         else
         {
-            // do something
+
         }
     }
 

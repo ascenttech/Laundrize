@@ -118,10 +118,12 @@ public class Constants {
 
     // Log Tags for async Task
     public static final String AddNewAddressAsyncTask=" ADD NEW ADDRESS ASYNC TASK ";
+    public static final String CheckIfUserExistsAsyncTask=" CHECK IF USER EXISTS ASYNC TASK ";
     public static final String ConfirmVerificationAsyncTask=" CONFIRM VERIFICATION ASYNC TASK ";
     public static final String FetchAddressAsyncTask=" FETCH ADDRESS ASYNC TASK ";
-    public static final String FetchAddressRelatedDataAsyncTask=" FETCH ADDRESS RELATED DATA ASYNC TASK ";
     public static final String FetchAllSlotsAsyncTask=" FETCH ALL SLOTS ASYNC TASK ";
+    public static final String FetchAreasAsyncTask=" FETCH AREAS ASYNC TASK ";
+    public static final String FetchCitiesAsyncTask=" FETCH CITIES ASYNC TASK ";
     public static final String FetchCurrentServerTimeAsyncTask=" FETCH CURRENT SERVER TIME ASYNC TASK ";
     public static final String FetchLaundryServicesAsyncTask=" FETCH LAUNDRY SERVICES ASYNC TASK ";
     public static final String FetchSlotDifferenceAsyncTask=" FETCH SLOT DIFFERENCE ASYNC TASK ";
@@ -129,6 +131,7 @@ public class Constants {
     public static final String FetchUserCityAsyncTask=" FETCH USER CITY ASYNC TASK ";
     public static final String FetchUserProfileAsyncTask=" FETCH USER PROFILE ASYNC TASK ";
     public static final String FetchVerificationCodeAsyncTask=" FETCH VERIFICATION CODE ASYNC TASK ";
+    public static final String FetchZipcodesAsyncTask=" FETCH ZIPCODES ASYNC TASK ";
     public static final String PlaceWeeklyOrderAsyncTask=" PLACE WEEKLY ORDER ASYNC TASK ";
     public static final String RegisterUserAsyncTask=" REGISTER USER ASYNC TASK ";
     public static final String RegisterUserViaSocialAsyncTask=" REGISTER USER VIA SOCIAL ASYNC TASK ";
@@ -224,6 +227,11 @@ public class Constants {
 
 //    public static final String registerViaGoogleUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?googleId=758924621&mobile_number=98765454323&password=null&verification_code=909juew&first_name=sagar&last_name=devanga&email=abc@gmail.com";
     public static final String registerViaGoogleUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?googleId=";
+
+
+    // type = GP for google
+//    public static final String checkUserExistsUrl ="http://dev.laundrize.com/api/api/v1/checkuserExist?id=874750579238699&type=FB";
+    public static final String checkUserExistsUrl ="http://dev.laundrize.com/api/api/v1/checkuserExist?id=";
 
     public static boolean isInternetAvailable(Context context){
 

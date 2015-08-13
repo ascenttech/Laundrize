@@ -21,19 +21,19 @@ import java.util.ArrayList;
 /**
  * Created by ADMIN on 11-08-2015.
  */
-public class FetchAddressRelatedDataAsyncTask extends AsyncTask<String,Void,Boolean> {
+public class FetchZipcodesAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     Context context;
-    FetchAddressRelatedDataCallback callback;
+    FetchZipcodesCallback callback;
     String areaName,zipCode,cityName,type;
 
-    public interface FetchAddressRelatedDataCallback{
+    public interface FetchZipcodesCallback{
 
         public void onStart(boolean status);
         public void onResult(boolean result);
     }
 
-    public FetchAddressRelatedDataAsyncTask(Context context, FetchAddressRelatedDataCallback callback) {
+    public FetchZipcodesAsyncTask(Context context, FetchZipcodesCallback callback) {
         this.context = context;
         this.callback = callback;
     }
@@ -47,11 +47,9 @@ public class FetchAddressRelatedDataAsyncTask extends AsyncTask<String,Void,Bool
     @Override
     protected Boolean doInBackground(String... url) {
 
-        Log.d(Constants.LOG_TAG,Constants.FetchAddressRelatedDataAsyncTask);
+        Log.d(Constants.LOG_TAG,Constants.FetchZipcodesAsyncTask);
         Log.d(Constants.LOG_TAG," The url to  be fetched "+ url[0]);
         try{
-
-            type = url[1];
 
             HttpGet httpGet = new HttpGet(url[0]);
             HttpClient httpClient = new DefaultHttpClient();
@@ -70,60 +68,22 @@ public class FetchAddressRelatedDataAsyncTask extends AsyncTask<String,Void,Bool
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String id = jsonObject.getString("id");
-                    if(type.equalsIgnoreCase("city")){
-
-                        cityName = jsonObject.getString("city");
-                        Constants.generalAddressRelatedData.add(new GeneralAddressRelatedData(id,cityName));
-                    }
-                    else if(type.equalsIgnoreCase("area")){
-
-                        areaName = jsonObject.getString("area_name");
-                        Constants.generalAddressRelatedData.add(new GeneralAddressRelatedData(id,cityName));
-
-                    }
-                    else if(type.equalsIgnoreCase("zipcode")){
-
-                        zipCode = jsonObject.getString("zip_code");
-                        Constants.generalAddressRelatedData.add(new GeneralAddressRelatedData(id,cityName));
-                    }
-
+                    zipCode = jsonObject.getString("zip_code");
                 }
 
-                categorizeData();
-
-                return true;
-            }
-            else{
-                return false;
-            }
+            return true;
         }
-        catch (Exception e){
-
-            e.printStackTrace();
+        else{
             return false;
         }
+    }
+    catch (Exception e){
 
+        e.printStackTrace();
+        return false;
     }
 
-    private void categorizeData() {
-
-        if(type.equalsIgnoreCase("city")){
-            Constants.cities = Constants.generalAddressRelatedData;
-            Constants.generalAddressRelatedData = new ArrayList<GeneralAddressRelatedData>();
-
-        }
-        else if(type.equalsIgnoreCase("area")){
-
-            Constants.areas = Constants.generalAddressRelatedData;
-            Constants.generalAddressRelatedData = new ArrayList<GeneralAddressRelatedData>();
-        }
-        else if(type.equalsIgnoreCase("zipcode")){
-
-            Constants.zipcodes = Constants.generalAddressRelatedData;
-            Constants.generalAddressRelatedData = new ArrayList<GeneralAddressRelatedData>();
-        }
-
-    }
+}
 
     @Override
     protected void onPostExecute(Boolean result) {

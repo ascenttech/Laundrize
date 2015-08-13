@@ -29,7 +29,8 @@ public class MobileVerificationActivity extends Activity {
     private String mobileNumber,name,emailId,password;
     private CustomEditText mobileNumberEdit,verificationCode;
     private ProgressDialog progressDialog;
-    private String from,id,firstName,lastName,email,url;
+    private String from,id,firstName,lastName,url;
+    private String finalUrl,finalVerificationUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,14 +48,24 @@ public class MobileVerificationActivity extends Activity {
             emailId = i.getStringExtra("emailId");
             password = i.getStringExtra("password");
         }
-        else{
+        else if(from.equalsIgnoreCase("facebook")){
 
             mobileNumber = "";
             id = i.getStringExtra("id");
             firstName = i.getStringExtra("firstName");
             lastName = i.getStringExtra("lastName");
-            email = i.getStringExtra("email");
-            url = i.getStringExtra("url");
+            emailId = i.getStringExtra("email");
+
+        }
+        else if(from.equalsIgnoreCase("google")){
+
+            Log.d(Constants.LOG_TAG,"INside Gooogle ");
+
+            mobileNumber = "";
+            id = i.getStringExtra("id");
+            firstName = i.getStringExtra("firstName");
+            lastName = i.getStringExtra("lastName");
+            emailId = i.getStringExtra("email");
 
         }
 
@@ -103,8 +114,7 @@ public class MobileVerificationActivity extends Activity {
 
     public void verifyNow(){
 
-        if(from.equalsIgnoreCase("register")){
-
+        if(!mobileNumberEdit.getText().toString().equalsIgnoreCase("null")){
             String finalUrl = Constants.verifyNowUrl+mobileNumberEdit.getText().toString();
             new FetchVerificationCodeAsyncTask(getApplicationContext(), new FetchVerificationCodeAsyncTask.FetchVerificationCodeCallback() {
                 @Override
@@ -132,45 +142,36 @@ public class MobileVerificationActivity extends Activity {
             }).execute(finalUrl);
 
         }
-        else if(from.equalsIgnoreCase("social")){
+        else{
 
-            String finalUrl = "a";
-            new RegisterUserViaSocialAsyncTask(getApplicationContext(),new RegisterUserViaSocialAsyncTask.RegisterUserViaSocialCallback() {
-                @Override
-                public void onStart(boolean status) {
-
-                    progressDialog = new ProgressDialog(getApplicationContext());
-                    progressDialog.setTitle(Constants.APP_NAME);
-                    progressDialog.setMessage("Registering, Please wait...");
-                    progressDialog.show();
-
-                }
-                @Override
-                public void onResult(boolean result) {
-
-                    progressDialog.dismiss();
-                    if(result){
-
-                    }
-                    else{
-
-                        Toast.makeText(getApplicationContext(),"Cannot register now\nTry Again Later",5000).show();
-                    }
-
-                }
-            }).execute(finalUrl);
-
+            Toast.makeText(getApplicationContext(),"Please enter a mobile number",5000).show();
         }
+
 
     }
 
     public void confirmVerification(){
 
         String verificationCodeValue = verificationCode.getText().toString();
+        mobileNumber = mobileNumberEdit.getText().toString();
 
         // verificationCode value (Wo8zxW) has been harcoded
 
-        String finalUrl = Constants.confirmVerificationUrl+mobileNumber+"&verification_code="+verificationCodeValue+"&password="+password+"&first_name="+name+"&email="+emailId;
+        if(from.equalsIgnoreCase("register")){
+
+            finalVerificationUrl = Constants.confirmVerificationUrl+mobileNumber+"&verification_code="+verificationCodeValue+"&password="+password+"&first_name="+name+"&email="+emailId;
+
+        }
+        else if(from.equalsIgnoreCase("facebook")){
+
+            finalVerificationUrl = Constants.registerViaFBUrl+id+"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId;
+
+        }
+        else if(from.equalsIgnoreCase("google")){
+
+            finalVerificationUrl = Constants.registerViaGoogleUrl+id+"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId;
+
+        }
 
         new ConfirmVerificationAsyncTask(getApplicationContext(), new ConfirmVerificationAsyncTask.ConfirmVerificationCallback() {
             @Override
@@ -196,7 +197,7 @@ public class MobileVerificationActivity extends Activity {
                     Toast.makeText(getApplicationContext()," Enter a valid code",5000).show();
                 }
             }
-        }).execute(finalUrl);
+        }).execute(finalVerificationUrl);
 
     }
 
