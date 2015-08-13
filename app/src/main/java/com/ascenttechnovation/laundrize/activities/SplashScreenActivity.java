@@ -95,7 +95,6 @@ public class SplashScreenActivity extends Activity {
     public void initializeArrayList(){
 
         Constants.subCategory = new ArrayList<GeneralData>();
-        Constants.generalAddressRelatedData = new ArrayList<GeneralAddressRelatedData>();
         Constants.addressData = new ArrayList<AddressData>();
         Constants.bagLaundryData = new ArrayList<GeneralData>();
         Constants.dryCleanHouseholdsData = new ArrayList<GeneralData>();
@@ -114,15 +113,18 @@ public class SplashScreenActivity extends Activity {
         Constants.washingOrderData = new ArrayList<WashingOrderData>();
         Constants.trackOrdersData = new ArrayList<TrackOrdersData>();
         Constants.completedOrdersData = new ArrayList<CompletedOrdersData>();
-        Constants.areas = new ArrayList<GeneralAddressRelatedData>();
-        Constants.cities = new ArrayList<GeneralAddressRelatedData>();
-        Constants.zipcodes = new ArrayList<GeneralAddressRelatedData>();
+        Constants.areas = new ArrayList<String>();
+        Constants.cities = new ArrayList<String>();
+        Constants.zipcodes = new ArrayList<String>();
 
 
     }
 
     public void intializeHashMap(){
 
+        Constants.areasMap = new HashMap<String,String>();
+        Constants.citiesMap = new HashMap<String,String>();
+        Constants.zipcodesMap = new HashMap<String,String>();
         Constants.order = new HashMap<String,String>();
         Constants.slots = new HashMap<String,String>();
         Constants.getSlotsId = new HashMap<String,String>();

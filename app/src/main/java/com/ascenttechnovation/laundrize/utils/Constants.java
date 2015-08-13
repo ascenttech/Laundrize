@@ -61,7 +61,9 @@ public class Constants {
     public static Map<String,String> order;
     public static Map<String,String> slots;
     public static Map<String,String> getSlotsId;
-
+    public static Map<String,String> areasMap;
+    public static Map<String,String> citiesMap;
+    public static Map<String,String> zipcodesMap;
 
     // All the arraylists
     public static ArrayList<GeneralData> subCategory;
@@ -86,9 +88,10 @@ public class Constants {
     public static ArrayList<WashingOrderData> washingOrderData;
     public static ArrayList<AllSlotsData> allSlotsData;
     public static ArrayList<TrackOrdersData> trackOrdersData;
-    public static ArrayList<GeneralAddressRelatedData> areas;
-    public static ArrayList<GeneralAddressRelatedData> cities;
-    public static ArrayList<GeneralAddressRelatedData> zipcodes;
+    public static ArrayList<String> areas;
+    public static ArrayList<String> cities;
+    public static ArrayList<String> zipcodes;
+
 
 
     // Log Tags for all the activities

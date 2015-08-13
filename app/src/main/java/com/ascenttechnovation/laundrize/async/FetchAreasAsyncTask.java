@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by ADMIN on 11-08-2015.
@@ -36,6 +37,8 @@ public class FetchAreasAsyncTask extends AsyncTask<String,Void,Boolean> {
     public FetchAreasAsyncTask(Context context, FetchAreasCallback callback) {
         this.context = context;
         this.callback = callback;
+        Constants.areas = new ArrayList<String>();
+        Constants.areasMap = new HashMap<String,String>();
     }
 
     @Override
@@ -69,6 +72,9 @@ public class FetchAreasAsyncTask extends AsyncTask<String,Void,Boolean> {
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String id = jsonObject.getString("id");
                     areaName = jsonObject.getString("area_name");
+
+                    Constants.areas.add(areaName);
+                    Constants.areasMap.put(areaName,id);
                 }
 
                return true;

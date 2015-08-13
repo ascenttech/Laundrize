@@ -13,8 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,7 +25,9 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.async.AddNewAddressAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchAddressAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchAreasAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchCitiesAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchZipcodesAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -35,8 +40,8 @@ import java.net.URLEncoder;
 public class AddressFragment extends Fragment {
 
     private ViewGroup selectAddressChild;
-    private CustomButton selectAddress,addNewAddress,updateNewAddress;
-    private LinearLayout addNewAddressChild;
+    private CustomButton selectAddress,addNewAddress, saveNewAddress;
+    private ScrollView addNewAddressChild;
     private int height;
     private ActionBar actionBar;
     private Animation animShow;
@@ -48,7 +53,7 @@ public class AddressFragment extends Fragment {
     private CustomTextView address,mobileNumber;
     private EditText buildingName,houseNumber;
     private Spinner city,zipcode,area;
-    private String cityValue,pincodeValue,areaValue,buildingNameValue,houseNumberValue,fullAddressValue;
+    private String cityValue, zipcodeValue,areaValue,buildingNameValue,houseNumberValue,fullAddressValue;
     private String orderType;
 
     public AddressFragment(String orderType) {
@@ -109,13 +114,14 @@ public class AddressFragment extends Fragment {
         selectAddressChild = (ViewGroup) v.findViewById(R.id.available_address_layout_container);
         addNewAddress = (CustomButton) v.findViewById(R.id.add_new_address_button_address_fragment);
 
-        addNewAddressChild = (LinearLayout) v.findViewById(R.id.add_new_address_linear_layout_address_fragment);
+//        addNewAddressChild = (LinearLayout) v.findViewById(R.id.add_new_address_linear_layout_address_fragment);
+        addNewAddressChild = (ScrollView) v.findViewById(R.id.add_new_address_linear_layout_address_fragment);
         city = (Spinner) v.findViewById(R.id.city_add_new_address);
-        zipcode = (Spinner) v.findViewById(R.id.pincode_add_new_address);
+        zipcode = (Spinner) v.findViewById(R.id.zipcode_add_new_address);
         area = (Spinner) v.findViewById(R.id.area_add_new_address);
         buildingName = (EditText) v.findViewById(R.id.building_or_street_add_new_address);
         houseNumber = (EditText) v.findViewById(R.id.flat_or_house_number_add_new_address);
-        updateNewAddress = (CustomButton) v.findViewById(R.id.update_this_address_add_new_address);
+        saveNewAddress = (CustomButton) v.findViewById(R.id.save_new_address_add_new_address);
 
     }
 
@@ -124,11 +130,6 @@ public class AddressFragment extends Fragment {
         selectAddressChild.setVisibility(View.GONE);
         selectAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus, 0, 0, 0);
         addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
-
-
-//        city.setAdapter(new CustomCityAdapter(getActivity().getApplicationContext(), R.layout.row_spinner_layout,Constants.cities));
-//        area.setAdapter(new CustomCityAdapter(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.areas));
-//        zipcode.setAdapter(new CustomCityAdapter(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.zipcodes));
 
     }
 
@@ -164,7 +165,7 @@ public class AddressFragment extends Fragment {
     private void setClickListeners(){
         selectAddress.setOnClickListener(listener);
         addNewAddress.setOnClickListener(listener);
-        updateNewAddress.setOnClickListener(listener);
+        saveNewAddress.setOnClickListener(listener);
     }
 
 
@@ -283,52 +284,31 @@ public class AddressFragment extends Fragment {
 
     public void validateNewAddress(){
 
-//        if(!city.getText().toString().equalsIgnoreCase("")){
-//
-//            if(!pincode.getText().toString().equalsIgnoreCase("")){
-//
-//
-//                if(!area.getText().toString().equalsIgnoreCase("")){
-//
-//                    if(!buildingName.getText().toString().equalsIgnoreCase("")){
-//
-//                        if(!houseNumber.getText().toString().equalsIgnoreCase("")){
-//
-//                            updateNewAddress();
-//                        } // end of house Number
-//                        else{
-//                            Toast.makeText(getActivity().getApplicationContext(),"Please enter the houseNumber",5000).show();
-//                        }
-//                    } // end of buildiing name
-//                    else{
-//                        Toast.makeText(getActivity().getApplicationContext(),"Please enter the building name",5000).show();
-//                    }
-//
-//                }// end of area
-//                else{
-//                    Toast.makeText(getActivity().getApplicationContext(),"Please enter the area",5000).show();
-//                }
-//
-//            } // end of pincode if
-//            else{
-//                Toast.makeText(getActivity().getApplicationContext(),"Please enter the pincode",5000).show();
-//            }
-//
-//        }// end of city if
-//        else{
-//            Toast.makeText(getActivity().getApplicationContext(),"Please enter the city",5000).show();
-//        }
+        if(!buildingName.getText().toString().equalsIgnoreCase("")){
+
+            if(!houseNumber.getText().toString().equalsIgnoreCase("")){
+
+                saveNewAddress();
+            } // end of house Number
+            else{
+                Toast.makeText(getActivity().getApplicationContext(),"Please enter the houseNumber",5000).show();
+            }
+        } // end of buildiing name
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Please enter the building name",5000).show();
+        }
+
 
 
     }
 
-    public void updateNewAddress(){
+    public void saveNewAddress(){
 
         try {
-//            cityValue = URLEncoder.encode(city.getText().toString(), "UTF-8");
-//            pincodeValue = URLEncoder.encode(pincode.getText().toString(), "UTF-8");
-//            areaValue = URLEncoder.encode(area.getText().toString(), "UTF-8");
-//            buildingNameValue = URLEncoder.encode(buildingName.getText().toString(), "UTF-8");
+            cityValue = URLEncoder.encode(city.getSelectedItem().toString().toString(), "UTF-8");
+            zipcodeValue = URLEncoder.encode(zipcode.getSelectedItem().toString(), "UTF-8");
+            areaValue = URLEncoder.encode(area.getSelectedItem().toString(), "UTF-8");
+            buildingNameValue = URLEncoder.encode(buildingName.getText().toString(), "UTF-8");
             houseNumberValue = URLEncoder.encode(houseNumber.getText().toString(), "UTF-8");
 
             String temp = houseNumberValue+","+buildingNameValue;
@@ -338,7 +318,7 @@ public class AddressFragment extends Fragment {
             e.printStackTrace();
         }
 
-        String finalUrl=Constants.addNewAddressUrl +Constants.userId+"&city="+cityValue+"&city_zip="+pincodeValue+"&city_zip_area="+areaValue+"&address="+fullAddressValue ;
+        String finalUrl=Constants.addNewAddressUrl +Constants.userId+"&city="+cityValue+"&city_zip="+ zipcodeValue +"&city_zip_area="+areaValue+"&address="+fullAddressValue ;
 
         new AddNewAddressAsyncTask(getActivity().getApplicationContext(),new AddNewAddressAsyncTask.AddNewAddressCallback() {
             @Override
@@ -403,9 +383,119 @@ public class AddressFragment extends Fragment {
             replaceFragment(new WeeklyFragment());
 
         }
+    }
+
+    public void populateCity(){
+
+        city.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.cities));
+        city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String cityValueFromSpinner = city.getSelectedItem().toString();
+                String id = Constants.citiesMap.get(cityValueFromSpinner);
+                populateZipcodes(id);
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+
+    public void populateZipcodes(String cityId){
+
+        if(Constants.zipcodes.size() == 0){
+
+            String finalUrl = Constants.getZipCodeUrl+cityId;
+            new FetchZipcodesAsyncTask(getActivity().getApplicationContext(),new FetchZipcodesAsyncTask.FetchZipcodesCallback() {
+                @Override
+                public void onStart(boolean status) {
+
+                }
+                @Override
+                public void onResult(boolean result) {
+
+                    zipcode.setVisibility(View.VISIBLE);
+                    setZipcodeAdapter();
+                }
+            }).execute(finalUrl);
+
+        }
+        else{
+
+            setZipcodeAdapter();
+        }
 
 
+    }
 
+    public void setZipcodeAdapter(){
+
+        zipcode.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.zipcodes));
+        zipcode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String zipcodeValueFromSpinner = zipcode.getSelectedItem().toString();
+                String id = Constants.zipcodesMap.get(zipcodeValueFromSpinner);
+                populateAreas(id);
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+
+    public void populateAreas(String zipcodeId){
+
+        if(Constants.areas.size() == 0){
+
+            String finalUrl = Constants.getZipAreaUrl+zipcodeId;
+            new FetchAreasAsyncTask(getActivity().getApplicationContext(),new FetchAreasAsyncTask.FetchAreasCallback() {
+                @Override
+                public void onStart(boolean status) {
+
+
+                }
+                @Override
+                public void onResult(boolean result) {
+
+                    area.setVisibility(View.VISIBLE);
+                    setAreasAdapter();
+                }
+            }).execute(finalUrl);
+
+        }
+        else{
+
+            setAreasAdapter();
+        }
+
+    }
+
+    public void setAreasAdapter(){
+
+
+        area.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.areas));
+        area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String areaValueFromSpinner = area.getSelectedItem().toString();
+                String id = Constants.areasMap.get(areaValueFromSpinner);
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
     }
 
@@ -463,7 +553,9 @@ public class AddressFragment extends Fragment {
                                     addNewAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_minus,0,0,0);
                                     if(selectAddressChild.getVisibility() == View.GONE){
 
+                                        populateCity();
                                         expand(addNewAddressChild);
+
                                     }
                                     else{
 
@@ -487,11 +579,11 @@ public class AddressFragment extends Fragment {
                             }
 
                         }
-                    }).execute(finalUrl,"city");
+                    }).execute(finalUrl);
 
 
                     break;
-                case R.id.update_this_address_add_new_address: validateNewAddress();
+                case R.id.save_new_address_add_new_address: validateNewAddress();
                     break;
 
 
