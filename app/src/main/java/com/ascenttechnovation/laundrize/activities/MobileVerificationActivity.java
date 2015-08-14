@@ -189,7 +189,7 @@ public class MobileVerificationActivity extends Activity {
                 progressDialog.dismiss();
                 if(result){
 
-                    Intent i = new Intent(MobileVerificationActivity.this,LoginActivity.class);
+                    Intent i = new Intent(MobileVerificationActivity.this,LandingActivity.class);
                     startActivity(i);
 
                 }

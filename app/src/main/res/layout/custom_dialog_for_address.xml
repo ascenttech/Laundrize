@@ -1,78 +1,86 @@
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:layout_marginRight="@dimen/margin_dp"
     android:layout_marginLeft="@dimen/margin_dp"
     android:orientation="vertical"
     android:background="@drawable/rectangle_box"
     android:padding="@dimen/margin_dp"
     >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginRight="@dimen/margin_dp"
+        android:layout_marginLeft="@dimen/margin_dp"
+        android:orientation="vertical"
+        android:padding="@dimen/margin_dp"
+        >
 
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/city_profile_fragment"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="City"
-        android:background="@drawable/rounded_edit_text"
-        android:textSize="@dimen/text_size_edit_text"
-        android:padding="@dimen/padding_large"
-        />
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/pincode_profile_fragment"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Pincode"
-        android:background="@drawable/rounded_edit_text"
-        android:layout_marginTop="@dimen/margin_dp"
-        android:textSize="@dimen/text_size_edit_text"
-        android:padding="@dimen/padding_large"
-        />
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/area_profile_fragment"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Area"
-        android:background="@drawable/rounded_edit_text"
-        android:layout_marginTop="@dimen/margin_dp"
-        android:textSize="@dimen/text_size_edit_text"
-        android:padding="@dimen/padding_large"
-        />
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/building_or_street_profile_fragment"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Building or Street Name"
-        android:background="@drawable/rounded_edit_text"
-        android:layout_marginTop="@dimen/margin_dp"
-        android:textSize="@dimen/text_size_edit_text"
-        android:padding="@dimen/padding_large"
-        />
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/flat_or_house_number_profile_fragment"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Flat or House Number"
-        android:background="@drawable/rounded_edit_text"
-        android:layout_marginTop="@dimen/margin_dp"
-        android:textSize="@dimen/text_size_edit_text"
-        android:padding="@dimen/padding_large"
-        />
+        <Spinner
+            android:id="@+id/city_profile_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="City"
+            android:background="@drawable/rounded_edit_text"
+            android:textSize="@dimen/text_size_edit_text"
+            />
+        <Spinner
+            android:id="@+id/zipcode_profile_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pincode"
+            android:background="@drawable/rounded_edit_text"
+            android:layout_marginTop="@dimen/margin_dp"
+            android:textSize="@dimen/text_size_edit_text"
+            android:visibility="gone"
+            />
+        <Spinner
+            android:id="@+id/area_profile_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Area"
+            android:background="@drawable/rounded_edit_text"
+            android:layout_marginTop="@dimen/margin_dp"
+            android:textSize="@dimen/text_size_edit_text"
+            android:visibility="gone"
+            />
+        <com.ascenttechnovation.laundrize.custom.CustomEditText
+            android:id="@+id/building_or_street_profile_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Building or Street Name"
+            android:background="@drawable/rounded_edit_text"
+            android:layout_marginTop="@dimen/margin_dp"
+            android:textSize="@dimen/text_size_edit_text"
+            android:padding="@dimen/padding_large"
+            />
+        <com.ascenttechnovation.laundrize.custom.CustomEditText
+            android:id="@+id/flat_or_house_number_profile_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Flat or House Number"
+            android:background="@drawable/rounded_edit_text"
+            android:layout_marginTop="@dimen/margin_dp"
+            android:textSize="@dimen/text_size_edit_text"
+            android:padding="@dimen/padding_large"
+            />
 
-    <com.ascenttechnovation.laundrize.custom.CustomButton
-        android:id="@+id/update_this_address_profile_fragment"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Save New Address"
-        android:background="@drawable/rounded_blue_button"
-        android:textColor="@color/text_color_white"
-        android:layout_marginLeft="@dimen/margin_large_thirty_five"
-        android:layout_marginRight="@dimen/margin_large_thirty_five"
-        android:layout_marginBottom="@dimen/margin_large"
-        android:layout_marginTop="@dimen/margin_large"
-        android:gravity="center"
-        android:layout_gravity="center_horizontal"
-        />
+        <com.ascenttechnovation.laundrize.custom.CustomButton
+            android:id="@+id/update_this_address_profile_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Save New Address"
+            android:background="@drawable/rounded_blue_button"
+            android:textColor="@color/text_color_white"
+            android:layout_marginLeft="@dimen/margin_large_thirty_five"
+            android:layout_marginRight="@dimen/margin_large_thirty_five"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            />
 
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

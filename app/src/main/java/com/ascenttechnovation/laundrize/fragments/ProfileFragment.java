@@ -19,20 +19,31 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
+import com.ascenttechnovation.laundrize.async.AddNewAddressAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchAddressAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchAreasAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchCitiesAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchUserProfileAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchZipcodesAsyncTask;
+import com.ascenttechnovation.laundrize.async.UpdateUserProfileAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
+import com.ascenttechnovation.laundrize.custom.CustomEditText;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.utils.Constants;
+
+import java.net.URLEncoder;
 
 /**
  * Created by ADMIN on 01-07-2015.
@@ -43,7 +54,7 @@ public class ProfileFragment extends Fragment {
     private ImageView profileImage;
     private Bitmap bitmap;
     private CustomTextView editYourProfile,address,mobileNumber,userName;
-    private Dialog dialog,dialogForAddress;
+    private Dialog profileDialog,addressDialog;
     private CustomButton update,cancel,addNewAddress;
     private LinearLayout footer;
     private ViewGroup availableAddresses;
@@ -52,6 +63,16 @@ public class ProfileFragment extends Fragment {
     private boolean inflateAddress;
     private LayoutInflater parentInflater;
     private View rowView;
+
+    Spinner city,zipcode,area;
+    EditText building,houseNumber;
+
+    String cityValue,zipcodeValue,areaValue,buildingNameValue,houseNumberValue,fullAddressValue;
+
+    CustomEditText firstName,lastName,emailId;
+    CustomButton dialogButton;
+
+
 
     @Nullable
     @Override
@@ -231,45 +252,325 @@ public class ProfileFragment extends Fragment {
     public void editYourProfile(){
 
         // custom dialog
-        dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.custom_dialog);
-        dialog.setTitle("Update Profile");
+        profileDialog = new Dialog(getActivity());
+        profileDialog.setContentView(R.layout.custom_dialog);
+        profileDialog.setTitle("Update Profile");
 
-        Button dialogButton = (Button) dialog.findViewById(R.id.update_button_custom_dialog);
-        EditText dateOfBirth = (EditText) dialog.findViewById(R.id.date_of_birth_edit_custom_dialog);
-//        dateOfBirth.setOnClickListener();
-
-
+        firstName = (CustomEditText) profileDialog.findViewById(R.id.first_name_edit_custom_dialog);
+        lastName = (CustomEditText) profileDialog.findViewById(R.id.last_name_edit_custom_dialog);
+        emailId = (CustomEditText) profileDialog.findViewById(R.id.email_id_edit_custom_dialog);
+        dialogButton = (CustomButton) profileDialog.findViewById(R.id.update_button_custom_dialog);
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+                validateProfile();
             }
         });
-        dialog.show();
+        profileDialog.show();
 
+    }
+
+    public void validateProfile(){
+
+        if(!firstName.getText().toString().equalsIgnoreCase("")){
+
+            if(!lastName.getText().toString().equalsIgnoreCase("")){
+
+                if(!emailId.getText().toString().equalsIgnoreCase("")){
+
+                    updateProfile();
+                }
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(),"Plese enter the Email Address",5000).show();
+                }
+            }
+            else{
+                Toast.makeText(getActivity().getApplicationContext(),"Please enter the Last Name",5000).show();
+            }
+
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Please enter the First Name",5000).show();
+        }
+
+
+    }
+
+    public void updateProfile(){
+
+        profileDialog.dismiss();
+        String finalUrl = Constants.updateUserProfile+emailId+"&firstName="+firstName+"&lastName="+lastName;
+        new UpdateUserProfileAsyncTask(getActivity().getApplicationContext(),new UpdateUserProfileAsyncTask.UpdateUserProfileCallback() {
+            @Override
+            public void onStart(boolean status) {
+
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.APP_NAME);
+                progressDialog.setMessage("Updating Your Address, Please wait...");
+                progressDialog.show();
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                progressDialog.dismiss();
+                if(result){
+                    replaceFragment(new ProfileFragment());
+                }
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(),"Profile couldn't be updated\nTry Again Later",5000).show();
+                }
+            }
+        }).execute(finalUrl);
     }
 
     public void update(){
 
         // custom dialog
-        dialogForAddress = new Dialog(getActivity());
-        dialogForAddress.setContentView(R.layout.custom_dialog_for_address);
-        dialogForAddress.setTitle("Add New Address");
+        addressDialog = new Dialog(getActivity());
+        addressDialog.setContentView(R.layout.custom_dialog_for_address);
+        addressDialog.setTitle("Add New Address");
 
-        EditText city = (EditText) dialogForAddress.findViewById(R.id.city_profile_fragment);
-        EditText pincode = (EditText) dialogForAddress.findViewById(R.id.pincode_profile_fragment);
-        EditText building = (EditText) dialogForAddress.findViewById(R.id.building_or_street_profile_fragment);
-        EditText houseNumber = (EditText) dialogForAddress.findViewById(R.id.flat_or_house_number_profile_fragment);
-        Button update = (Button) dialogForAddress.findViewById(R.id.update_this_address_profile_fragment);
+        city = (Spinner) addressDialog.findViewById(R.id.city_profile_fragment);
+        zipcode = (Spinner) addressDialog.findViewById(R.id.zipcode_profile_fragment);
+        area = (Spinner) addressDialog.findViewById(R.id.area_profile_fragment);
+        building = (EditText) addressDialog.findViewById(R.id.building_or_street_profile_fragment);
+        houseNumber = (EditText) addressDialog.findViewById(R.id.flat_or_house_number_profile_fragment);
+        update = (CustomButton) addressDialog.findViewById(R.id.update_this_address_profile_fragment);
 
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogForAddress.dismiss();
+                validateNewAddress();
             }
         });
-        dialogForAddress.show();
+        populateCities();
+
+        addressDialog.show();
+
+    }
+
+    public void validateNewAddress(){
+
+        if(!building.getText().toString().equalsIgnoreCase("")){
+
+            if(!houseNumber.getText().toString().equalsIgnoreCase("")){
+
+                saveNewAddress();
+            } // end of house Number
+            else{
+                Toast.makeText(getActivity().getApplicationContext(),"Please enter the houseNumber",5000).show();
+            }
+        } // end of buildiing name
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Please enter the building name",5000).show();
+        }
+
+
+
+    }
+
+    public void saveNewAddress(){
+
+        addressDialog.dismiss();
+        try {
+            cityValue = URLEncoder.encode(city.getSelectedItem().toString().toString(), "UTF-8");
+            zipcodeValue = URLEncoder.encode(zipcode.getSelectedItem().toString(), "UTF-8");
+            areaValue = URLEncoder.encode(area.getSelectedItem().toString(), "UTF-8");
+            buildingNameValue = URLEncoder.encode(building.getText().toString(), "UTF-8");
+            houseNumberValue = URLEncoder.encode(houseNumber.getText().toString(), "UTF-8");
+
+            String temp = houseNumberValue+","+buildingNameValue;
+            fullAddressValue = URLEncoder.encode(temp,"UTF-8");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+        String finalUrl=Constants.addNewAddressUrl +Constants.userId+"&city="+cityValue+"&city_zip="+ zipcodeValue +"&city_zip_area="+areaValue+"&address="+fullAddressValue ;
+
+        new AddNewAddressAsyncTask(getActivity().getApplicationContext(),new AddNewAddressAsyncTask.AddNewAddressCallback() {
+            @Override
+            public void onStart(boolean status) {
+
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.LOG_TAG);
+                progressDialog.setMessage("Adding Your Address");
+                progressDialog.show();
+
+
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                progressDialog.dismiss();
+                if(result){
+
+                    replaceFragment(new ProfileFragment());
+
+                }
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(),"Unable to add adress now.\nPlease try again later",5000).show();
+                }
+
+            }
+        }).execute(finalUrl);
+
+    }
+
+
+
+
+    public void populateCities(){
+
+        String finalUrl = Constants.getCityUrl;
+        new FetchCitiesAsyncTask(getActivity().getApplicationContext(),new FetchCitiesAsyncTask.FetchCitiesCallback() {
+            @Override
+            public void onStart(boolean status) {
+
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.APP_NAME);
+                progressDialog.setMessage("Please Wait");
+                progressDialog.show();
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                progressDialog.dismiss();
+                if(result){
+
+                    setCityAdapter();
+
+                }
+                else{
+
+                    Toast.makeText(getActivity().getApplicationContext()," Cannot add address now.\nTry Again Later",5000).show();
+                }
+
+            }
+        }).execute(finalUrl);
+
+
+    }
+
+    public void setCityAdapter(){
+
+        city.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.cities));
+        city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String cityValueFromSpinner = city.getSelectedItem().toString();
+                String id = Constants.citiesMap.get(cityValueFromSpinner);
+                populateZipcodes(id);
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+
+    public void populateZipcodes(String cityId){
+
+        if(Constants.zipcodes.size() == 0){
+
+            String finalUrl = Constants.getZipCodeUrl+cityId;
+            new FetchZipcodesAsyncTask(getActivity().getApplicationContext(),new FetchZipcodesAsyncTask.FetchZipcodesCallback() {
+                @Override
+                public void onStart(boolean status) {
+
+                }
+                @Override
+                public void onResult(boolean result) {
+
+                    zipcode.setVisibility(View.VISIBLE);
+                    setZipcodeAdapter();
+                }
+            }).execute(finalUrl);
+
+        }
+        else{
+
+            setZipcodeAdapter();
+        }
+
+    }
+
+    public void setZipcodeAdapter(){
+
+        zipcode.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.zipcodes));
+        zipcode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String zipcodeValueFromSpinner = zipcode.getSelectedItem().toString();
+                String id = Constants.zipcodesMap.get(zipcodeValueFromSpinner);
+                populateAreas(id);
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+
+    public void populateAreas(String zipcodeId){
+
+        if(Constants.areas.size() == 0){
+
+            String finalUrl = Constants.getZipAreaUrl+zipcodeId;
+            new FetchAreasAsyncTask(getActivity().getApplicationContext(),new FetchAreasAsyncTask.FetchAreasCallback() {
+                @Override
+                public void onStart(boolean status) {
+
+
+                }
+                @Override
+                public void onResult(boolean result) {
+
+                    area.setVisibility(View.VISIBLE);
+                    setAreasAdapter();
+                }
+            }).execute(finalUrl);
+
+        }
+        else{
+
+            setAreasAdapter();
+        }
+
+    }
+    public void setAreasAdapter(){
+
+
+        area.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.areas));
+        area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String areaValueFromSpinner = area.getSelectedItem().toString();
+                String id = Constants.areasMap.get(areaValueFromSpinner);
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+    }
+
+    public void replaceFragment(Fragment fragment){
+
+        ((LandingActivity)getActivity()).getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container,fragment)
+                .addToBackStack(fragment.getClass().getName())
+                .commit();
 
     }
 
@@ -285,7 +586,8 @@ public class ProfileFragment extends Fragment {
                     break;
                 case R.id.right_button_included: cancel();
                     break;
-                case R.id.add_new_address_button_profile_fragment : update();
+                case R.id.add_new_address_button_profile_fragment :
+                    update();
                     break;
             }
 

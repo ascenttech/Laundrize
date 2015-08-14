@@ -61,6 +61,8 @@ public class RegisterUserViaSocialAsyncTask extends AsyncTask<String,Void,Boolea
 
                 Log.d(Constants.LOG_TAG," JSON RESPONSE "+response);
                 JSONObject jsonObject = new JSONObject(response);
+//                Constants.userId = jsonObject.getString("user_id");
+//                Constants.token = jsonObject.getString("token");
 
                 return true;
 

@@ -8,45 +8,65 @@
     >
 
     <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/name_edit_custom_dialog"
+        android:id="@+id/first_name_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
+        android:hint="First Name"
         android:background="@drawable/rounded_edit_text"
         android:textSize="@dimen/text_size"
         android:layout_margin="@dimen/pop_up_margin_dp"
         android:padding="@dimen/padding_large"
         />
     <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/email_edit_custom_dialog"
+        android:id="@+id/last_name_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Email Address"
+        android:hint="Last Name"
         android:background="@drawable/rounded_edit_text"
         android:textSize="@dimen/text_size"
         android:layout_margin="@dimen/pop_up_margin_dp"
         android:padding="@dimen/padding_large"
         />
     <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/date_of_birth_edit_custom_dialog"
+        android:id="@+id/email_id_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Date Of Birth"
+        android:hint="Email Id"
         android:background="@drawable/rounded_edit_text"
         android:textSize="@dimen/text_size"
         android:layout_margin="@dimen/pop_up_margin_dp"
         android:padding="@dimen/padding_large"
         />
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
-        android:id="@+id/mobile_number_edit_custom_dialog"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mobile Number"
-        android:background="@drawable/rounded_edit_text"
-        android:textSize="@dimen/text_size"
-        android:layout_margin="@dimen/pop_up_margin_dp"
-        android:padding="@dimen/padding_large"
-        />
+    <!--<com.ascenttechnovation.laundrize.custom.CustomEditText-->
+        <!--android:id="@+id/email_edit_custom_dialog"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="Email Address"-->
+        <!--android:background="@drawable/rounded_edit_text"-->
+        <!--android:textSize="@dimen/text_size"-->
+        <!--android:layout_margin="@dimen/pop_up_margin_dp"-->
+        <!--android:padding="@dimen/padding_large"-->
+        <!--/>-->
+    <!--<com.ascenttechnovation.laundrize.custom.CustomEditText-->
+        <!--android:id="@+id/date_of_birth_edit_custom_dialog"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="Date Of Birth"-->
+        <!--android:background="@drawable/rounded_edit_text"-->
+        <!--android:textSize="@dimen/text_size"-->
+        <!--android:layout_margin="@dimen/pop_up_margin_dp"-->
+        <!--android:padding="@dimen/padding_large"-->
+        <!--/>-->
+    <!--<com.ascenttechnovation.laundrize.custom.CustomEditText-->
+        <!--android:id="@+id/mobile_number_edit_custom_dialog"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="Mobile Number"-->
+        <!--android:background="@drawable/rounded_edit_text"-->
+        <!--android:textSize="@dimen/text_size"-->
+        <!--android:layout_margin="@dimen/pop_up_margin_dp"-->
+        <!--android:padding="@dimen/padding_large"-->
+        <!--/>-->
 
     <com.ascenttechnovation.laundrize.custom.CustomButton
         android:id="@+id/update_button_custom_dialog"

@@ -236,6 +236,10 @@ public class Constants {
 //    public static final String checkUserExistsUrl ="http://dev.laundrize.com/api/api/v1/checkuserExist?id=874750579238699&type=FB";
     public static final String checkUserExistsUrl ="http://dev.laundrize.com/api/api/v1/checkuserExist?id=";
 
+
+//    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=sagardevanga@gmail.com&first_name=sagar&last_name=devanga";
+    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=";
+
     public static boolean isInternetAvailable(Context context){
 
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);

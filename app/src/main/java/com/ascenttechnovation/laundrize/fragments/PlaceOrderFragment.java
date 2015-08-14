@@ -275,7 +275,7 @@ public class PlaceOrderFragment extends Fragment {
         if(collectionSlots != null){
 
             // d will always receive Constants.collectionDate
-            collectionDateText.setText(d);
+            collectionDateText.setText(Constants.collectionDate);
             collectionAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, collectionSlots);
             collectionAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
             collectionTimeSlot.setAdapter(collectionAdapter);
@@ -290,8 +290,8 @@ public class PlaceOrderFragment extends Fragment {
                     j = Integer.parseInt(Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()))-2;
                     int collectionArrayIndex = j;
                     Constants.collectionSlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
-                    setIroningAdapter(date,collectionArrayIndex);
-                    setWashingAdapter(date, collectionArrayIndex);
+                    setIroningAdapter(Constants.collectionDate,collectionArrayIndex);
+                    setWashingAdapter(Constants.collectionDate, collectionArrayIndex);
 
                 }
                 @Override
@@ -592,7 +592,7 @@ public class PlaceOrderFragment extends Fragment {
     // when : today or later
     public ArrayList<String> getSlots(String date, String when){
 
-
+        Constants.collectionDate = date;
         ArrayList<String> options = new ArrayList<String>();
         try {
 
@@ -614,6 +614,15 @@ public class PlaceOrderFragment extends Fragment {
 
                             options.add(getSlots[i]);
 
+                        }
+                        else{
+
+                            String dateDetails[] = date.split("/");
+                            int dateForChange = Integer.parseInt(dateDetails[0]);
+                            dateForChange++;
+                            String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                            ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                            return options1;
                         }
 
                     }

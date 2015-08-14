@@ -270,6 +270,7 @@ public class QuickOrderFragment extends Fragment {
         final ArrayList<String> collectionSlots = getSlots(date,when);
         if(collectionSlots != null) {
 
+            collectionDateText.setText(Constants.collectionDate);
             collectionAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, collectionSlots);
             collectionAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
             collectionTimeSlot.setAdapter(collectionAdapter);
@@ -286,11 +287,11 @@ public class QuickOrderFragment extends Fragment {
                     Constants.collectionSlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
                     if(ironing.isChecked()){
 
-                        setIroningAdapter(date,collectionArrayIndex);
+                        setIroningAdapter(Constants.collectionDate,collectionArrayIndex);
                     }
                     if(washing.isChecked()){
 
-                        setWashingAdapter(date, collectionArrayIndex);
+                        setWashingAdapter(Constants.collectionDate, collectionArrayIndex);
                     }
                     if(bags.isChecked()){
 
@@ -595,7 +596,7 @@ public class QuickOrderFragment extends Fragment {
     // when : today or later
     public ArrayList<String> getSlots(String date, String when){
 
-
+        Constants.collectionDate = date;
         ArrayList<String> options = new ArrayList<String>();
         try {
 
@@ -615,6 +616,16 @@ public class QuickOrderFragment extends Fragment {
                         if(validSlot>now){
 
                             options.add(getSlots[i]);
+
+                        }
+                        else{
+
+                                String dateDetails[] = date.split("/");
+                                int dateForChange = Integer.parseInt(dateDetails[0]);
+                                dateForChange++;
+                                String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                                ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                                return options1;
 
                         }
 

@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.NavigationDrawerAdapter;
@@ -290,6 +291,13 @@ public class LandingActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_splash_screen, menu);
+
+//        getMenuInflater().inflate(R.menu.menu_splash_screen, menu);
+//
+//        RelativeLayout badgeLayout = (RelativeLayout) menu.findItem(R.id.badge).getActionView();
+//        TextView tv = (TextView) badgeLayout.findViewById(R.id.actionbar_notifcation_textview);
+//        tv.setText("12");
+
         return true;
     }
 

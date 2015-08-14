@@ -250,6 +250,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
             @Override
             public void onStart() {
 
+
             }
             @Override
             public void onResult(boolean result) {
