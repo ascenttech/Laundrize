@@ -2,14 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".SplashScreen">
 
-    <item android:id="@+id/location"
-    android:title="@string/action_settings"
-    android:orderInCategory="100"
-    app:showAsAction="always"
-    android:icon="@drawable/icon_cart"
-    />
-
-
 
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
@@ -17,6 +9,12 @@
         app:showAsAction="never" />
 </menu>
 
+<!--<item android:id="@+id/location"-->
+<!--android:title="@string/action_settings"-->
+<!--android:orderInCategory="100"-->
+<!--app:showAsAction="always"-->
+<!--android:icon="@drawable/icon_cart"-->
+    <!--/>-->
 
 <!--<item-->
 <!--android:id="@+id/badge"-->

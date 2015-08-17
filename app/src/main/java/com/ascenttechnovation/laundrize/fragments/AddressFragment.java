@@ -175,7 +175,7 @@ public class AddressFragment extends Fragment {
         for(int i =0;i< Constants.addressData.size();i++){
 
             rowView = layoutInflater.inflate(R.layout.include_available_address,null);
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 275);
             params.setMargins(0,0,0,5);
             rowView.setLayoutParams(params);
 
@@ -187,7 +187,7 @@ public class AddressFragment extends Fragment {
 
             mobileNumber = (CustomTextView) rowView.findViewById(R.id.mobile_number_text_included);
             mobileNumber.setTag("number_"+i);
-            Log.d(Constants.LOG_TAG," Setting the adress "+Constants.addressData.get(i).getMobileNumber());
+            Log.d(Constants.LOG_TAG," Setting the mobile number "+Constants.addressData.get(i).getMobileNumber());
             mobileNumber.setText(Constants.addressData.get(i).getMobileNumber());
             mobileNumber.setOnClickListener(inflatedViewListener);
 
@@ -208,6 +208,7 @@ public class AddressFragment extends Fragment {
 
                 expand(selectAddressChild);
                 selectAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
+//                addNewAddressChild.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
                 collapse(addNewAddressChild);
             }
 
@@ -378,9 +379,9 @@ public class AddressFragment extends Fragment {
             replaceFragment(new QuickOrderFragment());
 
         }
-        else{
+        else if(orderType.equalsIgnoreCase("quick")){
 
-            replaceFragment(new WeeklyFragment());
+            replaceFragment(new WeeklyOrderFragment());
 
         }
     }

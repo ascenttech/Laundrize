@@ -43,6 +43,7 @@
             android:background="#777"
             android:layout_margin="@dimen/margin"
             />
+
         <Spinner
             android:id="@+id/select_time_slot_included"
             android:layout_width="fill_parent"

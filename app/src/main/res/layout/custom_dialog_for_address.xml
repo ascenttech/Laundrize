@@ -79,6 +79,7 @@
             android:layout_marginTop="@dimen/margin_large"
             android:gravity="center"
             android:layout_gravity="center_horizontal"
+            style="@style/smallTextOnly"
             />
 
 

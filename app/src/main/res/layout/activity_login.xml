@@ -5,16 +5,9 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo_with_name"
-        android:layout_marginTop="@dimen/margin_logo"
-        android:layout_centerHorizontal="true"
-        />
 
     <LinearLayout
+        android:id="@+id/user_name_password_layout_login_activity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_large_triple"
@@ -37,14 +30,14 @@
             android:id="@+id/username_edit_log_in_now_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint= "USERNAME"
+            android:hint= "MOBILE NUMBER"
             android:padding="@dimen/padding_large"
             android:layout_marginBottom="@dimen/margin"
             android:background="@drawable/rounded_edit_text"
             android:textSize="@dimen/text_size_edit_text"
             android:inputType="number"
             >
-        <requestFocus/>
+            <requestFocus/>
         </com.ascenttechnovation.laundrize.custom.CustomEditText>
 
         <com.ascenttechnovation.laundrize.custom.CustomEditText
@@ -59,6 +52,25 @@
             android:layout_marginTop="@dimen/margin"
             android:textSize="@dimen/text_size_edit_text"
             />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_with_name"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/user_name_password_layout_login_activity"
+        />
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_large_triple"
+        android:layout_marginRight="@dimen/margin_large_triple"
+        android:orientation="vertical"
+        android:layout_below="@+id/user_name_password_layout_login_activity">
 
         <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/log_in_now_button_log_in_now_activity"
@@ -71,6 +83,7 @@
             android:layout_marginRight="@dimen/margin_large_thirty_five"
             android:layout_marginBottom="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
+            style="@style/smallTextOnly"
             />
 
         <View
@@ -103,11 +116,8 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_marginLeft="@dimen/margin_large_triple"
             android:layout_marginRight="@dimen/margin_large_triple"
-            android:layout_marginBottom="@dimen/margin"/>
-
-
-
+            android:layout_marginBottom="@dimen/margin"
+            />
     </LinearLayout>
-
 
 </RelativeLayout>

@@ -299,7 +299,12 @@ public class ProfileFragment extends Fragment {
     public void updateProfile(){
 
         profileDialog.dismiss();
-        String finalUrl = Constants.updateUserProfile+emailId+"&firstName="+firstName+"&lastName="+lastName;
+
+        String emailValue = emailId.getText().toString();
+        String firstNameValue = firstName.getText().toString();
+        String lastNameValue = lastName.getText().toString();
+
+        String finalUrl = Constants.updateUserProfile+emailValue+"&firstName="+firstNameValue+"&lastName="+lastNameValue;
         new UpdateUserProfileAsyncTask(getActivity().getApplicationContext(),new UpdateUserProfileAsyncTask.UpdateUserProfileCallback() {
             @Override
             public void onStart(boolean status) {

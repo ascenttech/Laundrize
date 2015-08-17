@@ -80,6 +80,7 @@
         android:layout_marginRight="@dimen/margin_large_thirty_five"
         android:layout_marginBottom="@dimen/margin_large"
         android:layout_marginTop="@dimen/margin_large"
+        style="@style/smallTextOnly"
         />
 
 </LinearLayout>

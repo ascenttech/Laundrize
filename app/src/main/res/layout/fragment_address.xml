@@ -23,7 +23,9 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="@dimen/margin_dp"
+            android:layout_marginRight="@dimen/margin_dp"
+            android:layout_marginLeft="@dimen/margin_dp"
+            android:layout_marginBottom="@dimen/margin_dp"
             />
 
         <com.ascenttechnovation.laundrize.custom.CustomButton
@@ -114,7 +116,7 @@
                     android:layout_marginTop="@dimen/margin_large"
                     android:gravity="center"
                     android:layout_gravity="center_horizontal"
-                    />
+                    style="@style/smallTextOnly"/>
 
 
             </LinearLayout>

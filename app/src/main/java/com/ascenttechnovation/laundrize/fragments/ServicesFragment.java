@@ -65,10 +65,6 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
 
         viewPager = (ViewPager) v.findViewById(R.id.myviewpager);
 
-        customActionBar();
-        findViews(v);
-        setViews();
-
         if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
 
             fetchServices();
@@ -111,6 +107,9 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
                 progressDialog.dismiss();
                 if(result){
 
+                    customActionBar();
+                    findViews(v);
+                    setViews();
                     setClickListeners();
 
                 }
@@ -140,24 +139,12 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
         }
     }
 
-    public View makeDummyTab(String tabName, int tabIcon,int position){
-
-        View v = View.inflate(getActivity().getApplicationContext(),R.layout.custom_tab_layout,null);
-        v.setTag("view_"+position);
-
-        ImageView tabLogo = (ImageView)v.findViewById(R.id.tab_icon);
-        TextView tabText = (TextView)v.findViewById(R.id.tab_text);
-
-        tabLogo.setImageResource(tabIcon);
-        tabText.setText(tabName);
-        return v;
-    }
 
     private void findViews(View v){
 
         mainMenu = (CustomButton) v.findViewById(R.id.left_button_included);
         placeOrder = (CustomButton) v.findViewById(R.id.right_button_included);
-        viewPagerAdapter = new TabsViewPagerAdapter(getFragmentManager());
+
 
     }
 
@@ -165,6 +152,9 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
 
         mainMenu.setText("Main Menu");
         placeOrder.setText("Place Order");
+
+
+        viewPagerAdapter = new TabsViewPagerAdapter(getFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.setOnPageChangeListener(this);
     }
@@ -173,6 +163,18 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
 
         mainMenu.setOnClickListener(listener);
         placeOrder.setOnClickListener(listener);
+    }
+
+    public View makeDummyTab(String tabName, int tabIcon,int position){
+
+        View v = View.inflate(getActivity().getApplicationContext(),R.layout.custom_tab_layout,null);
+        v.setTag("view_"+position);
+
+        TextView tabText = (TextView)v.findViewById(R.id.tab_text);
+        tabText.setText(tabName);
+        tabText.setCompoundDrawablesWithIntrinsicBounds(tabIcon,0,0,0);
+        tabText.setCompoundDrawablePadding(5);
+        return v;
     }
 
     public void getOrder(){

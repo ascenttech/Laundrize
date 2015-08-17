@@ -5,23 +5,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/background">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo_with_name"
-        android:layout_marginTop="@dimen/margin_logo"
-        android:layout_centerHorizontal="true"
-        />
-
     <LinearLayout
+        android:id="@+id/fields_layout_register_activity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/margin_large_triple"
         android:layout_marginRight="@dimen/margin_large_triple"
         android:orientation="vertical"
         android:layout_centerInParent="true"
-        android:layout_below="@id/logo"
         >
 
         <com.ascenttechnovation.laundrize.custom.CustomTextView
@@ -33,7 +24,9 @@
             android:layout_marginBottom="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
             android:textColor="@color/activity_static_text"
+            android:layout_below="@id/logo"
             />
+
 
         <com.ascenttechnovation.laundrize.custom.CustomEditText
             android:id="@+id/name_edit_register_activity"
@@ -84,8 +77,16 @@
             android:inputType="textPassword"
             />
 
-
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_with_name"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/fields_layout_register_activity"
+        />
 
     <include
         layout="@layout/include_single_button_in_the_footer"

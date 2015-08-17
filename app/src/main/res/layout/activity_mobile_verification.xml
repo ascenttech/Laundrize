@@ -67,6 +67,7 @@
             android:layout_marginBottom="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin_large"
             android:layout_gravity="center_horizontal"
+            style="@style/smallTextOnly"
             />
 
 
@@ -129,6 +130,7 @@
             android:layout_marginTop="@dimen/margin_large"
             android:layout_gravity="center_horizontal"
             android:padding="@dimen/padding_large"
+            style="@style/smallTextOnly"
             />
 
 

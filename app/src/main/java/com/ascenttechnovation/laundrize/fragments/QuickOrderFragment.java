@@ -199,6 +199,10 @@ public class QuickOrderFragment extends Fragment {
 
     private void setViews(){
 
+        ironingLayout.setVisibility(View.GONE);
+        washingLayout.setVisibility(View.GONE);
+        bagsLayout.setVisibility(View.GONE);
+
         ironingLayout.setBackgroundResource(R.color.background_for_answers);
         washingLayout.setBackgroundResource(R.color.background_for_answers);
         bagsLayout.setBackgroundResource(R.color.background_for_answers);
@@ -215,9 +219,6 @@ public class QuickOrderFragment extends Fragment {
         bagsDateText.setTag("date_4");
         bagsDateText.setOnClickListener(datelistener);
 
-        ironingLayout.setVisibility(View.GONE);
-        washingLayout.setVisibility(View.GONE);
-        bagsLayout.setVisibility(View.GONE);
 
         collectionTitleText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_collection,0,0,0);
 

@@ -95,23 +95,23 @@ public class LandingFragment extends Fragment {
     private void setViews(){
 
         placeOrderBtn = (CustomButton) placeOrder.findViewById(R.id.styled_button_included);
-        placeOrderBtn.setText("PLACE ORDER");
+        placeOrderBtn.setText("Place Order");
 
         quickOrderBtn = (CustomButton) quickOrder.findViewById(R.id.styled_button_included);
-        quickOrderBtn.setText("QUICK ORDER");
+        quickOrderBtn.setText("Quick Order");
 
 
         weeklyOrderBtn = (CustomButton) weeklyOrder.findViewById(R.id.styled_button_included);
-        weeklyOrderBtn.setText("WEEKLY ORDER");
+        weeklyOrderBtn.setText("Weekly Order");
 
 
         trackOrderBtn = (CustomButton) trackOrder.findViewById(R.id.styled_button_included);
-        trackOrderBtn.setText("TRACK ORDER");
+        trackOrderBtn.setText("Track Order");
         trackOrderBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_watch,0,0,0);
 
 
         completedOrderBtn = (CustomButton) completedOrder.findViewById(R.id.styled_button_included);
-        completedOrderBtn.setText("COMPLETED ORDER");
+        completedOrderBtn.setText("Completed Order");
         completedOrderBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_shirt,0,0,0);
 
     }

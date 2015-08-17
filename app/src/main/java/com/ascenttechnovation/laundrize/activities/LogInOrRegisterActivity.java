@@ -192,10 +192,10 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
 
 
         HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Delivery",R.drawable.icon_delivery);
-        file_maps.put("Collection",R.drawable.icon_collection);
-        file_maps.put("Time",R.drawable.icon_minus);
-        file_maps.put("On Delivery", R.drawable.icon_clock);
+        file_maps.put("Fatest Delivery",R.drawable.icon_slider_1);
+        file_maps.put("Best Quality Service",R.drawable.icon_slider_2);
+        file_maps.put("Laundry Just a tap away",R.drawable.icon_slider_3);
+        file_maps.put("Wide Range of Services", R.drawable.icon_slider_4);
 
         for(String name : file_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(this);

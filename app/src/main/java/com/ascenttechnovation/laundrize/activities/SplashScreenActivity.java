@@ -61,7 +61,6 @@ public class SplashScreenActivity extends Activity {
                 public void run() {
 
                     Intent intent = new Intent(SplashScreenActivity.this,LandingActivity.class);
-//                    Intent intent = new Intent(SplashScreenActivity.this,LandActivity.class);
                     startActivity(intent);
                 }
             },3000);
@@ -74,7 +73,6 @@ public class SplashScreenActivity extends Activity {
                 public void run() {
 
                     Intent intent = new Intent(SplashScreenActivity.this,LogInOrRegisterActivity.class);
-//                    Intent intent = new Intent(SplashScreenActivity.this,LandActivity.class);
                     startActivity(intent);
                 }
             },3000);

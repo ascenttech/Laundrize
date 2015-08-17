@@ -29,10 +29,9 @@ public class IroningHouseholdsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_ironing_house_holds,container,false);
-
         Log.d(Constants.LOG_TAG, Constants.IroningHouseholdsFragement);
 
+        View v = inflater.inflate(R.layout.fragment_ironing_house_holds,container,false);
         settingTheAdapter(v);
         return v;
     }

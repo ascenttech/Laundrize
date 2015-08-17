@@ -29,10 +29,8 @@ public class IroningWearablesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_ironing_wearables,container,false);
-
         Log.d(Constants.LOG_TAG, Constants.IroningWearablesFragement);
-
+        View v = inflater.inflate(R.layout.fragment_ironing_wearables,container,false);
         settingTheAdapter(v);
         return v;
     }

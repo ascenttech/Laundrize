@@ -162,7 +162,8 @@ public class Constants {
     public static final String TrackOrdersFragement =" TRACK ORDERS FRAGMENT ";
     public static final String WashAndIronHouseholdsFragement =" WASH AND IRON HOUSEHOLDS FRAGMENT ";
     public static final String WashAndIronWearablesFragement =" WASH AND IRON WEARABLES FRAGMENT ";
-    public static final String WeeklyFragement =" WEEKLY FRAGMENT ";
+    public static final String WeeklyOrderFragement =" WEEKLY Order FRAGMENT ";
+
 
 
 
@@ -239,6 +240,9 @@ public class Constants {
 
 //    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=sagardevanga@gmail.com&first_name=sagar&last_name=devanga";
     public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=";
+
+//    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=";
+    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=";
 
     public static boolean isInternetAvailable(Context context){
 

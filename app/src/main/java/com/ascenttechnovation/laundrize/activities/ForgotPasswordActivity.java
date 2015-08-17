@@ -25,7 +25,9 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class ForgotPasswordActivity extends Activity {
 
-    private CustomButton verifyDetailsButton,submitButton;
+//    private CustomButton verifyDetailsButton,submitButton;
+    private CustomButton submitButton;
+    private Button verifyDetailsButton;
     private CustomEditText mobileNumberEdit,newPasswordEdit,confirmPasswordEdit,verificationCodeEdit;
     private ProgressDialog progressDialog;
     SharedPreferences prefs;
@@ -70,7 +72,8 @@ public class ForgotPasswordActivity extends Activity {
         newPasswordEdit = (CustomEditText) findViewById(R.id.new_password_edit_forgot_password_activity);
         confirmPasswordEdit = (CustomEditText) findViewById(R.id.confirm_password_edit_forgot_password_activity);
         verificationCodeEdit = (CustomEditText) findViewById(R.id.verify_code_edit_forgot_password_activity);
-        verifyDetailsButton = (CustomButton) findViewById(R.id.verify_details_button_forgot_password_activity);
+//        verifyDetailsButton = (CustomButton) findViewById(R.id.verify_details_button_forgot_password_activity);
+        verifyDetailsButton = (Button) findViewById(R.id.verify_details_button_forgot_password_activity);
         submitButton =(CustomButton) findViewById(R.id.submit_button_forgot_password_activity);
     }
 
@@ -122,40 +125,38 @@ public class ForgotPasswordActivity extends Activity {
 
     public void confirmVerification(){
 
-        String verificationCode = prefs.getString("vc","");
-        if(verificationCode.equals(verificationCodeEdit.getText().toString()))
-        {
+//
+        String verificationCodeValue = verificationCodeEdit.getText().toString();
+        String mobileNumberValue = mobileNumberEdit.getText().toString();
+        String password = newPasswordEdit.getText().toString();
 
-        }
-//        String verificationCodeValue = verificationCode.getText().toString();
-//
-//        String finalUrl = Constants.confirmVerificationUrl+mobileNumber+"&verification_code="+verificationCodeValue+"&password="+password+"&first_name="+name+"&email="+emailId;
-//
-//        new ConfirmVerificationAsyncTask(getApplicationContext(), new ConfirmVerificationAsyncTask.ConfirmVerificationCallback() {
-//            @Override
-//            public void onStart(boolean status) {
-//
-//                progressDialog = new ProgressDialog(ForgotPasswordActivity.this);
-//                progressDialog.setTitle(Constants.APP_NAME);
-//                progressDialog.setMessage("Loading,Please Wait...");
-//                progressDialog.setCancelable(false);
-//                progressDialog.show();
-//            }
-//            @Override
-//            public void onResult(boolean result) {
-//
-//                progressDialog.dismiss();
-//                if(result){
-//
-//                    Intent i = new Intent(ForgotPasswordActivity.this,LoginActivity.class);
-//                    startActivity(i);
-//
-//                }
-//                else{
-//                    Toast.makeText(getApplicationContext()," Enter a valid code",5000).show();
-//                }
-//            }
-//        }).execute(finalUrl);
+        String finalUrl = Constants.resetPasswordUrl+mobileNumberValue+"&password="+password+"&verification_code="+verificationCodeValue;
+
+        new ConfirmVerificationAsyncTask(getApplicationContext(), new ConfirmVerificationAsyncTask.ConfirmVerificationCallback() {
+            @Override
+            public void onStart(boolean status) {
+
+                progressDialog = new ProgressDialog(ForgotPasswordActivity.this);
+                progressDialog.setTitle(Constants.APP_NAME);
+                progressDialog.setMessage("Loading,Please Wait...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                progressDialog.dismiss();
+                if(result){
+
+                    Intent i = new Intent(ForgotPasswordActivity.this,LoginActivity.class);
+                    startActivity(i);
+
+                }
+                else{
+                    Toast.makeText(getApplicationContext()," Enter a valid code",5000).show();
+                }
+            }
+        }).execute(finalUrl);
 
     }
 
@@ -165,7 +166,9 @@ public class ForgotPasswordActivity extends Activity {
 
             switch (view.getId()){
 
-                case R.id.verify_details_button_forgot_password_activity: verifyNow();
+                case R.id.verify_details_button_forgot_password_activity: verificationCodeEdit.setVisibility(View.VISIBLE);
+                    submitButton.setVisibility(View.VISIBLE);
+                    verifyNow();
                     break;
                 case R.id.submit_button_forgot_password_activity: confirmVerification();
                     break;

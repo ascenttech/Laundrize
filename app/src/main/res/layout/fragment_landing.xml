@@ -18,35 +18,50 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             layout="@layout/button_dark_blue"
-            android:layout_margin="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_marginLeft="@dimen/margin_large_double"
+            android:layout_marginRight="@dimen/margin_large_double"
             />
         <include
             android:id="@+id/quick_order_layout_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             layout="@layout/button_dark_blue"
-            android:layout_margin="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_marginLeft="@dimen/margin_large_double"
+            android:layout_marginRight="@dimen/margin_large_double"
             />
         <include
             android:id="@+id/weekly_order_layout_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             layout="@layout/button_dark_blue"
-            android:layout_margin="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_marginLeft="@dimen/margin_large_double"
+            android:layout_marginRight="@dimen/margin_large_double"
             />
         <include
             android:id="@+id/track_order_layout_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             layout="@layout/button_light_blue"
-            android:layout_margin="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_marginLeft="@dimen/margin_large_double"
+            android:layout_marginRight="@dimen/margin_large_double"
             />
         <include
             android:id="@+id/completed_order_layout_order_now_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             layout="@layout/button_light_blue"
-            android:layout_margin="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_marginLeft="@dimen/margin_large_double"
+            android:layout_marginRight="@dimen/margin_large_double"
             />
 
     </LinearLayout>
