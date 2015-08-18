@@ -117,6 +117,8 @@ public class LoginActivity extends Activity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("userId",Constants.userId);
                     editor.putString("token",Constants.token);
+                    editor.putString("password",Constants.password);
+                    editor.putString("phoneNumber",Constants.phoneNumber);
                     editor.commit();
 
                     Intent i = new Intent(LoginActivity.this,LandingActivity.class);
@@ -128,7 +130,7 @@ public class LoginActivity extends Activity {
                 }
 
             }
-        }).execute(finalUrl);
+        }).execute(finalUrl,phoneNumber,pwd);
 
 
 

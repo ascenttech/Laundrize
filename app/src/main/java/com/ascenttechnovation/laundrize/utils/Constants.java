@@ -37,7 +37,7 @@ public class Constants {
     public static boolean slotDifferenceFetched;
     public static boolean slotsFetched;
 
-    public static String mobileNumber,userId,token,verificationCode,totalAmount,totalQuantity;
+    public static String userId,token,password,phoneNumber;
     public static String addressId,address;
     public static String minIroningDate,minIroningSlotId;
     public static String minWashingDate,minWashingSlotId;

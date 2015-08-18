@@ -266,7 +266,13 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
                     break;
 
                 case R.id.right_button_included: getOrder();
-                    replaceFragment(new PlaceOrderFragment());
+                    if(Constants.order.size()>0){
+
+                        replaceFragment(new PlaceOrderFragment());
+                    }
+                    else{
+                        Toast.makeText(getActivity().getApplicationContext(),"No items selected",5000).show();
+                    }
                     break;
             }
         }

@@ -617,6 +617,18 @@ public class QuickOrderFragment extends Fragment {
                         }
 
                     }
+
+                    if(options.size() == 0){
+
+                        String dateDetails[] = date.split("/");
+                        int dateForChange = Integer.parseInt(dateDetails[0]);
+                        dateForChange++;
+                        String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                        ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                        return options1;
+
+                    }
+
                 } // if the date is set for today
                 else{
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin_large"
+    >
+
+    <LinearLayout
+        android:id="@+id/your_items_layout_place_order_fragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin_small"
+        >
+
+        <com.ascenttechnovation.laundrize.custom.CustomTextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baniyan"
+            android:text="Your Items"
+            android:textSize="@dimen/text_size_extra_large"
+            android:textColor="@color/navy_blue_button"
+            android:padding="@dimen/padding"
+            android:drawablePadding="@dimen/padding"
+            />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dip"
+            android:background="@color/grey"
+            android:layout_margin="@dimen/margin"
+            />
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

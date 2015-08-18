@@ -1,14 +1,17 @@
 package com.ascenttechnovation.laundrize.activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.async.SignInUserAsyncTask;
 import com.ascenttechnovation.laundrize.data.AddressData;
 import com.ascenttechnovation.laundrize.data.BagOrderData;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
@@ -32,7 +35,7 @@ import java.util.HashMap;
 public class SplashScreenActivity extends Activity {
 
     private ImageView logo;
-    String userId,token;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,23 +53,15 @@ public class SplashScreenActivity extends Activity {
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
         Constants.userId = sharedPreferences.getString("userId","null");
         Constants.token = sharedPreferences.getString("token","null");
+        Constants.password = sharedPreferences.getString("password","null");
+        Constants.phoneNumber = sharedPreferences.getString("phoneNumber","null");
 
-        Log.d(Constants.LOG_TAG,"token "+Constants.token);
+        Log.d(Constants.LOG_TAG," Values userId "+Constants.userId+" token "+Constants.token+" password "+Constants.password+" phoneNumber "+Constants.phoneNumber);
 
         // if user Id is not equal null then we move to landing Activity
-        if(!Constants.userId.equalsIgnoreCase("null")){
+        if(Constants.userId.equalsIgnoreCase("null")){
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
 
-                    Intent intent = new Intent(SplashScreenActivity.this,LandingActivity.class);
-                    startActivity(intent);
-                }
-            },3000);
-
-        }
-        else{
 
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -76,6 +71,48 @@ public class SplashScreenActivity extends Activity {
                     startActivity(intent);
                 }
             },3000);
+
+        }
+        else{
+
+            String finalUrl = Constants.signInUrl+Constants.phoneNumber+"&password="+Constants.password;
+            new SignInUserAsyncTask(getApplicationContext(),new SignInUserAsyncTask.SignInUserCallback() {
+                @Override
+                public void onStart(boolean status) {
+
+                    progressDialog = new ProgressDialog(SplashScreenActivity.this);
+                    progressDialog.setTitle(Constants.LOG_TAG);
+                    progressDialog.setMessage("Loading,Please Wait...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+
+                }
+                @Override
+                public void onResult(boolean result) {
+
+                    progressDialog.dismiss();
+                    if(result){
+
+                        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("userId",Constants.userId);
+                        editor.putString("token",Constants.token);
+                        editor.putString("password",Constants.password);
+                        editor.putString("phoneNumber",Constants.phoneNumber);
+                        Log.d(Constants.LOG_TAG," Values before committing userId "+Constants.userId+" token "+Constants.token+" password "+Constants.password+" phoneNumber "+Constants.phoneNumber);
+
+                        editor.commit();
+
+                        Intent i = new Intent(SplashScreenActivity.this,LandingActivity.class);
+                        startActivity(i);
+
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Not a valid user", 5000).show();
+                    }
+
+                }
+            }).execute(finalUrl,Constants.phoneNumber,Constants.password);
 
         }
 

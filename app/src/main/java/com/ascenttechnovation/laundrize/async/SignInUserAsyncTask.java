@@ -64,6 +64,9 @@ public class SignInUserAsyncTask extends AsyncTask<String,Void,Boolean> {
                 JSONObject jsonObject = new JSONObject(responseString);
                 Constants.userId = jsonObject.getString("userid");
                 Constants.token = jsonObject.getString("token");
+                Constants.phoneNumber = url[1];
+                Constants.password = url[2];
+                Log.d(Constants.LOG_TAG," Password is "+Constants.password+" number "+Constants.phoneNumber);
 
                 return true;
             }

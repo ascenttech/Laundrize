@@ -2,6 +2,7 @@ package com.ascenttechnovation.laundrize.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -35,6 +38,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Created by ADMIN on 31-07-2015.
@@ -59,10 +64,17 @@ public class PlaceOrderFragment extends Fragment {
     private int washingDeliveryCounter = 22;
     private int bagsDeliveryCounter = 22;
 
+
+    private CustomTextView cloth,service,quantity,total;
+    private ImageView add,subtract,remove;
+
+    private LinearLayout yourItemsLayout;
+
     private ArrayList<String> minimumIroningSlots,minimumWashingSlots,minimumBagsSlots;
 
     // This will hold the index of the slot from the array of Collections Slots;
     private int j;
+    private int mapCounter =0;
 
 
     @Nullable
@@ -167,6 +179,7 @@ public class PlaceOrderFragment extends Fragment {
         bagsDateText = (CustomTextView) bagsLayout.findViewById(R.id.select_date_slot_included);
         bagsTimeSlot = (Spinner) bagsLayout.findViewById(R.id.select_time_slot_included);
 
+        yourItemsLayout = (LinearLayout) v.findViewById(R.id.your_items_layout_place_order_fragment);
 
 
     }
@@ -191,7 +204,6 @@ public class PlaceOrderFragment extends Fragment {
         bagsDateText.setTag("date_4");
         bagsDateText.setOnClickListener(datelistener);
 
-//      collectionLayout.setVisibility(View.GONE);
         ironingLayout.setVisibility(View.GONE);
         washingLayout.setVisibility(View.GONE);
         bagsLayout.setVisibility(View.GONE);
@@ -227,9 +239,70 @@ public class PlaceOrderFragment extends Fragment {
 
         }
 
+        setYourItems();
+
 
     }
 
+    public void setYourItems(){
+
+
+        Iterator it = Constants.order.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            Log.d(Constants.LOG_TAG," Map key "+pair.getKey()+" Value "+pair.getValue());
+            inflateYourItems(pair.getKey().toString(), pair.getValue().toString(), mapCounter);
+            mapCounter++;
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+
+    }
+
+    public void inflateYourItems(String key,String value,int position){
+
+        String valueDetails [] = value.split("_");
+
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflater.inflate(R.layout.row_your_items,null);
+        v.setTag("view_"+position);
+        Log.d(Constants.LOG_TAG," Assigned tag "+ v.getTag());
+
+        cloth = (CustomTextView) v.findViewById(R.id.cloth_text_your_items);
+        service = (CustomTextView) v.findViewById(R.id.service_text_your_items);
+        quantity = (CustomTextView) v.findViewById(R.id.quantity_text_your_items);
+        total = (CustomTextView) v.findViewById(R.id.total_text_your_items);
+
+        quantity.setText(valueDetails[0]);
+        total.setText(valueDetails[1]);
+
+        add = (ImageView) v.findViewById(R.id.add_image_your_items);
+        Log.d(Constants.LOG_TAG," The tag set is "+"add_"+position+"_"+key+"_"+value);
+        add.setTag("add_"+position+"_"+key+"_"+value);
+        add.setOnClickListener(inflatedClikcListener);
+
+        subtract = (ImageView) v.findViewById(R.id.subtract_image_your_items);
+        subtract.setTag("subtract_"+position+"_"+key+"_"+value);
+        subtract.setOnClickListener(inflatedClikcListener);
+
+        remove = (ImageView) v.findViewById(R.id.remove_image_your_items);
+        remove.setTag("remove_"+position+"_"+key+"_"+value);
+        remove.setOnClickListener(inflatedClikcListener);
+
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.setMargins(5,0,10,5);
+
+        v.setLayoutParams(params);
+        yourItemsLayout.addView(v);
+
+        View line = new View(getActivity().getApplicationContext());
+        line.setBackgroundColor(R.color.grey);
+        LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams)new LinearLayout.LayoutParams(LinearLayout.LayoutParams.FILL_PARENT, 1);
+        params.setMargins(0,5,0,5);
+        line.setLayoutParams(params1);
+        yourItemsLayout.addView(line);
+
+
+    }
 
     private void collectionsDatePicker() {
         Calendar c = Calendar.getInstance();
@@ -613,6 +686,18 @@ public class PlaceOrderFragment extends Fragment {
                         }
 
                     }
+
+                    if(options.size() == 0){
+
+                            String dateDetails[] = date.split("/");
+                            int dateForChange = Integer.parseInt(dateDetails[0]);
+                            dateForChange++;
+                            String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                            ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                            return options1;
+
+                    }
+
                 } // if the date is set for today
                 else if(when.equalsIgnoreCase("later")){
 
@@ -627,12 +712,12 @@ public class PlaceOrderFragment extends Fragment {
             }
             else{
 
-                    String dateDetails[] = date.split("/");
-                    int dateForChange = Integer.parseInt(dateDetails[0]);
-                    dateForChange++;
-                    String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
-                    ArrayList<String> options1 =getSlots(dateForFunction,"later");
-                    return options1;
+                String dateDetails[] = date.split("/");
+                int dateForChange = Integer.parseInt(dateDetails[0]);
+                dateForChange++;
+                String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                return options1;
 
             }
 
@@ -986,6 +1071,94 @@ public class PlaceOrderFragment extends Fragment {
                 .commit();
 
     }
+
+    public void add(String position,String key,String obtainedQuantity, String totalPrice){
+
+        int quantity = Integer.parseInt(obtainedQuantity);
+        int obtainedAmount = Integer.parseInt(totalPrice);
+        int perPieceCost = obtainedAmount/quantity;
+
+        // when added then
+        int totalQuantity = (quantity+1);
+        int totalAmount = (totalQuantity*perPieceCost);
+        String value = String.valueOf(totalQuantity)+"_"+totalAmount;
+        Constants.order.put(key,value);
+        updateUI(position,value);
+
+    }
+    public void subtract(String position,String key,String obtainedQuantity, String totalPrice){
+
+
+        int quantity = Integer.parseInt(obtainedQuantity);
+        int obtainedAmount = Integer.parseInt(totalPrice);
+        int perPieceCost = obtainedAmount/quantity;
+
+        if(quantity != 0){
+
+            int totalQuantity = (quantity-1);
+            int totalAmount = totalQuantity*perPieceCost;
+
+            String value = String.valueOf(totalQuantity)+"_"+totalAmount;
+            Constants.order.put(key,value);
+            updateUI(position,value);
+        }
+
+    }
+
+    public void updateUI(String position,String value){
+
+        String valueDetails[] = value.split("_");
+
+        int pos = Integer.parseInt(position);
+        Log.d(Constants.LOG_TAG," The position to be deleted "+ position);
+        // because we are drawing a horizontal line also
+//        pos = pos+1;
+
+        View v = yourItemsLayout.findViewWithTag("view_"+position);
+        ((CustomTextView)v.findViewById(R.id.quantity_text_your_items)).setText(valueDetails[0]);
+        ((CustomTextView)v.findViewById(R.id.total_text_your_items)).setText(valueDetails[1]);
+
+    }
+
+    public void remove(String key, String position){
+
+        int pos = Integer.parseInt(position);
+        // plus one because the first view is just a static text view
+        pos = pos+1;
+        Constants.order.remove(key);
+
+        // to remove the line and the layout
+        yourItemsLayout.removeViewAt(pos);
+        // because when you remove the view the view below it comes to the same position
+        yourItemsLayout.removeViewAt(pos);
+
+    }
+
+    View.OnClickListener inflatedClikcListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            // The tag would be like this add_0_001001000_2_12
+            String tag = view.getTag().toString();
+            String tagDetails[] = tag.split("_");
+            String position = tagDetails[1];
+            String key = tagDetails[2];
+            String quantity = tagDetails[3];
+            String totalPrice = tagDetails[4];
+
+            switch (tagDetails[0]){
+
+                case "add": add(position,key, quantity, totalPrice);
+                    break;
+                case "subtract": subtract(position,key,quantity,totalPrice);
+                    break;
+                case "remove": remove(key,position);
+                    break;
+
+            }
+
+        }
+    };
 
     View.OnClickListener datelistener = new View.OnClickListener() {
         @Override
