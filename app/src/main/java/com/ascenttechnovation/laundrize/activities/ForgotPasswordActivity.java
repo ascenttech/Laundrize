@@ -130,7 +130,7 @@ public class ForgotPasswordActivity extends Activity {
         String mobileNumberValue = mobileNumberEdit.getText().toString();
         String password = newPasswordEdit.getText().toString();
 
-        String finalUrl = Constants.resetPasswordUrl+mobileNumberValue+"&password="+password+"&verification_code="+verificationCodeValue;
+        String finalUrl = Constants.resetPasswordUrl+mobileNumberValue+"&new_password="+password+"&verification_code="+verificationCodeValue;
 
         new ConfirmVerificationAsyncTask(getApplicationContext(), new ConfirmVerificationAsyncTask.ConfirmVerificationCallback() {
             @Override

@@ -7,12 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
-import com.ascenttechnovation.laundrize.data.LaundryServicesSubCategoryData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
     Context context;
     private ArrayList<CompletedOrdersData> completedOrdersData;
     private LinearLayout numberOfItems,deliveryDate,totalAmount,totalBalance;
-    private CustomTextView numberOfItemsValue,deliveryDateValue,totalAmountValue,totalBalanceValue;
+    private CustomTextView numberOfItemsValue,deliveryDateValue,totalAmountValue,totalBalanceValue,title;
     private CustomTextView numberOfItemsStaticText,deliveryDateStaticText,totalAmountStaticText,totalBalanceStaticText;
 
     public CompletedOrdersRecyclerAdapter(Context context) {
@@ -74,6 +72,7 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
         totalAmount = (LinearLayout) holder.v.findViewById(R.id.total_amount_included);
         totalBalance = (LinearLayout) holder.v.findViewById(R.id.total_balance_included);
 
+        title = (CustomTextView) holder.v.findViewById(R.id.static_text_completed_order_fragment);
         numberOfItemsValue = (CustomTextView) numberOfItems.findViewById(R.id.field_value_text_included);
         deliveryDateValue = (CustomTextView) deliveryDate.findViewById(R.id.field_value_text_included);
         totalAmountValue = (CustomTextView) totalAmount.findViewById(R.id.field_value_text_included);
@@ -94,6 +93,8 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
         totalAmountStaticText.setText("Total Amount");
         totalBalanceStaticText.setText("Total Balance");
 
+        title.setText(Constants.completedOrdersData.get(position).getTypeOfService()+" | "+ Constants.completedOrdersData.get(position).getOrderId());
+
         numberOfItemsValue.setText(Constants.completedOrdersData.get(position).getQuantity());
         deliveryDateValue.setText(Constants.completedOrdersData.get(position).getDeliveryDate());
         totalAmountValue.setText(Constants.completedOrdersData.get(position).getPrice());
@@ -103,6 +104,7 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
 
     @Override
     public int getItemCount() {
+
         return completedOrdersData.size();
     }
 

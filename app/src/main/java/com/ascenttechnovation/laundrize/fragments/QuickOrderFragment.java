@@ -25,7 +25,7 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.async.FetchCurrentServerTimeAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
-import com.ascenttechnovation.laundrize.async.PlaceWeeklyOrderAsyncTask;
+import com.ascenttechnovation.laundrize.async.PlaceOrderAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -203,10 +203,6 @@ public class QuickOrderFragment extends Fragment {
         washingLayout.setVisibility(View.GONE);
         bagsLayout.setVisibility(View.GONE);
 
-        ironingLayout.setBackgroundResource(R.color.background_for_answers);
-        washingLayout.setBackgroundResource(R.color.background_for_answers);
-        bagsLayout.setBackgroundResource(R.color.background_for_answers);
-
         collectionDateText.setTag("date_1");
         collectionDateText.setOnClickListener(datelistener);
 
@@ -261,7 +257,7 @@ public class QuickOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        collectionDatePicker.getDatePicker().setMinDate(System.currentTimeMillis()-1);
+        collectionDatePicker.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
         collectionDatePicker.show();
     }
 
@@ -619,16 +615,6 @@ public class QuickOrderFragment extends Fragment {
                             options.add(getSlots[i]);
 
                         }
-                        else{
-
-                                String dateDetails[] = date.split("/");
-                                int dateForChange = Integer.parseInt(dateDetails[0]);
-                                dateForChange++;
-                                String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
-                                ArrayList<String> options1 =getSlots(dateForFunction,"later");
-                                return options1;
-
-                        }
 
                     }
                 } // if the date is set for today
@@ -644,7 +630,13 @@ public class QuickOrderFragment extends Fragment {
                 }
             }
             else{
-                return null;
+                    String dateDetails[] = date.split("/");
+                    int dateForChange = Integer.parseInt(dateDetails[0]);
+                    dateForChange++;
+                    String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                    ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                    return options1;
+
             }
 
 
@@ -778,7 +770,7 @@ public class QuickOrderFragment extends Fragment {
         formatDate();
         createJson();
 
-        new PlaceWeeklyOrderAsyncTask(getActivity().getApplicationContext(),new PlaceWeeklyOrderAsyncTask.PlaceWeeklyOrderCallback() {
+        new PlaceOrderAsyncTask(getActivity().getApplicationContext(),new PlaceOrderAsyncTask.PlaceWeeklyOrderCallback() {
             @Override
             public void onStart(boolean status) {
 

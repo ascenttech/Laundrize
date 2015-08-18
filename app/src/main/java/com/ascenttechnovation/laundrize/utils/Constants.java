@@ -127,6 +127,7 @@ public class Constants {
     public static final String FetchAllSlotsAsyncTask=" FETCH ALL SLOTS ASYNC TASK ";
     public static final String FetchAreasAsyncTask=" FETCH AREAS ASYNC TASK ";
     public static final String FetchCitiesAsyncTask=" FETCH CITIES ASYNC TASK ";
+    public static final String FetchCompletedOrdersAsyncTask=" FETCH COMPLETED ORDER ASYNC TASK ";
     public static final String FetchCurrentServerTimeAsyncTask=" FETCH CURRENT SERVER TIME ASYNC TASK ";
     public static final String FetchLaundryServicesAsyncTask=" FETCH LAUNDRY SERVICES ASYNC TASK ";
     public static final String FetchSlotDifferenceAsyncTask=" FETCH SLOT DIFFERENCE ASYNC TASK ";
@@ -135,12 +136,13 @@ public class Constants {
     public static final String FetchUserProfileAsyncTask=" FETCH USER PROFILE ASYNC TASK ";
     public static final String FetchVerificationCodeAsyncTask=" FETCH VERIFICATION CODE ASYNC TASK ";
     public static final String FetchZipcodesAsyncTask=" FETCH ZIPCODES ASYNC TASK ";
-    public static final String PlaceWeeklyOrderAsyncTask=" PLACE WEEKLY ORDER ASYNC TASK ";
+    public static final String PlaceOrderAsyncTask =" PLACE ORDER ASYNC TASK ";
     public static final String RegisterUserAsyncTask=" REGISTER USER ASYNC TASK ";
     public static final String RegisterUserViaSocialAsyncTask=" REGISTER USER VIA SOCIAL ASYNC TASK ";
     public static final String SignInUserAsyncTask=" SIGN IN USER ASYNC TASK ";
     public static final String TrackOrdersAsyncTask=" TRACK ORDERS ASYNC TASK ";
     public static final String UpdateUserProfileAsyncTask=" UPDATE USER PROFILE ASYNC TASK ";
+    public static final String WeeklyOrderAsyncTask=" WEEKLY ORDER ASYNC TASK ";
 
     // Log Tags for all the fragments
     public static final String AddressFragement =" ADDRESS FRAGMENT ";
@@ -241,8 +243,16 @@ public class Constants {
 //    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=sagardevanga@gmail.com&first_name=sagar&last_name=devanga";
     public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=";
 
-//    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=";
+
+//    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=7666441398&new_password=poiuy&verification_code=5329";
     public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=";
+
+//    public static final String completedOrdersUrl = "http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=3&type=completed";
+    public static final String completedOrdersUrl = "http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=";
+
+//    public static final String weeklyOrderUrl = "http://dev.laundrize.com/api/api/v1/postWeeklyOrder?user_id=2&address_id=2&order_day=monday&order_slot=2";
+    public static final String weeklyOrderUrl = "http://dev.laundrize.com/api/api/v1/postWeeklyOrder?user_id=";
+
 
     public static boolean isInternetAvailable(Context context){
 

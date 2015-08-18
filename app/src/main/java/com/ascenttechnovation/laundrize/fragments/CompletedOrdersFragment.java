@@ -18,6 +18,7 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.adapters.CompletedOrdersRecyclerAdapter;
 import com.ascenttechnovation.laundrize.adapters.TrackOrdersRecyclerAdapter;
+import com.ascenttechnovation.laundrize.async.FetchCompletedOrdersAsyncTask;
 import com.ascenttechnovation.laundrize.async.TrackOrdersAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
@@ -95,8 +96,6 @@ public class CompletedOrdersFragment extends Fragment {
         completedOrdersLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         completedOrdersRecyclerView.setLayoutManager(completedOrdersLayoutManager);
 
-        // specify an adapter (see also next example)
-//        completedOrdersAdapter = new TrackOrdersRecyclerAdapter(getActivity().getApplicationContext(), Constants.laundryServicesSubCategory);
         completedOrdersAdapter = new CompletedOrdersRecyclerAdapter(getActivity().getApplicationContext(),Constants.completedOrdersData);
         completedOrdersRecyclerView.setAdapter(completedOrdersAdapter);
 
@@ -104,9 +103,9 @@ public class CompletedOrdersFragment extends Fragment {
 
     public void getOrders(){
 
-        String finalUrl = Constants.trackOrdersUrl+Constants.userId;
+        String finalUrl = Constants.completedOrdersUrl+Constants.userId+"&type=completed";
 
-        new TrackOrdersAsyncTask(getActivity().getApplicationContext(),new TrackOrdersAsyncTask.TrackOrdersCallback() {
+        new FetchCompletedOrdersAsyncTask(getActivity().getApplicationContext(),new FetchCompletedOrdersAsyncTask.FetchCompletedOrdersCallback() {
             @Override
             public void onStart(boolean status) {
 
@@ -114,9 +113,7 @@ public class CompletedOrdersFragment extends Fragment {
                 progressDialog.setTitle(Constants.LOG_TAG);
                 progressDialog.setMessage("Getting Your Orders");
                 progressDialog.show();
-
             }
-
             @Override
             public void onResult(boolean result) {
 
@@ -131,6 +128,7 @@ public class CompletedOrdersFragment extends Fragment {
 
                     Toast.makeText(getActivity().getApplicationContext(),"Couldn't fetch your order \nTry Again Later",5000).show();
                 }
+
 
             }
         }).execute(finalUrl);

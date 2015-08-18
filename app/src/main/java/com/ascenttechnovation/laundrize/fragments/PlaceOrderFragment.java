@@ -1,7 +1,6 @@
 package com.ascenttechnovation.laundrize.fragments;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -24,7 +23,7 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.async.FetchCurrentServerTimeAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
-import com.ascenttechnovation.laundrize.async.PlaceWeeklyOrderAsyncTask;
+import com.ascenttechnovation.laundrize.async.PlaceOrderAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -36,7 +35,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 /**
  * Created by ADMIN on 31-07-2015.
@@ -175,10 +173,6 @@ public class PlaceOrderFragment extends Fragment {
 
     private void setViews(){
 
-        ironingLayout.setBackgroundResource(R.color.background_for_answers);
-        washingLayout.setBackgroundResource(R.color.background_for_answers);
-        bagsLayout.setBackgroundResource(R.color.background_for_answers);
-
         newOrder.setText("NEW ORDER");
         newOrder.setOnClickListener(listener);
 
@@ -264,7 +258,7 @@ public class PlaceOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        collectionsPickDate.getDatePicker().setMinDate(System.currentTimeMillis()-1);
+        collectionsPickDate.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
         collectionsPickDate.show();
     }
 
@@ -592,6 +586,7 @@ public class PlaceOrderFragment extends Fragment {
     // when : today or later
     public ArrayList<String> getSlots(String date, String when){
 
+        Log.d(Constants.LOG_TAG,"when from function "+ when );
         Constants.collectionDate = date;
         ArrayList<String> options = new ArrayList<String>();
         try {
@@ -601,6 +596,7 @@ public class PlaceOrderFragment extends Fragment {
 
             if(availableSlots != null){
                 String getSlots[] = availableSlots.split("_");
+                Log.d(Constants.LOG_TAG,"when before checking "+when.equalsIgnoreCase("today"));
                 if(when.equalsIgnoreCase("today")){
 
                     String presentTime = Constants.currentTime;
@@ -615,19 +611,10 @@ public class PlaceOrderFragment extends Fragment {
                             options.add(getSlots[i]);
 
                         }
-                        else{
-
-                            String dateDetails[] = date.split("/");
-                            int dateForChange = Integer.parseInt(dateDetails[0]);
-                            dateForChange++;
-                            String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
-                            ArrayList<String> options1 =getSlots(dateForFunction,"later");
-                            return options1;
-                        }
 
                     }
                 } // if the date is set for today
-                else{
+                else if(when.equalsIgnoreCase("later")){
 
                     Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
                     String availableOptions[] = availableSlots.split("_");
@@ -639,7 +626,14 @@ public class PlaceOrderFragment extends Fragment {
                 }
             }
             else{
-                return null;
+
+                    String dateDetails[] = date.split("/");
+                    int dateForChange = Integer.parseInt(dateDetails[0]);
+                    dateForChange++;
+                    String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                    ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                    return options1;
+
             }
 
 
@@ -770,7 +764,7 @@ public class PlaceOrderFragment extends Fragment {
         formatDate();
         createJson();
 
-        new PlaceWeeklyOrderAsyncTask(getActivity().getApplicationContext(),new PlaceWeeklyOrderAsyncTask.PlaceWeeklyOrderCallback() {
+        new PlaceOrderAsyncTask(getActivity().getApplicationContext(),new PlaceOrderAsyncTask.PlaceWeeklyOrderCallback() {
             @Override
             public void onStart(boolean status) {
 

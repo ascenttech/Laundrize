@@ -379,7 +379,7 @@ public class AddressFragment extends Fragment {
             replaceFragment(new QuickOrderFragment());
 
         }
-        else if(orderType.equalsIgnoreCase("quick")){
+        else if(orderType.equalsIgnoreCase("weekly")){
 
             replaceFragment(new WeeklyOrderFragment());
 

@@ -4,31 +4,35 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * Created by ADMIN on 25-07-2015.
+ * Created by ADMIN on 27-07-2015.
  */
-public class AddNewAddressAsyncTask extends AsyncTask<String,Void,Boolean> {
+public class WeeklyOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     Context context;
-    private AddNewAddressCallback callback;
-    public interface AddNewAddressCallback{
+    WeeklyOrdersCallback callback;
+    String typeOfService;
+    public interface WeeklyOrdersCallback{
 
         public void onStart(boolean status);
         public void onResult(boolean result);
 
     }
 
-    public AddNewAddressAsyncTask(Context context, AddNewAddressCallback callback) {
+    public WeeklyOrdersAsyncTask(Context context, WeeklyOrdersCallback callback) {
         this.context = context;
         this.callback = callback;
     }
@@ -42,37 +46,45 @@ public class AddNewAddressAsyncTask extends AsyncTask<String,Void,Boolean> {
     @Override
     protected Boolean doInBackground(String... url) {
 
-        Log.d(Constants.LOG_TAG,Constants.AddNewAddressAsyncTask);
-        Log.d(Constants.LOG_TAG,"URL to be fetched "+url[0]);
+        Log.d(Constants.LOG_TAG, Constants.WeeklyOrderAsyncTask);
+        Log.d(Constants.LOG_TAG," URL to be fetched "+ url[0]);
+
         try{
 
             HttpPost httpPost = new HttpPost(url[0]);
-            httpPost.addHeader("Authorization:Bearer",Constants.token);
+            httpPost.addHeader("Authorization:Bearer", Constants.token);
             HttpClient httpClient = new DefaultHttpClient();
             HttpResponse httpResponse = httpClient.execute(httpPost);
 
             int statusCode = httpResponse.getStatusLine().getStatusCode();
-            Log.d(Constants.LOG_TAG," status code "+statusCode);
-            if (statusCode == 200){
+            Log.d(Constants.LOG_TAG," status code "+ statusCode);
+            if(statusCode == 200){
 
                 HttpEntity httpEntity = httpResponse.getEntity();
                 String response = EntityUtils.toString(httpEntity);
 
-                Log.d(Constants.LOG_TAG," JSON Response "+ response);
-                JSONObject jsonObject = new JSONObject(response);
-                Constants.addressId = jsonObject.getString("addr_id");
+                Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
+                JSONObject jsonObject= new JSONObject(response);
+                JSONArray jsonArray = jsonObject.getJSONArray("orders");
+                for(int i = 0;i<jsonArray.length();i++){
+
+                    JSONObject nestedJsonObject = jsonArray.getJSONObject(i);
+//                    String serviceId = nestedJsonObject.getString("service_id");
+
+                }
+
                 return true;
             }
             else{
-
                 return false;
             }
-
         }
-        catch(Exception e){
+        catch (Exception e){
+
             e.printStackTrace();
             return false;
         }
+
     }
 
     @Override

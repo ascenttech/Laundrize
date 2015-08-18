@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.ascenttechnovation.laundrize.data.AddressData;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
 import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -21,19 +20,19 @@ import org.json.JSONObject;
 /**
  * Created by ADMIN on 27-07-2015.
  */
-public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
+public class FetchCompletedOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     Context context;
-    TrackOrdersCallback callback;
+    FetchCompletedOrdersCallback callback;
     String typeOfService;
-    public interface TrackOrdersCallback{
+    public interface FetchCompletedOrdersCallback{
 
         public void onStart(boolean status);
         public void onResult(boolean result);
 
     }
 
-    public TrackOrdersAsyncTask(Context context, TrackOrdersCallback callback) {
+    public FetchCompletedOrdersAsyncTask(Context context, FetchCompletedOrdersCallback callback) {
         this.context = context;
         this.callback = callback;
     }
@@ -47,7 +46,7 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
     @Override
     protected Boolean doInBackground(String... url) {
 
-        Log.d(Constants.LOG_TAG, Constants.TrackOrdersAsyncTask);
+        Log.d(Constants.LOG_TAG, Constants.FetchCompletedOrdersAsyncTask);
         Log.d(Constants.LOG_TAG," URL to be fetched "+ url[0]);
 
         try{
@@ -103,23 +102,8 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
                             break;
                     }
 
+                    Constants.completedOrdersData.add(new CompletedOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService));
 
-                      if(!actualOpsCollectionTime.equalsIgnoreCase("null")){
-
-                          Constants.orderProgress = 4;
-                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot, actualCollected, actualOpsSubmissionTime, actualOpsCollectionTime, price, actualDelivery, deliverySlot, deliveryDate,typeOfService,Constants.orderProgress));
-                      }
-                      else if(!actualOpsSubmissionTime.equalsIgnoreCase("null")){
-                          Constants.orderProgress = 3;
-                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService,Constants.orderProgress));
-                      }
-                        else if(!actualCollected.equalsIgnoreCase("null")){
-                          Constants.orderProgress = 2;
-                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService,Constants.orderProgress));
-                      } else if(!collectionSlot.equalsIgnoreCase("null")){
-                          Constants.orderProgress = 1;
-                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService,Constants.orderProgress));
-                      }
 
                 }
 
@@ -142,7 +126,7 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
         super.onPostExecute(result);
         Log.d(Constants.LOG_TAG," Value Returned "+result);
         if(result){
-            Constants.ordersTracked = true;
+            Constants.completedOrdersFetched = true;
         }
         callback.onResult(result);
     }

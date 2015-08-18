@@ -7,7 +7,8 @@
     >
 
     <LinearLayout
-        android:orientation="vertical" android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.ascenttechnovation.laundrize.custom.CustomTextView
@@ -30,11 +31,12 @@
             android:id="@+id/select_date_slot_included"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Today"
+            android:text="Select Date"
             android:drawableLeft="@drawable/calender"
             android:padding="@dimen/padding_large"
             android:drawablePadding="@dimen/padding"
             android:drawableRight="@drawable/icon_right_arrow"
+            android:textColor="@color/checkout_card_text"
             />
         <View
             android:id="@+id/horizontal_line"
@@ -48,10 +50,8 @@
             android:id="@+id/select_time_slot_included"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/icon_clock"
             android:padding="@dimen/padding_large"
-            android:drawablePadding="@dimen/padding"
-            android:drawableRight="@drawable/icon_right_arrow" />
+            android:drawablePadding="@dimen/padding"/>
 
 
     </LinearLayout>

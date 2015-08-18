@@ -8,25 +8,19 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by ADMIN on 23-07-2015.
  */
-public class PlaceWeeklyOrderAsyncTask extends AsyncTask<JSONObject,Void,Boolean> {
+public class PlaceOrderAsyncTask extends AsyncTask<JSONObject,Void,Boolean> {
 
     Context context;
     PlaceWeeklyOrderCallback callback;
@@ -36,7 +30,7 @@ public class PlaceWeeklyOrderAsyncTask extends AsyncTask<JSONObject,Void,Boolean
         public void onResult(boolean result);
     }
 
-    public PlaceWeeklyOrderAsyncTask(Context context, PlaceWeeklyOrderCallback callback) {
+    public PlaceOrderAsyncTask(Context context, PlaceWeeklyOrderCallback callback) {
         this.context = context;
         this.callback = callback;
     }
@@ -51,7 +45,7 @@ public class PlaceWeeklyOrderAsyncTask extends AsyncTask<JSONObject,Void,Boolean
     protected Boolean doInBackground(JSONObject... jsonObject) {
 
 
-        Log.d(Constants.LOG_TAG,Constants.PlaceWeeklyOrderAsyncTask);
+        Log.d(Constants.LOG_TAG,Constants.PlaceOrderAsyncTask);
 
         JSONObject json = jsonObject[0];
         HttpClient httpClient = new DefaultHttpClient();

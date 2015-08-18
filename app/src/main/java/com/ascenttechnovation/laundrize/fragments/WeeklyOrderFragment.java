@@ -1,7 +1,6 @@
 package com.ascenttechnovation.laundrize.fragments;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,14 +22,10 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.async.FetchCurrentServerTimeAsyncTask;
-import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
-import com.ascenttechnovation.laundrize.async.PlaceWeeklyOrderAsyncTask;
+import com.ascenttechnovation.laundrize.async.WeeklyOrdersAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
 import com.ascenttechnovation.laundrize.utils.Constants;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -230,16 +224,6 @@ public class WeeklyOrderFragment extends Fragment {
                             options.add(getSlots[i]);
 
                         }
-                        else{
-
-                                String dateDetails[] = date.split("/");
-                                int dateForChange = Integer.parseInt(dateDetails[0]);
-                                dateForChange++;
-                                String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
-                                ArrayList<String> options1 =getSlots(dateForFunction,"later");
-                                return options1;
-
-                        }
 
                     }
                 } // if the date is set for today
@@ -255,7 +239,13 @@ public class WeeklyOrderFragment extends Fragment {
                 }
             }
             else{
-                return null;
+                    String dateDetails[] = date.split("/");
+                    int dateForChange = Integer.parseInt(dateDetails[0]);
+                    dateForChange++;
+                    String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                    ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                    return options1;
+
             }
 
 
@@ -298,6 +288,30 @@ public class WeeklyOrderFragment extends Fragment {
     public void placeOrder(){
 
         formatDate();
+
+        String finalUrl = Constants.weeklyOrderUrl+Constants.userId+"&address_id="+Constants.addressId+"&order_day="+"monday"+"&order_slot="+ Constants.collectionSlotId;
+        new WeeklyOrdersAsyncTask(getActivity().getApplicationContext(),new WeeklyOrdersAsyncTask.WeeklyOrdersCallback() {
+            @Override
+            public void onStart(boolean status) {
+
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.APP_NAME);
+                progressDialog.setMessage("Placing Your Order");
+                progressDialog.show();
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                progressDialog.dismiss();
+                if(result){
+                    showDialog();
+                }
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(),"Order couldnt be placed sucessfully\nTry Again Later",5000).show();
+                }
+
+            }
+        }).execute(finalUrl);
 
 
     }
