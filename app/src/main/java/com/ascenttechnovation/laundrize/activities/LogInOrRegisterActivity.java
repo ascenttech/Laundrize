@@ -192,16 +192,15 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
 
 
         HashMap<String,Integer> file_maps = new HashMap<String, Integer>();
-        file_maps.put("Fatest Delivery",R.drawable.icon_slider_1);
-        file_maps.put("Best Quality Service",R.drawable.icon_slider_2);
-        file_maps.put("Laundry Just a tap away",R.drawable.icon_slider_3);
-        file_maps.put("Wide Range of Services", R.drawable.icon_slider_4);
+        file_maps.put("Fatest Delivery",R.drawable.icons_slider_1);
+        file_maps.put("Best Quality Service",R.drawable.icons_slider_2);
+        file_maps.put("Laundry Just a tap away",R.drawable.icons_slider_3);
+        file_maps.put("Wide Range of Services", R.drawable.icons_slider_4);
 
         for(String name : file_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(this);
             // initialize a SliderLayout
             textSliderView
-                    .description(name)
                     .image(file_maps.get(name))
                     .setScaleType(BaseSliderView.ScaleType.Fit);
 //                    .setOnSliderClickListener(this);
