@@ -435,6 +435,8 @@ public class AddressFragment extends Fragment {
 
     public void setZipcodeAdapter(){
 
+        Log.d(Constants.LOG_TAG,"Setting zip code adapter "+ Constants.zipcodes.size());
+
         zipcode.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.zipcodes));
         zipcode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -482,7 +484,7 @@ public class AddressFragment extends Fragment {
 
     public void setAreasAdapter(){
 
-
+        Log.d(Constants.LOG_TAG," Setting Areas Adapter "+ Constants.areas.size());
         area.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.areas));
         area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

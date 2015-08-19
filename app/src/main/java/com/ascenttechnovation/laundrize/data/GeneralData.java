@@ -8,22 +8,10 @@ public class GeneralData {
 
     String code, description,title,largeImage,smallImage,regular,regularCost,extraCare,extraCost,quantity;
 
-    public GeneralData(String code, String description, String title, String largeImage, String smallImage, String regular, String regularCost, String extraCare, String extraCost) {
+    public GeneralData(String code, String title,String description, String largeImage, String smallImage, String regular, String regularCost, String extraCare, String extraCost, String quantity) {
         this.code = code;
-        this.description = description;
         this.title = title;
-        this.largeImage = largeImage;
-        this.smallImage = smallImage;
-        this.regular = regular;
-        this.regularCost = regularCost;
-        this.extraCare = extraCare;
-        this.extraCost = extraCost;
-    }
-
-    public GeneralData(String code, String description, String title, String largeImage, String smallImage, String regular, String regularCost, String extraCare, String extraCost, String quantity) {
-        this.code = code;
         this.description = description;
-        this.title = title;
         this.largeImage = largeImage;
         this.smallImage = smallImage;
         this.regular = regular;

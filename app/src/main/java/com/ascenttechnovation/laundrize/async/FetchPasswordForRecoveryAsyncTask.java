@@ -1,7 +1,9 @@
 package com.ascenttechnovation.laundrize.async;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -9,29 +11,25 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * Created by ADMIN on 22-07-2015.
+ * Created by ADMIN on 08-07-2015.
  */
-public class UpdateUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
+public class FetchPasswordForRecoveryAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     Context context;
-    UpdateUserProfileCallback callback;
-
-    public interface UpdateUserProfileCallback{
+    FetchPasswordForRecoveryCallback callback;
+    public interface FetchPasswordForRecoveryCallback{
 
         public void onStart(boolean status);
         public void onResult(boolean result);
-
     }
 
-    public UpdateUserProfileAsyncTask(Context context, UpdateUserProfileCallback callback) {
+    public FetchPasswordForRecoveryAsyncTask(Context context, FetchPasswordForRecoveryCallback callback) {
         this.context = context;
         this.callback = callback;
     }
@@ -45,10 +43,8 @@ public class UpdateUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
     @Override
     protected Boolean doInBackground(String... url) {
 
-        Log.d(Constants.LOG_TAG,Constants.UpdateUserProfileAsyncTask);
-        Log.d(Constants.LOG_TAG," The Url to be fetched "+url[0]);
-
-
+        Log.d(Constants.LOG_TAG, Constants.FetchPasswordForRecoveryAsyncTask);
+        Log.d(Constants.LOG_TAG, " The url to be fetched " + url[0]);
         try{
 
             HttpPost httpPost = new HttpPost(url[0]);
@@ -56,15 +52,23 @@ public class UpdateUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
             HttpResponse httpResponse = httpClient.execute(httpPost);
 
             int statusCode = httpResponse.getStatusLine().getStatusCode();
-            Log.d(Constants.LOG_TAG," status code "+ statusCode);
             if(statusCode == 200){
 
                 HttpEntity httpEntity = httpResponse.getEntity();
                 String response = EntityUtils.toString(httpEntity);
 
                 Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
+                JSONObject jsonObject = new JSONObject(response);
+                String status = jsonObject.getString("status_code");
+                if(status.equalsIgnoreCase("200")){
 
-                return true;
+                    return true;
+                }
+                else{
+                    return false;
+                }
+
+
             }
             else{
                 return false;
@@ -75,13 +79,12 @@ public class UpdateUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
             e.printStackTrace();
             return false;
         }
-
     }
 
     @Override
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
-        Log.d(Constants.LOG_TAG," Value Returned "+result);
+        Log.d(Constants.LOG_TAG," Returned Value "+result);
         callback.onResult(result);
     }
 }

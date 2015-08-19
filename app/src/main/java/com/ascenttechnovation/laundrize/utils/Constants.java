@@ -37,7 +37,7 @@ public class Constants {
     public static boolean slotDifferenceFetched;
     public static boolean slotsFetched;
 
-    public static String userId,token,password,phoneNumber;
+    public static String userId,token,password,phoneNumber,weeklyOrderDay;
     public static String addressId,address;
     public static String minIroningDate,minIroningSlotId;
     public static String minWashingDate,minWashingSlotId;
@@ -49,6 +49,11 @@ public class Constants {
     public static String currentDate,currentTime;
     public static int totalQuantityToBeCollected,totalAmountToBeCollected;
     public static int collectionTimeSlot;
+
+    // This will be used in place ORder so that we can access this value from anywhere
+    public static String placeOrderkey,placeOrderValue;
+    public static int placeOrderPosition;
+
 
     // This is used to change the image of track orders.
     // 1 is order placed
@@ -64,6 +69,10 @@ public class Constants {
     public static Map<String,String> areasMap;
     public static Map<String,String> citiesMap;
     public static Map<String,String> zipcodesMap;
+
+    // This is used only to store the service code and the serviceName
+    // This is used in place order screen
+    public static Map<String,String> servicesName;
 
     // All the arraylists
     public static ArrayList<GeneralData> subCategory;
@@ -123,6 +132,7 @@ public class Constants {
     public static final String AddNewAddressAsyncTask=" ADD NEW ADDRESS ASYNC TASK ";
     public static final String CheckIfUserExistsAsyncTask=" CHECK IF USER EXISTS ASYNC TASK ";
     public static final String ConfirmVerificationAsyncTask=" CONFIRM VERIFICATION ASYNC TASK ";
+    public static final String ConfirmVerificationForPasswordRecoveryAsyncTask=" CONFIRM VERIFICATION FOR PASSWORD RECOVERY ASYNC TASK ";
     public static final String FetchAddressAsyncTask=" FETCH ADDRESS ASYNC TASK ";
     public static final String FetchAllSlotsAsyncTask=" FETCH ALL SLOTS ASYNC TASK ";
     public static final String FetchAreasAsyncTask=" FETCH AREAS ASYNC TASK ";
@@ -130,6 +140,7 @@ public class Constants {
     public static final String FetchCompletedOrdersAsyncTask=" FETCH COMPLETED ORDER ASYNC TASK ";
     public static final String FetchCurrentServerTimeAsyncTask=" FETCH CURRENT SERVER TIME ASYNC TASK ";
     public static final String FetchLaundryServicesAsyncTask=" FETCH LAUNDRY SERVICES ASYNC TASK ";
+    public static final String FetchPasswordForRecoveryAsyncTask=" FETCH PASSWORD FOR RECOVERY ASYNC TASK ";
     public static final String FetchSlotDifferenceAsyncTask=" FETCH SLOT DIFFERENCE ASYNC TASK ";
     public static final String FetchUserAddressAsyncTask=" FETCH USER ADDRESS ASYNC TASK ";
     public static final String FetchUserCityAsyncTask=" FETCH USER CITY ASYNC TASK ";
@@ -186,11 +197,11 @@ public class Constants {
     //  public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=8879153143";
     public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=";
 
+//    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
+    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
+
     public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/placeorder";
 //    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/placeorder?";
-
-//    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=8097746236";
-    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
 
 //    public static final String changePasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=9752493189&verification_code=039293&new_password=Abc";
     public static final String changePasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=";
@@ -244,8 +255,8 @@ public class Constants {
     public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=";
 
 
-//    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=7666441398&new_password=poiuy&verification_code=5329";
-    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=";
+//    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/changePassword?mobile_number=7666441398&new_password=poiuy&verification_code=5329";
+    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/changePassword?mobile_number=";
 
 //    public static final String completedOrdersUrl = "http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=3&type=completed";
     public static final String completedOrdersUrl = "http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=";

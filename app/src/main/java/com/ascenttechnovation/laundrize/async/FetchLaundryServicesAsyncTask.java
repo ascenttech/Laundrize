@@ -81,20 +81,22 @@ public class FetchLaundryServicesAsyncTask extends AsyncTask<String,Void,Boolean
                     JSONArray nestedJsonArray = jsonObject.getJSONArray("subitems");
                     for(int j=0;j<nestedJsonArray.length();j++){
 
-                    JSONObject nestedJsonObject = nestedJsonArray.getJSONObject(j);
-                     String code = nestedJsonObject.getString("code");
-                     String description = nestedJsonObject.getString("desc");
-                     String title = nestedJsonObject.getString("name");
-                     String largeImage = nestedJsonObject.getString("imglarge");
-                     String smallImage = nestedJsonObject.getString("imgsmall");
-                     String regular = nestedJsonObject.getString("regular");
-                     String regularCost = nestedJsonObject.getString("regularcost");
-                     String extraCare = nestedJsonObject.getString("extracare");
-                     String extraCareCost = nestedJsonObject.getString("extracarecost");
+                        JSONObject nestedJsonObject = nestedJsonArray.getJSONObject(j);
+                        String code = nestedJsonObject.getString("code");
+                        String title = nestedJsonObject.getString("name");
+                        title = title.replace("&amp;","&");
+                        String description = nestedJsonObject.getString("desc");
+                        description = description.replace("&amp;","&");
+                        String largeImage = nestedJsonObject.getString("imglarge");
+                        String smallImage = nestedJsonObject.getString("imgsmall");
+                        String regular = nestedJsonObject.getString("regular");
+                        String regularCost = nestedJsonObject.getString("regularcost");
+                        String extraCare = nestedJsonObject.getString("extracare");
+                        String extraCareCost = nestedJsonObject.getString("extracarecost");
 
-                     Constants.subCategory.add(new GeneralData(code,title,description,smallImage,largeImage,regular,regularCost,extraCare,extraCareCost,"0"));
+                        Constants.subCategory.add(new GeneralData(code,title,description,smallImage,largeImage,regular,regularCost,extraCare,extraCareCost,"0"));
 //                     Constants.subCategory.add(new GeneralData(code,title,description,smallImage,largeImage,regular,regularCost,extraCare,extraCareCost));
-
+                        Constants.servicesName.put(code,title);
                     } // end of nested for loop
 
                     sortTheCategories(id);

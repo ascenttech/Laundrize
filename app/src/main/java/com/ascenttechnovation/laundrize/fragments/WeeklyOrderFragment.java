@@ -279,6 +279,7 @@ public class WeeklyOrderFragment extends Fragment {
             newDateFormat.applyPattern("EEEE");
             String day = newDateFormat.format(MyDate);
             day = day.toLowerCase();
+            Constants.weeklyOrderDay = day;
             String availableSlots = (String) Constants.slots.get(day);
 
             return availableSlots;
@@ -301,7 +302,7 @@ public class WeeklyOrderFragment extends Fragment {
 
         formatDate();
 
-        String finalUrl = Constants.weeklyOrderUrl+Constants.userId+"&address_id="+Constants.addressId+"&order_day="+"monday"+"&order_slot="+ Constants.collectionSlotId;
+        String finalUrl = Constants.weeklyOrderUrl+Constants.userId+"&address_id="+Constants.addressId+"&order_day="+Constants.weeklyOrderDay+"&order_slot="+ Constants.collectionSlotId;
         new WeeklyOrdersAsyncTask(getActivity().getApplicationContext(),new WeeklyOrdersAsyncTask.WeeklyOrdersCallback() {
             @Override
             public void onStart(boolean status) {

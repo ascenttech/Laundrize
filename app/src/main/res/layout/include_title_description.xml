@@ -24,6 +24,8 @@
         android:textSize="@dimen/description_text_size"
         android:textColor="@color/text_color_white"
         android:text="Description"
+        android:maxLines="1"
+        android:maxLength="25"
         />
 
 </LinearLayout>

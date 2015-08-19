@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.async.ConfirmVerificationAsyncTask;
+import com.ascenttechnovation.laundrize.async.ConfirmVerificationForPasswordRecoveryAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchPasswordForRecoveryAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchVerificationCodeAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomEditText;
@@ -89,8 +91,8 @@ public class ForgotPasswordActivity extends Activity {
         String s2=confirmPasswordEdit.getText().toString();
         if(s1.equals(s2))
         {
-            String finalUrl = Constants.verifyNowUrl + mobileNumberEdit.getText().toString();
-            new FetchVerificationCodeAsyncTask(getApplicationContext(), new FetchVerificationCodeAsyncTask.FetchVerificationCodeCallback() {
+            String finalUrl = Constants.forgotPasswordUrl + mobileNumberEdit.getText().toString();
+            new FetchPasswordForRecoveryAsyncTask(getApplicationContext(), new FetchPasswordForRecoveryAsyncTask.FetchPasswordForRecoveryCallback() {
                 @Override
                 public void onStart(boolean status) {
 
@@ -107,6 +109,8 @@ public class ForgotPasswordActivity extends Activity {
 
                     progressDialog.dismiss();
                     if (result) {
+                        verificationCodeEdit.setVisibility(View.VISIBLE);
+                        submitButton.setVisibility(View.VISIBLE);
                         Toast.makeText(getApplicationContext(), " You will receive a message shortly", 5000).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "There was an error \nTry Again Later", 5000).show();
@@ -132,7 +136,7 @@ public class ForgotPasswordActivity extends Activity {
 
         String finalUrl = Constants.resetPasswordUrl+mobileNumberValue+"&new_password="+password+"&verification_code="+verificationCodeValue;
 
-        new ConfirmVerificationAsyncTask(getApplicationContext(), new ConfirmVerificationAsyncTask.ConfirmVerificationCallback() {
+        new ConfirmVerificationForPasswordRecoveryAsyncTask(getApplicationContext(), new ConfirmVerificationForPasswordRecoveryAsyncTask.ConfirmVerificationForPasswordRecoveryCallback() {
             @Override
             public void onStart(boolean status) {
 
@@ -166,8 +170,7 @@ public class ForgotPasswordActivity extends Activity {
 
             switch (view.getId()){
 
-                case R.id.verify_details_button_forgot_password_activity: verificationCodeEdit.setVisibility(View.VISIBLE);
-                    submitButton.setVisibility(View.VISIBLE);
+                case R.id.verify_details_button_forgot_password_activity:
                     verifyNow();
                     break;
                 case R.id.submit_button_forgot_password_activity: confirmVerification();

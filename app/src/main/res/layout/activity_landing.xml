@@ -35,15 +35,25 @@
             />
 
             <com.ascenttechnovation.laundrize.custom.CustomTextView
+                android:id="@+id/name_text_landing_activity"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/profile_image_navigation_drawer"
                 android:layout_alignParentBottom="true"
-                android:text="Hello,admin"
+                android:text="Admin"
                 android:textSize="@dimen/drawer_text_size"
                 android:textColor="@color/text_color_white"
-                android:layout_marginBottom="@dimen/margin_dp"
-                android:padding="@dimen/pop_up_margin_dp"
+                android:layout_marginBottom="@dimen/margin"
+                android:paddingLeft="@dimen/pop_up_margin_dp"
+                />
+
+            <com.ascenttechnovation.laundrize.custom.CustomTextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Hello"
+                android:textSize="@dimen/drawer_text_size_small"
+                android:textColor="@color/text_color_white"
+                android:paddingLeft="@dimen/pop_up_margin_dp"
+                android:layout_above="@id/name_text_landing_activity"
                 />
 
         </RelativeLayout>

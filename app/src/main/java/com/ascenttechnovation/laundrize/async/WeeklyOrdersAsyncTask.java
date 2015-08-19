@@ -64,15 +64,6 @@ public class WeeklyOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
                 String response = EntityUtils.toString(httpEntity);
 
                 Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
-                JSONObject jsonObject= new JSONObject(response);
-                JSONArray jsonArray = jsonObject.getJSONArray("orders");
-                for(int i = 0;i<jsonArray.length();i++){
-
-                    JSONObject nestedJsonObject = jsonArray.getJSONObject(i);
-//                    String serviceId = nestedJsonObject.getString("service_id");
-
-                }
-
                 return true;
             }
             else{

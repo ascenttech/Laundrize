@@ -80,17 +80,11 @@ public class SplashScreenActivity extends Activity {
                 @Override
                 public void onStart(boolean status) {
 
-                    progressDialog = new ProgressDialog(SplashScreenActivity.this);
-                    progressDialog.setTitle(Constants.LOG_TAG);
-                    progressDialog.setMessage("Loading,Please Wait...");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
 
                 }
                 @Override
                 public void onResult(boolean result) {
 
-                    progressDialog.dismiss();
                     if(result){
 
                         SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
@@ -159,6 +153,7 @@ public class SplashScreenActivity extends Activity {
 
         Constants.areasMap = new HashMap<String,String>();
         Constants.citiesMap = new HashMap<String,String>();
+        Constants.servicesName = new HashMap<String,String>();
         Constants.zipcodesMap = new HashMap<String,String>();
         Constants.order = new HashMap<String,String>();
         Constants.slots = new HashMap<String,String>();
