@@ -61,6 +61,12 @@ public class Constants {
     // 3 processing
     public static int orderProgress = 1;
 
+    // This is used to store the profileId of the user if he enters from FB or google
+    // The loginRoute will save the route from which the user entered
+    // register, facebook or google
+    public static String profileId,loginRoute;
+
+
 
     // This hashmap would containt the key as orderId and value as quantity
     public static Map<String,String> order;
@@ -133,6 +139,7 @@ public class Constants {
     public static final String CheckIfUserExistsAsyncTask=" CHECK IF USER EXISTS ASYNC TASK ";
     public static final String ConfirmVerificationAsyncTask=" CONFIRM VERIFICATION ASYNC TASK ";
     public static final String ConfirmVerificationForPasswordRecoveryAsyncTask=" CONFIRM VERIFICATION FOR PASSWORD RECOVERY ASYNC TASK ";
+    public static final String ConfirmVerificationFromSocialAsyncTask=" CONFIRM VERIFICATION FROM SOCIAL ASYNC TASK ";
     public static final String FetchAddressAsyncTask=" FETCH ADDRESS ASYNC TASK ";
     public static final String FetchAllSlotsAsyncTask=" FETCH ALL SLOTS ASYNC TASK ";
     public static final String FetchAreasAsyncTask=" FETCH AREAS ASYNC TASK ";

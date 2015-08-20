@@ -30,7 +30,7 @@ public class CustomEditText extends EditText {
     }
 
     private void init() {
-        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "roboto_medium.ttf");
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "roboto_light.ttf");
         setTypeface(tf);
     }
 }

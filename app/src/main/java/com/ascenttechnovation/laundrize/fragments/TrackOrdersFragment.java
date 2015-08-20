@@ -51,12 +51,12 @@ public class TrackOrdersFragment extends Fragment {
         customActionBar();
         settingTheAdapter(v);
 
-        // we will check if the orders have been parsed from the server or not
-        if(!Constants.ordersTracked){
+//        // we will check if the orders have been parsed from the server or not
+//        if(!Constants.ordersTracked){
 
             getOrders();
 
-        }
+//        }
 
         // The find Views and setViews are only for the footer button so it doesnt matter if the oreders are there
         // or not because you want to show the footer button

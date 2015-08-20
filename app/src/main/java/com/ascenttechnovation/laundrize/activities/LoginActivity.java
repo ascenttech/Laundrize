@@ -91,8 +91,8 @@ public class LoginActivity extends Activity {
 
     public void logInNow(){
 
-        String phoneNumber = mobileNumber.getText().toString();
-        String pwd = password.getText().toString();
+        final String phoneNumber = mobileNumber.getText().toString();
+        final String pwd = password.getText().toString();
 
         String finalUrl = Constants.signInUrl+phoneNumber+"&password="+pwd;
 
@@ -115,10 +115,12 @@ public class LoginActivity extends Activity {
 
                     SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("loginRoute","register");
+                    editor.putString("profileId", "NA");
                     editor.putString("userId",Constants.userId);
                     editor.putString("token",Constants.token);
-                    editor.putString("password",Constants.password);
-                    editor.putString("phoneNumber",Constants.phoneNumber);
+                    editor.putString("phoneNumber",phoneNumber);
+                    editor.putString("password",pwd);
                     editor.commit();
 
                     Intent i = new Intent(LoginActivity.this,LandingActivity.class);

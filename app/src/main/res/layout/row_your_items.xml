@@ -42,10 +42,10 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/add_image_your_items"
+        android:id="@+id/subtract_image_your_items"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_add"
+        android:src="@drawable/icon_subtract"
         android:layout_weight="1"
         android:layout_gravity="bottom"
         />
@@ -54,19 +54,21 @@
         android:id="@+id/quantity_text_your_items"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_edit_text"
+        android:background="@drawable/rounded_edit_text_with_border"
         android:textSize="@dimen/text_size"
         android:padding="@dimen/padding"
         android:layout_weight="2"
         android:layout_gravity="bottom"
         android:gravity="center"
+        android:layout_marginRight="1dp"
+        android:layout_marginLeft="1dp"
         />
 
     <ImageView
-        android:id="@+id/subtract_image_your_items"
+        android:id="@+id/add_image_your_items"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/icon_subtract"
+        android:src="@drawable/icon_add"
         android:layout_weight="1"
         android:layout_gravity="bottom"
         />

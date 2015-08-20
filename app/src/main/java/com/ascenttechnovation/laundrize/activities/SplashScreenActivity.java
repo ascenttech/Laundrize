@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
+import com.ascenttechnovation.laundrize.async.CheckIfUserExistsAsyncTask;
 import com.ascenttechnovation.laundrize.async.SignInUserAsyncTask;
 import com.ascenttechnovation.laundrize.data.AddressData;
 import com.ascenttechnovation.laundrize.data.BagOrderData;
@@ -36,6 +37,7 @@ public class SplashScreenActivity extends Activity {
 
     private ImageView logo;
     private ProgressDialog progressDialog;
+    private String finalUrl,type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,38 +46,24 @@ public class SplashScreenActivity extends Activity {
 
         Log.d(Constants.LOG_TAG,Constants.SplashScreenActivity);
 
-        fetchAreasCitiesPincodes();
         initializeArrayList();
         intializeHashMap();
         findViews();
         setViews();
 
         SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+        Constants.loginRoute = sharedPreferences.getString("loginRoute", "null");
+        Constants.profileId = sharedPreferences.getString("profileId", "null");
         Constants.userId = sharedPreferences.getString("userId","null");
         Constants.token = sharedPreferences.getString("token","null");
         Constants.password = sharedPreferences.getString("password","null");
         Constants.phoneNumber = sharedPreferences.getString("phoneNumber","null");
 
-        Log.d(Constants.LOG_TAG," Values userId "+Constants.userId+" token "+Constants.token+" password "+Constants.password+" phoneNumber "+Constants.phoneNumber);
 
-        // if user Id is not equal null then we move to landing Activity
-        if(Constants.userId.equalsIgnoreCase("null")){
+        if(Constants.loginRoute.equalsIgnoreCase("register")){
 
-
-
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    Intent intent = new Intent(SplashScreenActivity.this,LogInOrRegisterActivity.class);
-                    startActivity(intent);
-                }
-            },3000);
-
-        }
-        else{
-
-            String finalUrl = Constants.signInUrl+Constants.phoneNumber+"&password="+Constants.password;
+            finalUrl = Constants.signInUrl+Constants.phoneNumber+"&password="+Constants.password;
+            type ="register";
             new SignInUserAsyncTask(getApplicationContext(),new SignInUserAsyncTask.SignInUserCallback() {
                 @Override
                 public void onStart(boolean status) {
@@ -89,12 +77,12 @@ public class SplashScreenActivity extends Activity {
 
                         SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("loginRoute",type);
+                        editor.putString("profileId",Constants.profileId);
                         editor.putString("userId",Constants.userId);
                         editor.putString("token",Constants.token);
                         editor.putString("password",Constants.password);
                         editor.putString("phoneNumber",Constants.phoneNumber);
-                        Log.d(Constants.LOG_TAG," Values before committing userId "+Constants.userId+" token "+Constants.token+" password "+Constants.password+" phoneNumber "+Constants.phoneNumber);
-
                         editor.commit();
 
                         Intent i = new Intent(SplashScreenActivity.this,LandingActivity.class);
@@ -106,15 +94,70 @@ public class SplashScreenActivity extends Activity {
                     }
 
                 }
-            }).execute(finalUrl,Constants.phoneNumber,Constants.password);
+            }).execute(finalUrl);
+
 
         }
+        else if(Constants.loginRoute.equalsIgnoreCase("facebook")||Constants.loginRoute.equalsIgnoreCase("google")){
+
+            if(Constants.loginRoute.equalsIgnoreCase("facebook")){
+                finalUrl = Constants.checkUserExistsUrl+Constants.profileId+"&type=FB";
+                type= "facebook";
+            }
+            else if(Constants.loginRoute.equalsIgnoreCase("google")){
+
+                finalUrl = Constants.checkUserExistsUrl+Constants.profileId+"&type=GP";
+                type= "google";
+            }
+
+            new CheckIfUserExistsAsyncTask(getApplicationContext(),new CheckIfUserExistsAsyncTask.CheckIfUserExistsCallback() {
+                @Override
+                public void onStart() {
 
 
-    }
+                }
+                @Override
+                public void onResult(boolean result) {
 
-    private void fetchAreasCitiesPincodes(){
+                    if(result){
 
+
+                        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("loginRoute",type);
+                        editor.putString("profileId",Constants.profileId);
+                        editor.putString("userId",Constants.userId);
+                        editor.putString("token",Constants.token);
+                        editor.putString("mobileNumber","NA");
+                        editor.putString("password","NA");
+                        editor.commit();
+
+
+                        Intent i = new Intent(SplashScreenActivity.this,LandingActivity.class);
+                        startActivity(i);
+                    }
+                    else{
+
+                        Toast.makeText(getApplicationContext(),"There was an error.\nTry Again After Some time",5000).show();
+
+                    }
+                }
+            }).execute(finalUrl);
+
+        }
+        else{
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    Intent i = new Intent(SplashScreenActivity.this,LogInOrRegisterActivity.class);
+                    startActivity(i);
+                }
+            },3000);
+
+
+        }
 
 
     }

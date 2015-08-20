@@ -63,28 +63,15 @@
             android:layout_marginBottom="@dimen/margin_large"
             />
 
-        <com.google.android.gms.common.SignInButton
-            android:id="@+id/google_button_login_or_register_activity"
-            android:layout_width="fill_parent"
+
+        <include
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_large_triple"
             android:layout_marginRight="@dimen/margin_large_triple"
-            android:layout_marginBottom="@dimen/margin_large"/>
-
-        <!--<com.google.android.gms.common.SignInButton-->
-            <!--android:id="@+id/google_button_login_or_register_activity"-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:visibility="gone"/>-->
-
-        <!--<include-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/margin_large_triple"-->
-            <!--android:layout_marginRight="@dimen/margin_large_triple"-->
-            <!--android:layout_marginBottom="@dimen/margin_large"-->
-            <!--layout="@layout/include_google_button"-->
-            <!--/>-->
+            android:layout_marginBottom="@dimen/margin_large"
+            layout="@layout/include_google_button"
+            />
 
         <include
             android:layout_width="match_parent"

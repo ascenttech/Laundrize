@@ -29,6 +29,9 @@ import com.ascenttechnovation.laundrize.async.FetchSlotDifferenceAsyncTask;
 import com.ascenttechnovation.laundrize.async.PlaceOrderAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
+import com.ascenttechnovation.laundrize.data.BagOrderData;
+import com.ascenttechnovation.laundrize.data.IroningOrderData;
+import com.ascenttechnovation.laundrize.data.WashingOrderData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import org.json.JSONArray;
@@ -267,10 +270,9 @@ public class PlaceOrderFragment extends Fragment {
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.row_your_items,null);
-        v.setTag("view_"+position);
+        v.setTag("view_"+position+"_"+key);
 
         cloth = (CustomTextView) v.findViewById(R.id.cloth_text_your_items);
-//        cloth.setText();
 
         service = (CustomTextView) v.findViewById(R.id.service_text_your_items);
         String keyValue = key.substring(0,3);
@@ -299,23 +301,23 @@ public class PlaceOrderFragment extends Fragment {
         quantity = (CustomTextView) v.findViewById(R.id.quantity_text_your_items);
         total = (CustomTextView) v.findViewById(R.id.total_text_your_items);
 
-        quantity.setTag("quantity_"+position);
+        quantity.setTag("quantity_"+position+"_"+key);
         quantity.setText(valueDetails[0]);
 
-        total.setTag("total_"+position);
+        total.setTag("total_"+position+"_"+key);
         total.setText(valueDetails[1]);
 
         add = (ImageView) v.findViewById(R.id.add_image_your_items);
-        add.setTag("add_"+position);
-//        add.setOnClickListener(inflatedClickListener);
+        add.setTag("add_"+position+"_"+key);
+        add.setOnClickListener(inflatedClickListener);
 
         subtract = (ImageView) v.findViewById(R.id.subtract_image_your_items);
-        subtract.setTag("subtract_"+position);
-//        subtract.setOnClickListener(inflatedClickListener);
+        subtract.setTag("subtract_"+position+"_"+key);
+        subtract.setOnClickListener(inflatedClickListener);
 
         remove = (ImageView) v.findViewById(R.id.remove_image_your_items);
-        remove.setTag("remove_"+position);
-//        remove.setOnClickListener(inflatedClickListener);
+        remove.setTag("remove_"+position+"_"+key);
+        remove.setOnClickListener(inflatedClickListener);
         yourItemsLayout.addView(v);
 
         View line = new View(getActivity().getApplicationContext());
@@ -712,12 +714,12 @@ public class PlaceOrderFragment extends Fragment {
 
                     if(options.size() == 0){
 
-                            String dateDetails[] = date.split("/");
-                            int dateForChange = Integer.parseInt(dateDetails[0]);
-                            dateForChange++;
-                            String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
-                            ArrayList<String> options1 =getSlots(dateForFunction,"later");
-                            return options1;
+                        String dateDetails[] = date.split("/");
+                        int dateForChange = Integer.parseInt(dateDetails[0]);
+                        dateForChange++;
+                        String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                        ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                        return options1;
 
                     }
 
@@ -870,8 +872,8 @@ public class PlaceOrderFragment extends Fragment {
     public void placeOrder(){
 
         formatDate();
+        getTheValues();
         createJson();
-
         new PlaceOrderAsyncTask(getActivity().getApplicationContext(),new PlaceOrderAsyncTask.PlaceWeeklyOrderCallback() {
             @Override
             public void onStart(boolean status) {
@@ -899,9 +901,62 @@ public class PlaceOrderFragment extends Fragment {
     }
 
 
+
+    // We are first putting the data in the respective data holders Constants.ironingdata for eg
+    // and create a hashmap when creating the your items layout
+    // then we are manipulating the values in the hashmap
+    // but are json is created on the basis of the data holders so we are re creating the data holders
+    public void getTheValues(){
+
+        Constants.ironingOrderData.clear();
+        Constants.washingOrderData.clear();
+        Constants.bagOrderData.clear();
+
+        Log.d(Constants.LOG_TAG," Entered Get Values ");
+        Iterator it = Constants.order.entrySet().iterator();
+        Log.d(Constants.LOG_TAG," It  ");
+        while (it.hasNext()) {
+
+            Log.d(Constants.LOG_TAG," Entered While loop ");
+            Map.Entry pair = (Map.Entry)it.next();
+            Log.d(Constants.LOG_TAG," Map key "+pair.getKey()+" Value "+pair.getValue());
+            Log.d(Constants.LOG_TAG," key is "+pair.getKey().toString());
+            String key = pair.getKey().toString();
+            String orderDetails[] = Constants.order.get(key).toString().split("_");
+            String keyValue = key.substring(0,3);
+            Log.d(Constants.LOG_TAG," After Key is "+ keyValue);
+            switch(keyValue){
+
+                case "001": Constants.ironingOrderData.add(new IroningOrderData(key,orderDetails[1],orderDetails[0]));
+                    break;
+                case "002": Constants.ironingOrderData.add(new IroningOrderData(key,orderDetails[1],orderDetails[0]));
+                    break;
+                case "003": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
+                    break;
+                case "004": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
+                    break;
+                case "005": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
+                    break;
+                case "006": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
+                    break;
+                case "007": Constants.bagOrderData.add(new BagOrderData(key,orderDetails[1],orderDetails[0]));
+                    break;
+                case "008": Constants.bagOrderData.add(new BagOrderData(key,orderDetails[1],orderDetails[0]));
+                    break;
+
+            }
+
+            it.remove(); // avoids a ConcurrentModificationException
+        }
+
+    }
+
+
     // This function would be used to create JSON which contains the
     // users orders to be placed
     public void createJson(){
+
+        Log.d(Constants.LOG_TAG," Creating JSOn ");
 
         itemsJsonArray = new JSONArray();
         washingNestedJsonArray = new JSONArray();
@@ -1017,7 +1072,7 @@ public class PlaceOrderFragment extends Fragment {
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                replaceFragment(new TrackOrdersFragment());
+                replaceFragment(new LandingFragment());
             }
         });
         alert.show();
@@ -1098,76 +1153,73 @@ public class PlaceOrderFragment extends Fragment {
     public void add(String key,String position){
 
 
-        View v = yourItemsLayout.findViewWithTag("view_"+position);
+        View v = yourItemsLayout.findViewWithTag("view_"+position+"_"+key);
 
         // This will first find the view based on the tag
         // then get the text value which is set
         // then convert it to int
-        quantityValue = Integer.parseInt(((CustomTextView) v.findViewWithTag("quantity_"+position)).getText().toString());
-        obtainedAmount = Integer.parseInt(((CustomTextView) v.findViewWithTag("total_"+position)).getText().toString());
+        quantityValue = Integer.parseInt(((CustomTextView) v.findViewWithTag("quantity_"+position+"_"+key)).getText().toString());
+        Log.d(Constants.LOG_TAG," Qunatity value "+ quantityValue);
+        obtainedAmount = Integer.parseInt(((CustomTextView) v.findViewWithTag("total_"+position+"_"+key)).getText().toString());
+        Log.d(Constants.LOG_TAG," Obtained Amount "+ obtainedAmount);
         perPieceCost = obtainedAmount/quantityValue;
+        Log.d(Constants.LOG_TAG," Per Piece Cost "+ perPieceCost);
 
         // when added then
         totalQuantity = (quantityValue+1);
+        Log.d(Constants.LOG_TAG," Total Quantity "+ totalQuantity);
         totalAmount = (totalQuantity*perPieceCost);
+        Log.d(Constants.LOG_TAG," Total Amount "+ totalAmount);
 
         newValue = String.valueOf(totalQuantity)+"_"+totalAmount;
+        Log.d(Constants.LOG_TAG," NEW VALUE "+ newValue);
 
         Constants.order.put(key, newValue);
-        getNewValue(position,Constants.placeOrderkey);
+        updateUI(position,key,newValue);
 
     }
     public void subtract(String key,String position){
 
-//
-////        quantityValue = Integer.parseInt(obtainedQuantity);
-////        obtainedAmount = Integer.parseInt(totalPrice);
-//        perPieceCost = obtainedAmount/quantityValue;
-//
-//        if(quantityValue != 0){
-//
-//            totalQuantity = (quantityValue-1);
-//            totalAmount = totalQuantity*perPieceCost;
-//
-//            newValue = String.valueOf(totalQuantity)+"_"+totalAmount;
-//            Log.d(Constants.LOG_TAG," new Value "+ newValue);
-//            Constants.order.put(key,newValue);
-//            Constants.placeOrderkey = key;
-//            Constants.placeOrderValue= newValue;
-//            getNewValue(position, Constants.placeOrderkey);
-//        }
+        View v = yourItemsLayout.findViewWithTag("view_"+position+"_"+key);
 
-    }
+        // This will first find the view based on the tag
+        // then get the text value which is set
+        // then convert it to int
+        quantityValue = Integer.parseInt(((CustomTextView) v.findViewWithTag("quantity_"+position+"_"+key)).getText().toString());
+        Log.d(Constants.LOG_TAG," Qunatity value "+ quantityValue);
+        obtainedAmount = Integer.parseInt(((CustomTextView) v.findViewWithTag("total_"+position+"_"+key)).getText().toString());
+        Log.d(Constants.LOG_TAG," Obtained Amount "+ obtainedAmount);
+        perPieceCost = obtainedAmount/quantityValue;
+        Log.d(Constants.LOG_TAG," Per Piece Cost "+ perPieceCost);
 
-    public void getNewValue(String key,String position){
+        if(quantityValue!=0) {
+            // when added then
+            totalQuantity = (quantityValue - 1);
+            Log.d(Constants.LOG_TAG, " Total Quantity " + totalQuantity);
+            totalAmount = (totalQuantity * perPieceCost);
+            Log.d(Constants.LOG_TAG, " Total Amount " + totalAmount);
 
-        Iterator it = Constants.order.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
+            newValue = String.valueOf(totalQuantity) + "_" + totalAmount;
+            Log.d(Constants.LOG_TAG, " NEW VALUE " + newValue);
 
-            if(pair.getKey().toString().equalsIgnoreCase(key)){
-
-                updateUI(position,pair.getValue().toString());
-            }
-            it.remove(); // avoids a ConcurrentModificationException
+            Constants.order.put(key, newValue);
+            updateUI(position, key, newValue);
         }
 
     }
 
-    public void updateUI(String position,String value){
+    public void updateUI(String position,String key,String value){
 
 
-        Log.d(Constants.LOG_TAG," Obtained position "+ position+" value "+value);
+        Log.d(Constants.LOG_TAG," Obtained position "+ position+" key "+key+" value "+value);
         String valueDetails[] = value.split("_");
 
         int pos = Integer.parseInt(position);
         Log.d(Constants.LOG_TAG," The position to be updated "+ position);
-        // because we are drawing a horizontal line also
-//        pos = pos+1;
 
-        View v = yourItemsLayout.findViewWithTag("view_"+position);
-        ((CustomTextView)v.findViewById(R.id.quantity_text_your_items)).setText(valueDetails[0]);
-        ((CustomTextView)v.findViewById(R.id.total_text_your_items)).setText(valueDetails[1]);
+        View v = yourItemsLayout.findViewWithTag("view_"+position+"_"+key);
+        ((CustomTextView)v.findViewWithTag("quantity_" + position + "_" + key)).setText(valueDetails[0]);
+        ((CustomTextView)v.findViewWithTag("total_" + position + "_" + key)).setText(valueDetails[1]);
 
     }
 
@@ -1196,16 +1248,17 @@ public class PlaceOrderFragment extends Fragment {
             String tagDetails[] = tag.split("_");
             String tagValue = tagDetails[0];
             String position = tagDetails[1];
-            Log.d(Constants.LOG_TAG," Tag Value "+ tagValue+" position"+position);
+            String key = tagDetails[2];
+            Log.d(Constants.LOG_TAG," Tag Value "+ tagValue+" position"+position+" key "+key);
 
             switch (tagValue){
 
-//                case "add": add(position);
-//                    break;
-//                case "subtract": subtract(position);
-//                    break;
-//                case "remove": remove(position);
-//                    break;
+                case "add": add(key,position);
+                    break;
+                case "subtract": subtract(key,position);
+                    break;
+                case "remove": remove(key,position);
+                    break;
 
             }
 

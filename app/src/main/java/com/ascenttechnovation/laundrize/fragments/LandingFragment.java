@@ -56,7 +56,7 @@ public class LandingFragment extends Fragment {
     public void getSlots(){
 
         String finalUrl = Constants.getslotsUrl+Constants.userId;
-        new FetchAllSlotsAsyncTask(new FetchAllSlotsAsyncTask.FetchAllSlotsCallback() {
+        new FetchAllSlotsAsyncTask(new FetchAllSlotsAsyncTask.FetchAllSlotsCallback(){
             @Override
             public void onStart(boolean status) {
 

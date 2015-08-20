@@ -9,29 +9,25 @@ import com.ascenttechnovation.laundrize.utils.Constants;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
  * Created by ADMIN on 08-07-2015.
  */
-public class SignInUserAsyncTask extends AsyncTask<String,Void,Boolean> {
+public class ConfirmVerificationFromSocialAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     Context context;
-    SignInUserCallback callback;
-    HttpEntity httpEntity;
-    String responseString;
-    public interface SignInUserCallback{
+    ConfirmVerificationFromSocialCallback callback;
+    public interface ConfirmVerificationFromSocialCallback{
 
         public void onStart(boolean status);
         public void onResult(boolean result);
     }
 
-    public SignInUserAsyncTask(Context context, SignInUserCallback callback) {
+    public ConfirmVerificationFromSocialAsyncTask(Context context, ConfirmVerificationFromSocialCallback callback) {
         this.context = context;
         this.callback = callback;
     }
@@ -45,39 +41,38 @@ public class SignInUserAsyncTask extends AsyncTask<String,Void,Boolean> {
     @Override
     protected Boolean doInBackground(String... url) {
 
-        Log.d(Constants.LOG_TAG,Constants.SignInUserAsyncTask);
-        Log.d(Constants.LOG_TAG," The url to be fetched "+ url[0]);
+        Log.d(Constants.LOG_TAG,Constants.ConfirmVerificationFromSocialAsyncTask);
+        Log.d(Constants.LOG_TAG," The url to be fetched "+url[0]);
+        try{
 
-        try {
             HttpPost httpPost = new HttpPost(url[0]);
             HttpClient httpClient = new DefaultHttpClient();
             HttpResponse httpResponse = httpClient.execute(httpPost);
 
             int statusCode = httpResponse.getStatusLine().getStatusCode();
             Log.d(Constants.LOG_TAG," status code "+statusCode);
-            if(statusCode == 200){
+            if (statusCode == 200){
 
-                httpEntity = httpResponse.getEntity();
-                responseString = EntityUtils.toString(httpEntity);
+                HttpEntity httpEntity = httpResponse.getEntity();
+                String response = EntityUtils.toString(httpEntity);
 
-                Log.d(Constants.LOG_TAG," JSON RESPONSE " + responseString);
-                JSONObject jsonObject = new JSONObject(responseString);
+                Log.d(Constants.LOG_TAG," JSON Response "+response);
+                JSONObject jsonObject = new JSONObject(response);
                 Constants.userId = jsonObject.getString("userid");
                 Constants.token = jsonObject.getString("token");
 
                 return true;
             }
             else{
+
                 return false;
             }
 
         }
-        catch (Exception e){
-
+        catch(Exception e){
             e.printStackTrace();
             return false;
         }
-
     }
 
     @Override

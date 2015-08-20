@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
@@ -124,7 +125,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
         registerNow = (CustomButton) findViewById(R.id.register_now_button_login_or_register_activity);
         mDemoSlider = (SliderLayout)findViewById(R.id.slider);
 
-//        google = (Button)findViewById(R.id.google);
+        google = (Button)findViewById(R.id.google);
         googleSignIn = (SignInButton) findViewById(R.id.google_button_login_or_register_activity);
         googleSignIn.setOnClickListener(listener);
 
@@ -144,27 +145,58 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
                                 public void onCompleted(GraphResponse response) {
 
                                     try {
-                                        String id = URLEncoder.encode(response.getJSONObject().getString("id"), "UTF-8");
-                                        String firstName = URLEncoder.encode(response.getJSONObject().getString("first_name"), "UTF-8");
-                                        String lastName = URLEncoder.encode(response.getJSONObject().getString("last_name"), "UTF-8");
-                                        String email = URLEncoder.encode(response.getJSONObject().getString("email"), "UTF-8");
+                                        final String id = URLEncoder.encode(response.getJSONObject().getString("id"), "UTF-8");
+                                        final String firstName = URLEncoder.encode(response.getJSONObject().getString("first_name"), "UTF-8");
+                                        final String lastName = URLEncoder.encode(response.getJSONObject().getString("last_name"), "UTF-8");
+                                        final String email = URLEncoder.encode(response.getJSONObject().getString("email"), "UTF-8");
 
-                                        Log.d(Constants.LOG_TAG," Valued of already Registered "+isAlreadyRegistered(id,"FB"));
 
-                                        if(isAlreadyRegistered(id,"FB")){
+                                        String finalUrl = Constants.checkUserExistsUrl+googleId+"&type="+"GP";
+                                        new CheckIfUserExistsAsyncTask(getApplicationContext(),new CheckIfUserExistsAsyncTask.CheckIfUserExistsCallback() {
+                                            @Override
+                                            public void onStart() {
 
-                                            Intent i = new Intent(LogInOrRegisterActivity.this,LandingActivity.class);
-                                            startActivity(i);
-                                        }else{
-                                            Intent i = new Intent(LogInOrRegisterActivity.this, MobileVerificationActivity.class);
-                                            i.putExtra("from", "facebook");
-                                            i.putExtra("id", id);
-                                            i.putExtra("firstName", firstName);
-                                            i.putExtra("lastName", lastName);
-                                            i.putExtra("email", email);
-                                            startActivity(i);
 
-                                        }
+                                            }
+                                            @Override
+                                            public void onResult(boolean result) {
+
+                                                res = result;
+                                                Log.d(Constants.LOG_TAG," Received result from background");
+
+                                                if(result){
+
+
+                                                    SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+                                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                                    editor.putString("loginRoute","facebook");
+                                                    editor.putString("profileId",id);
+                                                    editor.putString("userId",Constants.userId);
+                                                    editor.putString("token",Constants.token);
+                                                    editor.putString("mobileNumber","NA");
+                                                    editor.putString("password","NA");
+                                                    editor.commit();
+
+
+                                                    Intent i = new Intent(LogInOrRegisterActivity.this,LandingActivity.class);
+                                                    startActivity(i);
+                                                }
+                                                else{
+
+                                                    Intent i = new Intent(LogInOrRegisterActivity.this, MobileVerificationActivity.class);
+                                                    i.putExtra("from", "facebook");
+                                                    i.putExtra("profileId", id);
+                                                    i.putExtra("firstName", firstName);
+                                                    i.putExtra("lastName", lastName);
+                                                    i.putExtra("email", email);
+                                                    i.putExtra("mobileNumber","NA");
+                                                    i.putExtra("password","NA");
+                                                    startActivity(i);
+
+                                                }
+                                            }
+                                        }).execute(finalUrl);
+
 
                                     }
                                     catch(Exception e){
@@ -226,7 +258,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
         signInNow.setOnClickListener(listener);
         registerNow.setOnClickListener(listener);
         fb.setOnClickListener(listener);
-//        google.setOnClickListener(listener);
+        google.setOnClickListener(listener);
     }
 
     public void signInNow(){
@@ -241,27 +273,6 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
 
     }
 
-    public boolean isAlreadyRegistered(String id,String type){
-
-
-        String finalUrl = Constants.checkUserExistsUrl+id+"&type="+type;
-        new CheckIfUserExistsAsyncTask(getApplicationContext(),new CheckIfUserExistsAsyncTask.CheckIfUserExistsCallback() {
-            @Override
-            public void onStart() {
-
-
-            }
-            @Override
-            public void onResult(boolean result) {
-
-                res = result;
-
-            }
-        }).execute(finalUrl);
-
-        return res;
-
-    }
 
     @Override
     public void onBackPressed() {
@@ -386,22 +397,51 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
         if (isSignedIn)
         {
 
-            if(isAlreadyRegistered(googleId,"GP")){
+            String finalUrl = Constants.checkUserExistsUrl+googleId+"&type="+"GP";
+            new CheckIfUserExistsAsyncTask(getApplicationContext(),new CheckIfUserExistsAsyncTask.CheckIfUserExistsCallback() {
+                @Override
+                public void onStart() {
 
-                Intent i = new Intent(LogInOrRegisterActivity.this,LandingActivity.class);
-                startActivity(i);
-            }
-            else{
 
-                Intent i = new Intent(LogInOrRegisterActivity.this, MobileVerificationActivity.class);
-                i.putExtra("from","google");
-                i.putExtra("id", googleId);
-                i.putExtra("firstName", googlefname);
-                i.putExtra("lastName", googlelname);
-                i.putExtra("email", googleemail);
-                startActivity(i);
+                }
+                @Override
+                public void onResult(boolean result) {
 
-            }
+                    res = result;
+                    Log.d(Constants.LOG_TAG," Received result from background");
+
+                    if(result){
+
+
+                        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("loginRoute","google");
+                        editor.putString("profileId",googleId);
+                        editor.putString("userId",Constants.userId);
+                        editor.putString("token",Constants.token);
+                        editor.putString("mobileNumber","NA");
+                        editor.putString("password","NA");
+                        editor.commit();
+
+
+                        Intent i = new Intent(LogInOrRegisterActivity.this,LandingActivity.class);
+                        startActivity(i);
+                    }
+                    else{
+
+                        Intent i = new Intent(LogInOrRegisterActivity.this, MobileVerificationActivity.class);
+                        i.putExtra("from","google");
+                        i.putExtra("profileId", googleId);
+                        i.putExtra("firstName", googlefname);
+                        i.putExtra("lastName", googlelname);
+                        i.putExtra("email", googleemail);
+                        i.putExtra("mobileNumber", "NA");
+                        i.putExtra("password", "NA");
+                        startActivity(i);
+
+                    }
+                }
+            }).execute(finalUrl);
 
 
         }
@@ -464,11 +504,9 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
                     break;
                 case R.id.fb : facebookLoginButton.performClick();
                     break;
-                case R.id.google_button_login_or_register_activity: signInWithGplus();
+                case R.id.google : googleSignIn.performClick();
+                    signInWithGplus();
                     break;
-//                case R.id.google : googleSignIn.performClick();
-//                    signInWithGplus();
-//                    break;
 
             }
 

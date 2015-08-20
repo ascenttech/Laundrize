@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.ascenttechnovation.laundrize.data.IroningOrderData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import org.apache.http.HttpEntity;
@@ -15,7 +16,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by ADMIN on 23-07-2015.
@@ -77,15 +81,6 @@ public class PlaceOrderAsyncTask extends AsyncTask<JSONObject,Void,Boolean> {
 
             Log.d(Constants.LOG_TAG,"Response of our updated data " + se);
             JSONObject object = new JSONObject(se);
-//            int statusCode = object.getInt("status");
-//
-//            Log.d(Constants.LOG_TAG,"Obtained status code "+ statusCode);
-//
-//            if(statusCode == 200){
-//
-//                return true;
-//
-//            }
 
             return true;
 
@@ -104,6 +99,18 @@ public class PlaceOrderAsyncTask extends AsyncTask<JSONObject,Void,Boolean> {
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
         Log.d(Constants.LOG_TAG," Value Returned "+result);
+        if(result){
+
+            Constants.ironingOrderData.clear();
+            Constants.washingOrderData.clear();
+            Constants.bagOrderData.clear();
+
+            // needs to be reset both of them
+            Constants.totalAmountToBeCollected = 0;
+            Constants.totalQuantityToBeCollected = 0;
+
+
+        }
         callback.onResult(result);
     }
 }

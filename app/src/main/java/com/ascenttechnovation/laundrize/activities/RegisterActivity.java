@@ -94,8 +94,10 @@ public class RegisterActivity extends Activity {
 
                         Intent i = new Intent(RegisterActivity.this,MobileVerificationActivity.class);
                         i.putExtra("from","register");
-                        i.putExtra("name",name.getText().toString());
-                        i.putExtra("emailId",email.getText().toString());
+                        i.putExtra("profileId", "NA");
+                        i.putExtra("firstName", name.getText().toString());
+                        i.putExtra("lastName", "NA");
+                        i.putExtra("email", email.getText().toString());
                         i.putExtra("mobileNumber",mobileNumber.getText().toString());
                         i.putExtra("password",password.getText().toString());
                         startActivity(i);

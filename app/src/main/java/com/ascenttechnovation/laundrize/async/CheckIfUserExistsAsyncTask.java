@@ -59,9 +59,8 @@ public class CheckIfUserExistsAsyncTask extends AsyncTask<String,Void,Boolean> {
 
                 Log.d(Constants.LOG_TAG," JSON Response "+response);
                 JSONObject jsonObject = new JSONObject(response);
-                JSONObject nestedJsonObject = jsonObject.getJSONObject("user_details");
-                Constants.userId = nestedJsonObject.getString("id");
-                Constants.token = nestedJsonObject.getString("remember_token");
+                Constants.userId = jsonObject.getString("userid");
+                Constants.token = jsonObject.getString("token");
 
                 return true;
             }

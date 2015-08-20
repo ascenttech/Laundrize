@@ -5,17 +5,15 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.async.ConfirmVerificationAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchVerificationCodeAsyncTask;
-import com.ascenttechnovation.laundrize.async.RegisterUserViaSocialAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomEditText;
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -29,7 +27,7 @@ public class MobileVerificationActivity extends Activity {
     private String mobileNumber,name,emailId,password;
     private CustomEditText mobileNumberEdit,verificationCode;
     private ProgressDialog progressDialog;
-    private String from,id,firstName,lastName,url;
+    private String from, profileId,firstName,lastName,url;
     private String finalUrl,finalVerificationUrl;
 
     @Override
@@ -41,33 +39,12 @@ public class MobileVerificationActivity extends Activity {
 
         Intent i = getIntent();
         from = i.getStringExtra("from");
-        if(from.equalsIgnoreCase("register")){
-
-            mobileNumber = i.getStringExtra("mobileNumber");
-            name = i.getStringExtra("name");
-            emailId = i.getStringExtra("emailId");
-            password = i.getStringExtra("password");
-        }
-        else if(from.equalsIgnoreCase("facebook")){
-
-            mobileNumber = "";
-            id = i.getStringExtra("id");
-            firstName = i.getStringExtra("firstName");
-            lastName = i.getStringExtra("lastName");
-            emailId = i.getStringExtra("email");
-
-        }
-        else if(from.equalsIgnoreCase("google")){
-
-            Log.d(Constants.LOG_TAG,"INside Gooogle ");
-
-            mobileNumber = "";
-            id = i.getStringExtra("id");
-            firstName = i.getStringExtra("firstName");
-            lastName = i.getStringExtra("lastName");
-            emailId = i.getStringExtra("email");
-
-        }
+        profileId = i.getStringExtra("id");
+        firstName = i.getStringExtra("firstName");
+        lastName = i.getStringExtra("lastName");
+        emailId = i.getStringExtra("email");
+        mobileNumber = i.getStringExtra("mobileNumber");
+        password = i.getStringExtra("password");
 
 
     }
@@ -159,17 +136,17 @@ public class MobileVerificationActivity extends Activity {
 
         if(from.equalsIgnoreCase("register")){
 
-            finalVerificationUrl = Constants.confirmVerificationUrl+mobileNumber+"&verification_code="+verificationCodeValue+"&password="+password+"&first_name="+name+"&email="+emailId;
+            finalVerificationUrl = Constants.confirmVerificationUrl+mobileNumber+"&verification_code="+verificationCodeValue+"&password="+password+"&first_name="+firstName+"&email="+emailId;
 
         }
         else if(from.equalsIgnoreCase("facebook")){
 
-            finalVerificationUrl = Constants.registerViaFBUrl+id+"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId;
+            finalVerificationUrl = Constants.registerViaFBUrl+ profileId +"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId;
 
         }
         else if(from.equalsIgnoreCase("google")){
 
-            finalVerificationUrl = Constants.registerViaGoogleUrl+id+"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId;
+            finalVerificationUrl = Constants.registerViaGoogleUrl+ profileId +"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId;
 
         }
 
@@ -188,6 +165,16 @@ public class MobileVerificationActivity extends Activity {
 
                 progressDialog.dismiss();
                 if(result){
+
+                    SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("loginRoute",from);
+                    editor.putString("profileId", profileId);
+                    editor.putString("userId",Constants.userId);
+                    editor.putString("token",Constants.token);
+                    editor.putString("mobileNumber",mobileNumber);
+                    editor.putString("password",password);
+                    editor.commit();
 
                     Intent i = new Intent(MobileVerificationActivity.this,LandingActivity.class);
                     startActivity(i);
