@@ -296,6 +296,7 @@ public class PlaceOrderFragment extends Fragment {
         v.setTag("view_"+position+"_"+key);
 
         cloth = (CustomTextView) v.findViewById(R.id.cloth_text_your_items);
+        cloth.setText(Constants.servicesName.get(key));
 
         service = (CustomTextView) v.findViewById(R.id.service_text_your_items);
         String keyValue = key.substring(0,3);
@@ -980,73 +981,6 @@ public class PlaceOrderFragment extends Fragment {
     }
 
 
-
-    // We are first putting the data in the respective data holders Constants.ironingdata for eg
-    // and create a hashmap when creating the your items layout
-    // then we are manipulating the values in the hashmap
-    // but are json is created on the basis of the data holders so we are re creating the data holders
-//    public void getTheValues(){
-//
-//        Log.d(Constants.LOG_TAG," Entered Get Values ");
-//        Constants.ironingOrderData.clear();
-//        Constants.washingOrderData.clear();
-//        Constants.bagOrderData.clear();
-//        Constants.totalAmountToBeCollected = 0;
-//        Constants.totalQuantityToBeCollected = 0;
-//
-//
-//        Iterator it = Constants.order.entrySet().iterator();
-//        while (it.hasNext()) {
-//
-//            Map.Entry pair = (Map.Entry)it.next();
-//            Log.d(Constants.LOG_TAG," Map key "+pair.getKey()+" Value "+pair.getValue());
-//            String key = pair.getKey().toString();
-//            String orderDetails[] = Constants.order.get(key).toString().split("_");
-//            String keyValue = key.substring(0,3);
-//            Log.d(Constants.LOG_TAG," After Key is "+ keyValue);
-//            switch(keyValue){
-//
-//                case "001": Constants.ironingOrderData.add(new IroningOrderData(key,orderDetails[1],orderDetails[0]));
-//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
-//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
-//                    break;
-//                case "002": Constants.ironingOrderData.add(new IroningOrderData(key,orderDetails[1],orderDetails[0]));
-//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
-//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
-//                    break;
-//                case "003": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
-//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
-//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
-//                    break;
-//                case "004": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
-//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
-//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
-//                    break;
-//                case "005": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
-//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
-//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
-//                    break;
-//                case "006": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
-//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
-//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
-//                    break;
-//                case "007": Constants.bagOrderData.add(new BagOrderData(key,orderDetails[1],orderDetails[0]));
-//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
-//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
-//                    break;
-//                case "008": Constants.bagOrderData.add(new BagOrderData(key,orderDetails[1],orderDetails[0]));
-//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
-//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
-//                    break;
-//
-//            }
-//
-//            it.remove(); // avoids a ConcurrentModificationException
-//        }
-//
-//    }
-
-
     // This function would be used to create JSON which contains the
     // users orders to be placed
     public void createJson(){
@@ -1069,11 +1003,13 @@ public class PlaceOrderFragment extends Fragment {
                     String quantity = Constants.ironingOrderData.get(i).getQuantity();
                     String amount = Constants.ironingOrderData.get(i).getAmount();
 
-                    // just sending the price of a single piece
-                    quantity = String.valueOf(Integer.parseInt(amount)/Integer.parseInt(quantity));
+
                     ironingNestedJsonObject.put("order_id",orderId);
                     ironingNestedJsonObject.put("amount",amount);
-                    ironingNestedJsonObject.put("quantity",quantity);
+                    // just sending the price of a single piece
+                    String temp = String.valueOf((Integer.parseInt(amount)/Integer.parseInt(quantity)));
+                    Log.d(Constants.LOG_TAG,"Value for quantity"+temp);
+                    ironingNestedJsonObject.put("quantity",temp);
 
                     ironingNestedJsonArray.put(ironingNestedJsonObject);
 
@@ -1093,10 +1029,12 @@ public class PlaceOrderFragment extends Fragment {
                     String quantity = Constants.washingOrderData.get(i).getQuantity();
                     String amount = Constants.washingOrderData.get(i).getAmount();
 
-                    quantity = String.valueOf(Integer.parseInt(amount)/Integer.parseInt(quantity));
+
                     washingNestedJsonObject.put("order_id",orderId);
                     washingNestedJsonObject.put("amount",amount);
-                    washingNestedJsonObject.put("quantity",quantity);
+                    String temp = String.valueOf((Integer.parseInt(amount)/Integer.parseInt(quantity)));
+                    Log.d(Constants.LOG_TAG,"Value for quantity"+temp);
+                    washingNestedJsonObject.put("quantity",temp);
 
                     washingNestedJsonArray.put(washingNestedJsonObject);
                 }
@@ -1117,10 +1055,13 @@ public class PlaceOrderFragment extends Fragment {
                     String quantity = Constants.bagOrderData.get(i).getQuantity();
                     String amount = Constants.bagOrderData.get(i).getAmount();
 
-                    quantity = String.valueOf(Integer.parseInt(amount)/Integer.parseInt(quantity));
                     bagsNestedJsonObject.put("order_id",orderId);
                     bagsNestedJsonObject.put("amount",amount);
-                    bagsNestedJsonObject.put("quantity",quantity);
+
+                    String temp = String.valueOf((Integer.parseInt(amount)/Integer.parseInt(quantity)));
+                    Log.d(Constants.LOG_TAG,"Value for quantity"+temp);
+                    bagsNestedJsonObject.put("quantity",temp);
+
 
                     bagsNestedJsonArray.put(bagsNestedJsonObject);
 

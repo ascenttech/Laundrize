@@ -530,8 +530,8 @@ public class AddressFragment extends Fragment {
 
     public void getSlots(){
 
-//        String finalUrl = Constants.getslotsUrl+Constants.userId+"&address_id"+Constants.addressId;
-        String finalUrl = Constants.getslotsUrl+Constants.userId;
+        String finalUrl = Constants.getslotsUrl+Constants.userId+"&address_id"+Constants.addressId;
+//        String finalUrl = Constants.getslotsUrl+Constants.userId;
         new FetchAllSlotsAsyncTask(new FetchAllSlotsAsyncTask.FetchAllSlotsCallback(){
             @Override
             public void onStart(boolean status) {
