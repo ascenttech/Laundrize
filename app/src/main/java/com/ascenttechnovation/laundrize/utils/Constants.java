@@ -37,7 +37,7 @@ public class Constants {
     public static boolean slotDifferenceFetched;
     public static boolean slotsFetched;
 
-    public static String userId,token,password,phoneNumber,weeklyOrderDay;
+    public static String userId,token,password,phoneNumber,weeklyOrderDay,todaysDay;
     public static String addressId,address;
     public static String minIroningDate,minIroningSlotId;
     public static String minWashingDate,minWashingSlotId;
@@ -106,6 +106,7 @@ public class Constants {
     public static ArrayList<String> areas;
     public static ArrayList<String> cities;
     public static ArrayList<String> zipcodes;
+    public static ArrayList<String> weekdays;
 
 
 

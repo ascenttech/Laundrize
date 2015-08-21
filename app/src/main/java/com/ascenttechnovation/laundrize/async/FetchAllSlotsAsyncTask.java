@@ -73,6 +73,7 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
 //                    String allSlots = slot1+"_"+slot2+"_"+slot3+"_"+slot4+"_"+slot5+"_"+slot6+"_"+slot7
                     String allSlots = slot2+"_"+slot3+"_"+slot4+"_"+slot5+"_"+slot6+"_"+slot7;
                     Constants.slots.put(day,allSlots);
+                    Constants.weekdays.add(day);
 
                 }
                 return true;
@@ -93,9 +94,6 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
     protected void onPostExecute(Boolean result) {
         super.onPostExecute(result);
         Log.d(Constants.LOG_TAG," Value returned "+result);
-        if(result){
-//            Constants. = true;
-        }
         callback.onResult(result);
     }
 }

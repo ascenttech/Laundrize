@@ -177,42 +177,6 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
         return v;
     }
 
-    public void getOrder(){
-
-        Iterator iterator = Constants.order.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry mapEntry = (Map.Entry) iterator.next();
-            Log.d(Constants.LOG_TAG, " key " + mapEntry.getKey() + " value " + mapEntry.getValue());
-
-            String orderId = mapEntry.getKey().toString();
-            String serviceType = String.valueOf(orderId.charAt(2));
-            String orderDetails[] = mapEntry.getValue().toString().split("_");
-            if(serviceType.equalsIgnoreCase("1") || serviceType.equalsIgnoreCase("2")){
-
-                Constants.ironingOrderData.add(new IroningOrderData(orderId,orderDetails[1],orderDetails[0]));
-                Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
-                Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
-            }
-            else if(serviceType.equalsIgnoreCase("3")||serviceType.equalsIgnoreCase("4")||serviceType.equalsIgnoreCase("5")||serviceType.equalsIgnoreCase("6")){
-
-                Constants.washingOrderData.add(new WashingOrderData(orderId,orderDetails[1],orderDetails[0]));
-                Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
-                Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
-            }
-            else if(serviceType.equalsIgnoreCase("7") || serviceType.equalsIgnoreCase("8")){
-
-                Constants.bagOrderData.add(new BagOrderData(orderId,orderDetails[1],orderDetails[0]));
-                Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
-                Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
-            }
-
-        }
-
-        Log.d(Constants.LOG_TAG,"Total Quantity "+Constants.totalQuantityToBeCollected);
-        Log.d(Constants.LOG_TAG,"Total Amount "+Constants.totalAmountToBeCollected);
-
-    }
-
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
 
@@ -265,7 +229,7 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
                 case R.id.left_button_included: replaceFragment(new LandingFragment());
                     break;
 
-                case R.id.right_button_included: getOrder();
+                case R.id.right_button_included:
                     if(Constants.order.size()>0){
 
                         replaceFragment(new PlaceOrderFragment());

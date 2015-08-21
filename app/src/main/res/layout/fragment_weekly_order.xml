@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/collection_layout_quick_fragment"
-        layout="@layout/row_fragment_checkout"
+        layout="@layout/row_fragment_checkout_for_weekly"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"

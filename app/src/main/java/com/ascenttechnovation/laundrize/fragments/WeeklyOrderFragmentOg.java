@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,14 +35,14 @@ import java.util.Date;
 /**
  * Created by ADMIN on 31-07-2015.
  */
-public class WeeklyOrderFragment extends Fragment {
+public class WeeklyOrderFragmentOg extends Fragment {
 
     View v;
     private CardView collectionLayout;
     private CustomButton newOrder,placeOrder;
     private ActionBar actionBar;
-    private CustomTextView collectionTitleText,collectionDateText, collectionTimeText;
-    private Spinner collectionDateSlot,collectionTimeSlot;
+    private CustomTextView collectionTitleText,collectionDateText;
+    private Spinner collectionTimeSlot;
     private DatePickerDialog collectionDatePicker;
     private int date,month,year;
     private ArrayAdapter<String> collectionAdapter;
@@ -78,21 +79,16 @@ public class WeeklyOrderFragment extends Fragment {
             @Override
             public void onStart(boolean status) {
 
-                progressDialog = new ProgressDialog(getActivity());
-                progressDialog.setTitle(Constants.APP_NAME);
-                progressDialog.setMessage("Please Wait...");
-                progressDialog.setCancelable(false);
-                progressDialog.show();
             }
+
             @Override
             public void onResult(boolean result) {
-                progressDialog.dismiss();
                 if(result){
 
                     Constants.currentServerTimeFetched = true;
                     findViews(v);
                     setViews();
-                    setAdapters();
+
                 }
                 else{
                     Constants.currentServerTimeFetched = false;
@@ -110,13 +106,8 @@ public class WeeklyOrderFragment extends Fragment {
 
         collectionLayout = (CardView) v.findViewById(R.id.collection_layout_quick_fragment);
         collectionTitleText = (CustomTextView) collectionLayout.findViewById(R.id.service_included);
-
-        collectionDateText = (CustomTextView) collectionLayout.findViewById(R.id.select_date_slot_text);
-        collectionDateSlot = (Spinner) collectionLayout.findViewById(R.id.select_date_slot_included);
-
-        collectionTimeText = (CustomTextView) collectionLayout.findViewById(R.id.select_time_slot_text);
+        collectionDateText = (CustomTextView) collectionLayout.findViewById(R.id.select_date_slot_included);
         collectionTimeSlot = (Spinner) collectionLayout.findViewById(R.id.select_time_slot_included);
-
         newOrder = (CustomButton) v.findViewById(R.id.left_button_included);
         placeOrder = (CustomButton) v.findViewById(R.id.right_button_included);
 
@@ -124,12 +115,9 @@ public class WeeklyOrderFragment extends Fragment {
 
     private void setViews(){
 
-        collectionDateText.setVisibility(View.GONE);
-        collectionDateSlot.setVisibility(View.VISIBLE);
 
-        collectionTimeText.setVisibility(View.GONE);
-        collectionTimeSlot.setVisibility(View.VISIBLE);
-
+        collectionDateText.setTag("date_1");
+        collectionDateText.setOnClickListener(datelistener);
         collectionTitleText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_collection,0,0,0);
         collectionTitleText.setText("Collection");
 
@@ -139,95 +127,139 @@ public class WeeklyOrderFragment extends Fragment {
         placeOrder.setText("PLACE ORDER");
         placeOrder.setOnClickListener(listener);
 
+
     }
 
-    public void setAdapters(){
+    private void collectionDatePicker() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        collectionDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
-        Constants.todaysDay = getTodaysDay();
-        ArrayAdapter<String> collectionAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout,Constants.weekdays);
-        collectionAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
-        collectionDateSlot.setAdapter(collectionAdapter);
-        collectionDateSlot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
-                Constants.weeklyOrderDay = adapterView.getSelectedItem().toString();
-                if (Constants.weeklyOrderDay.equalsIgnoreCase(Constants.todaysDay))
-                {
-                    setTimeSlots(Constants.weeklyOrderDay, "today");
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth){
+                    collectionDateText.setText("Today");
+                    monthOfYear = month+1;
+                    Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    setCollectionsAdapter(Constants.collectionDate,"today");
+
                 }
                 else{
-                    setTimeSlots(Constants.weeklyOrderDay, "later");
+                    monthOfYear = month+1;
+                    collectionDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
+                    Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    setCollectionsAdapter(Constants.collectionDate, "later");
                 }
             }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
-
-
-    }
-
-    public void setTimeSlots(String day,String when){
-
-
-        ArrayList<String> availableSlots = getSlots(day,when);
-        ArrayAdapter<String> timeAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout,availableSlots);
-        timeAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
-        collectionTimeSlot.setAdapter(timeAdapter);
-        collectionTimeSlot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-
-                Constants.collectionSlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        },year, month, date);
+        collectionDatePicker.getDatePicker().setMinDate(System.currentTimeMillis()-1);
+        collectionDatePicker.show();
     }
 
 
+    public void setCollectionsAdapter(final String date,final String when){
 
-    public ArrayList<String> getSlots(String day, String when){
+        Log.d(Constants.LOG_TAG," Received date "+ date);
 
+        final ArrayList<String> collectionSlots = getSlots(date,when);
+        if(collectionSlots != null) {
+
+            collectionDateText.setText(Constants.collectionDate);
+            collectionAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, collectionSlots);
+            collectionAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
+            collectionTimeSlot.setAdapter(collectionAdapter);
+            collectionAdapter.notifyDataSetChanged();
+
+            collectionTimeSlot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    Constants.collectionSlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
+
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+        }
+        else{
+
+            String completedDate[] = date.split("/");
+            int newDate = Integer.parseInt(completedDate[0]);
+            newDate++;
+            Constants.collectionDate = String.valueOf(newDate)+"/"+completedDate[1]+"/"+completedDate[2];
+            setCollectionsAdapter(Constants.collectionDate, "later");
+        }
+    }
+
+    // setting the available slots  for collection
+    // date : the selected date
+    // when : today or later
+    public ArrayList<String> getSlots(String date, String when){
+
+        Constants.collectionDate = date;
         ArrayList<String> options = new ArrayList<String>();
         try {
 
-            String availableSlots = Constants.slots.get(day);
+            String availableSlots = getAvailableSlots(date);
 
-            String getSlots[] = availableSlots.split("_");
-            if(when.equalsIgnoreCase("today")){
+            if(availableSlots != null){
+                String getSlots[] = availableSlots.split("_");
+                if(when.equalsIgnoreCase("today")){
 
-                String presentTime = Constants.currentTime;
+                    String presentTime = Constants.currentTime;
 
-                for(int i=0 ;i<getSlots.length;i++){
+                    for(int i=0 ;i<getSlots.length;i++){
 
-                    int validSlot = Integer.parseInt(getSlots[i].substring(0, 2));
-                    int now = Integer.parseInt(presentTime.substring(0,2));
+                        int validSlot = Integer.parseInt(getSlots[i].substring(0, 2));
+                        int now = Integer.parseInt(presentTime.substring(0,2));
 
-                    if(validSlot>now){
+                        if(validSlot>now){
 
-                        options.add(getSlots[i]);
+                            options.add(getSlots[i]);
+
+                        }
+
+                    }
+                    if(options.size() == 0){
+
+                        String dateDetails[] = date.split("/");
+                        int dateForChange = Integer.parseInt(dateDetails[0]);
+                        dateForChange++;
+                        String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                        ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                        return options1;
 
                     }
 
-                }
 
-            } // if the date is set for today
+                } // if the date is set for today
+                else{
+
+                    Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
+                    String availableOptions[] = availableSlots.split("_");
+                    for(int i=0;i<availableOptions.length;i++){
+
+                        options.add(availableOptions[i]);
+                    }
+
+                }
+            }
             else{
-
-                Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
-                String availableOptions[] = availableSlots.split("_");
-                for(int i=0;i<availableOptions.length;i++){
-
-                    options.add(availableOptions[i]);
-                }
+                    String dateDetails[] = date.split("/");
+                    int dateForChange = Integer.parseInt(dateDetails[0]);
+                    dateForChange++;
+                    String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                    ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                    return options1;
 
             }
+
 
         }
 
@@ -239,17 +271,26 @@ public class WeeklyOrderFragment extends Fragment {
         return options;
     }
 
+    public String getAvailableSlots(String date){
 
-    public String getTodaysDay(){
+        try {
+            SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date MyDate = newDateFormat.parse(date);
+            newDateFormat.applyPattern("EEEE");
+            String day = newDateFormat.format(MyDate);
+            day = day.toLowerCase();
+            Constants.weeklyOrderDay = day;
+            String availableSlots = (String) Constants.slots.get(day);
 
+            return availableSlots;
+        }
+        catch (Exception e){
 
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE");
-        return simpleDateFormat.format(c.getTime());
+            return null;
+        }
+
 
     }
-
-
 
     public void newOrder(){
 
@@ -296,7 +337,7 @@ public class WeeklyOrderFragment extends Fragment {
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                replaceFragment(new LandingFragment());
+                replaceFragment(new TrackOrdersFragment());
             }
         });
         alert.setCancelable(false);
@@ -338,7 +379,19 @@ public class WeeklyOrderFragment extends Fragment {
 
     }
 
+    View.OnClickListener datelistener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
+
+            switch (v.getTag().toString()) {
+
+                case "date_1":
+                    collectionDatePicker();
+                    break;
+            }
+        }
+    };
 
     View.OnClickListener listener = new View.OnClickListener() {
         @Override

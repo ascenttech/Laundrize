@@ -196,9 +196,11 @@ public class ProfileFragment extends Fragment {
                 rowView.setLayoutParams(params);
 
                 address = (CustomTextView) rowView.findViewById(R.id.address_text_included);
+                address.setVisibility(View.VISIBLE);
                 address.setText(Constants.addressData.get(i).getFullAddress());
 
                 mobileNumber = (CustomTextView) rowView.findViewById(R.id.mobile_number_text_included);
+                mobileNumber.setVisibility(View.VISIBLE);
                 mobileNumber.setText(Constants.addressData.get(i).getMobileNumber());
 
                 availableAddresses.addView(rowView);

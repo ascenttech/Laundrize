@@ -19,9 +19,11 @@
 
     <style name="MyActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background" >@drawable/ab_solid_laundrize</item>
+        <item name="android:backgroundStacked" >#05577f</item>
 
         <!-- Support library compatibility -->
         <item name="background" >@drawable/ab_solid_laundrize</item>
+        <item name="backgroundStacked" >#05577f</item>
     </style>
 
     <!--ActionBar tabs styles -->

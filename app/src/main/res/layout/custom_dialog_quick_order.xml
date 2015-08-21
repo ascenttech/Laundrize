@@ -16,12 +16,12 @@
         android:layout_height="wrap_content"
         android:text="@string/text_wash"
         android:textSize="@dimen/text_size_extra_large"/>
-    <CheckBox
-        android:id="@+id/quick_service_bags"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/text_laundry"
-        android:textSize="@dimen/text_size_extra_large"/>
+    <!--<CheckBox-->
+        <!--android:id="@+id/quick_service_bags"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/text_laundry"-->
+        <!--android:textSize="@dimen/text_size_extra_large"/>-->
 
     <com.ascenttechnovation.laundrize.custom.CustomButton
         android:id="@+id/quick_service_done"

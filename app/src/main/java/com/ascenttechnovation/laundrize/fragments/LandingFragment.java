@@ -39,7 +39,7 @@ public class LandingFragment extends Fragment {
         customActionBar();
         findViews(v);
         setViews();
-        getSlots();
+        setClickListeners();
 
         return v;
     }
@@ -53,33 +53,6 @@ public class LandingFragment extends Fragment {
     }
 
 
-    public void getSlots(){
-
-        String finalUrl = Constants.getslotsUrl+Constants.userId;
-        new FetchAllSlotsAsyncTask(new FetchAllSlotsAsyncTask.FetchAllSlotsCallback(){
-            @Override
-            public void onStart(boolean status) {
-
-
-            }
-            @Override
-            public void onResult(boolean result) {
-
-                if(result){
-
-                    Constants.slotsFetched = true;
-                    setClickListeners();
-
-                }
-                else{
-
-                    Toast.makeText(getActivity().getApplicationContext(), "Unable to connect to the internet.\nTry again Later", 5000).show();
-                }
-
-            }
-        }).execute(finalUrl);
-
-    }
 
 
     private void findViews(View v){

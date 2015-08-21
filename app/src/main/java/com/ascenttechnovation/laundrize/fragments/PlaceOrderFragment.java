@@ -52,7 +52,7 @@ public class PlaceOrderFragment extends Fragment {
     View v;
     private CardView ironingLayout,washingLayout,bagsLayout,collectionLayout;
     private ActionBar actionBar;
-    private CustomTextView ironingTitleText,ironingDateText,washingTitleText,washingDateText,bagsTitleText,bagsDateText,collectionTitleText,collectionDateText;
+    private CustomTextView ironingTitleText,ironingDateText,washingTitleText,washingDateText,bagsTitleText,bagsDateText,collectionTitleText,collectionDateText,collectionStaticText,ironingStaticText,washingStaticText,bagsStaticText;
     private Spinner collectionTimeSlot, ironingTimeSlot, washingTimeSlot, bagsTimeSlot;
     private CustomButton placeOrder,newOrder;
     private JSONObject ironingNestedJsonObject,washingNestedJsonObject,bagsNestedJsonObject,ironingJsonObject,washingJsonObject,bagsJsonObject,postOrderJsonObject;
@@ -93,6 +93,7 @@ public class PlaceOrderFragment extends Fragment {
 
         customActionBar();
         getServerTime();
+        getTheValues();
 
 
         return v;
@@ -126,18 +127,23 @@ public class PlaceOrderFragment extends Fragment {
                         @Override
                         public void onStart(boolean status) {
 
+                            progressDialog = new ProgressDialog(getActivity());
+                            progressDialog.setTitle(Constants.APP_NAME);
+                            progressDialog.setMessage("Please Wait...");
+                            progressDialog.setCancelable(false);
+                            progressDialog.show();
 
                         }
                         @Override
                         public void onResult(boolean result) {
 
+                            progressDialog.dismiss();
                             if(result){
 
                                 Constants.slotDifferenceFetched = true;
                                 findViews(v);
                                 setViews();
                                 inflateViews();
-
 
                             }
                             else{
@@ -167,22 +173,26 @@ public class PlaceOrderFragment extends Fragment {
         collectionLayout = (CardView) v.findViewById(R.id.collection_layout_place_order_fragment);
         collectionTitleText = (CustomTextView) collectionLayout.findViewById(R.id.service_included);
         collectionDateText = (CustomTextView) collectionLayout.findViewById(R.id.select_date_slot_included);
+        collectionStaticText = (CustomTextView) collectionLayout.findViewById(R.id.select_time_slot_text);
         collectionTimeSlot = (Spinner) collectionLayout.findViewById(R.id.select_time_slot_included);
 
         ironingLayout = (CardView) v.findViewById(R.id.ironing_layout_place_order_fragment);
         ironingTitleText = (CustomTextView) ironingLayout.findViewById(R.id.service_included);
         ironingDateText = (CustomTextView) ironingLayout.findViewById(R.id.select_date_slot_included);
+        ironingStaticText = (CustomTextView) ironingLayout.findViewById(R.id.select_time_slot_text);
         ironingTimeSlot = (Spinner) ironingLayout.findViewById(R.id.select_time_slot_included);
 
 
         washingLayout = (CardView) v.findViewById(R.id.washing_layout_place_order_fragment);
         washingTitleText = (CustomTextView) washingLayout.findViewById(R.id.service_included);
         washingDateText = (CustomTextView) washingLayout.findViewById(R.id.select_date_slot_included);
+        washingStaticText = (CustomTextView) washingLayout.findViewById(R.id.select_time_slot_text);
         washingTimeSlot = (Spinner) washingLayout.findViewById(R.id.select_time_slot_included);
 
         bagsLayout = (CardView) v.findViewById(R.id.bags_layout_place_order_fragment);
         bagsTitleText = (CustomTextView) bagsLayout.findViewById(R.id.service_included);
         bagsDateText = (CustomTextView) bagsLayout.findViewById(R.id.select_date_slot_included);
+        bagsStaticText = (CustomTextView) bagsLayout.findViewById(R.id.select_time_slot_text);
         bagsTimeSlot = (Spinner) bagsLayout.findViewById(R.id.select_time_slot_included);
 
         yourItemsLayout = (LinearLayout) v.findViewById(R.id.your_items_layout_place_order_fragment);
@@ -191,6 +201,7 @@ public class PlaceOrderFragment extends Fragment {
     }
 
     private void setViews(){
+
 
         newOrder.setText("NEW ORDER");
         newOrder.setOnClickListener(listener);
@@ -201,14 +212,27 @@ public class PlaceOrderFragment extends Fragment {
         collectionDateText.setTag("date_1");
         collectionDateText.setOnClickListener(datelistener);
 
+        collectionStaticText.setTag("collection");
+        collectionStaticText.setOnClickListener(toastListener);
+
         ironingDateText.setTag("date_2");
         ironingDateText.setOnClickListener(datelistener);
+
+        ironingStaticText.setTag("collection");
+        ironingStaticText.setOnClickListener(toastListener);
 
         washingDateText.setTag("date_3");
         washingDateText.setOnClickListener(datelistener);
 
+
+        washingStaticText.setTag("collection");
+        washingStaticText.setOnClickListener(toastListener);
+
         bagsDateText.setTag("date_4");
         bagsDateText.setOnClickListener(datelistener);
+
+        bagsStaticText.setTag("collection");
+        bagsStaticText.setOnClickListener(toastListener);
 
         ironingLayout.setVisibility(View.GONE);
         washingLayout.setVisibility(View.GONE);
@@ -256,10 +280,9 @@ public class PlaceOrderFragment extends Fragment {
         Iterator it = Constants.order.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
-            Log.d(Constants.LOG_TAG," Map key "+pair.getKey()+" Value "+pair.getValue());
             inflateYourItems(pair.getKey().toString(), pair.getValue().toString(), mapCounter);
             mapCounter++;
-            it.remove(); // avoids a ConcurrentModificationException
+
         }
 
     }
@@ -362,6 +385,9 @@ public class PlaceOrderFragment extends Fragment {
 
     public void setCollectionsAdapter(String d,final String when){
 
+        collectionStaticText.setVisibility(View.GONE);
+        collectionTimeSlot.setVisibility(View.VISIBLE);
+
         final String date = d;
         final ArrayList<String> collectionSlots = getSlots(date,when);
         if(collectionSlots != null){
@@ -457,6 +483,9 @@ public class PlaceOrderFragment extends Fragment {
 
     public void setIroningAdapter(String date,int collectionArrayIndex){
 
+        ironingStaticText.setVisibility(View.GONE);
+        ironingTimeSlot.setVisibility(View.VISIBLE);
+
         ArrayList<String> ironingSlots;
         if(collectionArrayIndex == -1){
 
@@ -547,6 +576,10 @@ public class PlaceOrderFragment extends Fragment {
 
     public void setWashingAdapter(String date,int collectionArrayIndex){
 
+
+        washingStaticText.setVisibility(View.GONE);
+        washingTimeSlot.setVisibility(View.VISIBLE);
+
         ArrayList<String> washingSlots;
         if(collectionArrayIndex == -1){
 
@@ -636,6 +669,9 @@ public class PlaceOrderFragment extends Fragment {
     }
 
     public void setBagsAdapter(String date,int collectionArrayIndex){
+
+        bagsStaticText.setVisibility(View.GONE);
+        bagsTimeSlot.setVisibility(View.VISIBLE);
 
         // This is pending for now as he not sending bags data
         ArrayList<String> bagsSlots;
@@ -871,32 +907,75 @@ public class PlaceOrderFragment extends Fragment {
 
     public void placeOrder(){
 
-        formatDate();
-        getTheValues();
-        createJson();
-        new PlaceOrderAsyncTask(getActivity().getApplicationContext(),new PlaceOrderAsyncTask.PlaceWeeklyOrderCallback() {
-            @Override
-            public void onStart(boolean status) {
+        if(Constants.collectionDate != null) {
+            formatDate();
+            getTheValues();
+            createJson();
+            new PlaceOrderAsyncTask(getActivity().getApplicationContext(), new PlaceOrderAsyncTask.PlaceWeeklyOrderCallback() {
+                @Override
+                public void onStart(boolean status) {
 
-                progressDialog = new ProgressDialog(getActivity());
-                progressDialog.setTitle(Constants.APP_NAME);
-                progressDialog.setMessage("Placing Your Order");
-                progressDialog.show();
+                    progressDialog = new ProgressDialog(getActivity());
+                    progressDialog.setTitle(Constants.APP_NAME);
+                    progressDialog.setMessage("Placing Your Order");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+                }
+
+                @Override
+                public void onResult(boolean result) {
+
+                    progressDialog.dismiss();
+                    if (result) {
+                        showDialog();
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Order couldnt be placed sucessfully\nTry Again Later", 5000).show();
+                    }
+                }
+            }).execute(postOrderJsonObject);
+
+        }
+        else{
+
+            Toast.makeText(getActivity().getApplicationContext(),"Please set the dates",5000).show();
+        }
+
+    }
+
+
+    public void getTheValues(){
+
+        Iterator iterator = Constants.order.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry mapEntry = (Map.Entry) iterator.next();
+            Log.d(Constants.LOG_TAG, " key " + mapEntry.getKey() + " value " + mapEntry.getValue());
+
+            String orderId = mapEntry.getKey().toString();
+            String serviceType = String.valueOf(orderId.charAt(2));
+            String orderDetails[] = mapEntry.getValue().toString().split("_");
+            if(serviceType.equalsIgnoreCase("1") || serviceType.equalsIgnoreCase("2")){
+
+                Constants.ironingOrderData.add(new IroningOrderData(orderId,orderDetails[1],orderDetails[0]));
+                Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+                Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
+            }
+            else if(serviceType.equalsIgnoreCase("3")||serviceType.equalsIgnoreCase("4")||serviceType.equalsIgnoreCase("5")||serviceType.equalsIgnoreCase("6")){
+
+                Constants.washingOrderData.add(new WashingOrderData(orderId,orderDetails[1],orderDetails[0]));
+                Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+                Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
+            }
+            else if(serviceType.equalsIgnoreCase("7") || serviceType.equalsIgnoreCase("8")){
+
+                Constants.bagOrderData.add(new BagOrderData(orderId,orderDetails[1],orderDetails[0]));
+                Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+                Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
             }
 
-            @Override
-            public void onResult(boolean result) {
+        }
 
-                progressDialog.dismiss();
-                if(result){
-                    showDialog();
-                }
-                else{
-                    Toast.makeText(getActivity().getApplicationContext(),"Order couldnt be placed sucessfully\nTry Again Later",5000).show();
-                }
-            }
-        }).execute(postOrderJsonObject);
-
+        Log.d(Constants.LOG_TAG,"Total Quantity "+Constants.totalQuantityToBeCollected);
+        Log.d(Constants.LOG_TAG,"Total Amount "+Constants.totalAmountToBeCollected);
 
     }
 
@@ -906,50 +985,66 @@ public class PlaceOrderFragment extends Fragment {
     // and create a hashmap when creating the your items layout
     // then we are manipulating the values in the hashmap
     // but are json is created on the basis of the data holders so we are re creating the data holders
-    public void getTheValues(){
-
-        Constants.ironingOrderData.clear();
-        Constants.washingOrderData.clear();
-        Constants.bagOrderData.clear();
-
-        Log.d(Constants.LOG_TAG," Entered Get Values ");
-        Iterator it = Constants.order.entrySet().iterator();
-        Log.d(Constants.LOG_TAG," It  ");
-        while (it.hasNext()) {
-
-            Log.d(Constants.LOG_TAG," Entered While loop ");
-            Map.Entry pair = (Map.Entry)it.next();
-            Log.d(Constants.LOG_TAG," Map key "+pair.getKey()+" Value "+pair.getValue());
-            Log.d(Constants.LOG_TAG," key is "+pair.getKey().toString());
-            String key = pair.getKey().toString();
-            String orderDetails[] = Constants.order.get(key).toString().split("_");
-            String keyValue = key.substring(0,3);
-            Log.d(Constants.LOG_TAG," After Key is "+ keyValue);
-            switch(keyValue){
-
-                case "001": Constants.ironingOrderData.add(new IroningOrderData(key,orderDetails[1],orderDetails[0]));
-                    break;
-                case "002": Constants.ironingOrderData.add(new IroningOrderData(key,orderDetails[1],orderDetails[0]));
-                    break;
-                case "003": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
-                    break;
-                case "004": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
-                    break;
-                case "005": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
-                    break;
-                case "006": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
-                    break;
-                case "007": Constants.bagOrderData.add(new BagOrderData(key,orderDetails[1],orderDetails[0]));
-                    break;
-                case "008": Constants.bagOrderData.add(new BagOrderData(key,orderDetails[1],orderDetails[0]));
-                    break;
-
-            }
-
-            it.remove(); // avoids a ConcurrentModificationException
-        }
-
-    }
+//    public void getTheValues(){
+//
+//        Log.d(Constants.LOG_TAG," Entered Get Values ");
+//        Constants.ironingOrderData.clear();
+//        Constants.washingOrderData.clear();
+//        Constants.bagOrderData.clear();
+//        Constants.totalAmountToBeCollected = 0;
+//        Constants.totalQuantityToBeCollected = 0;
+//
+//
+//        Iterator it = Constants.order.entrySet().iterator();
+//        while (it.hasNext()) {
+//
+//            Map.Entry pair = (Map.Entry)it.next();
+//            Log.d(Constants.LOG_TAG," Map key "+pair.getKey()+" Value "+pair.getValue());
+//            String key = pair.getKey().toString();
+//            String orderDetails[] = Constants.order.get(key).toString().split("_");
+//            String keyValue = key.substring(0,3);
+//            Log.d(Constants.LOG_TAG," After Key is "+ keyValue);
+//            switch(keyValue){
+//
+//                case "001": Constants.ironingOrderData.add(new IroningOrderData(key,orderDetails[1],orderDetails[0]));
+//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
+//                    break;
+//                case "002": Constants.ironingOrderData.add(new IroningOrderData(key,orderDetails[1],orderDetails[0]));
+//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
+//                    break;
+//                case "003": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
+//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
+//                    break;
+//                case "004": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
+//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
+//                    break;
+//                case "005": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
+//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
+//                    break;
+//                case "006": Constants.washingOrderData.add(new WashingOrderData(key,orderDetails[1],orderDetails[0]));
+//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
+//                    break;
+//                case "007": Constants.bagOrderData.add(new BagOrderData(key,orderDetails[1],orderDetails[0]));
+//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
+//                    break;
+//                case "008": Constants.bagOrderData.add(new BagOrderData(key,orderDetails[1],orderDetails[0]));
+//                    Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+//                    Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
+//                    break;
+//
+//            }
+//
+//            it.remove(); // avoids a ConcurrentModificationException
+//        }
+//
+//    }
 
 
     // This function would be used to create JSON which contains the
@@ -973,6 +1068,9 @@ public class PlaceOrderFragment extends Fragment {
                     String orderId = Constants.ironingOrderData.get(i).getOrderId();
                     String quantity = Constants.ironingOrderData.get(i).getQuantity();
                     String amount = Constants.ironingOrderData.get(i).getAmount();
+
+                    // just sending the price of a single piece
+                    quantity = String.valueOf(Integer.parseInt(amount)/Integer.parseInt(quantity));
                     ironingNestedJsonObject.put("order_id",orderId);
                     ironingNestedJsonObject.put("amount",amount);
                     ironingNestedJsonObject.put("quantity",quantity);
@@ -994,6 +1092,8 @@ public class PlaceOrderFragment extends Fragment {
                     String orderId = Constants.washingOrderData.get(i).getOrderId();
                     String quantity = Constants.washingOrderData.get(i).getQuantity();
                     String amount = Constants.washingOrderData.get(i).getAmount();
+
+                    quantity = String.valueOf(Integer.parseInt(amount)/Integer.parseInt(quantity));
                     washingNestedJsonObject.put("order_id",orderId);
                     washingNestedJsonObject.put("amount",amount);
                     washingNestedJsonObject.put("quantity",quantity);
@@ -1016,6 +1116,8 @@ public class PlaceOrderFragment extends Fragment {
                     String orderId = Constants.bagOrderData.get(i).getOrderId();
                     String quantity = Constants.bagOrderData.get(i).getQuantity();
                     String amount = Constants.bagOrderData.get(i).getAmount();
+
+                    quantity = String.valueOf(Integer.parseInt(amount)/Integer.parseInt(quantity));
                     bagsNestedJsonObject.put("order_id",orderId);
                     bagsNestedJsonObject.put("amount",amount);
                     bagsNestedJsonObject.put("quantity",quantity);
@@ -1159,23 +1261,14 @@ public class PlaceOrderFragment extends Fragment {
         // then get the text value which is set
         // then convert it to int
         quantityValue = Integer.parseInt(((CustomTextView) v.findViewWithTag("quantity_"+position+"_"+key)).getText().toString());
-        Log.d(Constants.LOG_TAG," Qunatity value "+ quantityValue);
         obtainedAmount = Integer.parseInt(((CustomTextView) v.findViewWithTag("total_"+position+"_"+key)).getText().toString());
-        Log.d(Constants.LOG_TAG," Obtained Amount "+ obtainedAmount);
         perPieceCost = obtainedAmount/quantityValue;
-        Log.d(Constants.LOG_TAG," Per Piece Cost "+ perPieceCost);
-
-        // when added then
         totalQuantity = (quantityValue+1);
-        Log.d(Constants.LOG_TAG," Total Quantity "+ totalQuantity);
         totalAmount = (totalQuantity*perPieceCost);
-        Log.d(Constants.LOG_TAG," Total Amount "+ totalAmount);
-
         newValue = String.valueOf(totalQuantity)+"_"+totalAmount;
-        Log.d(Constants.LOG_TAG," NEW VALUE "+ newValue);
-
         Constants.order.put(key, newValue);
         updateUI(position,key,newValue);
+
 
     }
     public void subtract(String key,String position){
@@ -1186,24 +1279,17 @@ public class PlaceOrderFragment extends Fragment {
         // then get the text value which is set
         // then convert it to int
         quantityValue = Integer.parseInt(((CustomTextView) v.findViewWithTag("quantity_"+position+"_"+key)).getText().toString());
-        Log.d(Constants.LOG_TAG," Qunatity value "+ quantityValue);
         obtainedAmount = Integer.parseInt(((CustomTextView) v.findViewWithTag("total_"+position+"_"+key)).getText().toString());
-        Log.d(Constants.LOG_TAG," Obtained Amount "+ obtainedAmount);
         perPieceCost = obtainedAmount/quantityValue;
-        Log.d(Constants.LOG_TAG," Per Piece Cost "+ perPieceCost);
 
         if(quantityValue!=0) {
             // when added then
             totalQuantity = (quantityValue - 1);
-            Log.d(Constants.LOG_TAG, " Total Quantity " + totalQuantity);
             totalAmount = (totalQuantity * perPieceCost);
-            Log.d(Constants.LOG_TAG, " Total Amount " + totalAmount);
-
             newValue = String.valueOf(totalQuantity) + "_" + totalAmount;
-            Log.d(Constants.LOG_TAG, " NEW VALUE " + newValue);
-
             Constants.order.put(key, newValue);
             updateUI(position, key, newValue);
+
         }
 
     }
@@ -1214,9 +1300,6 @@ public class PlaceOrderFragment extends Fragment {
         Log.d(Constants.LOG_TAG," Obtained position "+ position+" key "+key+" value "+value);
         String valueDetails[] = value.split("_");
 
-        int pos = Integer.parseInt(position);
-        Log.d(Constants.LOG_TAG," The position to be updated "+ position);
-
         View v = yourItemsLayout.findViewWithTag("view_"+position+"_"+key);
         ((CustomTextView)v.findViewWithTag("quantity_" + position + "_" + key)).setText(valueDetails[0]);
         ((CustomTextView)v.findViewWithTag("total_" + position + "_" + key)).setText(valueDetails[1]);
@@ -1225,17 +1308,46 @@ public class PlaceOrderFragment extends Fragment {
 
     public void remove(String key, String position){
 
-        int pos = Integer.parseInt(position);
-        // plus one because the first view is just a static text view
-        pos = pos+1;
         Constants.order.remove(key);
 
-        // to remove the line and the layout
-        yourItemsLayout.removeViewAt(pos);
-        // because when you remove the view the view below it comes to the same position
-        yourItemsLayout.removeViewAt(pos);
+        yourItemsLayout.findViewWithTag("view_"+position+"_"+key).setVisibility(View.GONE);
+        yourItemsLayout.findViewWithTag("line_"+position).setVisibility(View.GONE);
 
     }
+
+    View.OnClickListener toastListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            switch (view.getTag().toString()){
+
+                case "collection":
+                    if(Constants.collectionDate == null){
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
+                    }
+
+                    break;
+                case "ironing":
+                    if(Constants.collectionDate == null){
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
+                    }
+                    break;
+                case "washing":
+                    if(Constants.collectionDate == null){
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
+                    }
+                    break;
+                case "bag":
+                    if(Constants.collectionDate == null){
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
+                    }
+                    break;
+
+            }
+
+        }
+    };
+
 
     View.OnClickListener inflatedClickListener = new View.OnClickListener() {
         @Override

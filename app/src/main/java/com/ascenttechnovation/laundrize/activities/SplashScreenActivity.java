@@ -188,6 +188,8 @@ public class SplashScreenActivity extends Activity {
         Constants.areas = new ArrayList<String>();
         Constants.cities = new ArrayList<String>();
         Constants.zipcodes = new ArrayList<String>();
+        Constants.weekdays = new ArrayList<String>();
+
 
 
     }

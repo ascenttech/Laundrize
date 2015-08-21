@@ -80,12 +80,13 @@
     </LinearLayout>
 
     <ImageView
-        android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo_with_name"
+        android:layout_marginTop="@dimen/margin_logo"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
-        android:layout_above="@id/fields_layout_register_activity"
         />
 
     <include

@@ -25,6 +25,7 @@ import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.async.AddNewAddressAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchAddressAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchAllSlotsAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchAreasAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchCitiesAsyncTask;
 import com.ascenttechnovation.laundrize.async.FetchZipcodesAsyncTask;
@@ -55,6 +56,8 @@ public class AddressFragment extends Fragment {
     private Spinner city,zipcode,area;
     private String cityValue, zipcodeValue,areaValue,buildingNameValue,houseNumberValue,fullAddressValue;
     private String orderType;
+
+    private CustomTextView cityStaticText,zipcodeStaticText,areaStaticText;
 
     public AddressFragment(String orderType) {
 
@@ -116,11 +119,19 @@ public class AddressFragment extends Fragment {
 
 //        addNewAddressChild = (LinearLayout) v.findViewById(R.id.add_new_address_linear_layout_address_fragment);
         addNewAddressChild = (ScrollView) v.findViewById(R.id.add_new_address_linear_layout_address_fragment);
+
         city = (Spinner) v.findViewById(R.id.city_add_new_address);
+        cityStaticText = (CustomTextView) v.findViewById(R.id.city_add_new_address_static);
+
         zipcode = (Spinner) v.findViewById(R.id.zipcode_add_new_address);
+        zipcodeStaticText = (CustomTextView) v.findViewById(R.id.zipcode_add_new_address_static);
+
         area = (Spinner) v.findViewById(R.id.area_add_new_address);
+        areaStaticText = (CustomTextView) v.findViewById(R.id.area_add_new_address_static);
+
         buildingName = (EditText) v.findViewById(R.id.building_or_street_add_new_address);
         houseNumber = (EditText) v.findViewById(R.id.flat_or_house_number_add_new_address);
+
         saveNewAddress = (CustomButton) v.findViewById(R.id.save_new_address_add_new_address);
 
     }
@@ -175,18 +186,20 @@ public class AddressFragment extends Fragment {
         for(int i =0;i< Constants.addressData.size();i++){
 
             rowView = layoutInflater.inflate(R.layout.include_available_address,null);
-            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 275);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
             params.setMargins(0,0,0,5);
             rowView.setLayoutParams(params);
 
             address = (CustomTextView) rowView.findViewById(R.id.address_text_included);
             address.setTag("address_"+i);
+            address.setVisibility(View.VISIBLE);
             Log.d(Constants.LOG_TAG," Setting the adress "+Constants.addressData.get(i).getFullAddress());
             address.setText(Constants.addressData.get(i).getFullAddress());
             address.setOnClickListener(inflatedViewListener);
 
             mobileNumber = (CustomTextView) rowView.findViewById(R.id.mobile_number_text_included);
             mobileNumber.setTag("number_"+i);
+            mobileNumber.setVisibility(View.VISIBLE);
             Log.d(Constants.LOG_TAG," Setting the mobile number "+Constants.addressData.get(i).getMobileNumber());
             mobileNumber.setText(Constants.addressData.get(i).getMobileNumber());
             mobileNumber.setOnClickListener(inflatedViewListener);
@@ -328,6 +341,7 @@ public class AddressFragment extends Fragment {
                 progressDialog = new ProgressDialog(getActivity());
                 progressDialog.setTitle(Constants.LOG_TAG);
                 progressDialog.setMessage("Adding Your Address");
+                progressDialog.setCancelable(false);
                 progressDialog.show();
 
 
@@ -356,6 +370,8 @@ public class AddressFragment extends Fragment {
     public void replaceFragment(Fragment fragment){
 
         Log.d(Constants.LOG_TAG," Entering Replace Fragment "+ fragment.getClass().getName());
+
+        getSlots();
 
         ((LandingActivity)getActivity()).getSupportFragmentManager()
                 .beginTransaction()
@@ -388,6 +404,8 @@ public class AddressFragment extends Fragment {
 
     public void populateCity(){
 
+        cityStaticText.setVisibility(View.GONE);
+        city.setVisibility(View.VISIBLE);
         city.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.cities));
         city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -407,6 +425,7 @@ public class AddressFragment extends Fragment {
     }
 
     public void populateZipcodes(String cityId){
+
 
         if(Constants.zipcodes.size() == 0){
 
@@ -437,6 +456,8 @@ public class AddressFragment extends Fragment {
 
         Log.d(Constants.LOG_TAG,"Setting zip code adapter "+ Constants.zipcodes.size());
 
+        zipcodeStaticText.setVisibility(View.GONE);
+        zipcode.setVisibility(View.VISIBLE);
         zipcode.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.zipcodes));
         zipcode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -485,6 +506,10 @@ public class AddressFragment extends Fragment {
     public void setAreasAdapter(){
 
         Log.d(Constants.LOG_TAG," Setting Areas Adapter "+ Constants.areas.size());
+
+        areaStaticText.setVisibility(View.GONE);
+        area.setVisibility(View.VISIBLE);
+
         area.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.areas));
         area.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -501,6 +526,38 @@ public class AddressFragment extends Fragment {
         });
 
     }
+
+
+    public void getSlots(){
+
+//        String finalUrl = Constants.getslotsUrl+Constants.userId+"&address_id"+Constants.addressId;
+        String finalUrl = Constants.getslotsUrl+Constants.userId;
+        new FetchAllSlotsAsyncTask(new FetchAllSlotsAsyncTask.FetchAllSlotsCallback(){
+            @Override
+            public void onStart(boolean status) {
+
+
+            }
+            @Override
+            public void onResult(boolean result) {
+
+                if(result){
+
+                    Constants.slotsFetched = true;
+
+                }
+                else{
+
+                    Toast.makeText(getActivity().getApplicationContext(), "Unable to connect to the internet.\nTry again Later", 5000).show();
+                }
+
+            }
+        }).execute(finalUrl);
+
+    }
+
+
+
 
     View.OnClickListener inflatedViewListener = new View.OnClickListener() {
         @Override

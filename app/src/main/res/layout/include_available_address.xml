@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/blue_border_box"
     android:padding="20px"
     android:layout_marginRight="@dimen/margin_dp"
@@ -27,6 +27,8 @@
         android:paddingBottom="30px"
         android:textSize="@dimen/text_size_extra_large"
         android:layout_marginLeft="@dimen/icon_offset"
+        android:text="hey"
+        android:visibility="invisible"
         />
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
@@ -43,5 +45,8 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_large"
         android:layout_marginLeft="@dimen/icon_offset"
+        android:text="Hello"
+        android:visibility="invisible"
+        android:layout_marginBottom="@dimen/margin"
         />
 </LinearLayout>

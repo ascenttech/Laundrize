@@ -21,14 +21,13 @@
             android:textColor="@color/checkout_card_text"
             />
         <View
-            android:id="@+id/horizontal_line"
             android:layout_width="fill_parent"
             android:layout_height="1dip"
             android:background="#777"
             android:layout_margin="@dimen/margin"
            />
         <com.ascenttechnovation.laundrize.custom.CustomTextView
-            android:id="@+id/select_date_slot_included"
+            android:id="@+id/select_date_slot_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Select Date"
@@ -38,8 +37,16 @@
             android:drawableRight="@drawable/icon_right_arrow"
             android:textColor="@color/checkout_card_text"
             />
+        <Spinner
+            android:id="@+id/select_date_slot_included"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_large"
+            android:drawablePadding="@dimen/padding"
+            android:visibility="gone"
+            />
+
         <View
-            android:id="@+id/horizontal_line"
             android:layout_width="fill_parent"
             android:layout_height="1dip"
             android:background="#777"

@@ -50,13 +50,15 @@ public class QuickOrderFragment extends Fragment {
     private CustomButton done,newOrder,placeOrder;
     private ActionBar actionBar;
     private boolean ironingCreated,washingCreated,bagsCreated = false;
-    private CustomTextView ironingTitleText,ironingDateText,washingTitleText,washingDateText,bagsTitleText,bagsDateText,collectionTitleText,collectionDateText;
+    private CustomTextView ironingTitleText,ironingDateText,washingTitleText,washingDateText,bagsTitleText,bagsDateText,collectionTitleText,collectionDateText,ironingStaticText,washingStaticText,bagsStaticText;
     private Spinner collectionTimeSlot, ironingTimeSlot, washingTimeSlot, bagsTimeSlot;
     private DatePickerDialog collectionDatePicker,ironingDatePicker,washingDatePicker,bagsDatePicker;
     private int date,month,year;
     private JSONObject ironingNestedJsonObject,washingNestedJsonObject,bagsNestedJsonObject,ironingJsonObject,washingJsonObject,bagsJsonObject,postOrderJsonObject;
     private JSONArray ironingNestedJsonArray,washingNestedJsonArray,bagsNestedJsonArray,itemsJsonArray;
     private ArrayAdapter<String> collectionAdapter,ironingAdapter,washingAdapter,bagsAdapter;
+
+    private CustomTextView collectionTimeSlotText,ironingTimeSlotText,washingTimeSlotText,bagsTimeSlotText;
 
     // slot difference is 4 but +1 is added to get the correct index in the array same logic for washingDeliveryCounter
     private int ironingDeliveryCounter = 5;
@@ -99,8 +101,8 @@ public class QuickOrderFragment extends Fragment {
         washing = (CheckBox) dialog.findViewById(R.id.quick_service_washing);
         washing.setOnClickListener(listener);
 
-        bags = (CheckBox) dialog.findViewById(R.id.quick_service_bags);
-        bags.setOnClickListener(listener);
+//        bags = (CheckBox) dialog.findViewById(R.id.quick_service_bags);
+//        bags.setOnClickListener(listener);
 
         done = (CustomButton) dialog.findViewById(R.id.quick_service_done);
         done.setOnClickListener(listener);
@@ -174,22 +176,26 @@ public class QuickOrderFragment extends Fragment {
         collectionLayout = (CardView) v.findViewById(R.id.collection_layout_quick_fragment);
         collectionTitleText = (CustomTextView) collectionLayout.findViewById(R.id.service_included);
         collectionDateText = (CustomTextView) collectionLayout.findViewById(R.id.select_date_slot_included);
+        collectionTimeSlotText = (CustomTextView) collectionLayout.findViewById(R.id.select_time_slot_text);
         collectionTimeSlot = (Spinner) collectionLayout.findViewById(R.id.select_time_slot_included);
 
         ironingLayout = (CardView) v.findViewById(R.id.ironing_layout_quick_fragment);
         ironingTitleText = (CustomTextView) ironingLayout.findViewById(R.id.service_included);
         ironingDateText = (CustomTextView) ironingLayout.findViewById(R.id.select_date_slot_included);
+        ironingTimeSlotText = (CustomTextView) ironingLayout.findViewById(R.id.select_time_slot_text);
         ironingTimeSlot = (Spinner) ironingLayout.findViewById(R.id.select_time_slot_included);
 
 
         washingLayout = (CardView) v.findViewById(R.id.washing_layout_quick_fragment);
         washingTitleText = (CustomTextView) washingLayout.findViewById(R.id.service_included);
         washingDateText = (CustomTextView) washingLayout.findViewById(R.id.select_date_slot_included);
+        washingTimeSlotText = (CustomTextView) washingLayout.findViewById(R.id.select_time_slot_text);
         washingTimeSlot = (Spinner) washingLayout.findViewById(R.id.select_time_slot_included);
 
         bagsLayout = (CardView) v.findViewById(R.id.bags_layout_quick_fragment);
         bagsTitleText = (CustomTextView) bagsLayout.findViewById(R.id.service_included);
         bagsDateText = (CustomTextView) bagsLayout.findViewById(R.id.select_date_slot_included);
+        bagsTimeSlotText = (CustomTextView) bagsLayout.findViewById(R.id.select_time_slot_text);
         bagsTimeSlot = (Spinner) bagsLayout.findViewById(R.id.select_time_slot_included);
 
         newOrder = (CustomButton) v.findViewById(R.id.left_button_included);
@@ -206,15 +212,26 @@ public class QuickOrderFragment extends Fragment {
         collectionDateText.setTag("date_1");
         collectionDateText.setOnClickListener(datelistener);
 
+        collectionTimeSlotText.setTag("collection");
+        collectionTimeSlotText.setOnClickListener(toastListener);
+
         ironingDateText.setTag("date_2");
         ironingDateText.setOnClickListener(datelistener);
+
+        ironingTimeSlotText.setTag("ironing");
+        ironingTimeSlotText.setOnClickListener(toastListener);
 
         washingDateText.setTag("date_3");
         washingDateText.setOnClickListener(datelistener);
 
+        washingTimeSlotText.setTag("washing");
+        washingTimeSlotText.setOnClickListener(toastListener);
+
         bagsDateText.setTag("date_4");
         bagsDateText.setOnClickListener(datelistener);
 
+        bagsTimeSlotText.setTag("bags");
+        bagsTimeSlotText.setOnClickListener(toastListener);
 
         collectionTitleText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_collection,0,0,0);
 
@@ -264,6 +281,9 @@ public class QuickOrderFragment extends Fragment {
 
     public void setCollectionsAdapter(final String date,final String when){
 
+        collectionTimeSlotText.setVisibility(View.GONE);
+        collectionTimeSlot.setVisibility(View.VISIBLE);
+
         final ArrayList<String> collectionSlots = getSlots(date,when);
         if(collectionSlots != null) {
 
@@ -290,9 +310,9 @@ public class QuickOrderFragment extends Fragment {
 
                         setWashingAdapter(Constants.collectionDate, collectionArrayIndex);
                     }
-                    if(bags.isChecked()){
-
-                    }
+//                    if(bags.isChecked()){
+//
+//                    }
 
 
 
@@ -369,6 +389,10 @@ public class QuickOrderFragment extends Fragment {
     }
 
     public void setIroningAdapter(String date,int collectionArrayIndex){
+
+        ironingTimeSlotText.setVisibility(View.GONE);
+        ironingTimeSlot.setVisibility(View.VISIBLE);
+
 
         ArrayList<String> ironingSlots;
         if(collectionArrayIndex == -1){
@@ -457,6 +481,10 @@ public class QuickOrderFragment extends Fragment {
     }
 
     public void setWashingAdapter(String date,int collectionArrayIndex){
+
+
+        washingTimeSlotText.setVisibility(View.GONE);
+        washingTimeSlot.setVisibility(View.VISIBLE);
 
         ArrayList<String> washingSlots;
         if(collectionArrayIndex == -1){
@@ -547,6 +575,9 @@ public class QuickOrderFragment extends Fragment {
     }
 
     public void setBagsAdapter(String date,int collectionArrayIndex){
+
+        bagsTimeSlotText.setVisibility(View.GONE);
+        bagsTimeSlot.setVisibility(View.VISIBLE);
 
         // This is pending for now as he not sending bags data
         ArrayList<String> bagsSlots;
@@ -984,6 +1015,40 @@ public class QuickOrderFragment extends Fragment {
 
     }
 
+    View.OnClickListener toastListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            switch (view.getTag().toString()){
+
+                case "collection":
+                    if(Constants.collectionDate == null){
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
+                    }
+
+                    break;
+                case "ironing":
+                    if(Constants.collectionDate == null){
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
+                    }
+                    break;
+                case "washing":
+                    if(Constants.collectionDate == null){
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
+                    }
+                    break;
+                case "bags":
+                    if(Constants.collectionDate == null){
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
+                    }
+                    break;
+
+            }
+
+        }
+    };
+
+
     View.OnClickListener datelistener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -1043,14 +1108,14 @@ public class QuickOrderFragment extends Fragment {
                         washingLayout.setVisibility(View.GONE);
                     }
                     break;
-                case R.id.quick_service_bags:
-                    if(bags.isChecked()){
-                        bagsLayout.setVisibility(View.VISIBLE);
-                    }
-                    else{
-                        bagsLayout.setVisibility(View.GONE);
-                    }
-                    break;
+//                case R.id.quick_service_bags:
+//                    if(bags.isChecked()){
+//                        bagsLayout.setVisibility(View.VISIBLE);
+//                    }
+//                    else{
+//                        bagsLayout.setVisibility(View.GONE);
+//                    }
+//                    break;
                 case R.id.quick_service_done: dialog.dismiss();
                     break;
                 case R.id.left_button_included : newOrder();

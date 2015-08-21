@@ -18,6 +18,8 @@ import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.custom.CustomEditText;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
+import java.net.URLEncoder;
+
 /**
  * Created by ADMIN on 02-07-2015.
  */
@@ -29,6 +31,7 @@ public class MobileVerificationActivity extends Activity {
     private ProgressDialog progressDialog;
     private String from, profileId,firstName,lastName,url;
     private String finalUrl,finalVerificationUrl;
+    String verificationCodeValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,7 @@ public class MobileVerificationActivity extends Activity {
 
         Intent i = getIntent();
         from = i.getStringExtra("from");
-        profileId = i.getStringExtra("id");
+        profileId = i.getStringExtra("profileId");
         firstName = i.getStringExtra("firstName");
         lastName = i.getStringExtra("lastName");
         emailId = i.getStringExtra("email");
@@ -84,7 +87,12 @@ public class MobileVerificationActivity extends Activity {
     }
 
     private void setViews(){
-        mobileNumberEdit.setText(mobileNumber);
+
+        if(from.equalsIgnoreCase("register")){
+
+            mobileNumberEdit.setText(mobileNumber);
+        }
+
         verifyNow.setOnClickListener(listener);
         confirmVerification.setOnClickListener(listener);
     }
@@ -129,11 +137,16 @@ public class MobileVerificationActivity extends Activity {
 
     public void confirmVerification(){
 
-        String verificationCodeValue = verificationCode.getText().toString();
-        mobileNumber = mobileNumberEdit.getText().toString();
+        try {
+            verificationCodeValue = URLEncoder.encode(verificationCode.getText().toString(), "UTF-8");
+            mobileNumber = URLEncoder.encode(mobileNumberEdit.getText().toString(), "UTF-8");
 
-        // verificationCode value (Wo8zxW) has been harcoded
+            // verificationCode value (Wo8zxW) has been harcoded
 
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         if(from.equalsIgnoreCase("register")){
 
             finalVerificationUrl = Constants.confirmVerificationUrl+mobileNumber+"&verification_code="+verificationCodeValue+"&password="+password+"&first_name="+firstName+"&email="+emailId;
