@@ -42,6 +42,7 @@ public class AddressFragment extends Fragment {
 
     private ViewGroup selectAddressChild;
     private CustomButton selectAddress,addNewAddress, saveNewAddress;
+    private ScrollView scrollView;
     private ScrollView addNewAddressChild;
     private int height;
     private ActionBar actionBar;
@@ -114,6 +115,7 @@ public class AddressFragment extends Fragment {
     private void findViews(View v){
 
         selectAddress = (CustomButton) v.findViewById(R.id.select_address_button_address_fragment);
+        scrollView = (ScrollView)v.findViewById(R.id.select_address_scroll_address_fragment);
         selectAddressChild = (ViewGroup) v.findViewById(R.id.available_address_layout_container);
         addNewAddress = (CustomButton) v.findViewById(R.id.add_new_address_button_address_fragment);
 
@@ -210,6 +212,8 @@ public class AddressFragment extends Fragment {
     }
 
     private void changeVisibility(){
+
+        scrollView.setVisibility(View.VISIBLE);
 
         if(selectAddressChild.getVisibility()==View.GONE){
             selectAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_minus,0,0,0);
@@ -319,9 +323,15 @@ public class AddressFragment extends Fragment {
     public void saveNewAddress(){
 
         try {
-            cityValue = URLEncoder.encode(city.getSelectedItem().toString().toString(), "UTF-8");
-            zipcodeValue = URLEncoder.encode(zipcode.getSelectedItem().toString(), "UTF-8");
-            areaValue = URLEncoder.encode(area.getSelectedItem().toString(), "UTF-8");
+
+            String cityId = Constants.citiesMap.get(city.getSelectedItem().toString()).toString();
+            cityValue = URLEncoder.encode(cityId,"UTF-8");
+
+            String zipId = Constants.zipcodesMap.get(zipcode.getSelectedItem().toString());
+            zipcodeValue = URLEncoder.encode(zipId, "UTF-8");
+
+            String areaId = Constants.areasMap.get(area.getSelectedItem().toString()).toString();
+            areaValue = URLEncoder.encode(areaId, "UTF-8");
             buildingNameValue = URLEncoder.encode(buildingName.getText().toString(), "UTF-8");
             houseNumberValue = URLEncoder.encode(houseNumber.getText().toString(), "UTF-8");
 
@@ -530,7 +540,7 @@ public class AddressFragment extends Fragment {
 
     public void getSlots(){
 
-        String finalUrl = Constants.getslotsUrl+Constants.userId+"&address_id"+Constants.addressId;
+        String finalUrl = Constants.getslotsUrl+Constants.userId+"&address_id="+Constants.addressId;
 //        String finalUrl = Constants.getslotsUrl+Constants.userId;
         new FetchAllSlotsAsyncTask(new FetchAllSlotsAsyncTask.FetchAllSlotsCallback(){
             @Override

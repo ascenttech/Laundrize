@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/background_color"
+    android:background="@drawable/backgroud_inner"
     >
     <LinearLayout
         android:orientation="vertical"
@@ -18,6 +18,14 @@
             android:layout_marginTop="@dimen/margin_dp"
             android:text="Select Your Address"
             />
+        <ScrollView
+            android:id="@+id/select_address_scroll_address_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginRight="@dimen/margin_dp"
+            android:layout_marginLeft="@dimen/margin_dp"
+            android:visibility="gone"
+            >
         <LinearLayout
             android:id="@+id/available_address_layout_container"
             android:layout_width="fill_parent"
@@ -27,7 +35,7 @@
             android:layout_marginLeft="@dimen/margin_dp"
             android:layout_marginBottom="@dimen/margin_dp"
             />
-
+        </ScrollView>
         <com.ascenttechnovation.laundrize.custom.CustomButton
             android:id="@+id/add_new_address_button_address_fragment"
             android:layout_width="fill_parent"

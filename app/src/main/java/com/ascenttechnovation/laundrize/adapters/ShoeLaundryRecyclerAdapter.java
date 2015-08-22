@@ -115,6 +115,12 @@ public class ShoeLaundryRecyclerAdapter extends RecyclerView.Adapter<ShoeLaundry
 //            Constants.shoeLaundryData.get(position).setQuantity(quantity);
 //
 //        }
+//    else if(value == 0){
+//
+//        String orderId = Constants.dryCleanHouseholdsData.get(position).getCode();
+//        Constants.order.remove(orderId);
+//
+//    }
 //
 //    }
 

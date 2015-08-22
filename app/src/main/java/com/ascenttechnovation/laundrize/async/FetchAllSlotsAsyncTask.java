@@ -73,7 +73,10 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
 //                    String allSlots = slot1+"_"+slot2+"_"+slot3+"_"+slot4+"_"+slot5+"_"+slot6+"_"+slot7
                     String allSlots = slot2+"_"+slot3+"_"+slot4+"_"+slot5+"_"+slot6+"_"+slot7;
                     Constants.slots.put(day,allSlots);
-                    Constants.weekdays.add(day);
+
+                    // This line was supposed to add all the days of the week that are fetched fromt he server
+                    // Now this is hardcoded
+//                    Constants.weekdays.add(day);
 
                 }
                 return true;

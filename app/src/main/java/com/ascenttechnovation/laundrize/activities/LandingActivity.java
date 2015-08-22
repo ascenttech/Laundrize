@@ -71,7 +71,7 @@ public class LandingActivity extends ActionBarActivity {
     LinearLayout sliderLayout;
     RelativeLayout profileLayout;
     ImageView profileImage;
-    int icons[]={R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_watch,R.drawable.icon_shirt,R.drawable.drawer_logo_profile,R.drawable.drawer_logo_tnc,R.drawable.drawer_logo_privacy_policy,R.drawable.drawer_logo_faq,R.drawable.drawer_logo_contact_us};
+    int icons[]={R.drawable.icon_home,R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_watch,R.drawable.icon_shirt,R.drawable.drawer_logo_profile,R.drawable.drawer_logo_tnc,R.drawable.drawer_logo_privacy_policy,R.drawable.drawer_logo_faq,R.drawable.drawer_logo_contact_us};
 
 
     @Override
@@ -309,8 +309,7 @@ public class LandingActivity extends ActionBarActivity {
         }
         // Handle action bar actions click
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -323,7 +322,7 @@ public class LandingActivity extends ActionBarActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         // if nav drawer is opened, hide the action items
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(sliderLayout);
-        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+//        menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
 

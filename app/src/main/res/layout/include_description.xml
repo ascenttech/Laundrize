@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/gradient"
     >
 
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
-        android:id="@+id/title_text_included"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/five_dp"
-        android:textSize="@dimen/title_text_size"
-        android:textColor="@color/text_color_white"
-        android:text="Tittle"
-        />
+
     <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/description_text_included"
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="@dimen/five_dp"
         android:textSize="@dimen/description_text_size"
         android:textColor="@color/text_color_white"
         android:text="Description"
-        android:maxLines="1"
-        android:maxLength="25"
+        android:layout_weight="1"
+        />
+
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/five_dp"
+        android:textSize="@dimen/description_text_size"
+        android:layout_weight="1"
         />
 
 </LinearLayout>

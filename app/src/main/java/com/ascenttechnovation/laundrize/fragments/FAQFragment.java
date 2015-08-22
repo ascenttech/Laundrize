@@ -60,6 +60,7 @@ public class FAQFragment extends Fragment {
     private void findViews(View v){
 
         firstLayout = (LinearLayout) v.findViewById(R.id.first_question_static_faq_fragment);
+
         firstQuestion = (CustomTextView) firstLayout.findViewById(R.id.question_text_faq_fragment);
         firstAnswer = (CustomTextView) firstLayout.findViewById(R.id.answer_text_faq_fragment);
 

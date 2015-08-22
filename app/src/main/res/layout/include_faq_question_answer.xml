@@ -14,7 +14,9 @@
         android:gravity="center_vertical"
         android:padding="@dimen/margin_dp"
         android:background="@drawable/rectangle_box"
-        />
+        android:singleLine="false"
+     />
+
     <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/answer_text_faq_fragment"
         android:layout_width="fill_parent"
@@ -24,10 +26,9 @@
         android:layout_marginTop="@dimen/margin_dp"
         android:textColor="@color/text_color_black"
         android:padding="@dimen/margin_dp"
-        android:visibility="gone"
         android:background="@drawable/blue_rectangle_box"
-        android:layout_weight="1"
-        android:ems="5"
+        android:visibility="gone"
+        android:ems="15"
         />
 
 

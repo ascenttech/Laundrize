@@ -810,36 +810,40 @@ public class QuickOrderFragment extends Fragment {
 
     public void placeOrder(){
 
-        formatDate();
-        createJson();
+        if(Constants.collectionDate !=null) {
+            formatDate();
+            createJson();
 
-        new PlaceOrderAsyncTask(getActivity().getApplicationContext(),new PlaceOrderAsyncTask.PlaceWeeklyOrderCallback() {
-            @Override
-            public void onStart(boolean status) {
+            new PlaceOrderAsyncTask(getActivity().getApplicationContext(), new PlaceOrderAsyncTask.PlaceWeeklyOrderCallback() {
+                @Override
+                public void onStart(boolean status) {
 
-                progressDialog = new ProgressDialog(getActivity());
-                progressDialog.setTitle(Constants.APP_NAME);
-                progressDialog.setMessage("Placing Your Order");
-                progressDialog.show();
-            }
-
-            @Override
-            public void onResult(boolean result) {
-
-                progressDialog.dismiss();
-                if(result){
-                    showDialog();
+                    progressDialog = new ProgressDialog(getActivity());
+                    progressDialog.setTitle(Constants.APP_NAME);
+                    progressDialog.setMessage("Placing Your Order");
+                    progressDialog.show();
                 }
-                else{
-                    Toast.makeText(getActivity().getApplicationContext(), "Order couldnt be placed sucessfully\nTry Again Later", 5000).show();
-                }
-            }
-        }).execute(postOrderJsonObject);
 
+                @Override
+                public void onResult(boolean result) {
+
+                    progressDialog.dismiss();
+                    if (result) {
+                        showDialog();
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Order couldnt be placed sucessfully\nTry Again Later", 5000).show();
+                    }
+                }
+            }).execute(postOrderJsonObject);
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Please select the collection date.",5000).show();
+        }
     }
 
     public void createJson(){
 
+        Log.d(Constants.LOG_TAG," Create Json Entereed");
         itemsJsonArray = new JSONArray();
         washingNestedJsonArray = new JSONArray();
         bagsNestedJsonArray = new JSONArray();
@@ -884,24 +888,24 @@ public class QuickOrderFragment extends Fragment {
 
 
             }
-            if(bags.isChecked()){
-
-                bagsCreated = true;
-                for(int i=0;i<1;i++){
-                    bagsNestedJsonObject = new JSONObject();
-                    bagsNestedJsonObject.put("order_id","0");
-                    bagsNestedJsonObject.put("amount","0");
-                    bagsNestedJsonObject.put("quantity","0");
-
-                    bagsNestedJsonArray.put(bagsNestedJsonObject);
-
-                }
-
-                bagsJsonObject = new JSONObject();
-                bagsJsonObject.put("user_delivery_date",Constants.bagsDeliveryDate);
-                bagsJsonObject.put("user_delivery_slot",Constants.bagsDeliverySlotId);
-                bagsJsonObject.put("itemarr",bagsNestedJsonArray);
-            }
+//            if(bags.isChecked()){
+//
+//                bagsCreated = true;
+//                for(int i=0;i<1;i++){
+//                    bagsNestedJsonObject = new JSONObject();
+//                    bagsNestedJsonObject.put("order_id","0");
+//                    bagsNestedJsonObject.put("amount","0");
+//                    bagsNestedJsonObject.put("quantity","0");
+//
+//                    bagsNestedJsonArray.put(bagsNestedJsonObject);
+//
+//                }
+//
+//                bagsJsonObject = new JSONObject();
+//                bagsJsonObject.put("user_delivery_date",Constants.bagsDeliveryDate);
+//                bagsJsonObject.put("user_delivery_slot",Constants.bagsDeliverySlotId);
+//                bagsJsonObject.put("itemarr",bagsNestedJsonArray);
+//            }
 
 
             if (ironingCreated){
@@ -913,9 +917,9 @@ public class QuickOrderFragment extends Fragment {
 
                 itemsJsonArray.put(washingJsonObject);
             }
-            if(bagsCreated){
-                itemsJsonArray.put(bagsJsonObject);
-            }
+//            if(bagsCreated){
+//                itemsJsonArray.put(bagsJsonObject);
+//            }
 
             postOrderJsonObject = new JSONObject();
             postOrderJsonObject.put("user_id",Constants.userId);
@@ -943,7 +947,7 @@ public class QuickOrderFragment extends Fragment {
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                replaceFragment(new TrackOrdersFragment());
+                replaceFragment(new LandingFragment());
             }
         });
         alert.setCancelable(false);

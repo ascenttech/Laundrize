@@ -34,7 +34,7 @@ import java.util.Date;
 /**
  * Created by ADMIN on 31-07-2015.
  */
-public class WeeklyOrderFragment extends Fragment {
+public class WeeklyOrderFragmentDynamic extends Fragment {
 
     View v;
     private CardView collectionLayout;
@@ -143,6 +143,7 @@ public class WeeklyOrderFragment extends Fragment {
 
     public void setAdapters(){
 
+        Constants.todaysDay = getTodaysDay();
         ArrayAdapter<String> collectionAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout,Constants.weekdays);
         collectionAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
         collectionDateSlot.setAdapter(collectionAdapter);
@@ -151,7 +152,13 @@ public class WeeklyOrderFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Constants.weeklyOrderDay = adapterView.getSelectedItem().toString();
-                setTimeSlots(Constants.weeklyOrderDay);
+                if (Constants.weeklyOrderDay.equalsIgnoreCase(Constants.todaysDay))
+                {
+                    setTimeSlots(Constants.weeklyOrderDay, "today");
+                }
+                else{
+                    setTimeSlots(Constants.weeklyOrderDay, "later");
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -162,56 +169,64 @@ public class WeeklyOrderFragment extends Fragment {
 
     }
 
-    public void setTimeSlots(String day){
+    public void setTimeSlots(String day,String when){
 
 
-        ArrayList<String> availableSlots = getSlots(day);
-        if(availableSlots.size() != 0) {
+        ArrayList<String> availableSlots = getSlots(day,when);
+        ArrayAdapter<String> timeAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout,availableSlots);
+        timeAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
+        collectionTimeSlot.setAdapter(timeAdapter);
+        collectionTimeSlot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-            collectionTimeText.setVisibility(View.GONE);
-            collectionTimeSlot.setVisibility(View.VISIBLE);
+                Constants.collectionSlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
 
-            ArrayAdapter<String> timeAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, availableSlots);
-            timeAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
-            collectionTimeSlot.setAdapter(timeAdapter);
-            collectionTimeSlot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                    Constants.collectionSlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-
-        }
-        else{
-
-            collectionTimeText.setVisibility(View.VISIBLE);
-            collectionTimeSlot.setVisibility(View.GONE);
-
-            Toast.makeText(getActivity().getApplicationContext(),"Collection cannot be done on this day.\nPlease select another day.",5000).show();
-        }
+            }
+        });
     }
 
 
 
-    public ArrayList<String> getSlots(String day){
+    public ArrayList<String> getSlots(String day, String when){
 
 
         ArrayList<String> options = new ArrayList<String>();
         try {
 
             String availableSlots = Constants.slots.get(day);
-            Log.d(Constants.LOG_TAG," Available slots "+ availableSlots);
-            String getSlots[] = availableSlots.split("_");
-            for(int i=0;i<getSlots.length;i++){
 
-                options.add(getSlots[i]);
+            String getSlots[] = availableSlots.split("_");
+            if(when.equalsIgnoreCase("today")){
+
+                String presentTime = Constants.currentTime;
+
+                for(int i=0 ;i<getSlots.length;i++){
+
+                    int validSlot = Integer.parseInt(getSlots[i].substring(0, 2));
+                    int now = Integer.parseInt(presentTime.substring(0,2));
+
+                    if(validSlot>now){
+
+                        options.add(getSlots[i]);
+
+                    }
+
+                }
+
+            } // if the date is set for today
+            else{
+
+                Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
+                String availableOptions[] = availableSlots.split("_");
+                for(int i=0;i<availableOptions.length;i++){
+
+                    options.add(availableOptions[i]);
+                }
 
             }
 
@@ -226,6 +241,16 @@ public class WeeklyOrderFragment extends Fragment {
     }
 
 
+    public String getTodaysDay(){
+
+
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE");
+        return simpleDateFormat.format(c.getTime());
+
+    }
+
+
 
     public void newOrder(){
 
@@ -235,40 +260,31 @@ public class WeeklyOrderFragment extends Fragment {
 
     public void placeOrder(){
 
-        if(Constants.weeklyOrderDay.equalsIgnoreCase("thursday")){
+        formatDate();
 
-           Toast.makeText(getActivity().getApplicationContext()," Collection cannot be done on given day.\nPlease select another day.",5000).show();
-        }
-        else{
+        String finalUrl = Constants.weeklyOrderUrl+Constants.userId+"&address_id="+Constants.addressId+"&order_day="+Constants.weeklyOrderDay+"&order_slot="+ Constants.collectionSlotId;
+        new WeeklyOrdersAsyncTask(getActivity().getApplicationContext(),new WeeklyOrdersAsyncTask.WeeklyOrdersCallback() {
+            @Override
+            public void onStart(boolean status) {
 
-            formatDate();
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.APP_NAME);
+                progressDialog.setMessage("Placing Your Order");
+                progressDialog.show();
+            }
+            @Override
+            public void onResult(boolean result) {
 
-            String finalUrl = Constants.weeklyOrderUrl+Constants.userId+"&address_id="+Constants.addressId+"&order_day="+Constants.weeklyOrderDay+"&order_slot="+ Constants.collectionSlotId;
-            new WeeklyOrdersAsyncTask(getActivity().getApplicationContext(),new WeeklyOrdersAsyncTask.WeeklyOrdersCallback() {
-                @Override
-                public void onStart(boolean status) {
-
-                    progressDialog = new ProgressDialog(getActivity());
-                    progressDialog.setTitle(Constants.APP_NAME);
-                    progressDialog.setMessage("Placing Your Order");
-                    progressDialog.show();
+                progressDialog.dismiss();
+                if(result){
+                    showDialog();
                 }
-                @Override
-                public void onResult(boolean result) {
-
-                    progressDialog.dismiss();
-                    if(result){
-                        showDialog();
-                    }
-                    else{
-                        Toast.makeText(getActivity().getApplicationContext(),"Order couldnt be placed sucessfully\nTry Again Later",5000).show();
-                    }
-
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(),"Order couldnt be placed sucessfully\nTry Again Later",5000).show();
                 }
-            }).execute(finalUrl);
 
-        }
-
+            }
+        }).execute(finalUrl);
 
 
     }

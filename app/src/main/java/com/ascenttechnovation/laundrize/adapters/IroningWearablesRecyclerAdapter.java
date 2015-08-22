@@ -133,6 +133,12 @@ public class IroningWearablesRecyclerAdapter extends RecyclerView.Adapter<Ironin
             String orderId = Constants.ironingWearablesData.get(position).getCode();
             Constants.order.put(orderId,total);
         }
+        else if(value == 0){
+
+            String orderId = Constants.dryCleanHouseholdsData.get(position).getCode();
+            Constants.order.remove(orderId);
+
+        }
 
     }
 

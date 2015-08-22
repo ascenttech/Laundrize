@@ -908,43 +908,67 @@ public class PlaceOrderFragment extends Fragment {
 
     public void placeOrder(){
 
-        if(Constants.collectionDate != null) {
-            formatDate();
-            getTheValues();
-            createJson();
-            new PlaceOrderAsyncTask(getActivity().getApplicationContext(), new PlaceOrderAsyncTask.PlaceWeeklyOrderCallback() {
-                @Override
-                public void onStart(boolean status) {
+        if(Constants.order.size()!= 0) {
+            if (Constants.collectionDate != null) {
+                formatDate();
+                getTheValues();
+                createJson();
+                new PlaceOrderAsyncTask(getActivity().getApplicationContext(), new PlaceOrderAsyncTask.PlaceWeeklyOrderCallback() {
+                    @Override
+                    public void onStart(boolean status) {
 
-                    progressDialog = new ProgressDialog(getActivity());
-                    progressDialog.setTitle(Constants.APP_NAME);
-                    progressDialog.setMessage("Placing Your Order");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
-                }
-
-                @Override
-                public void onResult(boolean result) {
-
-                    progressDialog.dismiss();
-                    if (result) {
-                        showDialog();
-                    } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Order couldnt be placed sucessfully\nTry Again Later", 5000).show();
+                        progressDialog = new ProgressDialog(getActivity());
+                        progressDialog.setTitle(Constants.APP_NAME);
+                        progressDialog.setMessage("Placing Your Order");
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
                     }
-                }
-            }).execute(postOrderJsonObject);
 
+                    @Override
+                    public void onResult(boolean result) {
+
+                        progressDialog.dismiss();
+                        if (result) {
+
+                            resetValues();
+                            showDialog();
+                        } else {
+                            Toast.makeText(getActivity().getApplicationContext(), "Order couldnt be placed sucessfully\nTry Again Later", 5000).show();
+                        }
+                    }
+                }).execute(postOrderJsonObject);
+
+            } else {
+
+                Toast.makeText(getActivity().getApplicationContext(), "Please set the dates", 5000).show();
+            }
         }
         else{
-
-            Toast.makeText(getActivity().getApplicationContext(),"Please set the dates",5000).show();
+            Toast.makeText(getActivity().getApplicationContext(), "No items for placing order", 5000).show();
         }
 
     }
 
+    public void resetValues(){
+
+        // This will cler the order que once the order has been place and will reset the values
+        Iterator it = Constants.order.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            Log.d(Constants.LOG_TAG," Key "+pair.getKey().toString()+" Value "+pair.getValue().toString());
+            it.remove();
+        }
+
+
+    }
 
     public void getTheValues(){
+
+        Constants.totalAmountToBeCollected =0 ;
+        Constants.totalQuantityToBeCollected =0;
+        Constants.ironingOrderData.clear();
+        Constants.washingOrderData.clear();
+        Constants.bagOrderData.clear();
 
         Iterator iterator = Constants.order.entrySet().iterator();
         while (iterator.hasNext()) {
@@ -953,31 +977,40 @@ public class PlaceOrderFragment extends Fragment {
 
             String orderId = mapEntry.getKey().toString();
             String serviceType = String.valueOf(orderId.charAt(2));
+            Log.d(Constants.LOG_TAG," The service type int  is "+ serviceType);
+
             String orderDetails[] = mapEntry.getValue().toString().split("_");
+            Log.d(Constants.LOG_TAG," The orderDetails are as follows "+orderDetails[0]+" value "+orderDetails[1]);
+
             if(serviceType.equalsIgnoreCase("1") || serviceType.equalsIgnoreCase("2")){
 
+                Log.d(Constants.LOG_TAG," amount "+orderDetails[1]+" quantity "+orderDetails[0]);
                 Constants.ironingOrderData.add(new IroningOrderData(orderId,orderDetails[1],orderDetails[0]));
                 Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
                 Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
             }
             else if(serviceType.equalsIgnoreCase("3")||serviceType.equalsIgnoreCase("4")||serviceType.equalsIgnoreCase("5")||serviceType.equalsIgnoreCase("6")){
 
+                Log.d(Constants.LOG_TAG," amount "+orderDetails[1]+" quantity "+orderDetails[0]);
                 Constants.washingOrderData.add(new WashingOrderData(orderId,orderDetails[1],orderDetails[0]));
                 Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
                 Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
             }
             else if(serviceType.equalsIgnoreCase("7") || serviceType.equalsIgnoreCase("8")){
 
+                Log.d(Constants.LOG_TAG," amount "+orderDetails[1]+" quantity "+orderDetails[0]);
                 Constants.bagOrderData.add(new BagOrderData(orderId,orderDetails[1],orderDetails[0]));
                 Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
                 Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
             }
 
+//            iterator.remove();
         }
 
         Log.d(Constants.LOG_TAG,"Total Quantity "+Constants.totalQuantityToBeCollected);
         Log.d(Constants.LOG_TAG,"Total Amount "+Constants.totalAmountToBeCollected);
 
+        checkItem();
     }
 
 
@@ -1005,11 +1038,14 @@ public class PlaceOrderFragment extends Fragment {
 
 
                     ironingNestedJsonObject.put("order_id",orderId);
-                    ironingNestedJsonObject.put("amount",amount);
+
                     // just sending the price of a single piece
-                    String temp = String.valueOf((Integer.parseInt(amount)/Integer.parseInt(quantity)));
-                    Log.d(Constants.LOG_TAG,"Value for quantity"+temp);
-                    ironingNestedJsonObject.put("quantity",temp);
+                    Log.d(Constants.LOG_TAG," the amount "+ Integer.parseInt(amount)+" quantity "+Integer.parseInt(quantity));
+                    int temp = (Integer.parseInt(amount)/Integer.parseInt(quantity));
+                    Log.d(Constants.LOG_TAG,"Value for quantity for ironinig"+temp);
+
+                    ironingNestedJsonObject.put("amount",temp);
+                    ironingNestedJsonObject.put("quantity",quantity);
 
                     ironingNestedJsonArray.put(ironingNestedJsonObject);
 
@@ -1031,10 +1067,12 @@ public class PlaceOrderFragment extends Fragment {
 
 
                     washingNestedJsonObject.put("order_id",orderId);
-                    washingNestedJsonObject.put("amount",amount);
-                    String temp = String.valueOf((Integer.parseInt(amount)/Integer.parseInt(quantity)));
-                    Log.d(Constants.LOG_TAG,"Value for quantity"+temp);
-                    washingNestedJsonObject.put("quantity",temp);
+
+                    Log.d(Constants.LOG_TAG," the amount "+ Integer.parseInt(amount)+" quantity "+Integer.parseInt(quantity));
+                    int temp = (Integer.parseInt(amount)/Integer.parseInt(quantity));
+                    Log.d(Constants.LOG_TAG,"Value for quantity washing "+temp);
+                    washingNestedJsonObject.put("amount",temp);
+                    washingNestedJsonObject.put("quantity",quantity);
 
                     washingNestedJsonArray.put(washingNestedJsonObject);
                 }
@@ -1056,11 +1094,14 @@ public class PlaceOrderFragment extends Fragment {
                     String amount = Constants.bagOrderData.get(i).getAmount();
 
                     bagsNestedJsonObject.put("order_id",orderId);
-                    bagsNestedJsonObject.put("amount",amount);
 
-                    String temp = String.valueOf((Integer.parseInt(amount)/Integer.parseInt(quantity)));
-                    Log.d(Constants.LOG_TAG,"Value for quantity"+temp);
-                    bagsNestedJsonObject.put("quantity",temp);
+
+                    Log.d(Constants.LOG_TAG," the amount "+ Integer.parseInt(amount)+" quantity "+Integer.parseInt(quantity));
+                    int temp = (Integer.parseInt(amount)/Integer.parseInt(quantity));
+                    Log.d(Constants.LOG_TAG,"Value for quantity for bags"+temp);
+
+                    bagsNestedJsonObject.put("amount",temp);
+                    bagsNestedJsonObject.put("quantity",quantity);
 
 
                     bagsNestedJsonArray.put(bagsNestedJsonObject);
@@ -1176,8 +1217,10 @@ public class PlaceOrderFragment extends Fragment {
         }
     }
 
+    // This function will clear the previous order before placing a new one
     public void newOrder(){
 
+        resetValues();
         replaceFragment(new ServicesFragment());
     }
 
@@ -1251,8 +1294,21 @@ public class PlaceOrderFragment extends Fragment {
 
         Constants.order.remove(key);
 
+
         yourItemsLayout.findViewWithTag("view_"+position+"_"+key).setVisibility(View.GONE);
         yourItemsLayout.findViewWithTag("line_"+position).setVisibility(View.GONE);
+
+    }
+
+    public void checkItem(){
+
+        Iterator it = Constants.order.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry)it.next();
+            Log.d(Constants.LOG_TAG," Key "+pair.getKey().toString()+" Value "+pair.getValue().toString());
+
+        }
+
 
     }
 

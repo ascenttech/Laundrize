@@ -115,6 +115,12 @@ public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAd
 //            Constants.othersData.get(position).setQuantity(quantity);
 //
 //        }
+//    else if(value == 0){
+//
+//        String orderId = Constants.dryCleanHouseholdsData.get(position).getCode();
+//        Constants.order.remove(orderId);
+//
+//    }
 //
 //    }
 

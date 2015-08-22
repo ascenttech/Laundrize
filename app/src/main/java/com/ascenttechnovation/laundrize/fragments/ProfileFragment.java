@@ -84,7 +84,7 @@ public class ProfileFragment extends Fragment {
         parentInflater = inflater;
         // create bitmap from resource
         bitmap = BitmapFactory.decodeResource(getResources(),
-                R.drawable.profile);
+                R.drawable.profile_picture);
 
         fetchData();
 
@@ -380,9 +380,15 @@ public class ProfileFragment extends Fragment {
 
         addressDialog.dismiss();
         try {
-            cityValue = URLEncoder.encode(city.getSelectedItem().toString().toString(), "UTF-8");
-            zipcodeValue = URLEncoder.encode(zipcode.getSelectedItem().toString(), "UTF-8");
-            areaValue = URLEncoder.encode(area.getSelectedItem().toString(), "UTF-8");
+
+            String c = Constants.citiesMap.get(city.getSelectedItem().toString());
+            cityValue = URLEncoder.encode(c,"UTF-8");
+
+            String z = Constants.zipcodesMap.get(zipcode.getSelectedItem().toString());
+            zipcodeValue = URLEncoder.encode(z, "UTF-8");
+
+            String a = Constants.areasMap.get(area.getSelectedItem().toString());
+            areaValue = URLEncoder.encode(a, "UTF-8");
             buildingNameValue = URLEncoder.encode(building.getText().toString(), "UTF-8");
             houseNumberValue = URLEncoder.encode(houseNumber.getText().toString(), "UTF-8");
 

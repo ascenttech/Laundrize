@@ -16,7 +16,7 @@
         />
 
     <include
-        layout="@layout/include_title_description"
+        layout="@layout/include_description"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/background_image_row_order"

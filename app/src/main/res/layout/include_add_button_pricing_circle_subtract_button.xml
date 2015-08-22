@@ -5,10 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
+    <com.ascenttechnovation.laundrize.custom.CustomTextView
+        android:id="@+id/title_text_included"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/five_dp"
+        android:textSize="@dimen/title_text_size"
+        android:textColor="@color/text_color_black"
+        android:text="Tittle"
+        android:layout_weight="1"
+        android:layout_gravity="bottom"
+        android:ellipsize="end"
+        android:maxLines="1"
+        />
 
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         >
 
         <ImageView

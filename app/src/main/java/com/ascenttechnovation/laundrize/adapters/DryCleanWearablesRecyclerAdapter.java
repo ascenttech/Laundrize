@@ -133,6 +133,12 @@ public class DryCleanWearablesRecyclerAdapter extends RecyclerView.Adapter<DryCl
             Constants.order.put(orderId,total);
 
         }
+        else if(value == 0){
+
+            String orderId = Constants.dryCleanHouseholdsData.get(position).getCode();
+            Constants.order.remove(orderId);
+
+        }
 
     }
 
