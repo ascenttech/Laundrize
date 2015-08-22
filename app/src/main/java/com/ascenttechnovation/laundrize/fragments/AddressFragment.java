@@ -60,17 +60,14 @@ public class AddressFragment extends Fragment {
 
     private CustomTextView cityStaticText,zipcodeStaticText,areaStaticText;
 
-    public AddressFragment(String orderType) {
-
-        this.orderType = orderType;
-
-        Log.d(Constants.LOG_TAG,Constants.AddressFragement);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+        Log.d(Constants.LOG_TAG,Constants.AddressFragement);
+
         v = inflater.inflate(R.layout.fragment_address,container,false);
+
+        orderType = this.getArguments().getString("orderType");
         layoutInflater= inflater;
 
         customActionBar();
@@ -539,6 +536,7 @@ public class AddressFragment extends Fragment {
 
 
     public void getSlots(){
+
 
         String finalUrl = Constants.getslotsUrl+Constants.userId+"&address_id="+Constants.addressId;
 //        String finalUrl = Constants.getslotsUrl+Constants.userId;

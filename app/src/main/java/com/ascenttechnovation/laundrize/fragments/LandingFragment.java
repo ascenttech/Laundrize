@@ -102,18 +102,30 @@ public class LandingFragment extends Fragment {
 
     public void placeOrder(){
 
-        replaceFragment(new AddressFragment("place"));
+        Bundle bundle = new Bundle();
+        bundle.putString("orderType", "place");
+        Fragment fragment = new AddressFragment();
+        fragment.setArguments(bundle);
+        replaceFragment(fragment);
     }
 
     public void quickOrder(){
 
-        replaceFragment(new AddressFragment("quick"));
+        Bundle bundle = new Bundle();
+        bundle.putString("orderType", "quick");
+        Fragment fragment = new AddressFragment();
+        fragment.setArguments(bundle);
+        replaceFragment(fragment);
 
     }
 
     public void weeklyOrder(){
 
-        replaceFragment(new AddressFragment("weekly"));
+        Bundle bundle = new Bundle();
+        bundle.putString("orderType", "weekly");
+        Fragment fragment = new AddressFragment();
+        fragment.setArguments(bundle);
+        replaceFragment(fragment);
 
     }
 

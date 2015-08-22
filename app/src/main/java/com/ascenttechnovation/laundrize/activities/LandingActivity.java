@@ -228,13 +228,22 @@ public class LandingActivity extends ActionBarActivity {
                 fragment = new LandingFragment();
                 break;
             case 1:
-                fragment = new AddressFragment("place");
+                Bundle bundle = new Bundle();
+                bundle.putString("orderType", "place");
+                fragment = new AddressFragment();
+                fragment.setArguments(bundle);
                 break;
             case 2:
-                fragment = new AddressFragment("quick");
+                Bundle bundle2 = new Bundle();
+                bundle2.putString("orderType", "quick");
+                fragment = new AddressFragment();
+                fragment.setArguments(bundle2);
                 break;
             case 3:
-                fragment = new AddressFragment("weekly");
+                Bundle bundle3 = new Bundle();
+                bundle3.putString("orderType", "weekly");
+                fragment = new AddressFragment();
+                fragment.setArguments(bundle3);
                 break;
             case 4:
                 fragment = new TrackOrdersFragment();

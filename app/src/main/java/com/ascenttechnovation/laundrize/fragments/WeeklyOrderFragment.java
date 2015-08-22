@@ -151,6 +151,7 @@ public class WeeklyOrderFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Constants.weeklyOrderDay = adapterView.getSelectedItem().toString();
+                Constants.weeklyOrderDay.toLowerCase();
                 setTimeSlots(Constants.weeklyOrderDay);
             }
             @Override

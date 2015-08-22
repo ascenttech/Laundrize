@@ -189,13 +189,13 @@ public class SplashScreenActivity extends Activity {
         Constants.cities = new ArrayList<String>();
         Constants.zipcodes = new ArrayList<String>();
         Constants.weekdays = new ArrayList<String>();
-        Constants.weekdays.add("monday");
-        Constants.weekdays.add("tuesday");
-        Constants.weekdays.add("wednesday");
-        Constants.weekdays.add("thursday");
-        Constants.weekdays.add("friday");
-        Constants.weekdays.add("saturday");
-        Constants.weekdays.add("sunday");
+        Constants.weekdays.add("Monday");
+        Constants.weekdays.add("Tuesday");
+        Constants.weekdays.add("Wednesday");
+        Constants.weekdays.add("Thursday");
+        Constants.weekdays.add("Friday");
+        Constants.weekdays.add("Saturday");
+        Constants.weekdays.add("Sunday");
 
 
 
