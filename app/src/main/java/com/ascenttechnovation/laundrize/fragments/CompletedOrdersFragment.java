@@ -17,12 +17,9 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.adapters.CompletedOrdersRecyclerAdapter;
-import com.ascenttechnovation.laundrize.adapters.TrackOrdersRecyclerAdapter;
 import com.ascenttechnovation.laundrize.async.FetchCompletedOrdersAsyncTask;
-import com.ascenttechnovation.laundrize.async.TrackOrdersAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
-import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
 import java.util.ArrayList;

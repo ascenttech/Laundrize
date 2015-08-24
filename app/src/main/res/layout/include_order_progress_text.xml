@@ -10,7 +10,9 @@
         layout="@layout/row_include_order_progress_text"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        />
     <include
         android:id="@+id/delivery_date_included"
         layout="@layout/row_include_order_progress_text"
@@ -18,13 +20,13 @@
         android:layout_height="0dp"
         android:layout_weight="1"/>
     <include
-        android:id="@+id/total_amount_included"
+        android:id="@+id/delivery_slot_included"
         layout="@layout/row_include_order_progress_text"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"/>
     <include
-        android:id="@+id/total_balance_included"
+        android:id="@+id/total_amount_included"
         layout="@layout/row_include_order_progress_text"
         android:layout_width="fill_parent"
         android:layout_height="0dp"

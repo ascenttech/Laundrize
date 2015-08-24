@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,7 +17,7 @@ import android.widget.Toast;
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.activities.LandingActivity;
 import com.ascenttechnovation.laundrize.adapters.TrackOrdersRecyclerAdapter;
-import com.ascenttechnovation.laundrize.async.TrackOrdersAsyncTask;
+import com.ascenttechnovation.laundrize.async.FetchTrackOrdersAsyncTask;
 import com.ascenttechnovation.laundrize.custom.CustomButton;
 import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.utils.Constants;
@@ -112,7 +111,7 @@ public class TrackOrdersFragment extends Fragment {
 
         String finalUrl = Constants.trackOrdersUrl+Constants.userId;
 
-        new TrackOrdersAsyncTask(getActivity().getApplicationContext(),new TrackOrdersAsyncTask.TrackOrdersCallback() {
+        new FetchTrackOrdersAsyncTask(getActivity().getApplicationContext(),new FetchTrackOrdersAsyncTask.FetchTrackOrdersCallback() {
             @Override
             public void onStart(boolean status) {
 

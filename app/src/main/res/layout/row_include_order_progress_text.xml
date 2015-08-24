@@ -3,13 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.ascenttechnovation.laundrize.custom.CustomTextView
         android:id="@+id/field_static_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="HELLO THERE"
         android:textSize="@dimen/text_size"
         android:textColor="@color/sky_blue"
         />
@@ -17,8 +16,7 @@
         android:id="@+id/field_value_text_included"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="12"
-        android:textSize="@dimen/text_size_extra_large"
+        android:textSize="26dp"
         android:textColor="@color/navy_blue_button"
         />
 

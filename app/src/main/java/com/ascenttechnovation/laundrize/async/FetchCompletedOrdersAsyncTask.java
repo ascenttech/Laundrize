@@ -17,6 +17,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by ADMIN on 27-07-2015.
  */
@@ -35,6 +37,14 @@ public class FetchCompletedOrdersAsyncTask extends AsyncTask<String,Void,Boolean
     public FetchCompletedOrdersAsyncTask(Context context, FetchCompletedOrdersCallback callback) {
         this.context = context;
         this.callback = callback;
+        if(Constants.completedOrdersData.size() != 0 ){
+            Constants.completedOrdersData.clear();
+        }
+        else{
+
+            Constants.completedOrdersData = new ArrayList<CompletedOrdersData>();
+        }
+
     }
 
     @Override
@@ -80,7 +90,8 @@ public class FetchCompletedOrdersAsyncTask extends AsyncTask<String,Void,Boolean
                     String price = nestedJsonObject.getString("price");
                     String actualDelivery = nestedJsonObject.getString("actual_delivery");
                     String deliverySlot = nestedJsonObject.getString("delivery_slot");
-                    String deliveryDate = nestedJsonObject.getString("user_delivery_date");
+                    String dateDetails = nestedJsonObject.getString("user_delivery_date");
+                    String deliveryDate[] = dateDetails.split("\\s+");
 
                     switch(serviceId){
 
@@ -102,7 +113,7 @@ public class FetchCompletedOrdersAsyncTask extends AsyncTask<String,Void,Boolean
                             break;
                     }
 
-                    Constants.completedOrdersData.add(new CompletedOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService));
+                    Constants.completedOrdersData.add(new CompletedOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate[0],typeOfService));
 
 
                 }

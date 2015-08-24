@@ -487,27 +487,30 @@ public class ProfileFragment extends Fragment {
 
     public void populateZipcodes(String cityId){
 
-        if(Constants.zipcodes.size() == 0){
+        String finalUrl = Constants.getZipCodeUrl+cityId;
+        new FetchZipcodesAsyncTask(getActivity().getApplicationContext(),new FetchZipcodesAsyncTask.FetchZipcodesCallback() {
+            @Override
+            public void onStart(boolean status) {
 
-            String finalUrl = Constants.getZipCodeUrl+cityId;
-            new FetchZipcodesAsyncTask(getActivity().getApplicationContext(),new FetchZipcodesAsyncTask.FetchZipcodesCallback() {
-                @Override
-                public void onStart(boolean status) {
-
-                }
-                @Override
-                public void onResult(boolean result) {
-
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.APP_NAME);
+                progressDialog.setMessage("Please Wait...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+            }
+            @Override
+            public void onResult(boolean result) {
+                progressDialog.dismiss();
+                if(result){
                     zipcode.setVisibility(View.VISIBLE);
                     setZipcodeAdapter();
                 }
-            }).execute(finalUrl);
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(),"There was error.Please Try Again Later",5000).show();
+                }
+            }
+        }).execute(finalUrl);
 
-        }
-        else{
-
-            setZipcodeAdapter();
-        }
 
     }
 
@@ -533,28 +536,32 @@ public class ProfileFragment extends Fragment {
 
     public void populateAreas(String zipcodeId){
 
-        if(Constants.areas.size() == 0){
 
-            String finalUrl = Constants.getZipAreaUrl+zipcodeId;
-            new FetchAreasAsyncTask(getActivity().getApplicationContext(),new FetchAreasAsyncTask.FetchAreasCallback() {
-                @Override
-                public void onStart(boolean status) {
+        String finalUrl = Constants.getZipAreaUrl+zipcodeId;
+        new FetchAreasAsyncTask(getActivity().getApplicationContext(),new FetchAreasAsyncTask.FetchAreasCallback() {
+            @Override
+            public void onStart(boolean status) {
 
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.APP_NAME);
+                progressDialog.setMessage("Please Wait...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
 
-                }
-                @Override
-                public void onResult(boolean result) {
-
+            }
+            @Override
+            public void onResult(boolean result) {
+                progressDialog.dismiss();
+                if(result){
                     area.setVisibility(View.VISIBLE);
                     setAreasAdapter();
                 }
-            }).execute(finalUrl);
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(),"There was error.Please Try Again Later",5000).show();
+                }
+            }
+        }).execute(finalUrl);
 
-        }
-        else{
-
-            setAreasAdapter();
-        }
 
     }
     public void setAreasAdapter(){

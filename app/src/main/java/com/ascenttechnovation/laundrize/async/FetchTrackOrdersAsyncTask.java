@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.ascenttechnovation.laundrize.data.AddressData;
-import com.ascenttechnovation.laundrize.data.CompletedOrdersData;
 import com.ascenttechnovation.laundrize.data.TrackOrdersData;
 import com.ascenttechnovation.laundrize.utils.Constants;
 
@@ -18,24 +16,34 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by ADMIN on 27-07-2015.
  */
-public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
+public class FetchTrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     Context context;
-    TrackOrdersCallback callback;
+    FetchTrackOrdersCallback callback;
     String typeOfService;
-    public interface TrackOrdersCallback{
+    public interface FetchTrackOrdersCallback {
 
         public void onStart(boolean status);
         public void onResult(boolean result);
 
     }
 
-    public TrackOrdersAsyncTask(Context context, TrackOrdersCallback callback) {
+    public FetchTrackOrdersAsyncTask(Context context, FetchTrackOrdersCallback callback) {
         this.context = context;
         this.callback = callback;
+        if(Constants.trackOrdersData.size() != 0){
+            Constants.trackOrdersData.clear();
+        }
+        else{
+
+            Constants.trackOrdersData  = new ArrayList<TrackOrdersData>();
+        }
+
     }
 
     @Override
@@ -81,7 +89,8 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
                     String price = nestedJsonObject.getString("price");
                     String actualDelivery = nestedJsonObject.getString("actual_delivery");
                     String deliverySlot = nestedJsonObject.getString("delivery_slot");
-                    String deliveryDate = nestedJsonObject.getString("user_delivery_date");
+                    String dateDetails = nestedJsonObject.getString("user_delivery_date");
+                    String deliveryDate[] = dateDetails.split("\\s+");
 
                     switch(serviceId){
 
@@ -107,18 +116,18 @@ public class TrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
                       if(!actualOpsCollectionTime.equalsIgnoreCase("null")){
 
                           Constants.orderProgress = 4;
-                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot, actualCollected, actualOpsSubmissionTime, actualOpsCollectionTime, price, actualDelivery, deliverySlot, deliveryDate,typeOfService,Constants.orderProgress));
+                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot, actualCollected, actualOpsSubmissionTime, actualOpsCollectionTime, price, actualDelivery, deliverySlot, deliveryDate[0],typeOfService,Constants.orderProgress));
                       }
                       else if(!actualOpsSubmissionTime.equalsIgnoreCase("null")){
                           Constants.orderProgress = 3;
-                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService,Constants.orderProgress));
+                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate[0],typeOfService,Constants.orderProgress));
                       }
                         else if(!actualCollected.equalsIgnoreCase("null")){
                           Constants.orderProgress = 2;
-                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService,Constants.orderProgress));
+                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate[0],typeOfService,Constants.orderProgress));
                       } else if(!collectionSlot.equalsIgnoreCase("null")){
                           Constants.orderProgress = 1;
-                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate,typeOfService,Constants.orderProgress));
+                          Constants.trackOrdersData.add(new TrackOrdersData(serviceId,orderId,serviceName,quantity,collectionSlot,actualCollected,actualOpsSubmissionTime,actualOpsCollectionTime,price,actualDelivery,deliverySlot,deliveryDate[0],typeOfService,Constants.orderProgress));
                       }
 
                 }

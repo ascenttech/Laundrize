@@ -22,9 +22,9 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
 
     Context context;
     private ArrayList<CompletedOrdersData> completedOrdersData;
-    private LinearLayout numberOfItems,deliveryDate,totalAmount,totalBalance;
-    private CustomTextView numberOfItemsValue,deliveryDateValue,totalAmountValue,totalBalanceValue,title;
-    private CustomTextView numberOfItemsStaticText,deliveryDateStaticText,totalAmountStaticText,totalBalanceStaticText;
+    private LinearLayout numberOfItems,deliveryDate, deliverySlot, totalAmount;
+    private CustomTextView numberOfItemsValue,deliveryDateValue, deliverySlotValue, totalAmountValue,title;
+    private CustomTextView numberOfItemsStaticText,deliveryDateStaticText, deliverySlotStaticText, totalAmountStaticText;
 
     public CompletedOrdersRecyclerAdapter(Context context) {
         this.context = context;
@@ -69,19 +69,19 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
 
         numberOfItems = (LinearLayout) holder.v.findViewById(R.id.number_of_items_included);
         deliveryDate = (LinearLayout) holder.v.findViewById(R.id.delivery_date_included);
+        deliverySlot = (LinearLayout) holder.v.findViewById(R.id.delivery_slot_included);
         totalAmount = (LinearLayout) holder.v.findViewById(R.id.total_amount_included);
-        totalBalance = (LinearLayout) holder.v.findViewById(R.id.total_balance_included);
 
         title = (CustomTextView) holder.v.findViewById(R.id.static_text_completed_order_fragment);
         numberOfItemsValue = (CustomTextView) numberOfItems.findViewById(R.id.field_value_text_included);
         deliveryDateValue = (CustomTextView) deliveryDate.findViewById(R.id.field_value_text_included);
+        deliverySlotValue = (CustomTextView) deliverySlot.findViewById(R.id.field_value_text_included);
         totalAmountValue = (CustomTextView) totalAmount.findViewById(R.id.field_value_text_included);
-        totalBalanceValue = (CustomTextView) totalBalance.findViewById(R.id.field_value_text_included);
 
         numberOfItemsStaticText = (CustomTextView) numberOfItems.findViewById(R.id.field_static_text);
         deliveryDateStaticText = (CustomTextView) deliveryDate.findViewById(R.id.field_static_text);
+        deliverySlotStaticText = (CustomTextView) deliverySlot.findViewById(R.id.field_static_text);
         totalAmountStaticText = (CustomTextView) totalAmount.findViewById(R.id.field_static_text);
-        totalBalanceStaticText = (CustomTextView) totalBalance.findViewById(R.id.field_static_text);
 
 
     }
@@ -90,15 +90,15 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
 
         numberOfItemsStaticText.setText("Number of Items");
         deliveryDateStaticText.setText("Delivery Date");
+        deliverySlotStaticText.setText("Delivery Slot");
         totalAmountStaticText.setText("Total Amount");
-        totalBalanceStaticText.setText("Total Balance");
 
         title.setText(Constants.completedOrdersData.get(position).getTypeOfService()+" | "+ Constants.completedOrdersData.get(position).getOrderId());
 
         numberOfItemsValue.setText(Constants.completedOrdersData.get(position).getQuantity());
         deliveryDateValue.setText(Constants.completedOrdersData.get(position).getDeliveryDate());
+        deliverySlotValue.setText(getTheKey(Constants.completedOrdersData.get(position).getDeliverySlot()));
         totalAmountValue.setText(Constants.completedOrdersData.get(position).getPrice());
-        totalBalanceValue.setText("0");
 
     }
 
@@ -108,6 +108,16 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
         return completedOrdersData.size();
     }
 
+    public String getTheKey(String value) {
 
+        for (String key : Constants.slots.keySet()) {
+            if (Constants.slots.get(key).equals(value)) {
+                Log.d(Constants.LOG_TAG," Returning the key "+key);
+                return key;
+            }
+        }
+
+        return "NA";
+    }
 
 }
