@@ -365,15 +365,15 @@ public class PlaceOrderFragment extends Fragment {
 
                 if(year==yearofc && month==monthOfYear && date==dayOfMonth){
                     collectionDateText.setText("Today");
-                    monthOfYear = month+1;
-                    Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    month = monthOfYear+1;
+                    Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setCollectionsAdapter(Constants.collectionDate,"today");
 
                 }
                 else{
-                    monthOfYear = month+1;
+                    month = monthOfYear+1;
                     collectionDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
-                    Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setCollectionsAdapter(Constants.collectionDate, "later");
                 }
 
@@ -390,7 +390,7 @@ public class PlaceOrderFragment extends Fragment {
         collectionTimeSlot.setVisibility(View.VISIBLE);
 
         final String date = d;
-        final ArrayList<String> collectionSlots = getSlots(date,when);
+        final ArrayList<String> collectionSlots = getSlots(date,when,"collection");
         if(collectionSlots != null){
 
             // d will always receive Constants.collectionDate
@@ -438,22 +438,25 @@ public class PlaceOrderFragment extends Fragment {
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         date   = c.get(Calendar.DAY_OF_MONTH);
+        Log.d(Constants.LOG_TAG,"Instant Date "+date+"/"+month+"/"+year);
+
         ironingPickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
 
                 if(year==yearofc && month==monthOfYear && date==dayOfMonth) {
                     ironingDateText.setText("Today");
-
-                    monthOfYear = month+1;
-                    Constants.ironingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    month = monthOfYear+1;
+                    Log.d(Constants.LOG_TAG," Date is "+ year+"/"+monthOfYear+"/"+date );
+                    Constants.ironingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setIroningAdapter(Constants.ironingDeliveryDate,-1);
 
                 }
                 else{
-                    monthOfYear = month+1;
+                    month = monthOfYear+1;
+                    Log.d(Constants.LOG_TAG," Date is "+ year+"/"+monthOfYear+"/"+date );
                     ironingDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
-                    Constants.ironingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    Constants.ironingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setIroningAdapter(Constants.ironingDeliveryDate,-1);
 
                 }
@@ -503,7 +506,7 @@ public class PlaceOrderFragment extends Fragment {
             }
             else{
 
-                ironingSlots = getSlots(date,"later");
+                ironingSlots = getSlots(date,"later","ironing");
             }
 
         }
@@ -555,16 +558,15 @@ public class PlaceOrderFragment extends Fragment {
 
                 if(year==yearofc && month==monthOfYear && date==dayOfMonth) {
                     washingDateText.setText("Today");
-
-                    monthOfYear = month+1;
-                    Constants.washingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    month = monthOfYear+1;
+                    Constants.washingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setWashingAdapter(Constants.washingDeliveryDate,-1);
 
                 }
                 else{
-                    monthOfYear = month+1;
+                    month = monthOfYear+1;
                     washingDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
-                    Constants.washingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    Constants.washingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setWashingAdapter(Constants.washingDeliveryDate,-1);
 
                 }
@@ -597,7 +599,7 @@ public class PlaceOrderFragment extends Fragment {
             }
             else{
 
-                washingSlots = getSlots(date,"later");
+                washingSlots = getSlots(date,"later","washing");
             }
 
         }
@@ -649,16 +651,16 @@ public class PlaceOrderFragment extends Fragment {
 
                 if(year==yearofc && month==monthOfYear && date==dayOfMonth) {
 
-                    monthOfYear = month+1;
+                    month = monthOfYear+1;
                     bagsDateText.setText("Today");
-                    Constants.bagsDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    Constants.bagsDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setBagsAdapter(Constants.bagsDeliveryDate,-1);
 
                 }
                 else{
-                    monthOfYear = month+1;
+                    month = monthOfYear+1;
                     bagsDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
-                    Constants.bagsDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    Constants.bagsDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setBagsAdapter(Constants.bagsDeliveryDate,-1);
 
                 }
@@ -691,7 +693,7 @@ public class PlaceOrderFragment extends Fragment {
             }
             else{
 
-                bagsSlots = getSlots(date,"later");
+                bagsSlots = getSlots(date,"later","bags");
             }
 
         }
@@ -719,10 +721,25 @@ public class PlaceOrderFragment extends Fragment {
     // setting the available slots  for collection
     // date : the selected date
     // when : today or later
-    public ArrayList<String> getSlots(String date, String when){
+    public ArrayList<String> getSlots(String date, String when,String service){
 
-        Log.d(Constants.LOG_TAG,"when from function "+ when );
-        Constants.collectionDate = date;
+        Log.d(Constants.LOG_TAG,"Date "+date+" when "+when+" service "+service);
+        if(service.equalsIgnoreCase("collection")){
+            Constants.collectionDate = date;
+            Log.d(Constants.LOG_TAG," Collection Date set "+ Constants.collectionDate);
+        }
+        else if(service.equalsIgnoreCase("ironing")){
+            Constants.ironingDeliveryDate = date;
+            Log.d(Constants.LOG_TAG," Collection Date set "+ Constants.ironingDeliveryDate);
+        }
+        else if(service.equalsIgnoreCase("washing")){
+            Constants.washingDeliveryDate = date;
+            Log.d(Constants.LOG_TAG," Collection Date set "+ Constants.washingDeliveryDate);
+        }
+        else if(service.equalsIgnoreCase("bags")){
+            Constants.bagsDeliveryDate = date;
+            Log.d(Constants.LOG_TAG," Collection Date set "+ Constants.bagsDeliveryDate);
+        }
         ArrayList<String> options = new ArrayList<String>();
         try {
 
@@ -755,7 +772,7 @@ public class PlaceOrderFragment extends Fragment {
                         int dateForChange = Integer.parseInt(dateDetails[0]);
                         dateForChange++;
                         String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
-                        ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                        ArrayList<String> options1 =getSlots(dateForFunction,"later",service);
                         return options1;
 
                     }
@@ -778,7 +795,7 @@ public class PlaceOrderFragment extends Fragment {
                 int dateForChange = Integer.parseInt(dateDetails[0]);
                 dateForChange++;
                 String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
-                ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                ArrayList<String> options1 =getSlots(dateForFunction,"later",service);
                 return options1;
 
             }
@@ -818,6 +835,8 @@ public class PlaceOrderFragment extends Fragment {
     }
 
     public ArrayList<String> getSlotsForIroningAndWashing(String date, int counter,String service ,int j){
+
+        Log.d(Constants.LOG_TAG," Date is "+date);
 
         ArrayList<String> options = new ArrayList<String>();
         if(service.equalsIgnoreCase("ironing")){

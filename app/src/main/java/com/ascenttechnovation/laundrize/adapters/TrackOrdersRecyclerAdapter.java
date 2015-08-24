@@ -108,7 +108,7 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
 
         numberOfItemsStaticText.setText("Number of Items");
         deliveryDateStaticText.setText("Delivery Date");
-        deliverySlotStaticText.setText("Delivery Slot");
+        deliverySlotStaticText.setText("Delivery Time");
         totalAmountStaticText.setText("Total Amount");
 
         title.setText(Constants.trackOrdersData.get(position).getTypeOfService()+" | "+ Constants.trackOrdersData.get(position).getOrderId());

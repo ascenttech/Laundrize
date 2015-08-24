@@ -260,13 +260,13 @@ public class QuickOrderFragment extends Fragment {
 
                 if(year==yearofc && month==monthOfYear && date==dayOfMonth){
                     collectionDateText.setText("Today");
-                    monthOfYear = month+1;
-                    Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    month = monthOfYear+1;
+                    Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setCollectionsAdapter(Constants.collectionDate,"today");
 
                 }
                 else{
-                    monthOfYear = month+1;
+                    month = monthOfYear+1;
                     collectionDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
                     Constants.collectionDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
                     setCollectionsAdapter(Constants.collectionDate, "later");
@@ -349,15 +349,15 @@ public class QuickOrderFragment extends Fragment {
                 if(year==yearofc && month==monthOfYear && date==dayOfMonth) {
                     ironingDateText.setText("Today");
 
-                    monthOfYear = month+1;
-                    Constants.ironingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    month = monthOfYear+1;
+                    Constants.ironingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setIroningAdapter(Constants.ironingDeliveryDate,-1);
 
                 }
                 else {
-                    monthOfYear = month + 1;
+                    month = monthOfYear+1;
                     ironingDateText.setText(dayOfMonth + "/" + monthOfYear + "/" + yearofc);
-                    Constants.ironingDeliveryDate = String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear) + "/" + String.valueOf(yearofc);
+                    Constants.ironingDeliveryDate = String.valueOf(dayOfMonth) + "/" + String.valueOf(month) + "/" + String.valueOf(yearofc);
                     setIroningAdapter(Constants.ironingDeliveryDate, -1);
 
 
@@ -461,15 +461,15 @@ public class QuickOrderFragment extends Fragment {
                 if(year==yearofc && month==monthOfYear && date==dayOfMonth) {
                     washingDateText.setText("Today");
 
-                    monthOfYear = month+1;
-                    Constants.washingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    month = monthOfYear+1;
+                    Constants.washingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setWashingAdapter(Constants.washingDeliveryDate,-1);
 
                 }
                 else{
-                    monthOfYear = month+1;
+                    month = monthOfYear+1;
                     washingDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
-                    Constants.washingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    Constants.washingDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setWashingAdapter(Constants.washingDeliveryDate,-1);
 
                 }
@@ -554,16 +554,16 @@ public class QuickOrderFragment extends Fragment {
 
                 if(year==yearofc && month==monthOfYear && date==dayOfMonth) {
 
-                    monthOfYear = month+1;
+                    month = monthOfYear+1;
                     bagsDateText.setText("Today");
-                    Constants.bagsDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    Constants.bagsDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setBagsAdapter(Constants.bagsDeliveryDate,-1);
 
                 }
                 else{
-                    monthOfYear = month+1;
+                    month = monthOfYear+1;
                     bagsDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
-                    Constants.bagsDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(monthOfYear)+"/"+String.valueOf(yearofc);
+                    Constants.bagsDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
                     setBagsAdapter(Constants.bagsDeliveryDate,-1);
 
                 }

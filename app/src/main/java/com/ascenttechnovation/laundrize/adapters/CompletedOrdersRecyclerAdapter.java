@@ -89,8 +89,8 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
     private void setViews(int position){
 
         numberOfItemsStaticText.setText("Number of Items");
-        deliveryDateStaticText.setText("Delivery Date");
-        deliverySlotStaticText.setText("Delivery Slot");
+        deliveryDateStaticText.setText("Delivered Date");
+        deliverySlotStaticText.setText("Delivered Time");
         totalAmountStaticText.setText("Total Amount");
 
         title.setText(Constants.completedOrdersData.get(position).getTypeOfService()+" | "+ Constants.completedOrdersData.get(position).getOrderId());
