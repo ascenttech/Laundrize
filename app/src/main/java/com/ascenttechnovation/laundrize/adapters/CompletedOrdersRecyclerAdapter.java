@@ -110,8 +110,8 @@ public class CompletedOrdersRecyclerAdapter extends RecyclerView.Adapter<Complet
 
     public String getTheKey(String value) {
 
-        for (String key : Constants.slots.keySet()) {
-            if (Constants.slots.get(key).equals(value)) {
+        for (String key : Constants.getSlotsId.keySet()) {
+            if (Constants.getSlotsId.get(key).equals(value)) {
                 Log.d(Constants.LOG_TAG," Returning the key "+key);
                 return key;
             }

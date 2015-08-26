@@ -130,8 +130,9 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
 
     public String getTheKey(String value) {
 
-        for (String key : Constants.slots.keySet()) {
-            if (Constants.slots.get(key).equals(value)) {
+        Log.d(Constants.LOG_TAG," Obtained value "+value);
+        for (String key : Constants.getSlotsId.keySet()) {
+            if (Constants.getSlotsId.get(key).equals(value)) {
                 Log.d(Constants.LOG_TAG," Returning the key "+key);
                 return key;
             }

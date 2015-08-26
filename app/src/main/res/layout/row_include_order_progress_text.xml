@@ -16,7 +16,7 @@
         android:id="@+id/field_value_text_included"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="26dp"
+        android:textSize="@dimen/text_size_extra_extra_large"
         android:textColor="@color/navy_blue_button"
         />
 
