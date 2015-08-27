@@ -19,6 +19,7 @@
             android:padding="@dimen/padding_large"
             android:drawablePadding="@dimen/padding"
             android:textColor="@color/checkout_card_text"
+            android:textSize="@dimen/text_size"
             />
         <View
             android:layout_width="fill_parent"

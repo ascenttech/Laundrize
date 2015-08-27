@@ -134,7 +134,15 @@ public class TrackOrdersFragment extends Fragment {
                 }
                 else{
 
-                    Toast.makeText(getActivity().getApplicationContext(),"Couldn't fetch your order \nTry Again Later",5000).show();
+                    if(Constants.noOrdersToTrack){
+
+                        Toast.makeText(getActivity().getApplicationContext(),"No orders to be tracked",5000).show();
+                    }
+                    else{
+
+                        Toast.makeText(getActivity().getApplicationContext(),"Couldn't fetch your order \nTry Again Later",5000).show();
+                    }
+
                 }
 
             }

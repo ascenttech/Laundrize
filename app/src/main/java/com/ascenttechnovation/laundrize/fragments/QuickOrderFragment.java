@@ -237,7 +237,7 @@ public class QuickOrderFragment extends Fragment {
 
         collectionTitleText.setText("Collection");
         ironingTitleText.setText("Delivery : Ironing");
-        washingTitleText.setText("Delivery : Washables");
+        washingTitleText.setText("Delivery : Wash & Iron");
         bagsTitleText.setText("Delivery : Bags & Shoes");
 
         newOrder.setText("NEW ORDER");
@@ -943,11 +943,11 @@ public class QuickOrderFragment extends Fragment {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setTitle("Laundrize");
-        alert.setMessage("Your Order has been Placed");
+        alert.setMessage("Your order has been placed");
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                replaceFragment(new LandingFragment());
+                replaceFragment(new TrackOrdersFragment());
             }
         });
         alert.setCancelable(false);

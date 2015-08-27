@@ -27,7 +27,7 @@ import com.ascenttechnovation.laundrize.utils.Constants;
  */
 public class ForgotPasswordActivity extends Activity {
 
-//    private CustomButton verifyDetailsButton,submitButton;
+    //    private CustomButton verifyDetailsButton,submitButton;
     private CustomButton submitButton;
     private Button verifyDetailsButton;
     private CustomEditText mobileNumberEdit,newPasswordEdit,confirmPasswordEdit,verificationCodeEdit;
@@ -89,41 +89,48 @@ public class ForgotPasswordActivity extends Activity {
 
         String s1=newPasswordEdit.getText().toString();
         String s2=confirmPasswordEdit.getText().toString();
-        if(s1.equals(s2))
-        {
-            String finalUrl = Constants.forgotPasswordUrl + mobileNumberEdit.getText().toString();
-            new FetchPasswordForRecoveryAsyncTask(getApplicationContext(), new FetchPasswordForRecoveryAsyncTask.FetchPasswordForRecoveryCallback() {
-                @Override
-                public void onStart(boolean status) {
+        Log.d(Constants.LOG_TAG," Mobile Number length "+mobileNumberEdit.getText().length());
+        if(mobileNumberEdit.getText().length()== 10){
+            if(s1.equals(s2))
+            {
+                String finalUrl = Constants.forgotPasswordUrl + mobileNumberEdit.getText().toString();
+                new FetchPasswordForRecoveryAsyncTask(getApplicationContext(), new FetchPasswordForRecoveryAsyncTask.FetchPasswordForRecoveryCallback() {
+                    @Override
+                    public void onStart(boolean status) {
 
-                    progressDialog = new ProgressDialog(ForgotPasswordActivity.this);
-                    progressDialog.setTitle(Constants.APP_NAME);
-                    progressDialog.setMessage("Loading,Please Wait...");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
+                        progressDialog = new ProgressDialog(ForgotPasswordActivity.this);
+                        progressDialog.setTitle(Constants.APP_NAME);
+                        progressDialog.setMessage("Loading,Please Wait...");
+                        progressDialog.setCancelable(false);
+                        progressDialog.show();
 
-                }
-
-                @Override
-                public void onResult(boolean result) {
-
-                    progressDialog.dismiss();
-                    if (result) {
-                        verificationCodeEdit.setVisibility(View.VISIBLE);
-                        submitButton.setVisibility(View.VISIBLE);
-                        Toast.makeText(getApplicationContext(), " You will receive a message shortly", 5000).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "There was an error \nTry Again Later", 5000).show();
                     }
 
-                }
-            }).execute(finalUrl);
+                    @Override
+                    public void onResult(boolean result) {
+
+                        progressDialog.dismiss();
+                        if (result) {
+                            verificationCodeEdit.setVisibility(View.VISIBLE);
+                            submitButton.setVisibility(View.VISIBLE);
+                            Toast.makeText(getApplicationContext(), " You will receive a message shortly", 5000).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Number already registered.", 5000).show();
+                        }
+
+                    }
+                }).execute(finalUrl);
+            }
+            else
+            {
+                newPasswordEdit.setText("");
+                confirmPasswordEdit.setText("");
+                Toast.makeText(getApplicationContext(), "Password does not match", 5000).show();
+            }
+
         }
-        else
-        {
-            newPasswordEdit.setText("");
-            confirmPasswordEdit.setText("");
-            Toast.makeText(getApplicationContext(), " New Password and Confirm Password does not Match ", 5000).show();
+        else{
+            Toast.makeText(getApplicationContext(),"Mobile number should be 10 digit",5000).show();
         }
     }
 
@@ -152,6 +159,7 @@ public class ForgotPasswordActivity extends Activity {
                 progressDialog.dismiss();
                 if(result){
 
+                    Toast.makeText(getApplicationContext(),"Password successfully changed",5000).show();
                     Intent i = new Intent(ForgotPasswordActivity.this,LoginActivity.class);
                     startActivity(i);
 

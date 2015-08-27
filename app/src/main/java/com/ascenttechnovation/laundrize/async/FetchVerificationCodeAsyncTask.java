@@ -54,6 +54,7 @@ public class FetchVerificationCodeAsyncTask extends AsyncTask<String,Void,Boolea
             HttpResponse httpResponse = httpClient.execute(httpPost);
 
             int statusCode = httpResponse.getStatusLine().getStatusCode();
+            Log.d(Constants.LOG_TAG," Status code is "+statusCode);
             if(statusCode == 200){
 
                 HttpEntity httpEntity = httpResponse.getEntity();

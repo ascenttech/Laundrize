@@ -27,34 +27,38 @@
             >
         <ImageView
             android:id="@+id/profile_image_navigation_drawer"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
             android:layout_margin="@dimen/margin_dp"
+            android:layout_centerVertical="true"
             />
 
             <com.ascenttechnovation.laundrize.custom.CustomTextView
-                android:id="@+id/name_text_landing_activity"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="Admin"
-                android:textSize="@dimen/drawer_text_size"
-                android:textColor="@color/text_color_white"
-                android:layout_marginBottom="@dimen/margin"
-                android:paddingLeft="@dimen/pop_up_margin_dp"
-                />
-
-            <com.ascenttechnovation.laundrize.custom.CustomTextView
+                android:id="@+id/static_text_landing_activity"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Hello"
                 android:textSize="@dimen/drawer_text_size_small"
                 android:textColor="@color/text_color_white"
                 android:paddingLeft="@dimen/pop_up_margin_dp"
-                android:layout_above="@id/name_text_landing_activity"
+                android:layout_toRightOf="@id/profile_image_navigation_drawer"
+                android:layout_centerVertical="true"
                 />
+
+            <com.ascenttechnovation.laundrize.custom.CustomTextView
+                android:id="@+id/name_text_landing_activity"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Admin"
+                android:textSize="@dimen/drawer_text_size"
+                android:textColor="@color/text_color_white"
+                android:paddingLeft="@dimen/pop_up_margin_dp"
+                android:layout_toRightOf="@id/profile_image_navigation_drawer"
+                android:layout_below="@id/static_text_landing_activity"
+                />
+
+
 
         </RelativeLayout>
 

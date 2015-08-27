@@ -279,7 +279,7 @@ public class WeeklyOrderFragment extends Fragment {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setTitle("Laundrize");
-        alert.setMessage("Your Order has been Placed");
+        alert.setMessage("Your order has been placed");
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {

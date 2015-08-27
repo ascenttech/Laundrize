@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_large"
             android:background="@drawable/rounded_edit_text"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:layout_marginBottom="@dimen/margin_large"
             android:layout_marginTop="@dimen/margin"
             android:textSize="@dimen/text_size_edit_text"

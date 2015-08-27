@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.custom.CustomTextView;
@@ -93,6 +94,10 @@ public class DryCleanHouseholdsRecyclerAdapter extends RecyclerView.Adapter<DryC
 
     @Override
     public int getItemCount() {
+
+        if(dryCleanHouseholdsData.size() == 0){
+            Toast.makeText(context.getApplicationContext(),"Services not available",5000).show();
+        }
         return dryCleanHouseholdsData.size();
     }
 

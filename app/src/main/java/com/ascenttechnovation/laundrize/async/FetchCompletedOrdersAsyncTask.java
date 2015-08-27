@@ -127,6 +127,7 @@ public class FetchCompletedOrdersAsyncTask extends AsyncTask<String,Void,Boolean
         catch (Exception e){
 
             e.printStackTrace();
+            Constants.noCompletedOrders = true;
             return false;
         }
 

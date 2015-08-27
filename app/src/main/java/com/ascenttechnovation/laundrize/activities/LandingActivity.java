@@ -30,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ascenttechnovation.laundrize.R;
 import com.ascenttechnovation.laundrize.adapters.NavigationDrawerAdapter;
@@ -73,6 +74,7 @@ public class LandingActivity extends ActionBarActivity {
     ImageView profileImage;
     int icons[]={R.drawable.icon_home,R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_watch,R.drawable.icon_shirt,R.drawable.drawer_logo_profile,R.drawable.drawer_logo_tnc,R.drawable.drawer_logo_privacy_policy,R.drawable.drawer_logo_faq,R.drawable.drawer_logo_contact_us};
 
+    int counter=0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -363,7 +365,15 @@ public class LandingActivity extends ActionBarActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-//        setTitle(navMenuTitles[position]);
+
         mDrawerLayout.closeDrawer(sliderLayout);
+//        if(counter%2 == 0){
+//            finish();
+//            counter = 0;
+//        }
+//        else{
+//            counter++;
+//            Toast.makeText(getApplicationContext(),"Press back again to exit",5000).show();
+//        }
     }
 }

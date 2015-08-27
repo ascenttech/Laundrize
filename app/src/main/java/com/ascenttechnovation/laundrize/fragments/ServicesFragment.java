@@ -91,7 +91,7 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
 
     public void fetchServices(){
 
-        String finalUrl = Constants.fetchLaundrySevicesUrl+ Constants.userId;
+        String finalUrl = Constants.fetchLaundrySevicesUrl+ Constants.userId+"&address_id="+Constants.addressId;
         new FetchLaundryServicesAsyncTask(getActivity().getApplicationContext(), new FetchLaundryServicesAsyncTask.FetchLaundryServicesCallback() {
             @Override
             public void onStart(boolean status) {

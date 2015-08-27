@@ -34,6 +34,7 @@
             android:text="Sign in with Facebook"
             android:textColor="@color/white"
             style="@style/captionOnly"
+            android:textSize="@dimen/text_size_extra_small"
             />
 
     </LinearLayout>

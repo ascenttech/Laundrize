@@ -141,6 +141,7 @@ public class FetchTrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
         catch (Exception e){
 
             e.printStackTrace();
+            Constants.noOrdersToTrack = true;
             return false;
         }
 

@@ -122,7 +122,7 @@ public class PlaceOrderFragment extends Fragment {
                 if(result){
 
                     Constants.currentServerTimeFetched = true;
-                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId;
+                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId+"&address_id="+Constants.addressId;
                     new FetchSlotDifferenceAsyncTask(new FetchSlotDifferenceAsyncTask.FetchSlotDifferenceCallback() {
                         @Override
                         public void onStart(boolean status) {
@@ -242,7 +242,7 @@ public class PlaceOrderFragment extends Fragment {
 
         collectionTitleText.setText("Collection");
         ironingTitleText.setText("Delivery : Ironing");
-        washingTitleText.setText("Delivery : Washables");
+        washingTitleText.setText("Delivery : Wash & Iron");
         bagsTitleText.setText("Delivery : Bags & Shoes");
 
 
@@ -837,6 +837,8 @@ public class PlaceOrderFragment extends Fragment {
     public ArrayList<String> getSlotsForIroningAndWashing(String date, int counter,String service ,int j){
 
         Log.d(Constants.LOG_TAG," Date is "+date);
+        String dateDetails[] = date.split("/");
+
 
         ArrayList<String> options = new ArrayList<String>();
         if(service.equalsIgnoreCase("ironing")){
@@ -849,8 +851,6 @@ public class PlaceOrderFragment extends Fragment {
             Constants.bagsDeliveryDate = date;
         }
 
-//
-        String dateDetails[] = date.split("/");
         try {
             String availableSlots = getAvailableSlots(date);
             Log.d(Constants.LOG_TAG," SLOTS AVAILABLE "+ availableSlots);
@@ -1171,11 +1171,11 @@ public class PlaceOrderFragment extends Fragment {
 
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setTitle("Laundrize");
-        alert.setMessage("Your Order has been Placed");
+        alert.setMessage("Your order has been placed");
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                replaceFragment(new LandingFragment());
+                replaceFragment(new TrackOrdersFragment());
             }
         });
         alert.show();
@@ -1331,6 +1331,9 @@ public class PlaceOrderFragment extends Fragment {
 
     }
 
+
+    
+
     View.OnClickListener toastListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -1363,6 +1366,7 @@ public class PlaceOrderFragment extends Fragment {
 
         }
     };
+
 
 
     View.OnClickListener inflatedClickListener = new View.OnClickListener() {

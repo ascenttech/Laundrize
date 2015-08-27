@@ -14,12 +14,16 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
 /**
  * Created by ADMIN on 30-07-2015.
  */
 public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
 
     public FetchAllSlotsCallback callback;
+    public String allSlots="";
+    private boolean firstElement;
     public interface FetchAllSlotsCallback{
 
         public void onStart(boolean status);
@@ -61,22 +65,34 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
                 for (int i=0;i<jsonArray.length();i++){
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-//                    String slot1 = jsonObject.getString("1")
-                    String slot2 = jsonObject.getString("2");
-                    String slot3 = jsonObject.getString("3");
-                    String slot4 = jsonObject.getString("4");
-                    String slot5 = jsonObject.getString("5");
-                    String slot6 = jsonObject.getString("6");
-                    String slot7 = jsonObject.getString("7");
                     String day = jsonObject.getString("day");
+                    Iterator<String> keys = jsonObject.keys();
+                    while(keys.hasNext()){
 
-//                    String allSlots = slot1+"_"+slot2+"_"+slot3+"_"+slot4+"_"+slot5+"_"+slot6+"_"+slot7
-                    String allSlots = slot2+"_"+slot3+"_"+slot4+"_"+slot5+"_"+slot6+"_"+slot7;
+                        String currentKey = keys.next();
+                        if(currentKey.equalsIgnoreCase("day")){
+
+                            // We are using this variable because when we want to know which is the first element after
+                            // the day so that we can concatenate the others using "_"
+                            firstElement = true;
+                        }
+                        else if(firstElement){
+
+                            allSlots = allSlots.concat(jsonObject.getString(currentKey));
+                            firstElement = false;
+                        }
+                        else{
+
+                            allSlots = allSlots.concat("_");
+                            allSlots = allSlots.concat(jsonObject.getString(currentKey));
+                        }
+
+
+                    }
+
                     Constants.slots.put(day,allSlots);
+                    allSlots ="";
 
-                    // This line was supposed to add all the days of the week that are fetched fromt he server
-                    // Now this is hardcoded
-//                    Constants.weekdays.add(day);
 
                 }
                 return true;

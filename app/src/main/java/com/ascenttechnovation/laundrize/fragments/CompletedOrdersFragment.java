@@ -123,7 +123,15 @@ public class CompletedOrdersFragment extends Fragment {
                 }
                 else{
 
-                    Toast.makeText(getActivity().getApplicationContext(),"Couldn't fetch your order \nTry Again Later",5000).show();
+                    if(Constants.noCompletedOrders){
+
+                        Toast.makeText(getActivity().getApplicationContext(),"There are no completed orders for yet for you",5000).show();
+                    }
+                    else{
+
+                        Toast.makeText(getActivity().getApplicationContext(),"Couldn't fetch your order \nTry Again Later",5000).show();
+                    }
+
                 }
 
 
