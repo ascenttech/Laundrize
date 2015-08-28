@@ -24,7 +24,7 @@
                 android:padding="@dimen/padding_large"
                 android:background="@drawable/white_card">
 
-                <com.ascenttechnovation.laundrize.custom.CustomTextView
+                <com.tricerionservices.laundrize.custom.CustomTextView
                     android:id="@+id/edit_profile_text_profile_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                     android:src="@drawable/profile_picture"
                     />
 
-                <com.ascenttechnovation.laundrize.custom.CustomTextView
+                <com.tricerionservices.laundrize.custom.CustomTextView
                     android:id="@+id/forgot_password_static_text_log_in_now"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                     android:text=" Welcome "
                     android:textSize="@dimen/text_size"/>
 
-                <com.ascenttechnovation.laundrize.custom.CustomTextView
+                <com.tricerionservices.laundrize.custom.CustomTextView
                     android:id="@+id/user_name_text_profile_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
 
             </LinearLayout>
 
-            <com.ascenttechnovation.laundrize.custom.CustomButton
+            <com.tricerionservices.laundrize.custom.CustomButton
                 android:id="@+id/add_new_address_button_profile_fragment"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

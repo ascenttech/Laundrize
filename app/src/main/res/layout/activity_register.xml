@@ -15,7 +15,7 @@
         android:layout_centerInParent="true"
         >
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -28,7 +28,7 @@
             />
 
 
-        <com.ascenttechnovation.laundrize.custom.CustomEditText
+        <com.tricerionservices.laundrize.custom.CustomEditText
             android:id="@+id/name_edit_register_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,10 +39,10 @@
             android:background="@drawable/rounded_edit_text"
             android:textSize="@dimen/text_size_edit_text">
             <requestFocus/>
-            </com.ascenttechnovation.laundrize.custom.CustomEditText>
+            </com.tricerionservices.laundrize.custom.CustomEditText>
 
 
-        <com.ascenttechnovation.laundrize.custom.CustomEditText
+        <com.tricerionservices.laundrize.custom.CustomEditText
             android:id="@+id/email_edit_register_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
             android:background="@drawable/rounded_edit_text"
             android:layout_marginTop="@dimen/margin"
             android:textSize="@dimen/text_size_edit_text"/>
-        <com.ascenttechnovation.laundrize.custom.CustomEditText
+        <com.tricerionservices.laundrize.custom.CustomEditText
             android:id="@+id/mobileno_edit_register_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
             android:textSize="@dimen/text_size_edit_text"
             android:inputType="number"/>
 
-        <com.ascenttechnovation.laundrize.custom.CustomEditText
+        <com.tricerionservices.laundrize.custom.CustomEditText
             android:id="@+id/password_edit_register_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

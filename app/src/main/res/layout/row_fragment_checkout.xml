@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:id="@+id/service_included"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
             android:padding="@dimen/padding_large"
             android:drawablePadding="@dimen/padding"
             android:textColor="@color/checkout_card_text"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size_large"
             />
         <View
             android:layout_width="fill_parent"
@@ -27,7 +27,7 @@
             android:background="#777"
             android:layout_margin="@dimen/margin"
            />
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:id="@+id/select_date_slot_included"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             android:layout_margin="@dimen/margin"
             />
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:id="@+id/select_time_slot_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

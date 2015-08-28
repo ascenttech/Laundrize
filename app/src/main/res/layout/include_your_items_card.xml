@@ -15,7 +15,7 @@
         android:layout_margin="@dimen/margin_small"
         >
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/baniyan"

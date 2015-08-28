@@ -9,7 +9,7 @@
     android:id="@+id/address_layout_included"
     >
 
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <com.tricerionservices.laundrize.custom.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" Address "
@@ -18,7 +18,7 @@
         android:drawableLeft="@drawable/icon_tick"
         />
 
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <com.tricerionservices.laundrize.custom.CustomTextView
         android:id="@+id/address_text_included"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,7 +29,7 @@
         android:visibility="invisible"
         />
 
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <com.tricerionservices.laundrize.custom.CustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mobile"
@@ -37,7 +37,7 @@
         android:textSize="@dimen/text_size_extra_large"
         android:layout_marginLeft="@dimen/icon_offset"/>
 
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <com.tricerionservices.laundrize.custom.CustomTextView
         android:id="@+id/mobile_number_text_included"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

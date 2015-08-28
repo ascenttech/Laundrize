@@ -7,7 +7,7 @@
     >
 
 
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <com.tricerionservices.laundrize.custom.CustomTextView
         android:id="@+id/contact_us_static_text_contact_us_fragment"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

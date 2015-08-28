@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:padding="@dimen/pop_up_margin_dp"
         />
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <com.tricerionservices.laundrize.custom.CustomTextView
         android:id="@+id/menu_item_text_navigation_drawer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -9,7 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <com.ascenttechnovation.laundrize.custom.CustomButton
+        <com.tricerionservices.laundrize.custom.CustomButton
             android:id="@+id/select_address_button_address_fragment"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -36,7 +36,7 @@
             android:layout_marginBottom="@dimen/margin_dp"
             />
         </ScrollView>
-        <com.ascenttechnovation.laundrize.custom.CustomButton
+        <com.tricerionservices.laundrize.custom.CustomButton
             android:id="@+id/add_new_address_button_address_fragment"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -63,7 +63,7 @@
                 android:padding="@dimen/margin_dp"
                 >
 
-                <com.ascenttechnovation.laundrize.custom.CustomTextView
+                <com.tricerionservices.laundrize.custom.CustomTextView
                     android:id="@+id/city_add_new_address_static"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                     android:visibility="gone"
                     />
 
-                <com.ascenttechnovation.laundrize.custom.CustomTextView
+                <com.tricerionservices.laundrize.custom.CustomTextView
                     android:id="@+id/zipcode_add_new_address_static"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
                     android:visibility="gone"
                     />
 
-                <com.ascenttechnovation.laundrize.custom.CustomTextView
+                <com.tricerionservices.laundrize.custom.CustomTextView
                     android:id="@+id/area_add_new_address_static"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
                     android:textSize="@dimen/text_size_edit_text"
                     android:visibility="gone"
                     />
-                <com.ascenttechnovation.laundrize.custom.CustomEditText
+                <com.tricerionservices.laundrize.custom.CustomEditText
                     android:id="@+id/building_or_street_add_new_address"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                     android:textSize="@dimen/text_size_edit_text"
                     android:padding="@dimen/padding_large"
                     />
-                <com.ascenttechnovation.laundrize.custom.CustomEditText
+                <com.tricerionservices.laundrize.custom.CustomEditText
                     android:id="@+id/flat_or_house_number_add_new_address"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
                     android:padding="@dimen/padding_large"
                     />
 
-                <com.ascenttechnovation.laundrize.custom.CustomButton
+                <com.tricerionservices.laundrize.custom.CustomButton
                     android:id="@+id/save_new_address_add_new_address"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

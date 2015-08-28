@@ -24,7 +24,7 @@
         android:layout_gravity="bottom"
         >
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:id="@+id/cloth_text_your_items"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             android:textSize="@dimen/text_size_double_extra_small"
             />
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:id="@+id/service_text_your_items"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
         android:layout_gravity="bottom"
         />
 
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <com.tricerionservices.laundrize.custom.CustomTextView
         android:id="@+id/quantity_text_your_items"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
         android:layout_gravity="bottom"
         />
 
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <com.tricerionservices.laundrize.custom.CustomTextView
         android:id="@+id/total_text_your_items"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

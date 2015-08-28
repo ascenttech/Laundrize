@@ -34,7 +34,7 @@
             android:layout_centerVertical="true"
             />
 
-            <com.ascenttechnovation.laundrize.custom.CustomTextView
+            <com.tricerionservices.laundrize.custom.CustomTextView
                 android:id="@+id/static_text_landing_activity"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:layout_centerVertical="true"
                 />
 
-            <com.ascenttechnovation.laundrize.custom.CustomTextView
+            <com.tricerionservices.laundrize.custom.CustomTextView
                 android:id="@+id/name_text_landing_activity"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

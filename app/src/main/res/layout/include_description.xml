@@ -8,7 +8,7 @@
     >
 
 
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <com.tricerionservices.laundrize.custom.CustomTextView
         android:id="@+id/description_text_included"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:layout_weight="1"
         />
 
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <com.tricerionservices.laundrize.custom.CustomTextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="@dimen/five_dp"

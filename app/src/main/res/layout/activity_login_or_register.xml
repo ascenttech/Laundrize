@@ -31,7 +31,7 @@
         android:orientation="vertical"
         >
 
-        <com.ascenttechnovation.laundrize.custom.CustomButton
+        <com.tricerionservices.laundrize.custom.CustomButton
             android:id="@+id/sign_in_now_button_login_or_register_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             android:layout_marginBottom="@dimen/margin_large"
             style="@style/smallTextOnly"
             />
-        <com.ascenttechnovation.laundrize.custom.CustomButton
+        <com.tricerionservices.laundrize.custom.CustomButton
             android:id="@+id/register_now_button_login_or_register_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

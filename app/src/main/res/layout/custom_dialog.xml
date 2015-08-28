@@ -7,7 +7,7 @@
     android:layout_margin="@dimen/margin_dp"
     >
 
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
+    <com.tricerionservices.laundrize.custom.CustomEditText
         android:id="@+id/first_name_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -17,7 +17,7 @@
         android:layout_margin="@dimen/pop_up_margin_dp"
         android:padding="@dimen/padding_large"
         />
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
+    <com.tricerionservices.laundrize.custom.CustomEditText
         android:id="@+id/last_name_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         android:layout_margin="@dimen/pop_up_margin_dp"
         android:padding="@dimen/padding_large"
         />
-    <com.ascenttechnovation.laundrize.custom.CustomEditText
+    <com.tricerionservices.laundrize.custom.CustomEditText
         android:id="@+id/email_id_edit_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
         <!--android:padding="@dimen/padding_large"-->
         <!--/>-->
 
-    <com.ascenttechnovation.laundrize.custom.CustomButton
+    <com.tricerionservices.laundrize.custom.CustomButton
         android:id="@+id/update_button_custom_dialog"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

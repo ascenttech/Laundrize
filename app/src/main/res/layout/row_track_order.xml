@@ -16,7 +16,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:id="@+id/status_static_text_track_order_fragment"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

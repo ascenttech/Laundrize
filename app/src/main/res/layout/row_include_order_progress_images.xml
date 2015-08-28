@@ -19,14 +19,14 @@
         android:orientation="vertical"
         >
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:id="@+id/progress_static_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="HELLO THERE"
             android:textSize="@dimen/text_size_extra_large"
             />
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:id="@+id/progress_value_text_included"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

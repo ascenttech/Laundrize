@@ -23,7 +23,7 @@
         <!--android:text="@string/text_laundry"-->
         <!--android:textSize="@dimen/text_size_extra_large"/>-->
 
-    <com.ascenttechnovation.laundrize.custom.CustomButton
+    <com.tricerionservices.laundrize.custom.CustomButton
         android:id="@+id/quick_service_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

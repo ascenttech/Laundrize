@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:id="@+id/service_included"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:background="#777"
             android:layout_margin="@dimen/margin"
            />
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:id="@+id/select_date_slot_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             android:layout_margin="@dimen/margin"
             />
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:id="@+id/select_time_slot_text"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

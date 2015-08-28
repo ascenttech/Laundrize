@@ -6,7 +6,7 @@
     android:padding="@dimen/padding"
     >
 
-    <com.ascenttechnovation.laundrize.custom.CustomTextView
+    <com.tricerionservices.laundrize.custom.CustomTextView
         android:id="@+id/tab_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

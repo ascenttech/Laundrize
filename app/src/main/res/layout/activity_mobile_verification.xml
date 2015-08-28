@@ -29,7 +29,7 @@
         android:layout_below="@id/logo"
         >
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -40,7 +40,7 @@
             android:textColor="@color/activity_static_text"
             />
 
-        <com.ascenttechnovation.laundrize.custom.CustomEditText
+        <com.tricerionservices.laundrize.custom.CustomEditText
             android:id="@+id/mobileno_edit_verification_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,9 +52,9 @@
             android:inputType="number"
             >
             <requestFocus/>
-            </com.ascenttechnovation.laundrize.custom.CustomEditText>
+            </com.tricerionservices.laundrize.custom.CustomEditText>
 
-        <com.ascenttechnovation.laundrize.custom.CustomButton
+        <com.tricerionservices.laundrize.custom.CustomButton
             android:id="@+id/verify_now_button_mobile_verification_activity"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             android:layout_marginTop="@dimen/margin"
             />
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -92,7 +92,7 @@
             android:layout_marginTop="@dimen/margin_large"
             />
 
-        <com.ascenttechnovation.laundrize.custom.CustomTextView
+        <com.tricerionservices.laundrize.custom.CustomTextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -103,7 +103,7 @@
             android:layout_marginTop="@dimen/margin_large"
             />
 
-        <com.ascenttechnovation.laundrize.custom.CustomEditText
+        <com.tricerionservices.laundrize.custom.CustomEditText
             android:id="@+id/username_edit_verification_activity"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -117,7 +117,7 @@
 
 
 
-        <com.ascenttechnovation.laundrize.custom.CustomButton
+        <com.tricerionservices.laundrize.custom.CustomButton
             android:id="@+id/confirm_verification_button_mobile_verification_activity"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
