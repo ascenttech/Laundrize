@@ -406,6 +406,10 @@ public class PlaceOrderFragment extends Fragment {
 
                     // Collection Slot id
                     // minus 2 because the slots start from 1 instead of 1 and the slot 1 is not accessbile current
+                    Log.d(Constants.LOG_TAG," Adapter view "+adapterView.getItemAtPosition(i).toString());
+                    Log.d(Constants.LOG_TAG," SLot Id "+Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()));
+
+
                     j = Integer.parseInt(Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()))-2;
                     int collectionArrayIndex = j;
                     Constants.collectionSlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());

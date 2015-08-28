@@ -281,6 +281,8 @@ public class QuickOrderFragment extends Fragment {
 
     public void setCollectionsAdapter(final String date,final String when){
 
+        Log.d(Constants.LOG_TAG," Date obtained in collections adapter "+ date);
+
         collectionTimeSlotText.setVisibility(View.GONE);
         collectionTimeSlot.setVisibility(View.VISIBLE);
 
