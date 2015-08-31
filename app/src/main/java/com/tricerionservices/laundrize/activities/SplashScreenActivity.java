@@ -233,7 +233,7 @@ public class SplashScreenActivity extends Activity {
     private void setViews(){
 
 
-        Ion.with(logo).load("android.resource://com.ascenttechnovation.laundrize/" + R.drawable.animated_logo);
+        Ion.with(logo).load("android.resource://com.tricerionservices.laundrize/" + R.drawable.animated_logo);
 
     }
 
