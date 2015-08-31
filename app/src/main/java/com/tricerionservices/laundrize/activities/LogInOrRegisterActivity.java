@@ -150,8 +150,8 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
                                         final String lastName = URLEncoder.encode(response.getJSONObject().getString("last_name"), "UTF-8");
                                         final String email = URLEncoder.encode(response.getJSONObject().getString("email"), "UTF-8");
 
-
-                                        String finalUrl = Constants.checkUserExistsUrl+googleId+"&type="+"GP";
+                                        Log.d(Constants.LOG_TAG," Id "+ id);
+                                        String finalUrl = Constants.checkUserExistsUrl+id+"&type="+"FB";
                                         new CheckIfUserExistsAsyncTask(getApplicationContext(),new CheckIfUserExistsAsyncTask.CheckIfUserExistsCallback() {
                                             @Override
                                             public void onStart() {

@@ -279,14 +279,18 @@ public class QuickOrderFragment extends Fragment {
     }
 
 
-    public void setCollectionsAdapter(final String date,final String when){
+    public void setCollectionsAdapter(final String d,final String when){
 
         Log.d(Constants.LOG_TAG," Date obtained in collections adapter "+ date);
 
         collectionTimeSlotText.setVisibility(View.GONE);
         collectionTimeSlot.setVisibility(View.VISIBLE);
 
-        final ArrayList<String> collectionSlots = getSlots(date,when);
+        final String date = d;
+        final ArrayList<String> collectionSlots = getSlots(date,when,"collection");
+
+        // previous
+//        final ArrayList<String> collectionSlots = getSlots(date,when);
         if(collectionSlots != null) {
 
             collectionDateText.setText(Constants.collectionDate);
@@ -300,8 +304,9 @@ public class QuickOrderFragment extends Fragment {
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
                     // Collection Slot id
-                    // minus 2 because the slots start from 0 instead of 1 and the slot 1 is not accessbile current
-                    j = Integer.parseInt(Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()))-2;
+                    // -1 because our slots start from id number 1 so we are makieng th array index j = 0
+                    // by subtracting 1
+                    j = Integer.parseInt(Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()))-1;
                     int collectionArrayIndex = j;
                     Constants.collectionSlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
                     if(ironing.isChecked()){
@@ -412,7 +417,7 @@ public class QuickOrderFragment extends Fragment {
             }
             else{
 
-                ironingSlots = getSlots(date,"later");
+                ironingSlots = getSlots(date,"later","ironing");
             }
 
         }else {
@@ -504,7 +509,7 @@ public class QuickOrderFragment extends Fragment {
             }
             else{
 
-                washingSlots = getSlots(date,"later");
+                washingSlots = getSlots(date,"later","washing");
             }
 
         }
@@ -524,6 +529,7 @@ public class QuickOrderFragment extends Fragment {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                    Log.d(Constants.LOG_TAG," The delivery slot id is "+Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()));
                     Constants.washingDeliverySlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
                 }
                 @Override
@@ -598,7 +604,7 @@ public class QuickOrderFragment extends Fragment {
             }
             else{
 
-                bagsSlots = getSlots(date,"later");
+                bagsSlots = getSlots(date,"later","bags");
             }
 
         }
@@ -621,19 +627,59 @@ public class QuickOrderFragment extends Fragment {
         }
     }
 
+
     // setting the available slots  for collection
     // date : the selected date
     // when : today or later
-    public ArrayList<String> getSlots(String date, String when){
+    public ArrayList<String> getSlots(String date, String when,String service){
 
-        Constants.collectionDate = date;
+        Log.d(Constants.LOG_TAG," Date is "+date);
+        String dateDetails[] = date.split("/");
+
+        int year = Integer.parseInt(dateDetails[2]);
+
+        // we are subtracting one because months start range from 0 to 11
+        // while in our calender month ranges from 1 to 12
+        int month = Integer.parseInt(dateDetails[1])-1;
+        int day = Integer.parseInt(dateDetails[0]);
+
+        Calendar c = Calendar.getInstance();
+        c.set(year,month,day);
+
+        Log.d(Constants.LOG_TAG," The set date is "+ c.getTime());
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Log.d(Constants.LOG_TAG," The set date after fomating "+ simpleDateFormat.format(c.getTime()));
+        date = simpleDateFormat.format(c.getTime());
+
+
+
+        Log.d(Constants.LOG_TAG,"Date "+date+" when "+when+" service "+service);
+        if(service.equalsIgnoreCase("collection")){
+            Constants.collectionDate = date;
+            Log.d(Constants.LOG_TAG," Collection Date set "+ Constants.collectionDate);
+        }
+        else if(service.equalsIgnoreCase("ironing")){
+            Constants.ironingDeliveryDate = date;
+            Log.d(Constants.LOG_TAG," Ironing Date set "+ Constants.ironingDeliveryDate);
+        }
+        else if(service.equalsIgnoreCase("washing")){
+            Constants.washingDeliveryDate = date;
+            Log.d(Constants.LOG_TAG,"Washing Date set "+ Constants.washingDeliveryDate);
+        }
+        else if(service.equalsIgnoreCase("bags")){
+            Constants.bagsDeliveryDate = date;
+            Log.d(Constants.LOG_TAG," Bags Date set "+ Constants.bagsDeliveryDate);
+        }
         ArrayList<String> options = new ArrayList<String>();
         try {
 
+            Log.d(Constants.LOG_TAG," The Date which is received in the getSlots "+date);
             String availableSlots = getAvailableSlots(date);
 
             if(availableSlots != null){
                 String getSlots[] = availableSlots.split("_");
+                Log.d(Constants.LOG_TAG,"when before checking "+when.equalsIgnoreCase("today"));
                 if(when.equalsIgnoreCase("today")){
 
                     String presentTime = Constants.currentTime;
@@ -653,17 +699,17 @@ public class QuickOrderFragment extends Fragment {
 
                     if(options.size() == 0){
 
-                        String dateDetails[] = date.split("/");
-                        int dateForChange = Integer.parseInt(dateDetails[0]);
+                        String detailedDate[] = date.split("/");
+                        int dateForChange = Integer.parseInt(detailedDate[0]);
                         dateForChange++;
-                        String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
-                        ArrayList<String> options1 =getSlots(dateForFunction,"later");
+                        String dateForFunction = String.valueOf(dateForChange) + "/" + detailedDate[1] + "/" + detailedDate[2];
+                        ArrayList<String> options1 =getSlots(dateForFunction,"later",service);
                         return options1;
 
                     }
 
                 } // if the date is set for today
-                else{
+                else if(when.equalsIgnoreCase("later")){
 
                     Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
                     String availableOptions[] = availableSlots.split("_");
@@ -675,12 +721,13 @@ public class QuickOrderFragment extends Fragment {
                 }
             }
             else{
-                    String dateDetails[] = date.split("/");
-                    int dateForChange = Integer.parseInt(dateDetails[0]);
-                    dateForChange++;
-                    String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
-                    ArrayList<String> options1 =getSlots(dateForFunction,"later");
-                    return options1;
+
+                String detailedDate[] = date.split("/");
+                int dateForChange = Integer.parseInt(detailedDate[0]);
+                dateForChange++;
+                String dateForFunction = String.valueOf(dateForChange) + "/" + detailedDate[1] + "/" + detailedDate[2];
+                ArrayList<String> options1 =getSlots(dateForFunction,"later",service);
+                return options1;
 
             }
 
@@ -694,6 +741,105 @@ public class QuickOrderFragment extends Fragment {
         // return the array of available slots
         return options;
     }
+
+
+
+    // previous one
+    // setting the available slots  for collection
+    // date : the selected date
+    // when : today or later
+//    public ArrayList<String> getSlots(String date, String when){
+//
+//        Log.d(Constants.LOG_TAG," Date is "+date);
+//        String dateDetails[] = date.split("/");
+//
+//        int year = Integer.parseInt(dateDetails[2]);
+//
+//        // we are subtracting one because months start range from 0 to 11
+//        // while in our calender month ranges from 1 to 12
+//        int month = Integer.parseInt(dateDetails[1])-1;
+//        int day = Integer.parseInt(dateDetails[0]);
+//
+//        Calendar c = Calendar.getInstance();
+//        c.set(year,month,day);
+//
+//        Log.d(Constants.LOG_TAG," The set date is "+ c.getTime());
+//
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        Log.d(Constants.LOG_TAG," The set date after fomating "+ simpleDateFormat.format(c.getTime()));
+//        date = simpleDateFormat.format(c.getTime());
+//
+//
+//
+//
+//        Constants.collectionDate = date;
+//        ArrayList<String> options = new ArrayList<String>();
+//        try {
+//
+//            String availableSlots = getAvailableSlots(date);
+//
+//            if(availableSlots != null){
+//                String getSlots[] = availableSlots.split("_");
+//                if(when.equalsIgnoreCase("today")){
+//
+//                    String presentTime = Constants.currentTime;
+//
+//                    for(int i=0 ;i<getSlots.length;i++){
+//
+//                        int validSlot = Integer.parseInt(getSlots[i].substring(0, 2));
+//                        int now = Integer.parseInt(presentTime.substring(0,2));
+//
+//                        if(validSlot>now){
+//
+//                            options.add(getSlots[i]);
+//
+//                        }
+//
+//                    }
+//
+//                    if(options.size() == 0){
+//
+//                        String dateDetails[] = date.split("/");
+//                        int dateForChange = Integer.parseInt(dateDetails[0]);
+//                        dateForChange++;
+//                        String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+//                        ArrayList<String> options1 =getSlots(dateForFunction,"later");
+//                        return options1;
+//
+//                    }
+//
+//                } // if the date is set for today
+//                else{
+//
+//                    Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
+//                    String availableOptions[] = availableSlots.split("_");
+//                    for(int i=0;i<availableOptions.length;i++){
+//
+//                        options.add(availableOptions[i]);
+//                    }
+//
+//                }
+//            }
+//            else{
+//                    String dateDetails[] = date.split("/");
+//                    int dateForChange = Integer.parseInt(dateDetails[0]);
+//                    dateForChange++;
+//                    String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+//                    ArrayList<String> options1 =getSlots(dateForFunction,"later");
+//                    return options1;
+//
+//            }
+//
+//
+//        }
+//
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//        // return the array of available slots
+//        return options;
+//    }
 
     public String getAvailableSlots(String date){
 
@@ -877,7 +1023,7 @@ public class QuickOrderFragment extends Fragment {
                 ironingCreated = true;
                 for(int i=0;i < 1;i++){
                     ironingNestedJsonObject = new JSONObject();
-                    ironingNestedJsonObject.put("order_id","0");
+                    ironingNestedJsonObject.put("order_id","001001001");
                     ironingNestedJsonObject.put("amount","0");
                     ironingNestedJsonObject.put("quantity","0");
 
@@ -895,7 +1041,7 @@ public class QuickOrderFragment extends Fragment {
                 washingCreated = true;
                 for(int i=0;i<1;i++){
                     washingNestedJsonObject = new JSONObject();
-                    washingNestedJsonObject.put("order_id","0");
+                    washingNestedJsonObject.put("order_id","003001001");
                     washingNestedJsonObject.put("amount","0");
                     washingNestedJsonObject.put("quantity","0");
 
@@ -914,7 +1060,7 @@ public class QuickOrderFragment extends Fragment {
 //                bagsCreated = true;
 //                for(int i=0;i<1;i++){
 //                    bagsNestedJsonObject = new JSONObject();
-//                    bagsNestedJsonObject.put("order_id","0");
+//                    bagsNestedJsonObject.put("order_id","007001001");
 //                    bagsNestedJsonObject.put("amount","0");
 //                    bagsNestedJsonObject.put("quantity","0");
 //

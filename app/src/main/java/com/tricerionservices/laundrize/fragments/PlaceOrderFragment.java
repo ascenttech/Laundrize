@@ -410,7 +410,9 @@ public class PlaceOrderFragment extends Fragment {
                     Log.d(Constants.LOG_TAG," SLot Id "+Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()));
 
 
-                    j = Integer.parseInt(Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()))-2;
+                    // -1 because our slots start from id number 1 so we are makieng th array index j = 0
+                    // by subtracting 1
+                    j = Integer.parseInt(Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()))-1;
                     int collectionArrayIndex = j;
                     Constants.collectionSlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
                     setIroningAdapter(Constants.collectionDate,collectionArrayIndex);
@@ -625,6 +627,7 @@ public class PlaceOrderFragment extends Fragment {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
+                    Log.d(Constants.LOG_TAG," The delivery slot id is "+Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()));
                     Constants.washingDeliverySlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
                 }
                 @Override
@@ -729,6 +732,27 @@ public class PlaceOrderFragment extends Fragment {
     // when : today or later
     public ArrayList<String> getSlots(String date, String when,String service){
 
+        Log.d(Constants.LOG_TAG," Date is "+date);
+        String dateDetails[] = date.split("/");
+
+        int year = Integer.parseInt(dateDetails[2]);
+
+        // we are subtracting one because months start range from 0 to 11
+        // while in our calender month ranges from 1 to 12
+        int month = Integer.parseInt(dateDetails[1])-1;
+        int day = Integer.parseInt(dateDetails[0]);
+
+        Calendar c = Calendar.getInstance();
+        c.set(year,month,day);
+
+        Log.d(Constants.LOG_TAG," The set date is "+ c.getTime());
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        Log.d(Constants.LOG_TAG," The set date after fomating "+ simpleDateFormat.format(c.getTime()));
+        date = simpleDateFormat.format(c.getTime());
+
+
+
         Log.d(Constants.LOG_TAG,"Date "+date+" when "+when+" service "+service);
         if(service.equalsIgnoreCase("collection")){
             Constants.collectionDate = date;
@@ -736,15 +760,15 @@ public class PlaceOrderFragment extends Fragment {
         }
         else if(service.equalsIgnoreCase("ironing")){
             Constants.ironingDeliveryDate = date;
-            Log.d(Constants.LOG_TAG," Collection Date set "+ Constants.ironingDeliveryDate);
+            Log.d(Constants.LOG_TAG," Ironing Date set "+ Constants.ironingDeliveryDate);
         }
         else if(service.equalsIgnoreCase("washing")){
             Constants.washingDeliveryDate = date;
-            Log.d(Constants.LOG_TAG," Collection Date set "+ Constants.washingDeliveryDate);
+            Log.d(Constants.LOG_TAG,"Washing Date set "+ Constants.washingDeliveryDate);
         }
         else if(service.equalsIgnoreCase("bags")){
             Constants.bagsDeliveryDate = date;
-            Log.d(Constants.LOG_TAG," Collection Date set "+ Constants.bagsDeliveryDate);
+            Log.d(Constants.LOG_TAG," Bags Date set "+ Constants.bagsDeliveryDate);
         }
         ArrayList<String> options = new ArrayList<String>();
         try {
@@ -774,10 +798,10 @@ public class PlaceOrderFragment extends Fragment {
 
                     if(options.size() == 0){
 
-                        String dateDetails[] = date.split("/");
-                        int dateForChange = Integer.parseInt(dateDetails[0]);
+                        String detailedDate[] = date.split("/");
+                        int dateForChange = Integer.parseInt(detailedDate[0]);
                         dateForChange++;
-                        String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                        String dateForFunction = String.valueOf(dateForChange) + "/" + detailedDate[1] + "/" + detailedDate[2];
                         ArrayList<String> options1 =getSlots(dateForFunction,"later",service);
                         return options1;
 
@@ -797,10 +821,10 @@ public class PlaceOrderFragment extends Fragment {
             }
             else{
 
-                String dateDetails[] = date.split("/");
-                int dateForChange = Integer.parseInt(dateDetails[0]);
+                String detailedDate[] = date.split("/");
+                int dateForChange = Integer.parseInt(detailedDate[0]);
                 dateForChange++;
-                String dateForFunction = String.valueOf(dateForChange) + "/" + dateDetails[1] + "/" + dateDetails[2];
+                String dateForFunction = String.valueOf(dateForChange) + "/" + detailedDate[1] + "/" + detailedDate[2];
                 ArrayList<String> options1 =getSlots(dateForFunction,"later",service);
                 return options1;
 

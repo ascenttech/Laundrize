@@ -213,7 +213,7 @@ public class SplashScreenActivity extends Activity {
         Constants.order = new HashMap<String,String>();
         Constants.slots = new HashMap<String,String>();
         Constants.getSlotsId = new HashMap<String,String>();
-        Constants.getSlotsId.put("08:00 AM - 10:00 PM","1");
+        Constants.getSlotsId.put("08:00 AM - 10:00 AM","1");
         Constants.getSlotsId.put("10:00 AM - 12:00 PM","2");
         Constants.getSlotsId.put("12:00 PM - 14:00 PM","3");
         Constants.getSlotsId.put("14:00 PM - 16:00 PM","4");

@@ -24,6 +24,8 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
     public FetchAllSlotsCallback callback;
     public String allSlots="";
     private boolean firstElement;
+    private String day;
+
     public interface FetchAllSlotsCallback{
 
         public void onStart(boolean status);
@@ -43,10 +45,10 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
     @Override
     protected Boolean doInBackground(String... url) {
 
-        Log.d(Constants.LOG_TAG,Constants.FetchAllSlotsAsyncTask);
-        Log.d(Constants.LOG_TAG," Url to be fetched "+url[0]);
+        Log.d(Constants.LOG_TAG, Constants.FetchAllSlotsAsyncTask);
+        Log.d(Constants.LOG_TAG, " Url to be fetched " + url[0]);
 
-        try{
+        try {
 
             HttpPost httpPost = new HttpPost(url[0]);
             httpPost.addHeader("Authorization:Bearer", Constants.token);
@@ -55,64 +57,111 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
 
             int statusCode = httpResponse.getStatusLine().getStatusCode();
             Log.d(Constants.LOG_TAG, " status code " + statusCode);
-            if(statusCode == 200){
+            if (statusCode == 200) {
 
                 HttpEntity httpEntity = httpResponse.getEntity();
                 String response = EntityUtils.toString(httpEntity);
 
-                Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
+                Log.d(Constants.LOG_TAG, " JSON RESPONSE " + response);
                 JSONArray jsonArray = new JSONArray(response);
-                for (int i=0;i<jsonArray.length();i++){
+                for (int i = 0; i < jsonArray.length(); i++) {
 
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
-                    String day = jsonObject.getString("day");
                     Iterator<String> keys = jsonObject.keys();
-                    while(keys.hasNext()){
+                    while (keys.hasNext()) {
 
                         String currentKey = keys.next();
-                        if(currentKey.equalsIgnoreCase("day")){
+                        if (currentKey.equalsIgnoreCase("day")) {
 
+                            Log.d(Constants.LOG_TAG, " We reached here");
                             // We are using this variable because when we want to know which is the first element after
                             // the day so that we can concatenate the others using "_"
-                            firstElement = true;
-                        }
-                        else if(firstElement){
+                            day = jsonObject.getString("day");
+                        } else {
 
-                            allSlots = allSlots.concat(jsonObject.getString(currentKey));
-                            firstElement = false;
-                        }
-                        else{
+                            if (allSlots.isEmpty()) {
 
-                            allSlots = allSlots.concat("_");
-                            allSlots = allSlots.concat(jsonObject.getString(currentKey));
-                        }
+                                allSlots = jsonObject.getString(currentKey);
+                                Log.d(Constants.LOG_TAG, " Adding the first value " + allSlots);
+                            } else {
 
+
+                                allSlots = allSlots.concat("_");
+                                allSlots = allSlots.concat(jsonObject.getString(currentKey));
+                                Log.d(Constants.LOG_TAG, " Concating values " + allSlots);
+                            }
+
+                        }
 
                     }
-
-                    Constants.slots.put(day,allSlots);
-                    allSlots ="";
-
-
+                    Log.d(Constants.LOG_TAG, " All slots from background " + allSlots + " Day to be inserted " + day);
+                    allSlots = sortAllSlots();
+                    Log.d(Constants.LOG_TAG, " After Sorting" + allSlots + " Day to be inserted " + day);
+                    Constants.slots.put(day, allSlots);
+                    allSlots = "";
                 }
                 return true;
+
             }
-            else{
-                return false;
-            }
-        }
-        catch (Exception e){
+            return false;
+        }// end of try
+
+        catch(Exception e){
 
             e.printStackTrace();
             return false;
         }
 
+    }// end of doInBackground
+
+    // This method is used to sort the slots values from allSlots
+    private String sortAllSlots() {
+
+        String sortedSlots = new String();
+        String slots[] = allSlots.split("_");
+        // NOW we have the values as slots[0] = "10:00AM - 12:00PM"
+        //  slots[1] = "08:00AM - 10:00PM"
+        //  slots[2] = "14:00PM - 16:00PM"
+
+        for(int i=0;i<slots.length;i++){
+
+            int pivot = Integer.parseInt(slots[i].substring(0,2));
+            for(int j = i+1;j<slots.length;j++){
+
+                int checkElement = Integer.parseInt(slots[j].substring(0, 2));
+                Log.d(Constants.LOG_TAG," The pivot element is "+pivot+" checkElement is "+checkElement);
+                if(pivot > checkElement){
+
+                    Log.d(Constants.LOG_TAG," The value of i "+ i+" the value of j is "+j);
+                    String temp = slots[i];
+                    slots[i] = slots[j];
+                    slots[j] = temp;
+                }
+            }
+
+        }
+
+        for(int i =0;i<slots.length;i++){
+
+            if(i==0){
+                sortedSlots = slots[i];
+            }
+            else{
+                sortedSlots = sortedSlots.concat("_");
+                sortedSlots = sortedSlots.concat(slots[i]);
+            }
+
+        }
+
+        return sortedSlots;
+
+
     }
 
     @Override
-    protected void onPostExecute(Boolean result) {
+    protected void onPostExecute (Boolean result){
         super.onPostExecute(result);
-        Log.d(Constants.LOG_TAG," Value returned "+result);
+        Log.d(Constants.LOG_TAG, " Value returned " + result);
         callback.onResult(result);
     }
 }
