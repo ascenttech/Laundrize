@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.tricerionservices.laundrize.R;
 import com.tricerionservices.laundrize.adapters.IroningWearablesRecyclerAdapter;
@@ -33,6 +34,18 @@ public class IroningWearablesFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_ironing_wearables,container,false);
         settingTheAdapter(v);
         return v;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
+
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(), "Internet is required for this app.", 5000).show();
+        }
     }
 
     private void settingTheAdapter(View v){

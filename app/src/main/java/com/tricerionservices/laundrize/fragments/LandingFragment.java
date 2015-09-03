@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.tricerionservices.laundrize.R;
 import com.tricerionservices.laundrize.activities.LandingActivity;
@@ -36,9 +37,22 @@ public class LandingFragment extends Fragment {
         customActionBar();
         findViews(v);
         setViews();
-        setClickListeners();
+
 
         return v;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
+
+            setClickListeners();
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(), "Internet is required for this app.", 5000).show();
+        }
     }
 
     private void customActionBar(){
@@ -77,12 +91,12 @@ public class LandingFragment extends Fragment {
 
         trackOrderBtn = (CustomButton) trackOrder.findViewById(R.id.styled_button_included);
         trackOrderBtn.setText("Track Order");
-        trackOrderBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_watch,0,0,0);
+        trackOrderBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawer_icon_watch,0,0,0);
 
 
         completedOrderBtn = (CustomButton) completedOrder.findViewById(R.id.styled_button_included);
         completedOrderBtn.setText("Completed Order");
-        completedOrderBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_shirt,0,0,0);
+        completedOrderBtn.setCompoundDrawablesWithIntrinsicBounds(R.drawable.drawer_icon_shirt,0,0,0);
 
     }
 

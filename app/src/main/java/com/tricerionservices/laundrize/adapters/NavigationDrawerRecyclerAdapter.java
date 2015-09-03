@@ -70,7 +70,8 @@ public class NavigationDrawerRecyclerAdapter extends RecyclerView.Adapter<Naviga
 
     private void setViews(int position){
 
-        menuItemLogo.setImageResource(navigationDrawerData.get(position).getMenuItemLogo());
+        menuItemLogo.setImageBitmap(navigationDrawerData.get(position).getMenuItemLogo());
+//        menuItemLogo.setImageResource(navigationDrawerData.get(position).getMenuItemLogo());
         menuItemName.setText(navigationDrawerData.get(position).getMenuItemName());
 
     }

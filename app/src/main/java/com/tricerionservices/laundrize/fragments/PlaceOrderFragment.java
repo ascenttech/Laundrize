@@ -92,11 +92,22 @@ public class PlaceOrderFragment extends Fragment {
         Log.d(Constants.LOG_TAG, Constants.PlaceOrderFragment);
 
         customActionBar();
-        getServerTime();
-        getTheValues();
-
 
         return v;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
+
+            getServerTime();
+            getTheValues();
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Internet is required for this app.",5000).show();
+        }
     }
 
     private void customActionBar(){

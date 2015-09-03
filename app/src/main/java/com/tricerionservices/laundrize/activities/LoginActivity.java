@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.tricerionservices.laundrize.R;
+import com.tricerionservices.laundrize.async.FetchAddressAsyncTask;
+import com.tricerionservices.laundrize.async.FetchUserProfileAsyncTask;
 import com.tricerionservices.laundrize.async.SignInUserAsyncTask;
 import com.tricerionservices.laundrize.custom.CustomButton;
 import com.tricerionservices.laundrize.custom.CustomEditText;
@@ -49,17 +51,7 @@ public class LoginActivity extends Activity {
         }
         else{
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-            builder.setMessage("This app requires app connection")
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // FIRE ZE MISSILES!
-                            dialog.dismiss();
-                        }
-                    });
-            builder.create();
-            builder.show();
-
+            Constants.showInternetErrorDialog(this);
         }
     }
 
@@ -118,36 +110,59 @@ public class LoginActivity extends Activity {
                     editor.putString("password",pwd);
                     editor.commit();
 
-                    Intent i = new Intent(LoginActivity.this,LandingActivity.class);
-                    startActivity(i);
+
+                    String url = Constants.fetchProfileUrl + Constants.userId;
+                    new FetchUserProfileAsyncTask(getApplicationContext(),new FetchUserProfileAsyncTask.FetchUserProfileCallback() {
+                        @Override
+                        public void onStart(boolean status) {
+
+
+                        }
+
+                        @Override
+                        public void onResult(boolean result) {
+                            if (result) {
+
+                                SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME, MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("profileName", Constants.profileName);
+                                editor.commit();
+
+                                Intent i = new Intent(LoginActivity.this, LandingActivity.class);
+                                startActivity(i);
+
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(),"Couldn't fetch your profile",5000).show();
+                            }
+                        }
+                    }).execute(url);
+
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(),"Not a valid user",5000).show();
+                    }
 
                 }
-                else{
-                    Toast.makeText(getApplicationContext(),"Not a valid user",5000).show();
-                }
-
-            }
-        }).execute(finalUrl,phoneNumber,pwd);
-
-
-
-    }
-
-    View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            switch (view.getId()){
-
-                case R.id.click_here_static_text_log_in_now_activity: clickHere();
-                    break;
-                case R.id.log_in_now_button_log_in_now_activity: logInNow();
-                    break;
-                default:
-                    break;
-
-            }
+            }).execute(finalUrl);
 
         }
-    };
-}
+
+                View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                switch (view.getId()){
+
+                    case R.id.click_here_static_text_log_in_now_activity: clickHere();
+                        break;
+                    case R.id.log_in_now_button_log_in_now_activity: logInNow();
+                        break;
+                    default:
+                        break;
+
+                }
+
+            }
+        };
+    }

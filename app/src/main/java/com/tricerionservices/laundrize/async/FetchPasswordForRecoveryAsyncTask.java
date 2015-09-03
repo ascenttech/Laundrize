@@ -62,6 +62,11 @@ public class FetchPasswordForRecoveryAsyncTask extends AsyncTask<String,Void,Boo
 
                     return true;
                 }
+                else if(status.equalsIgnoreCase("401")){
+
+                    Constants.fetchPasswordErrorMessage = jsonObject.getString("errMsg");
+                    return false;
+                }
                 else{
                     return false;
                 }

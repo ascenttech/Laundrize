@@ -1,8 +1,10 @@
 package com.tricerionservices.laundrize.activities;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -32,6 +34,7 @@ import android.widget.RelativeLayout;
 
 import com.tricerionservices.laundrize.R;
 import com.tricerionservices.laundrize.adapters.NavigationDrawerAdapter;
+import com.tricerionservices.laundrize.custom.CustomTextView;
 import com.tricerionservices.laundrize.data.NavigationDrawerData;
 import com.tricerionservices.laundrize.fragments.AddressFragment;
 import com.tricerionservices.laundrize.fragments.CompletedOrdersFragment;
@@ -70,12 +73,17 @@ public class LandingActivity extends ActionBarActivity {
     LinearLayout sliderLayout;
     RelativeLayout profileLayout;
     ImageView profileImage;
-    int icons[]={R.drawable.icon_home,R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_checkbox,R.drawable.icon_watch,R.drawable.icon_shirt,R.drawable.drawer_logo_profile,R.drawable.drawer_logo_tnc,R.drawable.drawer_logo_privacy_policy,R.drawable.drawer_logo_faq,R.drawable.drawer_logo_contact_us};
+    int icons[]={R.drawable.drawer_icon_home,R.drawable.drawer_icon_checkbox,R.drawable.drawer_icon_checkbox,R.drawable.drawer_icon_checkbox,R.drawable.drawer_icon_watch,R.drawable.drawer_icon_shirt,R.drawable.drawer_icon_profile,R.drawable.drawer_icon_tnc,R.drawable.drawer_icon_privacy_policy,R.drawable.drawer_icon_faq,R.drawable.drawer_icon_contact_us,R.drawable.drawer_icon_logout};
+    CustomTextView profileName;
+    android.support.v7.app.AlertDialog.Builder builder;
+    android.support.v7.app.AlertDialog alertDialog;
+
 
     int counter=0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
@@ -96,6 +104,9 @@ public class LandingActivity extends ActionBarActivity {
         sliderLayout = (LinearLayout) findViewById(R.id.sliderLayout);
         profileLayout = (RelativeLayout) findViewById(R.id.profile_layout_navigation_drawer);
         profileImage = (ImageView) findViewById(R.id.profile_image_navigation_drawer);
+        profileName = (CustomTextView) findViewById(R.id.name_text_landing_activity);
+        profileName.setText(Constants.profileName);
+
 
         profileImage.setImageBitmap(getCircleBitmap(bitmap));
 
@@ -103,7 +114,15 @@ public class LandingActivity extends ActionBarActivity {
 
         for(int i=0;i<navMenuTitles.length;i++){
 
-            navigationDrawerData.add(new NavigationDrawerData(icons[i],navMenuTitles[i]));
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inScaled = false;
+
+            Bitmap b = BitmapFactory.decodeResource(getResources(),
+                    icons[i],options);
+
+
+//            navigationDrawerData.add(new NavigationDrawerData(icons[i],navMenuTitles[i]));
+            navigationDrawerData.add(new NavigationDrawerData(b,navMenuTitles[i]));
         }
 
         // setting the nav drawer list adapter
@@ -139,6 +158,14 @@ public class LandingActivity extends ActionBarActivity {
             // on first time display view for first nav item
             displayView(0);
         }
+
+        builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setMessage("This app requires internet connection");
+        builder.setCancelable(false);
+        builder.create();
+
+        alertDialog = builder.create();
+
     }
 
 
@@ -147,20 +174,13 @@ public class LandingActivity extends ActionBarActivity {
         boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());
         if(internetAvailable){
 
+            if(alertDialog.isShowing()){
+                alertDialog.dismiss();
+            }
         }
         else{
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(LandingActivity.this);
-            builder.setMessage("This app requires app connection")
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // FIRE ZE MISSILES!
-                            dialog.dismiss();
-                        }
-                    });
-            builder.create();
-            builder.show();
-
+            alertDialog.show();
         }
     }
 
@@ -266,6 +286,20 @@ public class LandingActivity extends ActionBarActivity {
             case 10:
                 mDrawerLayout.closeDrawer(sliderLayout);
                 mailToSupport();
+                break;
+            case 11:
+                SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.remove("loginRoute");
+                editor.remove("profileId");
+                editor.remove("userId");
+                editor.remove("token");
+                editor.remove("phoneNumber");
+                editor.remove("password");
+                editor.commit();
+
+                Intent i = new Intent(LandingActivity.this,LogInOrRegisterActivity.class);
+                startActivity(i);
                 break;
         }
 

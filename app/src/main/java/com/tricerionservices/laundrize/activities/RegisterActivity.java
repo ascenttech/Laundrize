@@ -46,16 +46,7 @@ public class RegisterActivity extends Activity {
         }
         else{
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
-            builder.setMessage("This app requires app connection")
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // FIRE ZE MISSILES!
-                            dialog.dismiss();
-                        }
-                    });
-            builder.create();
-            builder.show();
+           Constants.showInternetErrorDialog(this);
 
         }
     }
@@ -83,40 +74,51 @@ public class RegisterActivity extends Activity {
 
         if(!name.getText().toString().equalsIgnoreCase("")){
 
-            if(!email.getText().toString().equalsIgnoreCase("")){
+            if(!email.getText().toString().equalsIgnoreCase("")) {
 
-                if(!mobileNumber.getText().toString().equalsIgnoreCase("")){
+                if (isValidEmail(email.getText().toString())) {
 
-                    if(!password.getText().toString().equalsIgnoreCase("")){
+                    if (!mobileNumber.getText().toString().equalsIgnoreCase("")) {
 
-                        Intent i = new Intent(RegisterActivity.this,MobileVerificationActivity.class);
-                        i.putExtra("from","register");
-                        i.putExtra("profileId", "NA");
-                        i.putExtra("firstName", name.getText().toString());
-                        i.putExtra("lastName", "NA");
-                        i.putExtra("email", email.getText().toString());
-                        i.putExtra("mobileNumber",mobileNumber.getText().toString());
-                        i.putExtra("password",password.getText().toString());
-                        startActivity(i);
+                        if (!password.getText().toString().equalsIgnoreCase("")) {
+
+                            Intent i = new Intent(RegisterActivity.this, MobileVerificationActivity.class);
+                            i.putExtra("from", "register");
+                            i.putExtra("profileId", "NA");
+                            i.putExtra("firstName", name.getText().toString());
+                            i.putExtra("lastName", "NA");
+                            i.putExtra("email", email.getText().toString());
+                            i.putExtra("mobileNumber", mobileNumber.getText().toString());
+                            i.putExtra("password", password.getText().toString());
+                            startActivity(i);
+                        } else {
+                            Toast.makeText(getApplicationContext(), " You need to enter the password", 5000).show();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), " You need to enter the mobile number", 5000).show();
                     }
-                    else{
-                        Toast.makeText(getApplicationContext()," You need to enter the password",5000).show();
-                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), " You need to enter an email id", 5000).show();
                 }
-                else{
-                    Toast.makeText(getApplicationContext()," You need to enter the mobile number",5000).show();
-                }
+
             }
             else{
-                Toast.makeText(getApplicationContext()," You need to enter an email id",5000).show();
+                Toast.makeText(getApplicationContext()," You need to enter a valid email address",5000).show();
             }
-
         }
         else{
             Toast.makeText(getApplicationContext()," You need to enter a name",5000).show();
         }
 
 
+    }
+
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
     }
 
     View.OnClickListener listener = new View.OnClickListener() {

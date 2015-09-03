@@ -56,11 +56,23 @@ public class WeeklyOrderFragmentDynamic extends Fragment {
         Log.d(Constants.LOG_TAG, Constants.WeeklyOrderFragement);
 
         customActionBar();
-        getServerTime();
+
 
         return v;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
+
+            getServerTime();
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Internet is required for this app.",5000).show();
+        }
+    }
 
     private void customActionBar(){
 

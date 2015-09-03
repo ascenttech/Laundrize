@@ -74,32 +74,20 @@ public class AddressFragment extends Fragment {
         findViews(v);
         setViews();
 
-        fetchAddresses();
         return v;
     }
 
-//    @Override
-//    protected void onResume() {
-//        boolean internetAvailable = Constants.isInternetAvailable(getActivity());
-//        if(internetAvailable){
-//
-//
-//        }
-//        else{
-//
-//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//            builder.setMessage("This app requires app connection")
-//                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-//                        public void onClick(DialogInterface dialog, int id) {
-//                            // FIRE ZE MISSILES!
-//                            dialog.dismiss();
-//                        }
-//                    });
-//            builder.create();
-//            builder.show();
-//
-//        }
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
+
+            fetchAddresses();
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(), "Internet is required for this app.", 5000).show();
+        }
+    }
 
     private void customActionBar(){
 
@@ -411,6 +399,7 @@ public class AddressFragment extends Fragment {
 
     public void populateCity(){
 
+
         cityStaticText.setVisibility(View.GONE);
         city.setVisibility(View.VISIBLE);
         city.setAdapter(new ArrayAdapter<String>(getActivity().getApplicationContext(),R.layout.row_spinner_layout,Constants.cities));
@@ -636,6 +625,7 @@ public class AddressFragment extends Fragment {
                                     }
                                     else{
 
+                                        populateCity();
                                         expand(addNewAddressChild);
                                         selectAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_plus,0,0,0);
                                         collapse(selectAddressChild);

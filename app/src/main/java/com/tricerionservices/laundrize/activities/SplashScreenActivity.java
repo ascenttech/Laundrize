@@ -2,10 +2,12 @@ package com.tricerionservices.laundrize.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -43,117 +45,143 @@ public class SplashScreenActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        Log.d(Constants.LOG_TAG,Constants.SplashScreenActivity);
+        Log.d(Constants.LOG_TAG, Constants.SplashScreenActivity);
 
         initializeArrayList();
         intializeHashMap();
         findViews();
         setViews();
 
-        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME, MODE_PRIVATE);
         Constants.loginRoute = sharedPreferences.getString("loginRoute", "null");
         Constants.profileId = sharedPreferences.getString("profileId", "null");
-        Constants.userId = sharedPreferences.getString("userId","null");
-        Constants.token = sharedPreferences.getString("token","null");
-        Constants.password = sharedPreferences.getString("password","null");
-        Constants.phoneNumber = sharedPreferences.getString("phoneNumber","null");
+        Constants.userId = sharedPreferences.getString("userId", "null");
+        Constants.token = sharedPreferences.getString("token", "null");
+        Constants.password = sharedPreferences.getString("password", "null");
+        Constants.phoneNumber = sharedPreferences.getString("phoneNumber", "null");
+        Constants.profileName = sharedPreferences.getString("profileName", "null");
+
+        Log.d(Constants.LOG_TAG," The name "+Constants.profileName);
+
+        if(Constants.isInternetAvailable(this)){
+            if (Constants.loginRoute.equalsIgnoreCase("register")) {
+
+                finalUrl = Constants.signInUrl + Constants.phoneNumber + "&password=" + Constants.password;
+                type = "register";
 
 
-        if(Constants.loginRoute.equalsIgnoreCase("register")){
+                if((!Constants.phoneNumber.equalsIgnoreCase("null"))|| (!Constants.password.equalsIgnoreCase("null"))){
 
-            finalUrl = Constants.signInUrl+Constants.phoneNumber+"&password="+Constants.password;
-            type ="register";
-            new SignInUserAsyncTask(getApplicationContext(),new SignInUserAsyncTask.SignInUserCallback() {
-                @Override
-                public void onStart(boolean status) {
+                    new SignInUserAsyncTask(getApplicationContext(), new SignInUserAsyncTask.SignInUserCallback() {
+                        @Override
+                        public void onStart(boolean status) {
 
+
+                        }
+
+                        @Override
+                        public void onResult(boolean result) {
+
+                            if (result) {
+
+                                SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME, MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("loginRoute", type);
+                                editor.putString("profileId", Constants.profileId);
+                                editor.putString("userId", Constants.userId);
+                                editor.putString("token", Constants.token);
+                                editor.putString("password", Constants.password);
+                                editor.putString("phoneNumber", Constants.phoneNumber);
+                                editor.commit();
+
+                                Intent i = new Intent(SplashScreenActivity.this, LandingActivity.class);
+                                startActivity(i);
+
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Not a valid user", 5000).show();
+                            }
+
+                        }
+                    }).execute(finalUrl);
+                }
+                else{
+
+                    Intent i = new Intent(SplashScreenActivity.this,LoginActivity.class);
+                    startActivity(i);
+                }
+
+
+            } else if (Constants.loginRoute.equalsIgnoreCase("facebook") || Constants.loginRoute.equalsIgnoreCase("google")) {
+
+                if (Constants.loginRoute.equalsIgnoreCase("facebook")) {
+                    finalUrl = Constants.checkUserExistsUrl + Constants.profileId + "&type=FB";
+                    type = "facebook";
+                } else if (Constants.loginRoute.equalsIgnoreCase("google")) {
+
+                    finalUrl = Constants.checkUserExistsUrl + Constants.profileId + "&type=GP";
+                    type = "google";
+                }
+
+                if(!Constants.profileId.equalsIgnoreCase("null")){
+
+                    new CheckIfUserExistsAsyncTask(getApplicationContext(), new CheckIfUserExistsAsyncTask.CheckIfUserExistsCallback() {
+                        @Override
+                        public void onStart() {
+
+
+                        }
+
+                        @Override
+                        public void onResult(boolean result) {
+
+                            if (result) {
+
+
+                                SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME, MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("loginRoute", type);
+                                editor.putString("profileId", Constants.profileId);
+                                editor.putString("userId", Constants.userId);
+                                editor.putString("token", Constants.token);
+                                editor.putString("mobileNumber", "NA");
+                                editor.putString("password", "NA");
+                                editor.commit();
+
+
+                                Intent i = new Intent(SplashScreenActivity.this, LandingActivity.class);
+                                startActivity(i);
+                            } else {
+
+                                Toast.makeText(getApplicationContext(), "There was an error.\nTry Again After Some time", 5000).show();
+
+                            }
+                        }
+                    }).execute(finalUrl);
 
                 }
-                @Override
-                public void onResult(boolean result) {
+                else{
 
-                    if(result){
+                    Intent i = new Intent(SplashScreenActivity.this,LoginActivity.class);
+                    startActivity(i);
+                }
 
-                        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("loginRoute",type);
-                        editor.putString("profileId",Constants.profileId);
-                        editor.putString("userId",Constants.userId);
-                        editor.putString("token",Constants.token);
-                        editor.putString("password",Constants.password);
-                        editor.putString("phoneNumber",Constants.phoneNumber);
-                        editor.commit();
+            } else {
 
-                        Intent i = new Intent(SplashScreenActivity.this,LandingActivity.class);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Intent i = new Intent(SplashScreenActivity.this, LogInOrRegisterActivity.class);
                         startActivity(i);
-
                     }
-                    else{
-                        Toast.makeText(getApplicationContext(), "Not a valid user", 5000).show();
-                    }
-
-                }
-            }).execute(finalUrl);
+                }, 3000);
 
 
-        }
-        else if(Constants.loginRoute.equalsIgnoreCase("facebook")||Constants.loginRoute.equalsIgnoreCase("google")){
-
-            if(Constants.loginRoute.equalsIgnoreCase("facebook")){
-                finalUrl = Constants.checkUserExistsUrl+Constants.profileId+"&type=FB";
-                type= "facebook";
             }
-            else if(Constants.loginRoute.equalsIgnoreCase("google")){
-
-                finalUrl = Constants.checkUserExistsUrl+Constants.profileId+"&type=GP";
-                type= "google";
-            }
-
-            new CheckIfUserExistsAsyncTask(getApplicationContext(),new CheckIfUserExistsAsyncTask.CheckIfUserExistsCallback() {
-                @Override
-                public void onStart() {
-
-
-                }
-                @Override
-                public void onResult(boolean result) {
-
-                    if(result){
-
-
-                        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("loginRoute",type);
-                        editor.putString("profileId",Constants.profileId);
-                        editor.putString("userId",Constants.userId);
-                        editor.putString("token",Constants.token);
-                        editor.putString("mobileNumber","NA");
-                        editor.putString("password","NA");
-                        editor.commit();
-
-
-                        Intent i = new Intent(SplashScreenActivity.this,LandingActivity.class);
-                        startActivity(i);
-                    }
-                    else{
-
-                        Toast.makeText(getApplicationContext(),"There was an error.\nTry Again After Some time",5000).show();
-
-                    }
-                }
-            }).execute(finalUrl);
-
         }
         else{
 
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    Intent i = new Intent(SplashScreenActivity.this,LogInOrRegisterActivity.class);
-                    startActivity(i);
-                }
-            },3000);
+            Constants.showInternetErrorDialog(this);
 
 
         }

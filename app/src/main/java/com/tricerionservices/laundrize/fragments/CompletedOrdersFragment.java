@@ -53,12 +53,25 @@ public class CompletedOrdersFragment extends Fragment {
         settingTheAdapter(v);
 //        if(!Constants.completedOrdersFetched){
 
-            getOrders();
+
 //        }
 
         Log.d(Constants.LOG_TAG, Constants.CompletedOrdersFragement);
 
         return v;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
+
+            getOrders();
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Internet is required for this app.",5000).show();
+        }
     }
 
     private void findViews(View v){

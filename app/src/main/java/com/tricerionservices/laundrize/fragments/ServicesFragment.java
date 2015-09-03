@@ -47,28 +47,20 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        v = inflater.inflate(R.layout.fragment_services,container,false);
-
         Log.d(Constants.LOG_TAG,Constants.ServicesFragement);
+
+        v = inflater.inflate(R.layout.fragment_services,container,false);
 
         viewPager = (ViewPager) v.findViewById(R.id.myviewpager);
 
         if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
 
+            Log.d(Constants.LOG_TAG," Fetching the services from services fragmen");
             fetchServices();
         }
         else{
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setMessage("This app requires app connection")
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // FIRE ZE MISSILES!
-                            dialog.dismiss();
-                        }
-                    });
-            builder.create();
-            builder.show();
+            Toast.makeText(getActivity().getApplicationContext(),"Internet is required for this app.",5000).show();
         }
 
 

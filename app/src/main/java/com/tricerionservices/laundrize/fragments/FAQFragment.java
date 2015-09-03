@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.tricerionservices.laundrize.R;
 import com.tricerionservices.laundrize.activities.LandingActivity;
@@ -43,6 +44,18 @@ public class FAQFragment extends Fragment {
         setViews();
 
         return v;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
+
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(), "Internet is required for this app.", 5000).show();
+        }
     }
 
     public void customActionBar(){

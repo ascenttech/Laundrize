@@ -63,17 +63,7 @@ public class MobileVerificationActivity extends Activity {
         }
         else{
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(MobileVerificationActivity.this);
-            builder.setMessage("This app requires app connection")
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // FIRE ZE MISSILES!
-                            dialog.dismiss();
-                        }
-                    });
-            builder.create();
-            builder.show();
-
+            Constants.showInternetErrorDialog(this);
         }
     }
 
@@ -120,7 +110,16 @@ public class MobileVerificationActivity extends Activity {
                         Toast.makeText(getApplicationContext()," You will receive a message shortly",5000).show();
                     }
                     else{
-                        Toast.makeText(getApplicationContext(),"There was an error \nTry Again Later",5000).show();
+                        if(Constants.verificationCodeError != null){
+
+                            Toast.makeText(getApplicationContext(),Constants.verificationCodeError,5000).show();
+                        }
+                        else{
+
+                            Toast.makeText(getApplicationContext(),"There was an error \nTry Again Later",5000).show();
+                        }
+
+
                     }
 
                 }

@@ -105,16 +105,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
         }
         else{
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(LogInOrRegisterActivity.this);
-            builder.setMessage("This app requires app connection")
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // FIRE ZE MISSILES!
-                            dialog.dismiss();
-                        }
-                    });
-            builder.create();
-            builder.show();
+            Constants.showInternetErrorDialog(this);
 
         }
     }

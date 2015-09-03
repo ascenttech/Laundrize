@@ -7,9 +7,11 @@ import android.support.v7.app.ActionBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.tricerionservices.laundrize.R;
 import com.tricerionservices.laundrize.activities.LandingActivity;
+import com.tricerionservices.laundrize.utils.Constants;
 
 /**
  * Created by ADMIN on 08-08-2015.
@@ -26,6 +28,18 @@ public class TermAndConditionsFragment extends Fragment {
         customActionBar();
         return v;
 
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
+
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(), "Internet is required for this app.", 5000).show();
+        }
     }
 
     private void customActionBar(){

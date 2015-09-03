@@ -53,7 +53,7 @@ public class TrackOrdersFragment extends Fragment {
 //        // we will check if the orders have been parsed from the server or not
 //        if(!Constants.ordersTracked){
 
-            getOrders();
+
 
 //        }
 
@@ -63,6 +63,19 @@ public class TrackOrdersFragment extends Fragment {
         setViews();
 
         return v;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
+
+            getOrders();
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Internet is required for this app.",5000).show();
+        }
     }
 
     private void customActionBar(){

@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/icon_subtract"
         android:layout_weight="1"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_vertical"
         />
 
     <com.tricerionservices.laundrize.custom.CustomTextView
@@ -58,7 +58,7 @@
         android:textSize="@dimen/text_size"
         android:padding="@dimen/padding"
         android:layout_weight="2"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_vertical"
         android:gravity="center"
         android:layout_marginRight="1dp"
         android:layout_marginLeft="1dp"
@@ -70,7 +70,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/icon_add"
         android:layout_weight="1"
-        android:layout_gravity="bottom"
+        android:layout_gravity="center_vertical"
         />
 
     <com.tricerionservices.laundrize.custom.CustomTextView

@@ -67,6 +67,16 @@ public class FetchVerificationCodeAsyncTask extends AsyncTask<String,Void,Boolea
 
                 return true;
             }
+            else if(statusCode == 400){
+
+                HttpEntity httpEntity = httpResponse.getEntity();
+                String response = EntityUtils.toString(httpEntity);
+
+                Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
+                JSONObject jsonObject = new JSONObject(response);
+                Constants.verificationCodeError = jsonObject.getString("message");
+                return false;
+            }
             else{
                 return false;
             }

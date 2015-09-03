@@ -51,16 +51,7 @@ public class ForgotPasswordActivity extends Activity {
         }
         else{
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(ForgotPasswordActivity.this);
-            builder.setMessage("This app requires app connection")
-                    .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // FIRE ZE MISSILES!
-                            dialog.dismiss();
-                        }
-                    });
-            builder.create();
-            builder.show();
+            Constants.showInternetErrorDialog(this);
 
         }
     }
@@ -112,7 +103,16 @@ public class ForgotPasswordActivity extends Activity {
                             submitButton.setVisibility(View.VISIBLE);
                             Toast.makeText(getApplicationContext(), " You will receive a message shortly", 5000).show();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Number already registered.", 5000).show();
+
+                            if(Constants.fetchPasswordErrorMessage != null){
+
+                                Toast.makeText(getApplicationContext(), Constants.fetchPasswordErrorMessage, 5000).show();
+                            }
+                            else{
+
+                                Toast.makeText(getApplicationContext(), "Number not registered.", 5000).show();
+                            }
+
                         }
 
                     }

@@ -72,6 +72,7 @@ public class FetchUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
                 String username = nestedJsonObject.getString("username");
                 String password = nestedJsonObject.getString("password");
                 String firstName = nestedJsonObject.getString("first_name");
+                Constants.profileName = firstName;
                 String lastName = nestedJsonObject.getString("last_name");
                 String email = nestedJsonObject.getString("email");
                 String confirmed = nestedJsonObject.getString("confirmed");

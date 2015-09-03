@@ -72,8 +72,6 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
 
                         String currentKey = keys.next();
                         if (currentKey.equalsIgnoreCase("day")) {
-
-                            Log.d(Constants.LOG_TAG, " We reached here");
                             // We are using this variable because when we want to know which is the first element after
                             // the day so that we can concatenate the others using "_"
                             day = jsonObject.getString("day");
@@ -82,21 +80,17 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
                             if (allSlots.isEmpty()) {
 
                                 allSlots = jsonObject.getString(currentKey);
-                                Log.d(Constants.LOG_TAG, " Adding the first value " + allSlots);
                             } else {
 
 
                                 allSlots = allSlots.concat("_");
                                 allSlots = allSlots.concat(jsonObject.getString(currentKey));
-                                Log.d(Constants.LOG_TAG, " Concating values " + allSlots);
                             }
 
                         }
 
                     }
-                    Log.d(Constants.LOG_TAG, " All slots from background " + allSlots + " Day to be inserted " + day);
                     allSlots = sortAllSlots();
-                    Log.d(Constants.LOG_TAG, " After Sorting" + allSlots + " Day to be inserted " + day);
                     Constants.slots.put(day, allSlots);
                     allSlots = "";
                 }
@@ -129,10 +123,8 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
             for(int j = i+1;j<slots.length;j++){
 
                 int checkElement = Integer.parseInt(slots[j].substring(0, 2));
-                Log.d(Constants.LOG_TAG," The pivot element is "+pivot+" checkElement is "+checkElement);
                 if(pivot > checkElement){
 
-                    Log.d(Constants.LOG_TAG," The value of i "+ i+" the value of j is "+j);
                     String temp = slots[i];
                     slots[i] = slots[j];
                     slots[j] = temp;

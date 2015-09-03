@@ -85,14 +85,25 @@ public class ProfileFragment extends Fragment {
         bitmap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.profile_picture);
 
-        fetchData();
+
 
         return v;
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
+
+            fetchData();
+        }
+        else{
+            Toast.makeText(getActivity().getApplicationContext(),"Internet is required for this app.",5000).show();
+        }
+    }
+
     public void fetchData(){
-
-
 
         String finalUrl = Constants.fetchProfileUrl + Constants.userId;
         new FetchUserProfileAsyncTask(getActivity().getApplicationContext(),new FetchUserProfileAsyncTask.FetchUserProfileCallback() {
