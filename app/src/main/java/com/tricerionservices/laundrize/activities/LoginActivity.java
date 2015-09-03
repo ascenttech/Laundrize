@@ -29,6 +29,8 @@ public class LoginActivity extends Activity {
     private CustomTextView clickHere;
     private CustomButton logInNow;
     private ProgressDialog progressDialog;
+    android.support.v7.app.AlertDialog alertDialog;
+    android.support.v7.app.AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,13 @@ public class LoginActivity extends Activity {
 
         findViews();
 
+        builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setMessage("This app requires internet connection");
+        builder.setCancelable(false);
+        builder.create();
+
+        alertDialog = builder.create();
+
     }
 
     @Override
@@ -47,13 +56,18 @@ public class LoginActivity extends Activity {
         boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());
         if(internetAvailable){
 
+            if(alertDialog.isShowing()){
+                alertDialog.dismiss();
+            }
             setClickListeners();
         }
         else{
 
-            Constants.showInternetErrorDialog(this);
+            alertDialog.show();
         }
     }
+
+
 
     private void findViews(){
 

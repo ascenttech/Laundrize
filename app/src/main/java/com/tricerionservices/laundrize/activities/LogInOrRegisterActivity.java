@@ -68,6 +68,9 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
     private String googleName,googlePhotoUrl,googlePlusProfile,googleemail,googlefname,googlelname,googledisplayname,googleId;
     private boolean res;
     private boolean mSignInClicked;
+    android.support.v7.app.AlertDialog alertDialog;
+    android.support.v7.app.AlertDialog.Builder builder;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +96,14 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
                 .build();
 
+
+        builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setMessage("This app requires internet connection");
+        builder.setCancelable(false);
+        builder.create();
+
+        alertDialog = builder.create();
+
     }
 
     @Override
@@ -101,12 +112,14 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
         boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());
         if(internetAvailable){
 
+            if(alertDialog.isShowing()){
+                alertDialog.dismiss();
+            }
             setClickListeners();
         }
         else{
 
-            Constants.showInternetErrorDialog(this);
-
+            alertDialog.show();
         }
     }
 

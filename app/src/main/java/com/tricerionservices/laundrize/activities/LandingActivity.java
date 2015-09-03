@@ -168,7 +168,7 @@ public class LandingActivity extends ActionBarActivity {
 
     }
 
-
+    @Override
     protected void onResume() {
         super.onResume();
         boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());

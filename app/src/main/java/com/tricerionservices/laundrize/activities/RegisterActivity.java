@@ -24,6 +24,8 @@ public class RegisterActivity extends Activity {
     private String finalUrl;
     private ProgressDialog progressDialog;
     private CustomEditText name,email,mobileNumber,password;
+    android.support.v7.app.AlertDialog alertDialog;
+    android.support.v7.app.AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,13 @@ public class RegisterActivity extends Activity {
         findViews();
         setViews();
 
+        builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setMessage("This app requires internet connection");
+        builder.setCancelable(false);
+        builder.create();
+
+        alertDialog = builder.create();
+
     }
 
     @Override
@@ -42,14 +51,18 @@ public class RegisterActivity extends Activity {
         boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());
         if(internetAvailable){
 
-           setClickListeners();
+            if(alertDialog.isShowing()){
+                alertDialog.dismiss();
+            }
+            setClickListeners();
         }
         else{
 
-           Constants.showInternetErrorDialog(this);
-
+            alertDialog.show();
         }
     }
+
+
 
     private void findViews(){
 

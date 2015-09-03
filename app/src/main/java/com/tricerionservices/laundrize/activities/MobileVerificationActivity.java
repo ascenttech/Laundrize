@@ -32,6 +32,8 @@ public class MobileVerificationActivity extends Activity {
     private String from, profileId,firstName,lastName,url;
     private String finalUrl,finalVerificationUrl;
     String verificationCodeValue;
+    android.support.v7.app.AlertDialog alertDialog;
+    android.support.v7.app.AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,13 @@ public class MobileVerificationActivity extends Activity {
         mobileNumber = i.getStringExtra("mobileNumber");
         password = i.getStringExtra("password");
 
+        builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setMessage("This app requires internet connection");
+        builder.setCancelable(false);
+        builder.create();
+
+        alertDialog = builder.create();
+
 
     }
 
@@ -58,15 +67,17 @@ public class MobileVerificationActivity extends Activity {
         boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());
         if(internetAvailable){
 
+            if(alertDialog.isShowing()){
+                alertDialog.dismiss();
+            }
             findViews();
             setViews();
         }
         else{
 
-            Constants.showInternetErrorDialog(this);
+            alertDialog.show();
         }
     }
-
 
     private void findViews(){
 

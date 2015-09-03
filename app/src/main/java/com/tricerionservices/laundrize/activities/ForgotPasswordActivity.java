@@ -31,12 +31,22 @@ public class ForgotPasswordActivity extends Activity {
     private ProgressDialog progressDialog;
     SharedPreferences prefs;
 
+    android.support.v7.app.AlertDialog alertDialog;
+    android.support.v7.app.AlertDialog.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
         Log.d(Constants.LOG_TAG,Constants.ForgotPasswordActivity);
+
+        builder = new android.support.v7.app.AlertDialog.Builder(this);
+        builder.setMessage("This app requires internet connection");
+        builder.setCancelable(false);
+        builder.create();
+
+        alertDialog = builder.create();
 
     }
 
@@ -46,15 +56,18 @@ public class ForgotPasswordActivity extends Activity {
         boolean internetAvailable = Constants.isInternetAvailable(getApplicationContext());
         if(internetAvailable){
 
+            if(alertDialog.isShowing()){
+                alertDialog.dismiss();
+            }
             findViews();
             setViews();
         }
         else{
 
-            Constants.showInternetErrorDialog(this);
-
+            alertDialog.show();
         }
     }
+
 
     private void findViews(){
 
