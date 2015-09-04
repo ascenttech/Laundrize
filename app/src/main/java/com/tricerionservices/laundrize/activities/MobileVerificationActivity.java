@@ -38,6 +38,7 @@ public class MobileVerificationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_mobile_verification);
 
         Log.d(Constants.LOG_TAG,Constants.MobileVerificationActivity);

@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.tricerionservices.laundrize.R;
 import com.tricerionservices.laundrize.adapters.NavigationDrawerAdapter;
@@ -396,16 +397,27 @@ public class LandingActivity extends ActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
+        if(fragment instanceof LandingFragment){
+            counter++;
+            if(counter %2 == 0){
+
+                finish();
+            }
+            else{
+
+                Toast.makeText(getApplicationContext()," Press back again to exit",5000).show();
+            }
+
+        }
+        else{
+
+            super.onBackPressed();
+            counter = 0;
+        }
 
         mDrawerLayout.closeDrawer(sliderLayout);
-//        if(counter%2 == 0){
-//            finish();
-//            counter = 0;
-//        }
-//        else{
-//            counter++;
-//            Toast.makeText(getApplicationContext(),"Press back again to exit",5000).show();
-//        }
+
     }
 }

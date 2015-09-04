@@ -52,7 +52,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="MobileVerificationTheme" parent="@android:style/Theme.NoTitleBar">
+
+    <style name="MobileVerificationTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/black</item>
