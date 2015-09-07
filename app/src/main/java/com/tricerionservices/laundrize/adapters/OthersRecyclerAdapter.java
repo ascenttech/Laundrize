@@ -48,7 +48,7 @@ public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAd
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
-        .inflate(R.layout.row_data_holder,parent,false);
+                .inflate(R.layout.row_data_holder,parent,false);
         ViewHolder vh = new ViewHolder(view);
 
         return vh;
@@ -95,33 +95,33 @@ public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAd
         return othersData.size();
     }
 
-//    private void add(int position){
-//
-//        int value = Integer.parseInt(Constants.othersData.get(position).getQuantity());
-//        value++;
-//        String quantity = String.valueOf(value);
-//        Constants.othersData.get(position).setQuantity(quantity);
-//
-//    }
-//
-//    private void subtract(int position){
-//
-//        int value = Integer.parseInt(Constants.othersData.get(position).getQuantity());
-//        if(value !=0){
-//
-//            value--;
-//            String quantity = String.valueOf(value);
-//            Constants.othersData.get(position).setQuantity(quantity);
-//
-//        }
-//    else if(value == 0){
-//
-//        String orderId = Constants.dryCleanHouseholdsData.get(position).getCode();
-//        Constants.order.remove(orderId);
-//
-//    }
-//
-//    }
+    private void add(int position){
+
+        int value = Integer.parseInt(Constants.othersData.get(position).getQuantity());
+        value++;
+        String quantity = String.valueOf(value);
+        Constants.othersData.get(position).setQuantity(quantity);
+
+    }
+
+    private void subtract(int position){
+
+        int value = Integer.parseInt(Constants.othersData.get(position).getQuantity());
+        if(value !=0){
+
+            value--;
+            String quantity = String.valueOf(value);
+            Constants.othersData.get(position).setQuantity(quantity);
+
+        }
+        else if(value == 0){
+
+            String orderId = Constants.dryCleanHouseholdsData.get(position).getCode();
+            Constants.order.remove(orderId);
+
+        }
+
+    }
 
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -134,12 +134,12 @@ public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAd
             switch (view.getId()){
 
 
-//                case R.id.add_image_included: add(position);
-//                    notifyDataSetChanged();
-//                    break;
-//                case R.id.subtract_image_included: subtract(position);
-//                    notifyDataSetChanged();
-//                    break;
+                case R.id.add_image_included: add(position);
+                    notifyDataSetChanged();
+                    break;
+                case R.id.subtract_image_included: subtract(position);
+                    notifyDataSetChanged();
+                    break;
 
 
             }

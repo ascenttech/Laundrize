@@ -5,10 +5,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
+import com.tricerionservices.laundrize.fragments.BagLaundryFragment;
 import com.tricerionservices.laundrize.fragments.DryCleanHouseholdsFragment;
 import com.tricerionservices.laundrize.fragments.DryCleanWearablesFragment;
 import com.tricerionservices.laundrize.fragments.IroningHouseholdsFragment;
 import com.tricerionservices.laundrize.fragments.IroningWearablesFragment;
+import com.tricerionservices.laundrize.fragments.OthersFragment;
+import com.tricerionservices.laundrize.fragments.ShoeLaundryFragment;
 import com.tricerionservices.laundrize.fragments.WashAndIronHouseholdsFragment;
 import com.tricerionservices.laundrize.fragments.WashAndIronWearablesFragment;
 import com.tricerionservices.laundrize.utils.Constants;
@@ -40,6 +43,9 @@ public class TabsViewPagerAdapter extends FragmentStatePagerAdapter  {
             case 3 : return new WashAndIronHouseholdsFragment();
             case 4 : return new DryCleanWearablesFragment();
             case 5 : return new DryCleanHouseholdsFragment();
+            case 6 : return new ShoeLaundryFragment();
+            case 7 : return new BagLaundryFragment();
+            case 8 : return new OthersFragment();
             default: return null;
         }
 
@@ -48,6 +54,6 @@ public class TabsViewPagerAdapter extends FragmentStatePagerAdapter  {
 
     @Override
     public int getCount() {
-        return 6;
+        return 9;
     }
 }

@@ -143,6 +143,7 @@ public class LoginActivity extends Activity {
                                 editor.commit();
 
                                 Intent i = new Intent(LoginActivity.this, LandingActivity.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
 
                             }

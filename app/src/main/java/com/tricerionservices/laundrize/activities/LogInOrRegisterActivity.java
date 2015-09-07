@@ -183,6 +183,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
 
 
                                                     Intent i = new Intent(LogInOrRegisterActivity.this,LandingActivity.class);
+                                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                     startActivity(i);
                                                 }
                                                 else{
@@ -195,6 +196,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
                                                     i.putExtra("email", email);
                                                     i.putExtra("mobileNumber","NA");
                                                     i.putExtra("password","NA");
+                                                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                                     startActivity(i);
 
                                                 }
@@ -268,11 +270,13 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
     public void signInNow(){
 
         Intent i = new Intent(LogInOrRegisterActivity.this,LoginActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
     }
     public void registerNow(){
 
         Intent i = new Intent(LogInOrRegisterActivity.this,RegisterActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
 
     }
@@ -429,6 +433,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
 
 
                         Intent i = new Intent(LogInOrRegisterActivity.this,LandingActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
                     }
                     else{
@@ -441,6 +446,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
                         i.putExtra("email", googleemail);
                         i.putExtra("mobileNumber", "NA");
                         i.putExtra("password", "NA");
+                        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(i);
 
                     }

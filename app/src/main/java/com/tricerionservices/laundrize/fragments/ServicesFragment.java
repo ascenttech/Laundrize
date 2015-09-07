@@ -32,8 +32,8 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
     ActionBar actionBar;
     ActionBar.Tab tabs;
 
-    String names[]= {"Ironing\nWearables","Ironing\nHouseholds","Wash & Iron\nWearables","Wash & Iron\nHouseholds","Dry Clean\nWearables","Dry Clean\nHouseholds"};
-    int icons[] = {R.drawable.icon_ironing,R.drawable.icon_ironing,R.drawable.icon_washing,R.drawable.icon_washing,R.drawable.icon_dry_clean,R.drawable.icon_dry_clean};
+    String names[]= {"Ironing\nWearables","Ironing\nHouseholds","Wash & Iron\nWearables","Wash & Iron\nHouseholds","Dry Clean\nWearables","Dry Clean\nHouseholds","Shoe\nLaundry","Bag\nLaundry","Others"};
+    int icons[] = {R.drawable.icon_ironing,R.drawable.icon_ironing,R.drawable.icon_washing,R.drawable.icon_washing,R.drawable.icon_dry_clean,R.drawable.icon_dry_clean,R.drawable.icon_washing,R.drawable.icon_dry_clean,R.drawable.icon_dry_clean};
     private LinearLayout footer;
     private CustomButton mainMenu,placeOrder;
     ViewPager viewPager;
@@ -105,6 +105,7 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
 
     public void customActionBar(){
 
+        Log.d(Constants.LOG_TAG," Setting the actionbar ");
         actionBar = ((LandingActivity)getActivity()).getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         actionBar.setDisplayShowTitleEnabled(true);
@@ -124,7 +125,6 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
 
         mainMenu = (CustomButton) v.findViewById(R.id.left_button_included);
         placeOrder = (CustomButton) v.findViewById(R.id.right_button_included);
-
 
     }
 

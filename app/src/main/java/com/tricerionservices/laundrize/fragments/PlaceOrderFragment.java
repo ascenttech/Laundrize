@@ -1340,10 +1340,13 @@ public class PlaceOrderFragment extends Fragment {
         // then convert it to int
         quantityValue = Integer.parseInt(((CustomTextView) v.findViewWithTag("quantity_"+position+"_"+key)).getText().toString());
         obtainedAmount = Integer.parseInt(((CustomTextView) v.findViewWithTag("total_"+position+"_"+key)).getText().toString());
-        perPieceCost = obtainedAmount/quantityValue;
 
         if(quantityValue!=0) {
             // when added then
+
+            // we have added the perPiece cost here because the quantityValue may be 0
+            // and divide by 0 would give us an error
+            perPieceCost = obtainedAmount/quantityValue;
             totalQuantity = (quantityValue - 1);
             totalAmount = (totalQuantity * perPieceCost);
             newValue = String.valueOf(totalQuantity) + "_" + totalAmount;

@@ -150,6 +150,14 @@ public class FetchLaundryServicesAsyncTask extends AsyncTask<String,Void,Boolean
                 Constants.shoeLaundryData = Constants.subCategory;
                 Constants.subCategory = new ArrayList<GeneralData>();
                 break;
+            case "008000000":
+                Constants.bagLaundryData = Constants.subCategory;
+                Constants.subCategory = new ArrayList<GeneralData>();
+                break;
+            case "009000000":
+                Constants.othersData = Constants.subCategory;
+                Constants.subCategory = new ArrayList<GeneralData>();
+                break;
 
         }
 
