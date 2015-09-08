@@ -37,7 +37,7 @@ public class ImageLoader {
         executorService= Executors.newFixedThreadPool(5);
     }
 
-    final int stub_id= R.drawable.background_profile;
+    final int stub_id= R.drawable.background_services;
     public void DisplayImage(String url, ImageView imageView)
     {
         imageViews.put(imageView, url);

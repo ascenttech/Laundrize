@@ -33,7 +33,7 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
     ActionBar.Tab tabs;
 
     String names[]= {"Ironing\nWearables","Ironing\nHouseholds","Wash & Iron\nWearables","Wash & Iron\nHouseholds","Dry Clean\nWearables","Dry Clean\nHouseholds","Shoe\nLaundry","Bag\nLaundry","Others"};
-    int icons[] = {R.drawable.icon_ironing,R.drawable.icon_ironing,R.drawable.icon_washing,R.drawable.icon_washing,R.drawable.icon_dry_clean,R.drawable.icon_dry_clean,R.drawable.icon_washing,R.drawable.icon_dry_clean,R.drawable.icon_dry_clean};
+    int icons[] = {R.drawable.icon_ironing,R.drawable.icon_ironing,R.drawable.icon_washing,R.drawable.icon_washing,R.drawable.icon_dry_clean,R.drawable.icon_dry_clean,R.drawable.icon_shoe1,R.drawable.icon_bag,R.drawable.icon_others};
     private LinearLayout footer;
     private CustomButton mainMenu,placeOrder;
     ViewPager viewPager;

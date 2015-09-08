@@ -77,17 +77,19 @@ public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAd
 
     private void setViews(int position){
 
-        imgLoader.DisplayImage(Constants.ironingWearablesData.get(position).getLargeImage(),backgroundImage);
+
+        imgLoader.DisplayImage(Constants.othersData.get(position).getLargeImage(),backgroundImage);
         title.setText(Constants.othersData.get(position).getTitle());
         description.setText(Constants.othersData.get(position).getDescription());
-//        price.setText(Constants.othersData.get(position).getPrice());
-//        quantity.setText(Constants.othersData.get(position).getQuantity());
+        price.setText(Constants.othersData.get(position).getRegularCost());
+        quantity.setText(Constants.othersData.get(position).getQuantity());
 
         add.setTag("add_"+position);
         add.setOnClickListener(listener);
 
         subtract.setTag("subtract_"+position);
         subtract.setOnClickListener(listener);
+
     }
 
     @Override
@@ -102,6 +104,16 @@ public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAd
         String quantity = String.valueOf(value);
         Constants.othersData.get(position).setQuantity(quantity);
 
+        int numberOfPieces = Integer.parseInt(Constants.othersData.get(position).getQuantity());
+        int price = Integer.parseInt(Constants.othersData.get(position).getRegularCost());
+        int totalAmount = numberOfPieces * price;
+        String totalAmountValue = String.valueOf(totalAmount);
+        String total = Constants.othersData.get(position).getQuantity()+"_"+totalAmountValue;
+
+
+        String orderId = Constants.othersData.get(position).getCode();
+        Constants.order.put(orderId,total);
+
     }
 
     private void subtract(int position){
@@ -113,10 +125,19 @@ public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAd
             String quantity = String.valueOf(value);
             Constants.othersData.get(position).setQuantity(quantity);
 
+            int numberOfPieces = Integer.parseInt(Constants.othersData.get(position).getQuantity());
+            int price = Integer.parseInt(Constants.othersData.get(position).getRegularCost());
+            int totalAmount = numberOfPieces * price;
+            String totalAmountValue = String.valueOf(totalAmount);
+            String total = Constants.othersData.get(position).getQuantity()+"_"+totalAmountValue;
+
+            String orderId = Constants.othersData.get(position).getCode();
+            Constants.order.put(orderId,total);
+
         }
         else if(value == 0){
 
-            String orderId = Constants.dryCleanHouseholdsData.get(position).getCode();
+            String orderId = Constants.othersData.get(position).getCode();
             Constants.order.remove(orderId);
 
         }
@@ -133,7 +154,7 @@ public class OthersRecyclerAdapter extends RecyclerView.Adapter<OthersRecyclerAd
 
             switch (view.getId()){
 
-
+//
                 case R.id.add_image_included: add(position);
                     notifyDataSetChanged();
                     break;
