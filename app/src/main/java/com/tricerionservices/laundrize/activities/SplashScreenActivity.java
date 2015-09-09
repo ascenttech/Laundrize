@@ -2,12 +2,10 @@ package com.tricerionservices.laundrize.activities;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -23,6 +21,7 @@ import com.tricerionservices.laundrize.data.IroningOrderData;
 import com.tricerionservices.laundrize.data.LaundryServicesMainCategoryData;
 import com.tricerionservices.laundrize.data.LaundryServicesSubCategoryData;
 import com.tricerionservices.laundrize.data.NavigationDrawerData;
+import com.tricerionservices.laundrize.data.OthersOrderData;
 import com.tricerionservices.laundrize.data.TrackOrdersData;
 import com.tricerionservices.laundrize.data.WashingOrderData;
 import com.tricerionservices.laundrize.utils.Constants;
@@ -211,6 +210,7 @@ public class SplashScreenActivity extends Activity {
         Constants.washAndIronWearablesData = new ArrayList<GeneralData>();
         Constants.ironingOrderData = new ArrayList<IroningOrderData>();
         Constants.bagOrderData = new ArrayList<BagOrderData>();
+        Constants.othersOrderData = new ArrayList<OthersOrderData>();
         Constants.washingOrderData = new ArrayList<WashingOrderData>();
         Constants.trackOrdersData = new ArrayList<TrackOrdersData>();
         Constants.completedOrdersData = new ArrayList<CompletedOrdersData>();

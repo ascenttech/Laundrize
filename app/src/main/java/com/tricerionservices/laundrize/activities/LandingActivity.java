@@ -40,9 +40,11 @@ import com.tricerionservices.laundrize.data.NavigationDrawerData;
 import com.tricerionservices.laundrize.fragments.AddressFragment;
 import com.tricerionservices.laundrize.fragments.CompletedOrdersFragment;
 import com.tricerionservices.laundrize.fragments.FAQFragment;
+import com.tricerionservices.laundrize.fragments.PlaceOrderFragment;
 import com.tricerionservices.laundrize.fragments.PrivacyPolicyFragment;
 import com.tricerionservices.laundrize.fragments.LandingFragment;
 import com.tricerionservices.laundrize.fragments.ProfileFragment;
+import com.tricerionservices.laundrize.fragments.ServicesFragment;
 import com.tricerionservices.laundrize.fragments.TermAndConditionsFragment;
 import com.tricerionservices.laundrize.fragments.TrackOrdersFragment;
 import com.tricerionservices.laundrize.utils.Constants;
@@ -399,7 +401,12 @@ public class LandingActivity extends ActionBarActivity {
     public void onBackPressed() {
 
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.container);
-        if(fragment instanceof LandingFragment){
+        if(fragment instanceof PlaceOrderFragment){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.container, new ServicesFragment())
+                    .commit();
+        }
+        else if(fragment instanceof LandingFragment){
             counter++;
             if(counter %2 == 0){
 

@@ -47,6 +47,14 @@
                 android:layout_margin="@dimen/margin_small"
                 />
 
+            <include
+                android:id="@+id/others_layout_place_order_fragment"
+                layout="@layout/row_fragment_checkout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                />
+
              <include
                  layout="@layout/include_your_items_card"
                  android:layout_width="fill_parent"

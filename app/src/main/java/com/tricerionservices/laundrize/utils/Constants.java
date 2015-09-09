@@ -15,6 +15,7 @@ import com.tricerionservices.laundrize.data.IroningOrderData;
 import com.tricerionservices.laundrize.data.LaundryServicesMainCategoryData;
 import com.tricerionservices.laundrize.data.LaundryServicesSubCategoryData;
 import com.tricerionservices.laundrize.data.NavigationDrawerData;
+import com.tricerionservices.laundrize.data.OthersOrderData;
 import com.tricerionservices.laundrize.data.ProfileData;
 import com.tricerionservices.laundrize.data.TrackOrdersData;
 import com.tricerionservices.laundrize.data.WashingOrderData;
@@ -42,13 +43,15 @@ public class Constants {
 
     public static String userId,token,password,phoneNumber,weeklyOrderDay,todaysDay;
     public static String addressId,address;
-    public static String minIroningDate,minIroningSlotId;
-    public static String minWashingDate,minWashingSlotId;
-    public static String minBagsDate,minBagsSlotId;
+    public static String minIroningDate;
+    public static String minWashingDate;
+    public static String minBagsDate;
+    public static String minOthersDate;
     public static String collectionDate,collectionSlotId;
     public static String ironingDeliveryDate,ironingDeliverySlotId;
     public static String washingDeliverySlotId,washingDeliveryDate;
     public static String bagsDeliveryDate,bagsDeliverySlotId;
+    public static String othersDeliveryDate,othersDeliverySlotId;
     public static String currentDate,currentTime;
     public static int totalQuantityToBeCollected,totalAmountToBeCollected;
     public static int collectionTimeSlot;
@@ -104,8 +107,9 @@ public class Constants {
     public static ArrayList<GeneralData> washAndIronWearablesData;
     public static ArrayList<ProfileData> profileData;
     public static ArrayList<IroningOrderData> ironingOrderData;
-    public static ArrayList<BagOrderData> bagOrderData;
     public static ArrayList<WashingOrderData> washingOrderData;
+    public static ArrayList<BagOrderData> bagOrderData;
+    public static ArrayList<OthersOrderData> othersOrderData;
     public static ArrayList<AllSlotsData> allSlotsData;
     public static ArrayList<TrackOrdersData> trackOrdersData;
     public static ArrayList<String> areas;
@@ -189,10 +193,6 @@ public class Constants {
     public static final String WashAndIronHouseholdsFragement =" WASH AND IRON HOUSEHOLDS FRAGMENT ";
     public static final String WashAndIronWearablesFragement =" WASH AND IRON WEARABLES FRAGMENT ";
     public static final String WeeklyOrderFragement =" WEEKLY Order FRAGMENT ";
-
-
-
-
 
 
     // LINKS with a harcoded link for testing

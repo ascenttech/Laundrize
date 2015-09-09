@@ -46,6 +46,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
                 />
+            <include
+                android:id="@+id/others_layout_quick_fragment"
+                layout="@layout/row_fragment_checkout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_small"
+                />
 
         </LinearLayout>
 

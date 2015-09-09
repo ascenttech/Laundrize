@@ -16,12 +16,18 @@
         android:layout_height="wrap_content"
         android:text="@string/text_wash"
         android:textSize="@dimen/text_size_extra_large"/>
-    <!--<CheckBox-->
-        <!--android:id="@+id/quick_service_bags"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/text_laundry"-->
-        <!--android:textSize="@dimen/text_size_extra_large"/>-->
+    <CheckBox
+        android:id="@+id/quick_service_bags"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_bags"
+        android:textSize="@dimen/text_size_extra_large"/>
+    <CheckBox
+        android:id="@+id/quick_service_others"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_others"
+        android:textSize="@dimen/text_size_extra_large"/>
 
     <com.tricerionservices.laundrize.custom.CustomButton
         android:id="@+id/quick_service_done"

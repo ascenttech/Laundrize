@@ -31,6 +31,7 @@ import com.tricerionservices.laundrize.custom.CustomButton;
 import com.tricerionservices.laundrize.custom.CustomTextView;
 import com.tricerionservices.laundrize.data.BagOrderData;
 import com.tricerionservices.laundrize.data.IroningOrderData;
+import com.tricerionservices.laundrize.data.OthersOrderData;
 import com.tricerionservices.laundrize.data.WashingOrderData;
 import com.tricerionservices.laundrize.utils.Constants;
 
@@ -50,30 +51,77 @@ import java.util.Map;
 public class PlaceOrderFragment extends Fragment {
 
     View v;
-    private CardView ironingLayout,washingLayout,bagsLayout,collectionLayout;
+    private CardView collectionLayout;
+    private CustomTextView collectionTitleText,collectionDateText,collectionStaticText;
+    private Spinner collectionTimeSlot;
+    private DatePickerDialog collectionsPickDate;
+    private ArrayAdapter<String> collectionAdapter;
+
+
+    private CardView ironingLayout;
+    private CustomTextView ironingTitleText,ironingDateText,ironingStaticText;
+    private Spinner ironingTimeSlot;
+    private JSONObject ironingJsonObject,ironingNestedJsonObject;
+    private DatePickerDialog ironingPickDate;
+    private JSONArray ironingNestedJsonArray;
+    private boolean ironingCreated = false;
+    private ArrayList<String> minimumIroningSlots;
+    private ArrayAdapter<String> ironingAdapter;
+
+
+    private CardView washingLayout;
+    private CustomTextView washingTitleText,washingDateText,washingStaticText;
+    private Spinner washingTimeSlot;
+    private JSONObject washingJsonObject,washingNestedJsonObject;
+    private DatePickerDialog washingPickDate;
+    private JSONArray washingNestedJsonArray;
+    private boolean washingCreated = false;
+    private ArrayList<String> minimumWashingSlots;
+    private ArrayAdapter<String> washingAdapter;
+
+
+    private CardView bagsLayout;
+    private CustomTextView bagsTitleText,bagsDateText,bagsStaticText;
+    private Spinner bagsTimeSlot;
+    private JSONObject bagsJsonObject,bagsNestedJsonObject;
+    private DatePickerDialog bagsPickDate;
+    private JSONArray bagsNestedJsonArray;
+    private boolean bagsCreated = false;
+    private ArrayList<String> minimumBagsSlots;
+    private ArrayAdapter<String> bagsAdapter;
+
+
+    private CardView othersLayout;
+    private CustomTextView othersTitleText,othersDateText,othersStaticText;
+    private Spinner othersTimeSlot;
+    private JSONObject othersJsonObject,othersNestedJsonObject;
+    private DatePickerDialog othersPickDate;
+    private JSONArray othersNestedJsonArray;
+    private boolean othersCreated = false;
+    private ArrayList<String> minimumOthersSlots;
+    private ArrayAdapter<String> othersAdapter;
+
+
     private ActionBar actionBar;
-    private CustomTextView ironingTitleText,ironingDateText,washingTitleText,washingDateText,bagsTitleText,bagsDateText,collectionTitleText,collectionDateText,collectionStaticText,ironingStaticText,washingStaticText,bagsStaticText;
-    private Spinner collectionTimeSlot, ironingTimeSlot, washingTimeSlot, bagsTimeSlot;
     private CustomButton placeOrder,newOrder;
-    private JSONObject ironingNestedJsonObject,washingNestedJsonObject,bagsNestedJsonObject,ironingJsonObject,washingJsonObject,bagsJsonObject,postOrderJsonObject;
-    private JSONArray ironingNestedJsonArray,washingNestedJsonArray,bagsNestedJsonArray,itemsJsonArray;
-    private boolean ironingCreated,washingCreated,bagsCreated = false;
+    private JSONObject postOrderJsonObject;
     private ProgressDialog progressDialog;
-    private DatePickerDialog collectionsPickDate,ironingPickDate,washingPickDate,bagsPickDate;
     private int date,month,year;
-    private ArrayAdapter<String> collectionAdapter,ironingAdapter,washingAdapter,bagsAdapter;
+    private JSONArray itemsJsonArray;
+
+
+
     // slot difference is 4 but +1 is added to get the correct index in the array same logic for washingDeliveryCounter
     private int ironingDeliveryCounter = 5;
     private int washingDeliveryCounter = 22;
-    private int bagsDeliveryCounter = 22;
+    private int bagsDeliveryCounter = 25;
+    private int othersDeliveryCounter = 31;
 
 
     private CustomTextView cloth,service,quantity,total;
     private ImageView add,subtract,remove;
 
     private LinearLayout yourItemsLayout;
-
-    private ArrayList<String> minimumIroningSlots,minimumWashingSlots,minimumBagsSlots;
 
     // This will hold the index of the slot from the array of Collections Slots;
     private int j;
@@ -206,6 +254,12 @@ public class PlaceOrderFragment extends Fragment {
         bagsStaticText = (CustomTextView) bagsLayout.findViewById(R.id.select_time_slot_text);
         bagsTimeSlot = (Spinner) bagsLayout.findViewById(R.id.select_time_slot_included);
 
+        othersLayout = (CardView) v.findViewById(R.id.others_layout_place_order_fragment);
+        othersTitleText = (CustomTextView) othersLayout.findViewById(R.id.service_included);
+        othersDateText = (CustomTextView) othersLayout.findViewById(R.id.select_date_slot_included);
+        othersStaticText = (CustomTextView) othersLayout.findViewById(R.id.select_time_slot_text);
+        othersTimeSlot = (Spinner) othersLayout.findViewById(R.id.select_time_slot_included);
+
         yourItemsLayout = (LinearLayout) v.findViewById(R.id.your_items_layout_place_order_fragment);
 
 
@@ -222,32 +276,28 @@ public class PlaceOrderFragment extends Fragment {
 
         collectionDateText.setTag("date_1");
         collectionDateText.setOnClickListener(datelistener);
-
-        collectionStaticText.setTag("collection");
         collectionStaticText.setOnClickListener(toastListener);
 
         ironingDateText.setTag("date_2");
         ironingDateText.setOnClickListener(datelistener);
-
-        ironingStaticText.setTag("collection");
         ironingStaticText.setOnClickListener(toastListener);
 
         washingDateText.setTag("date_3");
         washingDateText.setOnClickListener(datelistener);
-
-
-        washingStaticText.setTag("collection");
         washingStaticText.setOnClickListener(toastListener);
 
         bagsDateText.setTag("date_4");
         bagsDateText.setOnClickListener(datelistener);
-
-        bagsStaticText.setTag("collection");
         bagsStaticText.setOnClickListener(toastListener);
+
+        othersDateText.setTag("date_5");
+        othersDateText.setOnClickListener(datelistener);
+        othersStaticText.setOnClickListener(toastListener);
 
         ironingLayout.setVisibility(View.GONE);
         washingLayout.setVisibility(View.GONE);
         bagsLayout.setVisibility(View.GONE);
+        othersLayout.setVisibility(View.GONE);
 
         collectionTitleText.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_collection,0,0,0);
 
@@ -255,6 +305,7 @@ public class PlaceOrderFragment extends Fragment {
         ironingTitleText.setText("Delivery : Ironing");
         washingTitleText.setText("Delivery : Wash & Iron");
         bagsTitleText.setText("Delivery : Bags & Shoes");
+        othersTitleText.setText("Delivery : Others");
 
 
     }
@@ -264,6 +315,7 @@ public class PlaceOrderFragment extends Fragment {
         int ironingSize = Constants.ironingOrderData.size();
         int washingSize = Constants.washingOrderData.size();
         int bagsSize = Constants.bagOrderData.size();
+        int othersSize = Constants.othersOrderData.size();
         if(ironingSize>0){
 
             ironingLayout.setVisibility(View.VISIBLE);
@@ -277,6 +329,11 @@ public class PlaceOrderFragment extends Fragment {
         if(bagsSize>0){
 
             bagsLayout.setVisibility(View.VISIBLE);
+
+        }
+        if(othersSize>0){
+
+            othersLayout.setVisibility(View.VISIBLE);
 
         }
 
@@ -329,6 +386,8 @@ public class PlaceOrderFragment extends Fragment {
             case "007": service.setText("Shoe Laundry");
                 break;
             case "008": service.setText("Bag Laundry");
+                break;
+            case "009": service.setText("Others");
                 break;
         }
 
@@ -423,11 +482,13 @@ public class PlaceOrderFragment extends Fragment {
 
                     // -1 because our slots start from id number 1 so we are makieng th array index j = 0
                     // by subtracting 1
-                    j = Integer.parseInt(Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()))-1;
+                    j = Integer.parseInt(Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()))-2;
                     int collectionArrayIndex = j;
                     Constants.collectionSlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
                     setIroningAdapter(Constants.collectionDate,collectionArrayIndex);
                     setWashingAdapter(Constants.collectionDate, collectionArrayIndex);
+                    setBagsAdapter(Constants.collectionDate, collectionArrayIndex);
+                    setOthersAdapter(Constants.collectionDate, collectionArrayIndex);
 
                 }
                 @Override
@@ -438,7 +499,6 @@ public class PlaceOrderFragment extends Fragment {
 
         }
         else{
-
 
             String completedDate[] = date.split("/");
             int newDate = Integer.parseInt(completedDate[0]);
@@ -510,6 +570,7 @@ public class PlaceOrderFragment extends Fragment {
         ArrayList<String> ironingSlots;
         /// -1 indicates that we have come from the date picker route
         // else part indicates that the value is directly calculated based on collection date
+        // the else will be executed first time because we would calculate dates based on collection date
         if(collectionArrayIndex == -1){
 
             String minimumDate[] = Constants.minIroningDate.split("/");
@@ -518,6 +579,8 @@ public class PlaceOrderFragment extends Fragment {
             int min = Integer.parseInt(minimumDate[0]);
             int iron = Integer.parseInt(ironingDate[0]);
 
+            // we are cheching here if the selected date in the date picker
+            // is same as th minimum date set of ironing date picker
             if(iron == min){
 
                 ironingSlots = minimumIroningSlots;
@@ -533,8 +596,10 @@ public class PlaceOrderFragment extends Fragment {
             ironingSlots = getSlotsForIroningAndWashing(date, ironingDeliveryCounter, "ironing", collectionArrayIndex);
             minimumIroningSlots = ironingSlots;
             Constants.minIroningDate = Constants.ironingDeliveryDate;
-            Log.d(Constants.LOG_TAG," The minimum date for washing is "+ Constants.minIroningDate);
+            Log.d(Constants.LOG_TAG," The minimum date for ironing is "+ Constants.minIroningDate);
         }
+        // This will check if the slots returned for the particular date is not null
+        // if it is then the else part will increment date and fetch the slots
         if(ironingSlots != null) {
             ironingDateText.setText(Constants.ironingDeliveryDate);
             ironingAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, ironingSlots);
@@ -603,6 +668,9 @@ public class PlaceOrderFragment extends Fragment {
         washingTimeSlot.setVisibility(View.VISIBLE);
 
         ArrayList<String> washingSlots;
+        /// -1 indicates that we have come from the date picker route
+        // else part indicates that the value is directly calculated based on collection date
+        // the else will be executed first time because we would calculate dates based on collection date
         if(collectionArrayIndex == -1){
 
             String minDate[] = Constants.minWashingDate.split("/");
@@ -696,8 +764,11 @@ public class PlaceOrderFragment extends Fragment {
         bagsStaticText.setVisibility(View.GONE);
         bagsTimeSlot.setVisibility(View.VISIBLE);
 
-        // This is pending for now as he not sending bags data
         ArrayList<String> bagsSlots;
+
+        /// -1 indicates that we have come from the date picker route
+        // else part indicates that the value is directly calculated based on collection date
+        // the else will be executed first time because we would calculate dates based on collection date
         if(collectionArrayIndex == -1){
 
             String minimumDate[] = Constants.minBagsDate.split("/");
@@ -723,9 +794,23 @@ public class PlaceOrderFragment extends Fragment {
             Constants.minBagsDate = Constants.bagsDeliveryDate;
         }
         if(bagsSlots != null) {
+            bagsDateText.setText(Constants.bagsDeliveryDate);
             bagsAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, bagsSlots);
             bagsAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
             bagsTimeSlot.setAdapter(bagsAdapter);
+            bagsAdapter.notifyDataSetChanged();
+            bagsTimeSlot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    Log.d(Constants.LOG_TAG," The delivery slot id is "+Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()));
+                    Constants.bagsDeliverySlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
         }
         else{
 
@@ -737,6 +822,107 @@ public class PlaceOrderFragment extends Fragment {
 
         }
     }
+
+    private void othersDatePicker() {
+        Calendar c = Calendar.getInstance();
+        year  = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH);
+        date   = c.get(Calendar.DAY_OF_MONTH);
+        othersPickDate = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int yearofc, int monthOfYear, int dayOfMonth) {
+
+                if(year==yearofc && month==monthOfYear && date==dayOfMonth) {
+
+                    month = monthOfYear+1;
+                    othersDateText.setText("Today");
+                    Constants.othersDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
+                    setBagsAdapter(Constants.othersDeliveryDate,-1);
+
+                }
+                else{
+                    month = monthOfYear+1;
+                    othersDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
+                    Constants.othersDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
+                    setBagsAdapter(Constants.othersDeliveryDate,-1);
+
+                }
+            }
+
+        },year, month, date);
+        othersPickDate.getDatePicker().setMinDate(Long.parseLong(Constants.minOthersDate));
+        othersPickDate.show();
+    }
+
+    public void setOthersAdapter(String date,int collectionArrayIndex){
+
+        othersStaticText.setVisibility(View.GONE);
+        othersTimeSlot.setVisibility(View.VISIBLE);
+
+        // This is pending for now as he not sending bags data
+        ArrayList<String> othersSlots;
+
+        /// -1 indicates that we have come from the date picker route
+        // else part indicates that the value is directly calculated based on collection date
+        // the else will be executed first time because we would calculate dates based on collection date
+        if(collectionArrayIndex == -1){
+
+            String minimumDate[] = Constants.minOthersDate.split("/");
+            String othersDate[] = date.split("/");
+
+            int min = Integer.parseInt(minimumDate[0]);
+            int others = Integer.parseInt(othersDate[0]);
+
+            if(others == min){
+
+                othersSlots = minimumOthersSlots;
+
+            }
+            else{
+
+                othersSlots = getSlots(date,"later","bags");
+            }
+
+        }
+        else {
+            othersSlots = getSlotsForIroningAndWashing(date,othersDeliveryCounter,"others",collectionArrayIndex);
+            minimumOthersSlots = othersSlots;
+            Constants.minOthersDate = Constants.othersDeliveryDate;
+        }
+        if(othersSlots != null) {
+            othersDateText.setText(Constants.othersDeliveryDate);
+            othersAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.row_spinner_layout, othersSlots);
+            othersAdapter.setDropDownViewResource(R.layout.row_spinner_layout);
+            othersTimeSlot.setAdapter(othersAdapter);
+            othersAdapter.notifyDataSetChanged();
+            othersTimeSlot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    Log.d(Constants.LOG_TAG," The delivery slot id is "+Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()));
+                    Constants.othersDeliverySlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+        }
+        else{
+
+            String completedDate[] = date.split("/");
+            int newDate = Integer.parseInt(completedDate[0]);
+            newDate++;
+            Constants.othersDeliveryDate = String.valueOf(newDate)+"/"+completedDate[1]+"/"+completedDate[2];
+            setBagsAdapter(Constants.othersDeliveryDate, -1);
+
+        }
+    }
+
+
+
+
+
 
     // setting the available slots  for collection
     // date : the selected date
@@ -907,6 +1093,9 @@ public class PlaceOrderFragment extends Fragment {
         else if(service.equalsIgnoreCase("bags")){
             Constants.bagsDeliveryDate = date;
         }
+        else if(service.equalsIgnoreCase("others")){
+            Constants.othersDeliveryDate = date;
+        }
 
         try {
             String availableSlots = getAvailableSlots(date);
@@ -1045,6 +1234,7 @@ public class PlaceOrderFragment extends Fragment {
         Constants.ironingOrderData.clear();
         Constants.washingOrderData.clear();
         Constants.bagOrderData.clear();
+        Constants.othersOrderData.clear();
 
         Iterator iterator = Constants.order.entrySet().iterator();
         while (iterator.hasNext()) {
@@ -1079,6 +1269,13 @@ public class PlaceOrderFragment extends Fragment {
                 Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
                 Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
             }
+            else if(serviceType.equalsIgnoreCase("9")){
+
+                Log.d(Constants.LOG_TAG," amount "+orderDetails[1]+" quantity "+orderDetails[0]);
+                Constants.othersOrderData.add(new OthersOrderData(orderId,orderDetails[1],orderDetails[0]));
+                Constants.totalAmountToBeCollected += Integer.parseInt(orderDetails[1]);
+                Constants.totalQuantityToBeCollected += Integer.parseInt(orderDetails[0]);
+            }
 
 //            iterator.remove();
         }
@@ -1097,9 +1294,11 @@ public class PlaceOrderFragment extends Fragment {
         Log.d(Constants.LOG_TAG," Creating JSOn ");
 
         itemsJsonArray = new JSONArray();
+        ironingNestedJsonArray = new JSONArray();
         washingNestedJsonArray = new JSONArray();
         bagsNestedJsonArray = new JSONArray();
-        ironingNestedJsonArray = new JSONArray();
+        othersNestedJsonArray = new JSONArray();
+
 
         try{
 
@@ -1189,6 +1388,35 @@ public class PlaceOrderFragment extends Fragment {
                 bagsJsonObject.put("user_delivery_slot",Constants.bagsDeliverySlotId);
                 bagsJsonObject.put("itemarr",bagsNestedJsonArray);
             }
+            if(Constants.othersOrderData.size()>0){
+
+                othersCreated = true;
+                for(int i=0;i<Constants.othersOrderData.size();i++){
+                    othersNestedJsonObject = new JSONObject();
+                    String orderId = Constants.othersOrderData.get(i).getOrderId();
+                    String quantity = Constants.othersOrderData.get(i).getQuantity();
+                    String amount = Constants.othersOrderData.get(i).getAmount();
+
+                    othersNestedJsonObject.put("order_id",orderId);
+
+
+                    Log.d(Constants.LOG_TAG," the amount "+ Integer.parseInt(amount)+" quantity "+Integer.parseInt(quantity));
+                    int temp = (Integer.parseInt(amount)/Integer.parseInt(quantity));
+                    Log.d(Constants.LOG_TAG,"Value for quantity for bags"+temp);
+
+                    othersNestedJsonObject.put("amount",temp);
+                    othersNestedJsonObject.put("quantity",quantity);
+
+
+                    othersNestedJsonArray.put(othersNestedJsonObject);
+
+                }
+
+                othersJsonObject = new JSONObject();
+                othersJsonObject.put("user_delivery_date",Constants.othersDeliveryDate);
+                othersJsonObject.put("user_delivery_slot",Constants.othersDeliverySlotId);
+                othersJsonObject.put("itemarr",othersNestedJsonArray);
+            }
 
 
             if (ironingCreated){
@@ -1202,6 +1430,9 @@ public class PlaceOrderFragment extends Fragment {
             }
             if(bagsCreated){
                 itemsJsonArray.put(bagsJsonObject);
+            }
+            if(othersCreated){
+                itemsJsonArray.put(othersJsonObject);
             }
 
             postOrderJsonObject = new JSONObject();
@@ -1229,6 +1460,7 @@ public class PlaceOrderFragment extends Fragment {
         AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
         alert.setTitle("Laundrize");
         alert.setMessage("Your order has been placed");
+        alert.setCancelable(false);
         alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -1278,13 +1510,23 @@ public class PlaceOrderFragment extends Fragment {
             }
             if (Constants.bagsDeliveryDate != null) {
 
-                Log.d(Constants.LOG_TAG," Old washing delivery Date"+Constants.bagsDeliveryDate);
+                Log.d(Constants.LOG_TAG," Old Bags delivery Date"+Constants.bagsDeliveryDate);
                 SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = originalFormat.parse(Constants.bagsDeliveryDate);
 
                 SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Constants.washingDeliveryDate = newDateFormat.format(date);
-                Log.d(Constants.LOG_TAG,"  NEW Washing Date "+ Constants.bagsDeliveryDate);
+                Constants.bagsDeliveryDate = newDateFormat.format(date);
+                Log.d(Constants.LOG_TAG,"  NEW Bags Date "+ Constants.bagsDeliveryDate);
+            }
+            if (Constants.othersDeliveryDate != null) {
+
+                Log.d(Constants.LOG_TAG," Old others delivery Date"+Constants.othersDeliveryDate);
+                SimpleDateFormat originalFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = originalFormat.parse(Constants.othersDeliveryDate);
+
+                SimpleDateFormat newDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Constants.othersDeliveryDate = newDateFormat.format(date);
+                Log.d(Constants.LOG_TAG,"  NEW Others Date "+ Constants.othersDeliveryDate);
             }
         }
         catch (Exception e){
@@ -1398,32 +1640,9 @@ public class PlaceOrderFragment extends Fragment {
         @Override
         public void onClick(View view) {
 
-            switch (view.getTag().toString()){
-
-                case "collection":
                     if(Constants.collectionDate == null){
                         Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
                     }
-
-                    break;
-                case "ironing":
-                    if(Constants.collectionDate == null){
-                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
-                    }
-                    break;
-                case "washing":
-                    if(Constants.collectionDate == null){
-                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
-                    }
-                    break;
-                case "bag":
-                    if(Constants.collectionDate == null){
-                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
-                    }
-                    break;
-
-            }
-
         }
     };
 
@@ -1486,6 +1705,13 @@ public class PlaceOrderFragment extends Fragment {
                 case "date_4":
                     if(Constants.collectionDate != null) {
                         bagsDatePicker();
+                    }else{
+                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the Collection Date",5000).show();
+                    }
+                    break;
+                case "date_5":
+                    if(Constants.collectionDate != null) {
+                        othersDatePicker();
                     }else{
                         Toast.makeText(getActivity().getApplicationContext(),"Please Select the Collection Date",5000).show();
                     }

@@ -106,9 +106,11 @@ public class FetchCompletedOrdersAsyncTask extends AsyncTask<String,Void,Boolean
                             break;
                         case "006" : typeOfService = "Washing";
                             break;
-                        case "007" : typeOfService = "Washing";
+                        case "007" : typeOfService = "Bags / Shoes";
                             break;
-                        case "008" : typeOfService = "Washing";
+                        case "008" : typeOfService = "Bags / Shoes";
+                            break;
+                        case "009" : typeOfService = "Others";
                             break;
                     }
 
