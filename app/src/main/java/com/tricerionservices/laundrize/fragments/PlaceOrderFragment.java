@@ -482,7 +482,7 @@ public class PlaceOrderFragment extends Fragment {
 
                     // -1 because our slots start from id number 1 so we are makieng th array index j = 0
                     // by subtracting 1
-                    j = Integer.parseInt(Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()))-2;
+                    j = Integer.parseInt(Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString()))- Constants.jCounter;
                     int collectionArrayIndex = j;
                     Constants.collectionSlotId = Constants.getSlotsId.get(adapterView.getItemAtPosition(i).toString());
                     setIroningAdapter(Constants.collectionDate,collectionArrayIndex);

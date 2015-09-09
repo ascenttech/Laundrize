@@ -71,6 +71,10 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
                     while (keys.hasNext()) {
 
                         String currentKey = keys.next();
+                        if(!currentKey.equalsIgnoreCase("day")){
+
+                            findLowestKey(currentKey);
+                        }
                         if (currentKey.equalsIgnoreCase("day")) {
                             // We are using this variable because when we want to know which is the first element after
                             // the day so that we can concatenate the others using "_"
@@ -80,6 +84,7 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
                             if (allSlots.isEmpty()) {
 
                                 allSlots = jsonObject.getString(currentKey);
+
                             } else {
 
 
@@ -107,6 +112,17 @@ public class FetchAllSlotsAsyncTask extends AsyncTask<String,Void,Boolean> {
         }
 
     }// end of doInBackground
+
+    private void findLowestKey(String currentKey) {
+
+        int key = Integer.parseInt(currentKey);
+        if(key < Constants.jCounter){
+
+            Constants.jCounter = 2;
+        }
+
+
+    }
 
     // This method is used to sort the slots values from allSlots
     private String sortAllSlots() {

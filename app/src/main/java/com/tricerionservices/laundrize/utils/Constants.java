@@ -61,6 +61,7 @@ public class Constants {
     // This will be used in place ORder so that we can access this value from anywhere
     public static String placeOrderkey,placeOrderValue;
     public static int placeOrderPosition;
+    public static int jCounter = 10;
 
 
     // This is used to change the image of track orders.
