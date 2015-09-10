@@ -360,6 +360,7 @@ public class QuickOrderFragment extends Fragment {
 
         final String date = d;
         final ArrayList<String> collectionSlots = getSlots(date,when,"collection");
+        Constants.jCounter = getJCounter(Constants.collectionDate);
 
         // previous
 //        final ArrayList<String> collectionSlots = getSlots(date,when);
@@ -1039,6 +1040,30 @@ public class QuickOrderFragment extends Fragment {
 
             return null;
         }
+
+
+    }
+
+    public int getJCounter(String date){
+
+        try {
+            SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date MyDate = newDateFormat.parse(date);
+            newDateFormat.applyPattern("EEEE");
+            String day = newDateFormat.format(MyDate);
+            day = day.toLowerCase();
+            String availableSlots[] = Constants.slots.get(day).split("_");
+            String minSlot = Constants.getSlotsId .get(availableSlots[0]);
+
+            Log.d(Constants.LOG_TAG," Minimum Slot for the date "+ date+" is "+ Integer.parseInt(minSlot));
+            return Integer.parseInt(minSlot);
+
+        }
+        catch (Exception e){
+
+            return 0;
+        }
+
 
 
     }

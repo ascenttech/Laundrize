@@ -461,6 +461,7 @@ public class PlaceOrderFragment extends Fragment {
 
         final String date = d;
         final ArrayList<String> collectionSlots = getSlots(date,when,"collection");
+        Constants.jCounter = getJCounter(Constants.collectionDate);
         if(collectionSlots != null){
 
             // d will always receive Constants.collectionDate
@@ -657,6 +658,7 @@ public class PlaceOrderFragment extends Fragment {
             }
 
         },year, month, date);
+        Log.d(Constants.LOG_TAG," The long date "+Constants.minWashingDate);
         washingPickDate.getDatePicker().setMinDate(getLongDate(Constants.minWashingDate));
         washingPickDate.show();
     }
@@ -755,7 +757,8 @@ public class PlaceOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        bagsPickDate.getDatePicker().setMinDate(Long.parseLong(Constants.minBagsDate));
+        Log.d(Constants.LOG_TAG," The long date for bags "+Constants.minBagsDate);
+        bagsPickDate.getDatePicker().setMinDate(getLongDate(Constants.minBagsDate));
         bagsPickDate.show();
     }
 
@@ -850,7 +853,7 @@ public class PlaceOrderFragment extends Fragment {
             }
 
         },year, month, date);
-        othersPickDate.getDatePicker().setMinDate(Long.parseLong(Constants.minOthersDate));
+        othersPickDate.getDatePicker().setMinDate(getLongDate(Constants.minOthersDate));
         othersPickDate.show();
     }
 
@@ -970,12 +973,11 @@ public class PlaceOrderFragment extends Fragment {
         ArrayList<String> options = new ArrayList<String>();
         try {
 
-            Log.d(Constants.LOG_TAG," The Date which is received in the getSlots "+date);
+//            Log.d(Constants.LOG_TAG," The Date which is received in the getSlots "+date);
             String availableSlots = getAvailableSlots(date);
 
             if(availableSlots != null){
                 String getSlots[] = availableSlots.split("_");
-                Log.d(Constants.LOG_TAG,"when before checking "+when.equalsIgnoreCase("today"));
                 if(when.equalsIgnoreCase("today")){
 
                     String presentTime = Constants.currentTime;
@@ -1007,7 +1009,7 @@ public class PlaceOrderFragment extends Fragment {
                 } // if the date is set for today
                 else if(when.equalsIgnoreCase("later")){
 
-                    Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
+//                    Log.d(Constants.LOG_TAG," Available slots "+availableSlots);
                     String availableOptions[] = availableSlots.split("_");
                     for(int i=0;i<availableOptions.length;i++){
 
@@ -1038,16 +1040,40 @@ public class PlaceOrderFragment extends Fragment {
         return options;
     }
 
-    public String getAvailableSlots(String date){
+    public int getJCounter(String date){
 
         try {
             SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Log.d(Constants.LOG_TAG," received date from getAvailable Slots "+ date);
             Date MyDate = newDateFormat.parse(date);
             newDateFormat.applyPattern("EEEE");
             String day = newDateFormat.format(MyDate);
             day = day.toLowerCase();
-            Log.d(Constants.LOG_TAG," received day from getAvailable Slots "+Constants.slots.get(day));
+            String availableSlots[] = Constants.slots.get(day).split("_");
+            String minSlot = Constants.getSlotsId .get(availableSlots[0]);
+
+            Log.d(Constants.LOG_TAG," Minimum Slot for the date "+ date+" is "+ Integer.parseInt(minSlot));
+            return Integer.parseInt(minSlot);
+
+        }
+        catch (Exception e){
+
+            return 0;
+        }
+
+
+
+    }
+
+    public String getAvailableSlots(String date){
+
+        try {
+            SimpleDateFormat newDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//            Log.d(Constants.LOG_TAG," received date from getAvailable Slots "+ date);
+            Date MyDate = newDateFormat.parse(date);
+            newDateFormat.applyPattern("EEEE");
+            String day = newDateFormat.format(MyDate);
+            day = day.toLowerCase();
+//            Log.d(Constants.LOG_TAG," received day from getAvailable Slots "+Constants.slots.get(day));
             String availableSlots = (String) Constants.slots.get(day);
 
 
@@ -1057,7 +1083,6 @@ public class PlaceOrderFragment extends Fragment {
 
             return null;
         }
-
 
     }
 
@@ -1077,10 +1102,10 @@ public class PlaceOrderFragment extends Fragment {
         Calendar c = Calendar.getInstance();
         c.set(year,month,day);
 
-        Log.d(Constants.LOG_TAG," The set date is "+ c.getTime());
+//        Log.d(Constants.LOG_TAG," The set date is "+ c.getTime());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        Log.d(Constants.LOG_TAG," The set date after fomating "+ simpleDateFormat.format(c.getTime()));
+//        Log.d(Constants.LOG_TAG," The set date after fomating "+ simpleDateFormat.format(c.getTime()));
         date = simpleDateFormat.format(c.getTime());
 
         ArrayList<String> options = new ArrayList<String>();
@@ -1099,7 +1124,7 @@ public class PlaceOrderFragment extends Fragment {
 
         try {
             String availableSlots = getAvailableSlots(date);
-            Log.d(Constants.LOG_TAG," SLOTS AVAILABLE "+ availableSlots);
+//            Log.d(Constants.LOG_TAG," SLOTS AVAILABLE "+ availableSlots);
 
             if(availableSlots!= null) {
 
@@ -1634,15 +1659,15 @@ public class PlaceOrderFragment extends Fragment {
     }
 
 
-    
+
 
     View.OnClickListener toastListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
-                    if(Constants.collectionDate == null){
-                        Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
-                    }
+            if(Constants.collectionDate == null){
+                Toast.makeText(getActivity().getApplicationContext(),"Please Select the collection date",5000).show();
+            }
         }
     };
 
