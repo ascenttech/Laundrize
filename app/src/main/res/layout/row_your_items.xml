@@ -8,12 +8,13 @@
     >
 
     <ImageView
+        android:id="@+id/service_image_your_items"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
-        android:src="@drawable/baniyan"
         android:layout_weight="1"
         android:layout_gravity="bottom"
         android:scaleType="fitCenter"
+        android:layout_marginRight="@dimen/margin_small"
         />
 
     <LinearLayout
@@ -28,7 +29,6 @@
             android:id="@+id/cloth_text_your_items"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text=" SHIRTS"
             android:textSize="@dimen/text_size_double_extra_small"
             />
 

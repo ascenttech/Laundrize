@@ -119,7 +119,7 @@ public class PlaceOrderFragment extends Fragment {
 
 
     private CustomTextView cloth,service,quantity,total;
-    private ImageView add,subtract,remove;
+    private ImageView add,subtract,remove,serviceImage;
 
     private LinearLayout yourItemsLayout;
 
@@ -369,25 +369,37 @@ public class PlaceOrderFragment extends Fragment {
         service = (CustomTextView) v.findViewById(R.id.service_text_your_items);
         String keyValue = key.substring(0,3);
 
+        serviceImage = (ImageView) v.findViewById(R.id.service_image_your_items);
+
+
         switch(keyValue){
 
             case "001": service.setText("Ironing");
+                serviceImage.setImageResource(R.drawable.your_items_icon_iron);
                 break;
             case "002": service.setText("Ironing");
+                serviceImage.setImageResource(R.drawable.your_items_icon_iron);
                 break;
             case "003": service.setText("Washing");
+                serviceImage.setImageResource(R.drawable.your_items_icon_washing);
                 break;
             case "004": service.setText("Washing");
+                serviceImage.setImageResource(R.drawable.your_items_icon_washing);
                 break;
             case "005": service.setText("Dry Cleaning");
+                serviceImage.setImageResource(R.drawable.your_items_icon_dry_clean);
                 break;
             case "006": service.setText("Dry Cleaning");
+                serviceImage.setImageResource(R.drawable.your_items_icon_dry_clean);
                 break;
             case "007": service.setText("Shoe Laundry");
+                serviceImage.setImageResource(R.drawable.your_items_icon_shoe);
                 break;
             case "008": service.setText("Bag Laundry");
+                serviceImage.setImageResource(R.drawable.your_items_icon_bags);
                 break;
             case "009": service.setText("Others");
+                serviceImage.setImageResource(R.drawable.your_items_icon_shoe);
                 break;
         }
 
