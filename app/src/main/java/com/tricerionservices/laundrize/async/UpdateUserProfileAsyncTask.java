@@ -49,6 +49,7 @@ public class UpdateUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
         try{
 
             HttpPost httpPost = new HttpPost(url[0]);
+            httpPost.addHeader("Authorization:Bearer", Constants.token);
             HttpClient httpClient = new DefaultHttpClient();
             HttpResponse httpResponse = httpClient.execute(httpPost);
 

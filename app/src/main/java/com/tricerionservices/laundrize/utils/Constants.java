@@ -284,7 +284,8 @@ public class Constants {
 //    public static final String checkUserExistsUrl ="http://www.laundrize.com/api/api/v1/checkuserExist?id=";
 
 //    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=sagardevanga@gmail.com&first_name=sagar&last_name=devanga";
-    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=";
+//    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=";
+    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?user_id=";
 //    public static final String updateUserProfile = "http://www.laundrize.com/api/api/v1/updateUserProfile?email=";
 
 

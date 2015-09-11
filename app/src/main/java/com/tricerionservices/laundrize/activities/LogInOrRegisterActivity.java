@@ -21,7 +21,6 @@ import com.tricerionservices.laundrize.R;
 import com.tricerionservices.laundrize.async.CheckIfUserExistsAsyncTask;
 import com.tricerionservices.laundrize.custom.CustomButton;
 import com.tricerionservices.laundrize.utils.Constants;
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
@@ -252,7 +251,6 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
         }
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(4000);
 //        mDemoSlider.addOnPageChangeListener(this);
 

@@ -318,7 +318,7 @@ public class ProfileFragment extends Fragment {
         String firstNameValue = firstName.getText().toString();
         String lastNameValue = lastName.getText().toString();
 
-        String finalUrl = Constants.updateUserProfile+emailValue+"&firstName="+firstNameValue+"&lastName="+lastNameValue;
+        String finalUrl = Constants.updateUserProfile+Constants.userId+"&email="+emailValue+"&firstName="+firstNameValue+"&lastName="+lastNameValue;
         new UpdateUserProfileAsyncTask(getActivity().getApplicationContext(),new UpdateUserProfileAsyncTask.UpdateUserProfileCallback() {
             @Override
             public void onStart(boolean status) {
