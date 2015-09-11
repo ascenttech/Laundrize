@@ -132,6 +132,11 @@ public class QuickOrderFragment extends Fragment {
 
         Log.d(Constants.LOG_TAG, Constants.QuickOrderFragement);
 
+        // we are doing this because the date is saved once the session is once
+        // so for multiple orders this date will have values even if you dont select
+        // to avoid this we are re initializing it to null
+        Constants.collectionDate = null;
+
         customActionBar();
 
         return v;
@@ -300,7 +305,7 @@ public class QuickOrderFragment extends Fragment {
         bagsDateText.setOnClickListener(datelistener);
         bagsTimeSlotText.setOnClickListener(toastListener);
 
-        othersDateText.setTag("date_4");
+        othersDateText.setTag("date_5");
         othersDateText.setOnClickListener(datelistener);
         othersTimeSlotText.setOnClickListener(toastListener);
 
@@ -730,14 +735,14 @@ public class QuickOrderFragment extends Fragment {
                     month = monthOfYear+1;
                     othersDateText.setText("Today");
                     Constants.othersDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
-                    setBagsAdapter(Constants.othersDeliveryDate,-1);
+                    setOthersAdapter(Constants.othersDeliveryDate,-1);
 
                 }
                 else{
                     month = monthOfYear+1;
                     othersDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
                     Constants.othersDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
-                    setBagsAdapter(Constants.othersDeliveryDate,-1);
+                    setOthersAdapter(Constants.othersDeliveryDate,-1);
 
                 }
             }
@@ -752,7 +757,6 @@ public class QuickOrderFragment extends Fragment {
         othersTimeSlotText.setVisibility(View.GONE);
         othersTimeSlot.setVisibility(View.VISIBLE);
 
-        // This is pending for now as he not sending bags data
         ArrayList<String> othersSlots;
         if(collectionArrayIndex == -1){
 
@@ -769,7 +773,7 @@ public class QuickOrderFragment extends Fragment {
             }
             else{
 
-                othersSlots = getSlots(date,"later","bags");
+                othersSlots = getSlots(date,"later","others");
             }
 
         }
@@ -802,7 +806,7 @@ public class QuickOrderFragment extends Fragment {
             int newDate = Integer.parseInt(completedDate[0]);
             newDate++;
             Constants.othersDeliveryDate = String.valueOf(newDate)+"/"+completedDate[1]+"/"+completedDate[2];
-            setBagsAdapter(Constants.othersDeliveryDate, -1);
+            setOthersAdapter(Constants.othersDeliveryDate, -1);
         }
     }
 
@@ -852,7 +856,7 @@ public class QuickOrderFragment extends Fragment {
         }
         else if(service.equalsIgnoreCase("others")){
             Constants.othersDeliveryDate = date;
-            Log.d(Constants.LOG_TAG," Others Date set "+ Constants.bagsDeliveryDate);
+            Log.d(Constants.LOG_TAG," Others Date set "+ Constants.othersDeliveryDate);
         }
         ArrayList<String> options = new ArrayList<String>();
         try {
@@ -1522,7 +1526,26 @@ public class QuickOrderFragment extends Fragment {
                         othersLayout.setVisibility(View.GONE);
                     }
                     break;
-                case R.id.quick_service_done: dialog.dismiss();
+                case R.id.quick_service_done:
+                    if(ironing.isChecked()){
+
+                        dialog.dismiss();
+                    }
+                    else if(washing.isChecked()){
+
+                        dialog.dismiss();
+                    }
+                    else if(bags.isChecked()){
+
+                        dialog.dismiss();
+                    }
+                    else if(others.isChecked()){
+
+                        dialog.dismiss();
+                    }
+                    else{
+                        Toast.makeText(getActivity().getApplicationContext(),"You need to select atleast one service",5000).show();
+                    }
                     break;
                 case R.id.left_button_included : newOrder();
                     break;

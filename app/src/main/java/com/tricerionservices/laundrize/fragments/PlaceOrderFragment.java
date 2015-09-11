@@ -139,6 +139,11 @@ public class PlaceOrderFragment extends Fragment {
 
         Log.d(Constants.LOG_TAG, Constants.PlaceOrderFragment);
 
+        // we are doing this because the date is saved once the session is once
+        // so for multiple orders this date will have values even if you dont select
+        // to avoid this we are re initializing it to null
+        Constants.collectionDate = null;
+
         customActionBar();
 
         return v;
@@ -836,9 +841,7 @@ public class PlaceOrderFragment extends Fragment {
             setBagsAdapter(Constants.bagsDeliveryDate, -1);
 
         }
-    }
-
-    private void othersDatePicker() {
+    }private void othersDatePicker() {
         Calendar c = Calendar.getInstance();
         year  = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
@@ -859,12 +862,13 @@ public class PlaceOrderFragment extends Fragment {
                     month = monthOfYear+1;
                     othersDateText.setText(dayOfMonth+"/"+monthOfYear+"/"+yearofc);
                     Constants.othersDeliveryDate = String.valueOf(dayOfMonth)+"/"+String.valueOf(month)+"/"+String.valueOf(yearofc);
-                    setBagsAdapter(Constants.othersDeliveryDate,-1);
+                    setOthersAdapter(Constants.othersDeliveryDate,-1);
 
                 }
             }
 
         },year, month, date);
+        Log.d(Constants.LOG_TAG," The long date for Others "+Constants.minOthersDate);
         othersPickDate.getDatePicker().setMinDate(getLongDate(Constants.minOthersDate));
         othersPickDate.show();
     }
@@ -874,7 +878,6 @@ public class PlaceOrderFragment extends Fragment {
         othersStaticText.setVisibility(View.GONE);
         othersTimeSlot.setVisibility(View.VISIBLE);
 
-        // This is pending for now as he not sending bags data
         ArrayList<String> othersSlots;
 
         /// -1 indicates that we have come from the date picker route
@@ -895,7 +898,7 @@ public class PlaceOrderFragment extends Fragment {
             }
             else{
 
-                othersSlots = getSlots(date,"later","bags");
+                othersSlots = getSlots(date,"later","others");
             }
 
         }
@@ -929,14 +932,10 @@ public class PlaceOrderFragment extends Fragment {
             int newDate = Integer.parseInt(completedDate[0]);
             newDate++;
             Constants.othersDeliveryDate = String.valueOf(newDate)+"/"+completedDate[1]+"/"+completedDate[2];
-            setBagsAdapter(Constants.othersDeliveryDate, -1);
+            setOthersAdapter(Constants.othersDeliveryDate, -1);
 
         }
     }
-
-
-
-
 
 
     // setting the available slots  for collection
@@ -981,6 +980,10 @@ public class PlaceOrderFragment extends Fragment {
         else if(service.equalsIgnoreCase("bags")){
             Constants.bagsDeliveryDate = date;
             Log.d(Constants.LOG_TAG," Bags Date set "+ Constants.bagsDeliveryDate);
+        }
+        else if(service.equalsIgnoreCase("others")){
+            Constants.othersDeliveryDate = date;
+            Log.d(Constants.LOG_TAG," Others Date set "+ Constants.bagsDeliveryDate);
         }
         ArrayList<String> options = new ArrayList<String>();
         try {

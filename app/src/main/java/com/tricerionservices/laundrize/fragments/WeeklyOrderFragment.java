@@ -54,6 +54,11 @@ public class WeeklyOrderFragment extends Fragment {
 
         Log.d(Constants.LOG_TAG, Constants.WeeklyOrderFragement);
 
+        // we are doing this because the date is saved once the session is once
+        // so for multiple orders this date will have values even if you dont select
+        // to avoid this we are re initializing it to null
+        Constants.collectionDate = null;
+
         customActionBar();
 
 
@@ -271,6 +276,7 @@ public class WeeklyOrderFragment extends Fragment {
 
                     progressDialog.dismiss();
                     if(result){
+                        Constants.collectionDate = null;
                         showDialog();
                     }
                     else{
