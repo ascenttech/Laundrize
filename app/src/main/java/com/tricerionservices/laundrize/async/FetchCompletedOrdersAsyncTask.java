@@ -36,7 +36,7 @@ public class FetchCompletedOrdersAsyncTask extends AsyncTask<String,Void,Boolean
     public FetchCompletedOrdersAsyncTask(Context context, FetchCompletedOrdersCallback callback) {
         this.context = context;
         this.callback = callback;
-        if(Constants.completedOrdersData.size() != 0 ){
+        if(Constants.completedOrdersData != null ){
             Constants.completedOrdersData.clear();
         }
         else{

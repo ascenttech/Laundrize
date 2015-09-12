@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -938,6 +939,17 @@ public class PlaceOrderFragment extends Fragment {
     }
 
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(yourItemsLayout != null){
+
+            yourItemsLayout.removeAllViews();
+        }
+
+
+    }
+
     // setting the available slots  for collection
     // date : the selected date
     // when : today or later
@@ -1654,12 +1666,69 @@ public class PlaceOrderFragment extends Fragment {
     public void remove(String key, String position){
 
         Constants.order.remove(key);
-
-
         yourItemsLayout.findViewWithTag("view_"+position+"_"+key).setVisibility(View.GONE);
         yourItemsLayout.findViewWithTag("line_"+position).setVisibility(View.GONE);
 
     }
+
+//    public void updateUserInterface(){
+//
+//        int ironingSize = Constants.ironingOrderData.size();
+//        int washingSize = Constants.washingOrderData.size();
+//        int bagsSize = Constants.bagOrderData.size();
+//        int othersSize = Constants.othersOrderData.size();
+//        if(ironingSize<0){
+//
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    ironingLayout.setVisibility(View.GONE);
+//                }
+//            },1000);
+//
+//
+//        }
+//        if(washingSize<0){
+//
+//
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    washingLayout.setVisibility(View.GONE);
+//                }
+//            },1000);
+//
+//
+//        }
+//        if(bagsSize<0){
+//
+//
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    bagsLayout.setVisibility(View.GONE);
+//                }
+//            },1000);
+//
+//
+//
+//        }
+//        if(othersSize<0){
+//
+//            new Handler().postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//
+//                    othersLayout.setVisibility(View.GONE);
+//                }
+//            },1000);
+//
+//        }
+//
+//    }
 
     public void checkItem(){
 

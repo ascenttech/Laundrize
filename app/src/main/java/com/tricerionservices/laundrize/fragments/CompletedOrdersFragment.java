@@ -51,10 +51,6 @@ public class CompletedOrdersFragment extends Fragment {
 
         customActionBar();
         settingTheAdapter(v);
-//        if(!Constants.completedOrdersFetched){
-
-
-//        }
 
         Log.d(Constants.LOG_TAG, Constants.CompletedOrdersFragement);
 

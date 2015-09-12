@@ -44,7 +44,7 @@
             android:id="@+id/mobileno_edit_verification_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="9876543210"
+            android:hint="Mobile Number"
             android:padding="@dimen/padding_large"
             android:layout_marginBottom="@dimen/margin"
             android:background="@drawable/rounded_edit_text"

@@ -36,7 +36,7 @@ public class FetchTrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
     public FetchTrackOrdersAsyncTask(Context context, FetchTrackOrdersCallback callback) {
         this.context = context;
         this.callback = callback;
-        if(Constants.trackOrdersData.size() != 0){
+        if(Constants.trackOrdersData != null){
             Constants.trackOrdersData.clear();
         }
         else{

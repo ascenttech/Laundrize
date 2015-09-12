@@ -36,7 +36,17 @@ import android.widget.Toast;
 import com.tricerionservices.laundrize.R;
 import com.tricerionservices.laundrize.adapters.NavigationDrawerAdapter;
 import com.tricerionservices.laundrize.custom.CustomTextView;
+import com.tricerionservices.laundrize.data.AddressData;
+import com.tricerionservices.laundrize.data.BagOrderData;
+import com.tricerionservices.laundrize.data.CompletedOrdersData;
+import com.tricerionservices.laundrize.data.GeneralData;
+import com.tricerionservices.laundrize.data.IroningOrderData;
+import com.tricerionservices.laundrize.data.LaundryServicesMainCategoryData;
+import com.tricerionservices.laundrize.data.LaundryServicesSubCategoryData;
 import com.tricerionservices.laundrize.data.NavigationDrawerData;
+import com.tricerionservices.laundrize.data.OthersOrderData;
+import com.tricerionservices.laundrize.data.TrackOrdersData;
+import com.tricerionservices.laundrize.data.WashingOrderData;
 import com.tricerionservices.laundrize.fragments.AddressFragment;
 import com.tricerionservices.laundrize.fragments.CompletedOrdersFragment;
 import com.tricerionservices.laundrize.fragments.FAQFragment;
@@ -50,6 +60,7 @@ import com.tricerionservices.laundrize.fragments.TrackOrdersFragment;
 import com.tricerionservices.laundrize.utils.Constants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -301,7 +312,8 @@ public class LandingActivity extends ActionBarActivity {
                 editor.remove("password");
                 editor.commit();
 
-                Intent i = new Intent(LandingActivity.this,LogInOrRegisterActivity.class);
+//                resetValues();
+                Intent i = new Intent(LandingActivity.this,SplashScreenActivity.class);
                 startActivity(i);
                 break;
         }
@@ -322,6 +334,43 @@ public class LandingActivity extends ActionBarActivity {
             // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
         }
+    }
+
+    public void resetValues(){
+
+        Constants.subCategory = new ArrayList<GeneralData>();
+        Constants.addressData = new ArrayList<AddressData>();
+        Constants.bagLaundryData = new ArrayList<GeneralData>();
+        Constants.dryCleanHouseholdsData = new ArrayList<GeneralData>();
+        Constants.dryCleanWearablesData = new ArrayList<GeneralData>();
+        Constants.ironingHouseholdsData = new ArrayList<GeneralData>();
+        Constants.ironingWearablesData = new ArrayList<GeneralData>();
+        Constants.laundryServicesMainCategory = new ArrayList<LaundryServicesMainCategoryData>();
+        Constants.laundryServicesSubCategory = new ArrayList<LaundryServicesSubCategoryData>();
+        Constants.navigationDrawerData = new ArrayList<NavigationDrawerData>();
+        Constants.othersData = new ArrayList<GeneralData>();
+        Constants.shoeLaundryData = new ArrayList<GeneralData>();
+        Constants.washAndIronHouseholdsData = new ArrayList<GeneralData>();
+        Constants.washAndIronWearablesData = new ArrayList<GeneralData>();
+        Constants.ironingOrderData = new ArrayList<IroningOrderData>();
+        Constants.bagOrderData = new ArrayList<BagOrderData>();
+        Constants.othersOrderData = new ArrayList<OthersOrderData>();
+        Constants.washingOrderData = new ArrayList<WashingOrderData>();
+        Constants.trackOrdersData = new ArrayList<TrackOrdersData>();
+        Constants.completedOrdersData = new ArrayList<CompletedOrdersData>();
+        Constants.areas = new ArrayList<String>();
+        Constants.cities = new ArrayList<String>();
+        Constants.zipcodes = new ArrayList<String>();
+
+        Constants.areasMap = new HashMap<String,String>();
+        Constants.citiesMap = new HashMap<String,String>();
+        Constants.servicesName = new HashMap<String,String>();
+        Constants.zipcodesMap = new HashMap<String,String>();
+        Constants.order = new HashMap<String,String>();
+        Constants.slots = new HashMap<String,String>();
+
+
+
     }
 
     public void mailToSupport(){

@@ -150,10 +150,7 @@ public class AddressFragment extends Fragment {
                 progressDialog.dismiss();
 
                 setClickListeners();
-                if(!Constants.addressPopulated){
-
-                    addAvailableAddresses();
-                }
+                addAvailableAddresses();
 
 
             }
@@ -197,7 +194,6 @@ public class AddressFragment extends Fragment {
 
             selectAddressChild.addView(rowView);
         }
-        Constants.addressPopulated = true;
 
     }
 
@@ -380,6 +376,13 @@ public class AddressFragment extends Fragment {
                 .commit();
 
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        selectAddressChild.removeAllViews();
+    }
+
 
     public void goAhead(int position){
 

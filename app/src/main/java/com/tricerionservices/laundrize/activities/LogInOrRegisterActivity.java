@@ -251,7 +251,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
         }
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mDemoSlider.setDuration(4000);
+        mDemoSlider.setDuration(3000);
 //        mDemoSlider.addOnPageChangeListener(this);
 
 

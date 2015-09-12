@@ -36,6 +36,7 @@ public class FetchLaundryServicesAsyncTask extends AsyncTask<String,Void,Boolean
     public FetchLaundryServicesAsyncTask(Context context, FetchLaundryServicesCallback callback) {
         this.context = context;
         this.callback = callback;
+        Constants.subCategory = new ArrayList<GeneralData>();
     }
 
     @Override
@@ -94,7 +95,7 @@ public class FetchLaundryServicesAsyncTask extends AsyncTask<String,Void,Boolean
                         String extraCare = nestedJsonObject.getString("extracare");
                         String extraCareCost = nestedJsonObject.getString("extracarecost");
 
-                        Constants.subCategory.add(new GeneralData(code,title,description,smallImage,largeImage,regular,regularCost,extraCare,extraCareCost,"0"));
+                        Constants.subCategory.add(new GeneralData(code, title, description, smallImage, largeImage, regular, regularCost, extraCare, extraCareCost, "0"));
 //                     Constants.subCategory.add(new GeneralData(code,title,description,smallImage,largeImage,regular,regularCost,extraCare,extraCareCost));
                         Constants.servicesName.put(code,title);
                     } // end of nested for loop

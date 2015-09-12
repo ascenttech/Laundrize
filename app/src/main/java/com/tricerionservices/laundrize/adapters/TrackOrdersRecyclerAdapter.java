@@ -67,8 +67,6 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
 
         progressIndicator = (ImageView) holder.v.findViewById(R.id.progress_indicator_image_track_order);
 
-
-
         numberOfItems = (LinearLayout) holder.v.findViewById(R.id.number_of_items_included);
         deliveryDate = (LinearLayout) holder.v.findViewById(R.id.delivery_date_included);
         deliverySlot = (LinearLayout) holder.v.findViewById(R.id.delivery_slot_included);
@@ -85,22 +83,20 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
         deliverySlotStaticText = (CustomTextView) deliverySlot.findViewById(R.id.field_static_text);
         totalAmountStaticText = (CustomTextView) totalAmount.findViewById(R.id.field_static_text);
 
-
-
     }
 
     private void setViews(int position){
 
-        if(Constants.trackOrdersData.get(position).getOrderProgress() == 1){
+        if(trackOrdersData.get(position).getOrderProgress() == 1){
             progressIndicator.setImageResource(R.drawable.track_progress_1);
         }
-        else if(Constants.trackOrdersData.get(position).getOrderProgress() == 2){
+        else if(trackOrdersData.get(position).getOrderProgress() == 2){
             progressIndicator.setImageResource(R.drawable.track_progress_2);
         }
-        else if(Constants.trackOrdersData.get(position).getOrderProgress() == 3){
+        else if(trackOrdersData.get(position).getOrderProgress() == 3){
             progressIndicator.setImageResource(R.drawable.track_progress_3);
         }
-        else if(Constants.trackOrdersData.get(position).getOrderProgress() == 4){
+        else if(trackOrdersData.get(position).getOrderProgress() == 4){
             progressIndicator.setImageResource(R.drawable.track_progress_4);
         }
 
@@ -109,13 +105,13 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
         deliverySlotStaticText.setText("Delivery Time");
         totalAmountStaticText.setText("Total Amount");
 
-        title.setText(Constants.trackOrdersData.get(position).getTypeOfService()+" | "+ Constants.trackOrdersData.get(position).getOrderId());
+        title.setText(trackOrdersData.get(position).getTypeOfService()+" | "+ trackOrdersData.get(position).getOrderId());
 
-        numberOfItemsValue.setText(Constants.trackOrdersData.get(position).getQuantity());
-        deliveryDateValue.setText(Constants.trackOrdersData.get(position).getDeliveryDate());
+        numberOfItemsValue.setText(trackOrdersData.get(position).getQuantity());
+        deliveryDateValue.setText(trackOrdersData.get(position).getDeliveryDate());
 
-        deliverySlotValue.setText(getTheKey(Constants.trackOrdersData.get(position).getDeliverySlot()));
-        totalAmountValue.setText(Constants.trackOrdersData.get(position).getPrice());
+        deliverySlotValue.setText(getTheKey(trackOrdersData.get(position).getDeliverySlot()));
+        totalAmountValue.setText(trackOrdersData.get(position).getPrice());
 
 
 
@@ -128,10 +124,8 @@ public class TrackOrdersRecyclerAdapter extends RecyclerView.Adapter<TrackOrders
 
     public String getTheKey(String value) {
 
-        Log.d(Constants.LOG_TAG," Obtained value "+value);
         for (String key : Constants.getSlotsId.keySet()) {
             if (Constants.getSlotsId.get(key).equals(value)) {
-                Log.d(Constants.LOG_TAG," Returning the key "+key);
                 return key;
             }
         }
