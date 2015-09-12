@@ -71,6 +71,8 @@ public class ProfileFragment extends Fragment {
     CustomButton dialogButton;
 
     CustomTextView cityText,zipText,areaText;
+    Bitmap output;
+
 
 
     @Nullable
@@ -200,7 +202,7 @@ public class ProfileFragment extends Fragment {
     public void displayAddress(){
 
 
-        if(Constants.addressFetched) {
+        if(Constants.addressFetched && (!Constants.profileAddressPopulated)) {
             for(int i = 0;i<Constants.addressData.size();i++) {
                 rowView = parentInflater.inflate(R.layout.include_available_address, null);
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -217,7 +219,7 @@ public class ProfileFragment extends Fragment {
 
                 availableAddresses.addView(rowView);
             }
-
+            Constants.profileAddressPopulated = true;
         } // end of IF statement
 
     }
@@ -226,31 +228,30 @@ public class ProfileFragment extends Fragment {
 
     public Bitmap getCircleBitmap(Bitmap bitmap){
 
+//        if (bitmap != null && ! bitmap.isRecycled()) {
+//            return output;
+//        }
+//        else{
 
-        final Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        final Canvas canvas = new Canvas(output);
+            output = Bitmap.createBitmap(bitmap.getWidth(),
+                    bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+            final Canvas canvas = new Canvas(output);
 
-        final int color = Color.RED;
-        final Paint paint = new Paint();
-        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        final RectF rectF = new RectF(rect);
+            final int color = Color.RED;
+            final Paint paint = new Paint();
+            final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+            final RectF rectF = new RectF(rect);
 
-        paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
-        canvas.drawOval(rectF, paint);
+            paint.setAntiAlias(true);
+            canvas.drawARGB(0, 0, 0, 0);
+            paint.setColor(color);
+            canvas.drawOval(rectF, paint);
 
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
+            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+            canvas.drawBitmap(bitmap, rect, rect, paint);
 
-        if (bitmap != null && ! bitmap.isRecycled()) {
-            bitmap.recycle();
-            bitmap = null;
-        }
+            return output;
 
-
-        return output;
 
     }
 
@@ -261,6 +262,16 @@ public class ProfileFragment extends Fragment {
                 .beginTransaction()
                 .replace(R.id.container,new LandingFragment())
                 .commit();
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        bitmap.recycle();
+        bitmap = null;
+        System.gc();
 
     }
 

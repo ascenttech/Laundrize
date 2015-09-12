@@ -150,7 +150,11 @@ public class AddressFragment extends Fragment {
                 progressDialog.dismiss();
 
                 setClickListeners();
-                addAvailableAddresses();
+                if(!Constants.addressPopulated){
+
+                    addAvailableAddresses();
+                }
+
 
             }
         }).execute(finalURL);
@@ -193,6 +197,7 @@ public class AddressFragment extends Fragment {
 
             selectAddressChild.addView(rowView);
         }
+        Constants.addressPopulated = true;
 
     }
 

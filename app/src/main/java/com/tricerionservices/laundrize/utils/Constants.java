@@ -33,6 +33,8 @@ public class Constants {
 
 
     public static boolean addressFetched;
+    public static boolean profileAddressPopulated = false;
+    public static boolean addressPopulated = false;
     public static boolean ordersTracked;
     public static boolean completedOrdersFetched;
     public static boolean currentServerTimeFetched;
