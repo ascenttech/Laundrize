@@ -73,6 +73,7 @@ public class ProfileFragment extends Fragment {
     CustomTextView cityText,zipText,areaText;
     Bitmap output;
 
+    String emailValue,firstNameValue,lastNameValue;
 
 
     @Nullable
@@ -336,10 +337,14 @@ public class ProfileFragment extends Fragment {
 
         profileDialog.dismiss();
 
-        String emailValue = emailId.getText().toString();
-        String firstNameValue = firstName.getText().toString();
-        String lastNameValue = lastName.getText().toString();
-
+        try {
+            emailValue = URLEncoder.encode(emailId.getText().toString(), "UTF-8");
+            firstNameValue = URLEncoder.encode(firstName.getText().toString(), "UTF-8");
+            lastNameValue = URLEncoder.encode(lastName.getText().toString(), "UTF-8");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         String finalUrl = Constants.updateUserProfile+Constants.userId+"&email="+emailValue+"&first_name="+firstNameValue+"&last_name="+lastNameValue;
         new UpdateUserProfileAsyncTask(getActivity().getApplicationContext(),new UpdateUserProfileAsyncTask.UpdateUserProfileCallback() {
             @Override

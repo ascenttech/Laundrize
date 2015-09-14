@@ -63,7 +63,7 @@ public class FetchSlotDifferenceAsyncTask extends AsyncTask<String,Void,Boolean>
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     String serviceCode = jsonObject.getString("service_code");
                     String slots = jsonObject.getString("slots");
-
+                    sortTheSlots(serviceCode,slots);
                     Constants.slots.put(serviceCode,slots);
 
                 }
@@ -78,6 +78,28 @@ public class FetchSlotDifferenceAsyncTask extends AsyncTask<String,Void,Boolean>
             e.printStackTrace();
             return false;
         }
+
+    }
+
+    private void sortTheSlots(String serviceCode,String slots) {
+
+        char differenceCode = serviceCode.charAt(2);
+        switch (differenceCode){
+
+            case '1': Constants.ironingDeliveryCounter = Integer.parseInt(slots)+1;
+                Log.d(Constants.LOG_TAG," The ironing delivery counter "+Constants.ironingDeliveryCounter);
+                break;
+            case '3': Constants.washingDeliveryCounter = Integer.parseInt(slots)+1;
+                Log.d(Constants.LOG_TAG," The washing delivery counter "+Constants.washingDeliveryCounter);
+                break;
+            case '7': Constants.bagsDeliveryCounter = Integer.parseInt(slots)+1;
+                Log.d(Constants.LOG_TAG," The bags delivery counter "+Constants.bagsDeliveryCounter);
+                break;
+            case '9': Constants.othersDeliveryCounter = Integer.parseInt(slots)+1;
+                Log.d(Constants.LOG_TAG," The others delivery counter "+Constants.othersDeliveryCounter);
+                break;
+        }
+
 
     }
 

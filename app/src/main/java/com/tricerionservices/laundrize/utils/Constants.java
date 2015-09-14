@@ -60,10 +60,12 @@ public class Constants {
     public static String fetchPasswordErrorMessage,verificationCodeError;
     public static String profileName;
 
-    // This will be used in place ORder so that we can access this value from anywhere
-    public static String placeOrderkey,placeOrderValue;
-    public static int placeOrderPosition;
     public static int jCounter = 10;
+
+    public static int ironingDeliveryCounter;
+    public static int washingDeliveryCounter;
+    public static int bagsDeliveryCounter;
+    public static int othersDeliveryCounter;
 
 
     // This is used to change the image of track orders.
@@ -286,9 +288,8 @@ public class Constants {
 //    public static final String checkUserExistsUrl ="http://www.laundrize.com/api/api/v1/checkuserExist?id=";
 
 //    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=sagardevanga@gmail.com&first_name=sagar&last_name=devanga";
-//    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=";
     public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?user_id=";
-//    public static final String updateUserProfile = "http://www.laundrize.com/api/api/v1/updateUserProfile?email=";
+//    public static final String updateUserProfile = "http://www.laundrize.com/api/api/v1/updateUserProfile?user_id=";
 
 
 //    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/changePassword?mobile_number=7666441398&new_password=poiuy&verification_code=5329";

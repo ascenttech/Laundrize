@@ -74,7 +74,10 @@ public class FetchTrackOrdersAsyncTask extends AsyncTask<String,Void,Boolean> {
 
                 Log.d(Constants.LOG_TAG," JSON RESPONSE "+ response);
                 JSONObject jsonObject= new JSONObject(response);
+
                 JSONArray jsonArray = jsonObject.getJSONArray("orders");
+
+                Log.d(Constants.LOG_TAG," The array size" +jsonArray.length());
                 for(int i = 0;i<jsonArray.length();i++){
 
                     JSONObject nestedJsonObject = jsonArray.getJSONObject(i);

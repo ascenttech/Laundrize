@@ -110,15 +110,6 @@ public class PlaceOrderFragment extends Fragment {
     private int date,month,year;
     private JSONArray itemsJsonArray;
 
-
-
-    // slot difference is 4 but +1 is added to get the correct index in the array same logic for washingDeliveryCounter
-    private int ironingDeliveryCounter = 5;
-    private int washingDeliveryCounter = 22;
-    private int bagsDeliveryCounter = 25;
-    private int othersDeliveryCounter = 31;
-
-
     private CustomTextView cloth,service,quantity,total;
     private ImageView add,subtract,remove,serviceImage;
 
@@ -612,7 +603,7 @@ public class PlaceOrderFragment extends Fragment {
 
         }
         else {
-            ironingSlots = getSlotsForIroningAndWashing(date, ironingDeliveryCounter, "ironing", collectionArrayIndex);
+            ironingSlots = getSlotsForIroningAndWashing(date, Constants.ironingDeliveryCounter, "ironing", collectionArrayIndex);
             minimumIroningSlots = ironingSlots;
             Constants.minIroningDate = Constants.ironingDeliveryDate;
             Log.d(Constants.LOG_TAG," The minimum date for ironing is "+ Constants.minIroningDate);
@@ -711,7 +702,7 @@ public class PlaceOrderFragment extends Fragment {
 
         }
         else {
-            washingSlots = getSlotsForIroningAndWashing(date, washingDeliveryCounter, "washing", collectionArrayIndex);
+            washingSlots = getSlotsForIroningAndWashing(date, Constants.washingDeliveryCounter, "washing", collectionArrayIndex);
             minimumWashingSlots = washingSlots;
             Constants.minWashingDate = Constants.washingDeliveryDate;
             Log.d(Constants.LOG_TAG," The minimum date for washing is "+ Constants.minWashingDate);
@@ -810,7 +801,7 @@ public class PlaceOrderFragment extends Fragment {
 
         }
         else {
-            bagsSlots = getSlotsForIroningAndWashing(date,bagsDeliveryCounter,"bags",collectionArrayIndex);
+            bagsSlots = getSlotsForIroningAndWashing(date,Constants.bagsDeliveryCounter,"bags",collectionArrayIndex);
             minimumBagsSlots = bagsSlots;
             Constants.minBagsDate = Constants.bagsDeliveryDate;
         }
@@ -904,7 +895,7 @@ public class PlaceOrderFragment extends Fragment {
 
         }
         else {
-            othersSlots = getSlotsForIroningAndWashing(date,othersDeliveryCounter,"others",collectionArrayIndex);
+            othersSlots = getSlotsForIroningAndWashing(date,Constants.othersDeliveryCounter,"others",collectionArrayIndex);
             minimumOthersSlots = othersSlots;
             Constants.minOthersDate = Constants.othersDeliveryDate;
         }
@@ -1670,6 +1661,7 @@ public class PlaceOrderFragment extends Fragment {
         yourItemsLayout.findViewWithTag("line_"+position).setVisibility(View.GONE);
 
     }
+
 
 //    public void updateUserInterface(){
 //
