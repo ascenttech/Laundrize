@@ -97,7 +97,8 @@ public class SplashScreenActivity extends Activity {
                                 startActivity(i);
 
                             } else {
-                                Toast.makeText(getApplicationContext(), "Not a valid user", 5000).show();
+                               Intent i = new Intent(SplashScreenActivity.this,LogInOrRegisterActivity.class);
+                               startActivity(i);
                             }
 
                         }
@@ -151,7 +152,8 @@ public class SplashScreenActivity extends Activity {
                                 startActivity(i);
                             } else {
 
-                                Toast.makeText(getApplicationContext(), "There was an error.\nTry Again After Some time", 5000).show();
+                                Intent i = new Intent(SplashScreenActivity.this,LogInOrRegisterActivity.class);
+                                startActivity(i);
 
                             }
                         }

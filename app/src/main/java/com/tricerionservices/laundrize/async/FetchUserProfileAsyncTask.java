@@ -85,6 +85,7 @@ public class FetchUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
                 String updatedAt = nestedJsonObject.getString("updated_at");
 
                 Constants.profileData.add(new ProfileData(id,username,password,firstName,lastName,email,confirmed,confirmationCode,token,facebookId,googleId,status,createdAt,updatedAt));
+
                 return true;
             }
             else{
