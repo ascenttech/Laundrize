@@ -34,7 +34,13 @@ public class FetchUserProfileAsyncTask extends AsyncTask<String,Void,Boolean> {
     public FetchUserProfileAsyncTask(Context context, FetchUserProfileCallback callback) {
         this.context = context;
         this.callback = callback;
-        Constants.profileData = new ArrayList<ProfileData>();
+        if(Constants.profileData != null){
+            Constants.profileData.clear();
+        }
+        else{
+            Constants.profileData = new ArrayList<ProfileData>();
+        }
+
     }
 
     @Override

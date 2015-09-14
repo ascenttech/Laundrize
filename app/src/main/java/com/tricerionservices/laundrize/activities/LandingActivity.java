@@ -119,8 +119,11 @@ public class LandingActivity extends ActionBarActivity {
         profileLayout = (RelativeLayout) findViewById(R.id.profile_layout_navigation_drawer);
         profileImage = (ImageView) findViewById(R.id.profile_image_navigation_drawer);
         profileName = (CustomTextView) findViewById(R.id.name_text_landing_activity);
-        profileName.setText(Constants.profileName);
-        profileName.setText(Constants.profileData.get(0).getFirstName());
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME, MODE_PRIVATE);
+        profileName.setText(sharedPreferences.getString("profileName","admin"));
+
+
+//        profileName.setText(Constants.profileData.get(0).getFirstName());
 
 
         profileImage.setImageBitmap(getCircleBitmap(bitmap));

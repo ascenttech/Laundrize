@@ -2,6 +2,7 @@ package com.tricerionservices.laundrize.fragments;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -124,6 +125,12 @@ public class ProfileFragment extends Fragment {
 
                 progressDialog.dismiss();
                 if(result){
+
+                    SharedPreferences sharedPreferences = getActivity().getSharedPreferences(Constants.APP_NAME,getActivity().MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("profileName", Constants.profileName);
+                    editor.commit();
+
                     customActionBar();
                     findViews(v);
                     setViews();
