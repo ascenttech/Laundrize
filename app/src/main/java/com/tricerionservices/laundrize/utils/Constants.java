@@ -204,105 +204,105 @@ public class Constants {
     // verify Now full Url
 
 //    public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=2";
-//    public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=";
-    public static final String fetchAddressUrl = "http://www.laundrize.com/api/api/v1/getuseraddress?user_id=";
+    public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=";
+//    public static final String fetchAddressUrl = "http://www.laundrize.com/api/api/v1/getuseraddress?user_id=";
 
 //    public static final String fetchProfileUrl = "http://dev.laundrize.com/api/api/v1/getuserinfo?user_id=2";
-//    public static final String fetchProfileUrl = "http://dev.laundrize.com/api/api/v1/getuserinfo?user_id=";
-    public static final String fetchProfileUrl = "http://www.laundrize.com/api/api/v1/getuserinfo?user_id=";
+    public static final String fetchProfileUrl = "http://dev.laundrize.com/api/api/v1/getuserinfo?user_id=";
+//    public static final String fetchProfileUrl = "http://www.laundrize.com/api/api/v1/getuserinfo?user_id=";
 
 //    public static final String fetchLaundrySevicesUrl ="http://dev.laundrize.com/api/api/v1/getlaundryservice?user_id=50&address_id=48"
-//    public static final String fetchLaundrySevicesUrl ="http://dev.laundrize.com/api/api/v1/getlaundryservice?user_id=";
-    public static final String fetchLaundrySevicesUrl ="http://www.laundrize.com/api/api/v1/getlaundryservice?user_id=";
+    public static final String fetchLaundrySevicesUrl ="http://dev.laundrize.com/api/api/v1/getlaundryservice?user_id=";
+//    public static final String fetchLaundrySevicesUrl ="http://www.laundrize.com/api/api/v1/getlaundryservice?user_id=";
 
     //  public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=8879153143";
-//    public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=";
-    public static final String verifyNowUrl = "http://www.laundrize.com/api/api/v1/sendverificationcode?mobile_number=";
+    public static final String verifyNowUrl = "http://dev.laundrize.com/api/api/v1/sendverificationcode?mobile_number=";
+//    public static final String verifyNowUrl = "http://www.laundrize.com/api/api/v1/sendverificationcode?mobile_number=";
 
 //    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
-//    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
-    public static final String forgotPasswordUrl = "http://www.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
+    public static final String forgotPasswordUrl = "http://dev.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
+//    public static final String forgotPasswordUrl = "http://www.laundrize.com/api/api/v1/sendForPasswordRecovery?mobile_number=";
 
 //    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/placeorder";
-//    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/placeorder?";
-        public static final String postOrderUrl = "http://www.laundrize.com/api/api/v1/placeorder";
+    public static final String postOrderUrl = "http://dev.laundrize.com/api/api/v1/placeorder?";
+//        public static final String postOrderUrl = "http://www.laundrize.com/api/api/v1/placeorder";
 
 //    public static final String changePasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=9752493189&verification_code=039293&new_password=Abc";
-//    public static final String changePasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=";
-    public static final String changePasswordUrl = "http://www.laundrize.com/api/api/v1/changepassword?mobile_number=";
+    public static final String changePasswordUrl = "http://dev.laundrize.com/api/api/v1/changepassword?mobile_number=";
+//    public static final String changePasswordUrl = "http://www.laundrize.com/api/api/v1/changepassword?mobile_number=";
 
     //  public static final String confirmVerificationUrl = "http://dev.laundrize.com/api/api/v1/registeruser?mobile_number=8879153143&verification_code=wFIqdi&password=qwerty&first_name=sagar&email=sagardevanga@gmail.com";
-//    public static final String confirmVerificationUrl = "http://dev.laundrize.com/api/api/v1/registeruser?mobile_number=";
-    public static final String confirmVerificationUrl = "http://www.laundrize.com/api/api/v1/registeruser?mobile_number=";
+    public static final String confirmVerificationUrl = "http://dev.laundrize.com/api/api/v1/registeruser?mobile_number=";
+//    public static final String confirmVerificationUrl = "http://www.laundrize.com/api/api/v1/registeruser?mobile_number=";
 
     // public static final String signInUrl = "http://dev.laundrize.com/api/api/v1/postlogin?mobile_number=9752493189&password=laundry";
-//    public static final String signInUrl = "http://dev.laundrize.com/api/api/v1/postlogin?mobile_number=";
-    public static final String signInUrl = "http://www.laundrize.com/api/api/v1/postlogin?mobile_number=";
+    public static final String signInUrl = "http://dev.laundrize.com/api/api/v1/postlogin?mobile_number=";
+//    public static final String signInUrl = "http://www.laundrize.com/api/api/v1/postlogin?mobile_number=";
 
 //    public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=12";
-//    public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=";
-    public static final String trackOrdersUrl="http://www.laundrize.com/api/api/v1/gettrackorders?user_id=";
+    public static final String trackOrdersUrl="http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=";
+//    public static final String trackOrdersUrl="http://www.laundrize.com/api/api/v1/gettrackorders?user_id=";
 
 //  public static final String addNewAddressUrl ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=12&city=Pune&city_zip=411027&city_zip_area=PimpleSaudagar&address=501RajGalaxy"
-//    public static final String addNewAddressUrl ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=";
-    public static final String addNewAddressUrl ="http://www.laundrize.com/api/api/v1/postAddress?user_id=";
+    public static final String addNewAddressUrl ="http://dev.laundrize.com/api/api/v1/postAddress?user_id=";
+//    public static final String addNewAddressUrl ="http://www.laundrize.com/api/api/v1/postAddress?user_id=";
 
 //    public static final String getTimeStampUrl ="http://dev.laundrize.com/api/api/v1/currentdatetime?";
-//    public static final String getTimeStampUrl ="http://dev.laundrize.com/api/api/v1/currentdatetime?";
-    public static final String getTimeStampUrl ="http://www.laundrize.com/api/api/v1/currentdatetime?";
+    public static final String getTimeStampUrl ="http://dev.laundrize.com/api/api/v1/currentdatetime?";
+//    public static final String getTimeStampUrl ="http://www.laundrize.com/api/api/v1/currentdatetime?";
 
 
 //    public static final String getslotsUrl ="http://dev.laundrize.com/api/api/v1/allslots?user_id=2&address_id=48;
-//    public static final String getslotsUrl = "http://dev.laundrize.com/api/api/v1/allslots?user_id=";
-    public static final String getslotsUrl = "http://www.laundrize.com/api/api/v1/allslots?user_id=";
+    public static final String getslotsUrl = "http://dev.laundrize.com/api/api/v1/allslots?user_id=";
+//    public static final String getslotsUrl = "http://www.laundrize.com/api/api/v1/allslots?user_id=";
 
 //    public static final String getSlotDifferenceUrl ="http://dev.laundrize.com/api/api/v1/slotdiff?user_id=2&address_id=48";
-//    public static final String getSlotDifferenceUrl ="http://dev.laundrize.com/api/api/v1/slotdiff?user_id=";
-    public static final String getSlotDifferenceUrl ="http://www.laundrize.com/api/api/v1/slotdiff?user_id=";
+    public static final String getSlotDifferenceUrl ="http://dev.laundrize.com/api/api/v1/slotdiff?user_id=";
+//    public static final String getSlotDifferenceUrl ="http://www.laundrize.com/api/api/v1/slotdiff?user_id=";
 
 //    public static final String getCityUrl ="http://dev.laundrize.com/api/api/v1/getCity
-//    public static final String getCityUrl ="http://dev.laundrize.com/api/api/v1/getCity";
-    public static final String getCityUrl ="http://www.laundrize.com/api/api/v1/getCity";
+    public static final String getCityUrl ="http://dev.laundrize.com/api/api/v1/getCity";
+//    public static final String getCityUrl ="http://www.laundrize.com/api/api/v1/getCity";
 
 //    public static final String getZipCodeUrl ="http://dev.laundrize.com/api/api/v1/getCityZipCode?city_id=1";
-//    public static final String getZipCodeUrl ="http://dev.laundrize.com/api/api/v1/getCityZipCode?city_id=";
-    public static final String getZipCodeUrl ="http://www.laundrize.com/api/api/v1/getCityZipCode?city_id=";
+    public static final String getZipCodeUrl ="http://dev.laundrize.com/api/api/v1/getCityZipCode?city_id=";
+//    public static final String getZipCodeUrl ="http://www.laundrize.com/api/api/v1/getCityZipCode?city_id=";
 
 //    public static final String getZipAreaUrl ="http://dev.laundrize.com/api/api/v1/getZipArea?zip_code_id=1";
-//    public static final String getZipAreaUrl ="http://dev.laundrize.com/api/api/v1/getZipArea?zip_code_id=";
-    public static final String getZipAreaUrl ="http://www.laundrize.com/api/api/v1/getZipArea?zip_code_id=";
+    public static final String getZipAreaUrl ="http://dev.laundrize.com/api/api/v1/getZipArea?zip_code_id=";
+//    public static final String getZipAreaUrl ="http://www.laundrize.com/api/api/v1/getZipArea?zip_code_id=";
 
 
 //    public static final String registerViaFBUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?facebookId=891231289&mobile_number=98765454323&password=null&verification_code=909juew&first_name=sagar&last_name=devanga&email=abc@gmail.com";
-//    public static final String registerViaFBUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?facebookId=";
-    public static final String registerViaFBUrl ="http://www.laundrize.com/api/api/v1/registerSocialUser?facebookId=";
+    public static final String registerViaFBUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?facebookId=";
+//    public static final String registerViaFBUrl ="http://www.laundrize.com/api/api/v1/registerSocialUser?facebookId=";
 
 //    public static final String registerViaGoogleUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?googleId=758924621&mobile_number=98765454323&password=null&verification_code=909juew&first_name=sagar&last_name=devanga&email=abc@gmail.com";
-//    public static final String registerViaGoogleUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?googleId=";
-    public static final String registerViaGoogleUrl ="http://www.laundrize.com/api/api/v1/registerSocialUser?googleId=";
+    public static final String registerViaGoogleUrl ="http://dev.laundrize.com/api/api/v1/registerSocialUser?googleId=";
+//    public static final String registerViaGoogleUrl ="http://www.laundrize.com/api/api/v1/registerSocialUser?googleId=";
 
 
     // type = GP for google
 //    public static final String checkUserExistsUrl ="http://dev.laundrize.com/api/api/v1/checkuserExist?id=874750579238699&type=FB";
-//    public static final String checkUserExistsUrl ="http://dev.laundrize.com/api/api/v1/checkuserExist?id=";
-    public static final String checkUserExistsUrl ="http://www.laundrize.com/api/api/v1/checkuserExist?id=";
+    public static final String checkUserExistsUrl ="http://dev.laundrize.com/api/api/v1/checkuserExist?id=";
+//    public static final String checkUserExistsUrl ="http://www.laundrize.com/api/api/v1/checkuserExist?id=";
 
 //    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?email=sagardevanga@gmail.com&first_name=sagar&last_name=devanga";
-//    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?user_id=";
-    public static final String updateUserProfile = "http://www.laundrize.com/api/api/v1/updateUserProfile?user_id=";
+    public static final String updateUserProfile = "http://dev.laundrize.com/api/api/v1/updateUserProfile?user_id=";
+//    public static final String updateUserProfile = "http://www.laundrize.com/api/api/v1/updateUserProfile?user_id=";
 
 
 //    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/changePassword?mobile_number=7666441398&new_password=poiuy&verification_code=5329";
-//    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/changePassword?mobile_number=";
-    public static final String resetPasswordUrl = "http://www.laundrize.com/api/api/v1/changePassword?mobile_number=";
+    public static final String resetPasswordUrl = "http://dev.laundrize.com/api/api/v1/changePassword?mobile_number=";
+//    public static final String resetPasswordUrl = "http://www.laundrize.com/api/api/v1/changePassword?mobile_number=";
 
 //    public static final String completedOrdersUrl = "http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=3&type=completed";
-//    public static final String completedOrdersUrl = "http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=";
-    public static final String completedOrdersUrl = "http://www.laundrize.com/api/api/v1/gettrackorders?user_id=";
+    public static final String completedOrdersUrl = "http://dev.laundrize.com/api/api/v1/gettrackorders?user_id=";
+//    public static final String completedOrdersUrl = "http://www.laundrize.com/api/api/v1/gettrackorders?user_id=";
 
 //    public static final String weeklyOrderUrl = "http://dev.laundrize.com/api/api/v1/postWeeklyOrder?user_id=2&address_id=2&order_day=monday&order_slot=2";
-//    public static final String weeklyOrderUrl = "http://dev.laundrize.com/api/api/v1/postWeeklyOrder?user_id=";
-    public static final String weeklyOrderUrl = "http://www.laundrize.com/api/api/v1/postWeeklyOrder?user_id=";
+    public static final String weeklyOrderUrl = "http://dev.laundrize.com/api/api/v1/postWeeklyOrder?user_id=";
+//    public static final String weeklyOrderUrl = "http://www.laundrize.com/api/api/v1/postWeeklyOrder?user_id=";
 
     public static void showInternetErrorDialog(Context context){
 

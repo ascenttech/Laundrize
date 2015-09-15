@@ -199,7 +199,7 @@ public class QuickOrderFragment extends Fragment {
                 if(result){
 
                     Constants.currentServerTimeFetched = true;
-                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId;
+                    String finalUrl = Constants.getSlotDifferenceUrl + Constants.userId+"&address_id="+Constants.addressId;
                     new FetchSlotDifferenceAsyncTask(new FetchSlotDifferenceAsyncTask.FetchSlotDifferenceCallback() {
                         @Override
                         public void onStart(boolean status) {
