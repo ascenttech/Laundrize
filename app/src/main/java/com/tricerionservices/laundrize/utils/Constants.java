@@ -316,6 +316,11 @@ public class Constants {
 
     }
 
+
+    // Problem : the problem was when the app is minimized and when we travel in different apps and then return to this app
+    // the values like user_id got wiped off SO the app used to crash
+    // To avoid crashing we have re initialized the values whenever we return to the app
+    // this function re initializes and solves the problem
     public static String reintializeTheValues(Context context){
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.APP_NAME, Context.MODE_PRIVATE);
