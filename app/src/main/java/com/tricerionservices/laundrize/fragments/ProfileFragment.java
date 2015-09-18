@@ -89,8 +89,6 @@ public class ProfileFragment extends Fragment {
         bitmap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.profile_picture);
 
-
-
         return v;
     }
 
@@ -243,10 +241,6 @@ public class ProfileFragment extends Fragment {
 
     public Bitmap getCircleBitmap(Bitmap bitmap){
 
-//        if (bitmap != null && ! bitmap.isRecycled()) {
-//            return output;
-//        }
-//        else{
 
         output = Bitmap.createBitmap(bitmap.getWidth(),
                 bitmap.getHeight(), Bitmap.Config.ARGB_8888);
