@@ -36,6 +36,7 @@ public class DryCleanWearablesFragment extends Fragment {
 
         Log.d(Constants.LOG_TAG, Constants.DryCleanWearablesFragement);
 
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
         return v;
     }
 

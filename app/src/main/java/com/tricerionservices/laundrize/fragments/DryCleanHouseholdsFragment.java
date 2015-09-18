@@ -35,6 +35,7 @@ public class DryCleanHouseholdsFragment extends Fragment {
         settingTheAdapter(v);
 
         Log.d(Constants.LOG_TAG, Constants.DryCleanHouseholdsFragement);
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
 
         return v;
     }

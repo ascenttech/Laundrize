@@ -36,6 +36,8 @@ public class BagLaundryFragment extends Fragment {
 
         Log.d(Constants.LOG_TAG, Constants.BagLaundryFragement);
 
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
+
         return v;
     }
 

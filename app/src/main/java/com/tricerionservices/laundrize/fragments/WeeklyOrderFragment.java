@@ -60,6 +60,7 @@ public class WeeklyOrderFragment extends Fragment {
         Constants.collectionDate = null;
 
         customActionBar();
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
 
 
         return v;

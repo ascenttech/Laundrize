@@ -42,6 +42,7 @@ public class MobileVerificationActivity extends Activity {
         setContentView(R.layout.activity_mobile_verification);
 
         Log.d(Constants.LOG_TAG,Constants.MobileVerificationActivity);
+        Constants.reintializeTheValues(this);
 
         Intent i = getIntent();
         from = i.getStringExtra("from");

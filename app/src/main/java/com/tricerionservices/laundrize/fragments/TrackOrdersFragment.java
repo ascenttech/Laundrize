@@ -61,6 +61,7 @@ public class TrackOrdersFragment extends Fragment {
         // or not because you want to show the footer button
         findViews(v);
         setViews();
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
 
         return v;
     }

@@ -35,6 +35,7 @@ public class RegisterActivity extends Activity {
         Log.d(Constants.LOG_TAG,Constants.RegisterActivity);
         findViews();
         setViews();
+        Constants.reintializeTheValues(this);
 
         builder = new android.support.v7.app.AlertDialog.Builder(this);
         builder.setMessage("This app requires internet connection");

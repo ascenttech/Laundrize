@@ -34,6 +34,7 @@ public class IroningHouseholdsFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_ironing_house_holds,container,false);
         settingTheAdapter(v);
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
         return v;
     }
 

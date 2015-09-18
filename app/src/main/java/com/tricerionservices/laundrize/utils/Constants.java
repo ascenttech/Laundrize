@@ -1,6 +1,7 @@
 package com.tricerionservices.laundrize.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
@@ -312,6 +313,18 @@ public class Constants {
             builder.create();
             builder.show();
 
+
+    }
+
+    public static String reintializeTheValues(Context context){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.APP_NAME, Context.MODE_PRIVATE);
+        Constants.userId = sharedPreferences.getString("userId","null");
+        Constants.token = sharedPreferences.getString("token","null");
+//        sharedPreferences.getString("loginRoute");
+//        sharedPreferences.getString("profileId");
+//        sharedPreferences.getString("phoneNumber");
+//        sharedPreferences.getString("password");
 
     }
 

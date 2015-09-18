@@ -40,6 +40,7 @@ public class LoginActivity extends Activity {
         Log.d(Constants.LOG_TAG,Constants.LoginActivity);
 
         findViews();
+        Constants.reintializeTheValues(this);
 
         builder = new android.support.v7.app.AlertDialog.Builder(this);
         builder.setMessage("This app requires internet connection");

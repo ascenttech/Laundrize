@@ -73,6 +73,7 @@ public class AddressFragment extends Fragment {
         customActionBar();
         findViews(v);
         setViews();
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
 
         return v;
     }
@@ -488,30 +489,30 @@ public class AddressFragment extends Fragment {
 
     public void populateAreas(String zipcodeId){
 
-            String finalUrl = Constants.getZipAreaUrl+zipcodeId;
-            new FetchAreasAsyncTask(getActivity().getApplicationContext(),new FetchAreasAsyncTask.FetchAreasCallback() {
-                @Override
-                public void onStart(boolean status) {
+        String finalUrl = Constants.getZipAreaUrl+zipcodeId;
+        new FetchAreasAsyncTask(getActivity().getApplicationContext(),new FetchAreasAsyncTask.FetchAreasCallback() {
+            @Override
+            public void onStart(boolean status) {
 
-                    progressDialog = new ProgressDialog(getActivity());
-                    progressDialog.setTitle(Constants.APP_NAME);
-                    progressDialog.setMessage("Please Wait...");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle(Constants.APP_NAME);
+                progressDialog.setMessage("Please Wait...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
 
+            }
+            @Override
+            public void onResult(boolean result) {
+                progressDialog.dismiss();
+                if(result) {
+                    area.setVisibility(View.VISIBLE);
+                    setAreasAdapter();
                 }
-                @Override
-                public void onResult(boolean result) {
-                    progressDialog.dismiss();
-                    if(result) {
-                        area.setVisibility(View.VISIBLE);
-                        setAreasAdapter();
-                    }
-                    else{
-                        Toast.makeText(getActivity().getApplicationContext(),"There was error.Please Try Again Later",5000).show();
-                    }
+                else{
+                    Toast.makeText(getActivity().getApplicationContext(),"There was error.Please Try Again Later",5000).show();
                 }
-            }).execute(finalUrl);
+            }
+        }).execute(finalUrl);
 
 
     }
@@ -545,7 +546,6 @@ public class AddressFragment extends Fragment {
 
 
         String finalUrl = Constants.getslotsUrl+Constants.userId+"&address_id="+Constants.addressId;
-//        String finalUrl = Constants.getslotsUrl+Constants.userId;
         new FetchAllSlotsAsyncTask(new FetchAllSlotsAsyncTask.FetchAllSlotsCallback(){
             @Override
             public void onStart(boolean status) {

@@ -35,6 +35,7 @@ public class OthersFragment extends Fragment {
         Log.d(Constants.LOG_TAG, Constants.OtherFragement);
 
         settingTheAdapter(v);
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
         return v;
     }
 

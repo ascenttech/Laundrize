@@ -35,6 +35,7 @@ public class ShoeLaundryFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_shoe_laundry,container,false);
 
         settingTheAdapter(v);
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
         return v;
     }
 

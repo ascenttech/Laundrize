@@ -42,6 +42,7 @@ public class FAQFragment extends Fragment {
 
         findViews(v);
         setViews();
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
 
         return v;
     }

@@ -47,6 +47,7 @@ public class ForgotPasswordActivity extends Activity {
         builder.create();
 
         alertDialog = builder.create();
+        Constants.reintializeTheValues(this);
 
     }
 

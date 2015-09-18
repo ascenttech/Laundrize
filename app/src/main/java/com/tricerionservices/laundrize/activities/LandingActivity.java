@@ -102,6 +102,7 @@ public class LandingActivity extends ActionBarActivity {
         setContentView(R.layout.activity_landing);
 
         Log.d(Constants.LOG_TAG,Constants.LandingActivity);
+        Constants.reintializeTheValues(this);
 
         mTitle = mDrawerTitle = getTitle();
 

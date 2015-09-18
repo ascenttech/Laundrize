@@ -38,6 +38,8 @@ public class LandingFragment extends Fragment {
         findViews(v);
         setViews();
 
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
+
 
         return v;
     }

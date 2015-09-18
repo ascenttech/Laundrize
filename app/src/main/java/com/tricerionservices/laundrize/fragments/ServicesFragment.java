@@ -52,6 +52,7 @@ public class ServicesFragment extends Fragment implements ActionBar.TabListener,
         v = inflater.inflate(R.layout.fragment_services,container,false);
 
         viewPager = (ViewPager) v.findViewById(R.id.myviewpager);
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
 
         if(Constants.isInternetAvailable(getActivity().getApplicationContext())){
 

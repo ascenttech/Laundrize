@@ -35,6 +35,7 @@ public class WashAndIronWearablesFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_wash_and_iron_wearables,container,false);
 
         settingTheAdapter(v);
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
         return v;
     }
 

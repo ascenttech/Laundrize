@@ -89,6 +89,8 @@ public class ProfileFragment extends Fragment {
         bitmap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.profile_picture);
 
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
+
         return v;
     }
 

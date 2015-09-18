@@ -53,6 +53,7 @@ public class CompletedOrdersFragment extends Fragment {
         settingTheAdapter(v);
 
         Log.d(Constants.LOG_TAG, Constants.CompletedOrdersFragement);
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
 
         return v;
     }

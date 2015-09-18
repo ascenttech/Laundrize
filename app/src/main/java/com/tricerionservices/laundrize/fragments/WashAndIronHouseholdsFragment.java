@@ -35,6 +35,7 @@ public class WashAndIronHouseholdsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_wash_and_iron_house_holds,container,false);
 
         settingTheAdapter(v);
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
         return v;
     }
 

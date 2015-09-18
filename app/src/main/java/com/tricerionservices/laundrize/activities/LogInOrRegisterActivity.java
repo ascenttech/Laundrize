@@ -79,6 +79,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login_or_register);
 
+        Constants.reintializeTheValues(this);
 
 //        / this is a callback manager for facebook
         callbackManager = CallbackManager.Factory.create();

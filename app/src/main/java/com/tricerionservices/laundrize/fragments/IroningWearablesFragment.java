@@ -33,6 +33,7 @@ public class IroningWearablesFragment extends Fragment {
         Log.d(Constants.LOG_TAG, Constants.IroningWearablesFragement);
         View v = inflater.inflate(R.layout.fragment_ironing_wearables,container,false);
         settingTheAdapter(v);
+        Constants.reintializeTheValues(getActivity().getApplicationContext());
         return v;
     }
 
