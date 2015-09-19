@@ -1179,6 +1179,16 @@ public class QuickOrderFragment extends Fragment {
 
     } // end of function
 
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if(dialog.isShowing()){
+            dialog.dismiss();
+        }
+    }
+
     public void newOrder(){
 
         replaceFragment(new LandingFragment());

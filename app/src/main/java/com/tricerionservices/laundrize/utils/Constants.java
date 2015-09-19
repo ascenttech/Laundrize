@@ -204,6 +204,7 @@ public class Constants {
     // LINKS with a harcoded link for testing
     // verify Now full Url
 
+
 //    public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=2";
 //    public static final String fetchAddressUrl = "http://dev.laundrize.com/api/api/v1/getuseraddress?user_id=";
     public static final String fetchAddressUrl = "http://www.laundrize.com/api/api/v1/getuseraddress?user_id=";
@@ -321,7 +322,7 @@ public class Constants {
     // the values like user_id got wiped off SO the app used to crash
     // To avoid crashing we have re initialized the values whenever we return to the app
     // this function re initializes and solves the problem
-    public static String reintializeTheValues(Context context){
+    public static void reintializeTheValues(Context context){
 
         SharedPreferences sharedPreferences = context.getSharedPreferences(Constants.APP_NAME, Context.MODE_PRIVATE);
         Constants.userId = sharedPreferences.getString("userId","null");
