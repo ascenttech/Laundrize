@@ -50,6 +50,7 @@ import com.tricerionservices.laundrize.data.WashingOrderData;
 import com.tricerionservices.laundrize.fragments.AddressFragment;
 import com.tricerionservices.laundrize.fragments.CompletedOrdersFragment;
 import com.tricerionservices.laundrize.fragments.FAQFragment;
+import com.tricerionservices.laundrize.fragments.NotificationsFragment;
 import com.tricerionservices.laundrize.fragments.PlaceOrderFragment;
 import com.tricerionservices.laundrize.fragments.PrivacyPolicyFragment;
 import com.tricerionservices.laundrize.fragments.LandingFragment;
@@ -87,7 +88,7 @@ public class LandingActivity extends ActionBarActivity {
     LinearLayout sliderLayout;
     RelativeLayout profileLayout;
     ImageView profileImage;
-    int icons[]={R.drawable.drawer_icon_home,R.drawable.drawer_icon_checkbox,R.drawable.drawer_icon_checkbox,R.drawable.drawer_icon_checkbox,R.drawable.drawer_icon_watch,R.drawable.drawer_icon_shirt,R.drawable.drawer_icon_profile,R.drawable.drawer_icon_tnc,R.drawable.drawer_icon_privacy_policy,R.drawable.drawer_icon_faq,R.drawable.drawer_icon_contact_us,R.drawable.drawer_icon_logout};
+    int icons[]={R.drawable.drawer_icon_home,R.drawable.drawer_icon_checkbox,R.drawable.drawer_icon_checkbox,R.drawable.drawer_icon_checkbox,R.drawable.drawer_icon_watch,R.drawable.drawer_icon_shirt,R.drawable.drawer_icon_profile,R.drawable.drawer_icon_notification,R.drawable.drawer_icon_tnc,R.drawable.drawer_icon_privacy_policy,R.drawable.drawer_icon_faq,R.drawable.drawer_icon_contact_us,R.drawable.drawer_icon_logout};
     CustomTextView profileName;
     android.support.v7.app.AlertDialog.Builder builder;
     android.support.v7.app.AlertDialog alertDialog;
@@ -294,19 +295,22 @@ public class LandingActivity extends ActionBarActivity {
                 fragment = new ProfileFragment();
                 break;
             case 7:
-                fragment = new TermAndConditionsFragment();
+                fragment = new NotificationsFragment();
                 break;
             case 8:
-                fragment = new PrivacyPolicyFragment();
+                fragment = new TermAndConditionsFragment();
                 break;
             case 9:
-                fragment = new FAQFragment();
+                fragment = new PrivacyPolicyFragment();
                 break;
             case 10:
+                fragment = new FAQFragment();
+                break;
+            case 11:
                 mDrawerLayout.closeDrawer(sliderLayout);
                 mailToSupport();
                 break;
-            case 11:
+            case 12:
                 SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.remove("loginRoute");

@@ -93,10 +93,15 @@ public class LoginActivity extends Activity {
 
     public void logInNow(){
 
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+        Constants.gcmToken = sharedPreferences.getString("gcmToken","null");
+        Constants.deviceId = sharedPreferences.getString("deviceId","null");
+
         final String phoneNumber = mobileNumber.getText().toString();
         final String pwd = password.getText().toString();
 
-        String finalUrl = Constants.signInUrl+phoneNumber+"&password="+pwd;
+//        String finalUrl = Constants.signInUrl+phoneNumber+"&password="+pwd;
+        String finalUrl = Constants.signInUrl+phoneNumber+"&password="+pwd+"&device_id="+Constants.deviceId+"&gcm_id="+Constants.gcmToken;
 
         new SignInUserAsyncTask(getApplicationContext(),new SignInUserAsyncTask.SignInUserCallback() {
             @Override

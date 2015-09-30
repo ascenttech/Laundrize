@@ -92,7 +92,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this).addApi(Plus.API, null)
+                .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
                 .build();
 
@@ -155,7 +155,8 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
                                         final String email = URLEncoder.encode(response.getJSONObject().getString("email"), "UTF-8");
 
                                         Log.d(Constants.LOG_TAG," Id "+ id);
-                                        String finalUrl = Constants.checkUserExistsUrl+id+"&type="+"FB";
+                                        String finalUrl = Constants.checkUserExistsUrl+id+"&type="+"FB&device_id="+Constants.deviceId+"&gcm_id="+Constants.gcmToken;
+//                                        String finalUrl = Constants.checkUserExistsUrl+id+"&type=FB";
                                         new CheckIfUserExistsAsyncTask(getApplicationContext(),new CheckIfUserExistsAsyncTask.CheckIfUserExistsCallback() {
                                             @Override
                                             public void onStart() {
@@ -404,7 +405,7 @@ public class LogInOrRegisterActivity extends Activity implements GoogleApiClient
         if (isSignedIn)
         {
 
-            String finalUrl = Constants.checkUserExistsUrl+googleId+"&type="+"GP";
+            String finalUrl = Constants.checkUserExistsUrl+googleId+"&type="+"GP&device_id="+Constants.deviceId+"&gcm_id="+Constants.gcmToken;
             new CheckIfUserExistsAsyncTask(getApplicationContext(),new CheckIfUserExistsAsyncTask.CheckIfUserExistsCallback() {
                 @Override
                 public void onStart() {

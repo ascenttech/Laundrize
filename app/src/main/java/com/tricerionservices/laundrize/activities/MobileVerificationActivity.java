@@ -31,6 +31,7 @@ public class MobileVerificationActivity extends Activity {
     private ProgressDialog progressDialog;
     private String from, profileId,firstName,lastName,url;
     private String finalUrl,finalVerificationUrl;
+    private String nameValue,emailIdValue;
     String verificationCodeValue;
     android.support.v7.app.AlertDialog alertDialog;
     android.support.v7.app.AlertDialog.Builder builder;
@@ -149,9 +150,18 @@ public class MobileVerificationActivity extends Activity {
 
     public void confirmVerification(){
 
+
+        SharedPreferences sharedPreferences = getSharedPreferences(Constants.APP_NAME,MODE_PRIVATE);
+        Constants.gcmToken = sharedPreferences.getString("gcmToken","null");
+        Constants.deviceId = sharedPreferences.getString("deviceId","null");
+
+
         try {
             verificationCodeValue = URLEncoder.encode(verificationCode.getText().toString(), "UTF-8");
             mobileNumber = URLEncoder.encode(mobileNumberEdit.getText().toString(), "UTF-8");
+            nameValue = URLEncoder.encode(firstName,"UTF-8");
+            emailIdValue = URLEncoder.encode(emailId,"UTF-8");
+
 
             // verificationCode value (Wo8zxW) has been harcoded
 
@@ -161,17 +171,19 @@ public class MobileVerificationActivity extends Activity {
         }
         if(from.equalsIgnoreCase("register")){
 
-            finalVerificationUrl = Constants.confirmVerificationUrl+mobileNumber+"&verification_code="+verificationCodeValue+"&password="+password+"&first_name="+firstName+"&email="+emailId;
+            finalVerificationUrl = Constants.confirmVerificationUrl+mobileNumber+"&verification_code="+verificationCodeValue+"&password="+password+"&first_name="+nameValue+"&email="+emailIdValue+"&device_id="+Constants.deviceId+"&gcm_id="+Constants.gcmToken;
 
         }
         else if(from.equalsIgnoreCase("facebook")){
 
-            finalVerificationUrl = Constants.registerViaFBUrl+ profileId +"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId;
+//            finalVerificationUrl = Constants.registerViaFBUrl+ profileId +"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId;
+            finalVerificationUrl = Constants.registerViaFBUrl+ profileId +"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId+"&device_id="+Constants.deviceId+"&gcm_id="+Constants.gcmToken;
 
         }
         else if(from.equalsIgnoreCase("google")){
 
-            finalVerificationUrl = Constants.registerViaGoogleUrl+ profileId +"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId;
+//            finalVerificationUrl = Constants.registerViaGoogleUrl+ profileId +"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId;
+            finalVerificationUrl = Constants.registerViaGoogleUrl+ profileId +"&mobile_number="+mobileNumber+"&password=null&verification_code="+verificationCodeValue+"&first_name="+firstName+"&last_name="+lastName+"&email="+emailId+"&device_id="+Constants.deviceId+"&gcm_id="+Constants.gcmToken;
 
         }
 

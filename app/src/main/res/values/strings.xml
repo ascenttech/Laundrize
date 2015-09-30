@@ -28,6 +28,15 @@
     <string name="text_others">Others</string>
 
 
+
+     <string name="gcm_send_message">Token retrieved and sent to server! You can now use gcmsender to
+        send downstream messages to this app.</string>
+    <string name="registering_message">Generating InstanceID token...</string>
+    <string name="token_error_message">An error occurred while either fetching the InstanceID token,
+        sending the fetched token to the server or subscribing to the PubSub topic. Please try
+        running the sample again.</string>
+
+
     <string-array name="faq_questions">
         <item>What is Laundrize ?</item>
         <item>How do I start ?</item>
@@ -145,6 +154,7 @@
         <item>Track Orders</item>
         <item>Completed Orders</item>
         <item>Profile</item>
+        <item>Notifications</item>
         <item>Terms and Conditions</item>
         <item>Privacy Policy</item>
         <item>FAQs</item>
